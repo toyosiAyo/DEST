@@ -61,7 +61,7 @@
             <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
           </form>
 
-          <p>Have account already? Please go to <a href="login-v2.html">Sign In</a></p>
+          <p>Have account already? Please go to <a href="login">Sign In</a></p>
           @include("partials.auth_footer")
         </div>
 

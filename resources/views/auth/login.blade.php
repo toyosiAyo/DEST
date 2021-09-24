@@ -48,7 +48,7 @@
               <button type="submit" class="btn btn-primary btn-block">Sign in</button>
             </form>
 
-            <p>No account? <a href="register-v2.html">Sign Up</a></p>
+            <p>No account? <a href="register">Sign Up</a></p>
             @include("partials.auth_footer")
           </div>
         
