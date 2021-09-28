@@ -21,7 +21,7 @@
               <label class="floating-label" for="inputEmail">Your Email</label>
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block">Reset Your Password</button>
+              <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
             </div>
           </form>
           @include("partials.auth_footer")

@@ -15,19 +15,19 @@
           <div class="page-brand-info">
             <div class="brand">
               <img class="brand-img" src="{{ asset('assets/images/logo%402x.png') }}" alt="...">
-              <h2 class="brand-text font-size-40">Remark</h2>
+              <h2 class="brand-text font-size-40">RUN DEST</h2>
             </div>
-            <p class="font-size-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.</p>
+            <!-- <p class="font-size-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.</p> -->
           </div>
 
           <div class="page-login-main">
             <div class="brand hidden-md-up">
               <img class="brand-img" src="{{ asset('assets/images/logo-colored%402x.png') }}" alt="...">
-              <h3 class="brand-text font-size-40">Remark</h3>
+              <h3 class="brand-text font-size-40">RUN DEST</h3>
             </div>
-            <h3 class="font-size-24">Sign In</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <h3 class="font-size-24">Log In</h3>
+            <p>Log in with your email and password</p>
 
             <form method="post" autocomplete="off">
               <div class="form-group form-material floating" data-plugin="formMaterial">
@@ -43,12 +43,12 @@
                   <input type="checkbox" id="remember" name="checkbox">
                   <label for="inputCheckbox">Remember me</label>
                 </div>
-                <a class="float-right" href="forgot-password.html">Forgot password?</a>
+                <a class="float-right" href="forgot">Forgot password?</a>
               </div>
-              <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+              <button type="submit" class="btn btn-primary btn-block">Log in</button>
             </form>
 
-            <p>No account? <a href="register">Sign Up</a></p>
+            <p>No account? <a href="register">Create Profile here</a></p>
             @include("partials.auth_footer")
           </div>
         

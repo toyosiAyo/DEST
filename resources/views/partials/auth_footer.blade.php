@@ -1,6 +1,6 @@
 <footer class="page-copyright">
-    <p>WEBSITE BY Creation Studio</p>
-    <p>© 2018. All RIGHT RESERVED.</p>
+    <p>RUN DEST</p>
+    <p>© <script>document.write(new Date().getFullYear())</script></p>
     <div class="social">
     <a class="btn btn-icon btn-round social-twitter mx-5" href="javascript:void(0)">
     <i class="icon bd-twitter" aria-hidden="true"></i>
