@@ -44,7 +44,7 @@
                   <input type="checkbox" id="remember" name="checkbox">
                   <label for="inputCheckbox">Remember me</label>
                 </div>
-                <a class="float-right" href="forgot">Forgot password?</a>
+                <a class="float-right" href="{{route('forgot.password')}}">Forgot password?</a>
               </div>
               <button type="submit" class="btn btn-primary btn-block">Log in</button>
             </form>

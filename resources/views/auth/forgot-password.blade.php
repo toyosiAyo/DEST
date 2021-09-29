@@ -15,8 +15,9 @@
           <h2>Forgot Your Password ?</h2>
           <p>Input your registered email to reset your password</p>
 
-          <form method="post" role="form" autocomplete="off">
-            <div class="form-group form-material floating" data-plugin="formMaterial">
+          <form action ="#" method="post" role="form" autocomplete="off">
+          @csrf
+          <div class="form-group form-material floating" data-plugin="formMaterial">
               <input type="email" class="form-control empty" id="inputEmail" name="email">
               <label class="floating-label" for="inputEmail">Your Email</label>
             </div>

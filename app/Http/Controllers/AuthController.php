@@ -71,7 +71,7 @@ class AuthController extends Controller
               
             $request->session()->put('user',$app->email);
 
-            return redirect('applicant/dashboard');
+            return redirect('dashboard');
            }else{return back()->with('fail','incorrect email/password!'); }
        }
     }
@@ -85,6 +85,10 @@ class AuthController extends Controller
     public function forgot_password(){
 
         return view('auth.forgot-password');
+    }
+    public function forgot_password_post(){
+
+        return redirect('forgot/password');
     }
 
     public function logout(){

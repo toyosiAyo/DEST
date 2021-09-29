@@ -8,7 +8,8 @@ use App\Http\Controllers\ApplicationController;
 
 
 
-Route::get('forgot/password',[ApplicationController::class,'forgot_password'])->name('forgot.password');
+Route::get('forgot/password',[AuthController::class,'forgot_password'])->name('forgot.password');
+Route::post('forgot/password',[AuthController::class,'forgot_password_post'])->name('forgot.password');
 Route::post('auth/check',[AuthController::class,'auth_check'])->name('auth.check');
 Route::get('logout',[AuthController::class,'logout'])->name('logout');
 Route::post('save/account/form',[AuthController::class,'save_new_account'])->name('save.account.form');
