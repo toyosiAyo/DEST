@@ -15,12 +15,12 @@
                 <div class="card-block p-20 pt-10">
                   <div class="clearfix">
                     <div class="grey-800 float-left py-10">
-                      <i class="icon md-account grey-600 font-size-24 vertical-align-bottom mr-5"></i>Applications
+                      <i class="icon md-file-text grey-600 font-size-24 vertical-align-bottom mr-5"></i>Applications
                     </div>
                     <span class="float-right grey-700 font-size-30">1</span>
                   </div>
                   <div class="mb-20 grey-500">
-                    <i class="icon md-long-arrow-up green-500 font-size-16"></i> Create New
+                     Create New
                   </div>
                   <div class="ct-chart h-50"></div>
                 </div>
@@ -32,12 +32,12 @@
                 <div class="card-block p-20 pt-10">
                   <div class="clearfix">
                     <div class="grey-800 float-left py-10">
-                      <i class="icon md-flash grey-600 font-size-24 vertical-align-bottom mr-5"></i>Pending Applications
+                      <i class="icon md-hourglass-alt grey-600 font-size-24 vertical-align-bottom mr-5"></i>Pending Applications
                     </div>
                     <span class="float-right grey-700 font-size-30">0</span>
                   </div>
                   <div class="mb-20 grey-500">
-                    <i class="icon md-long-arrow-up green-500 font-size-16"></i>View
+                    View
                   </div>
                   <div class="ct-chart h-50"></div>
                 </div>
@@ -49,12 +49,12 @@
                 <div class="card-block p-20 pt-10">
                   <div class="clearfix">
                     <div class="grey-800 float-left py-10">
-                      <i class="icon md-chart grey-600 font-size-24 vertical-align-bottom mr-5"></i>Approved Applications
+                      <i class="icon md-assignment-check grey-600 font-size-24 vertical-align-bottom mr-5"></i>Approved Applications
                     </div>
                     <span class="float-right grey-700 font-size-30">1</span>
                   </div>
                   <div class="mb-20 grey-500">
-                    <i class="icon md-long-arrow-down red-500 font-size-16"></i>View
+                    View
                   </div>
                   <div class="ct-chart h-50"></div>
                 </div>
@@ -109,17 +109,6 @@
                         <p class="mb-20 text-nowrap">
                           <span class="text-break"><a href="https://getbootstrapadmin.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="98f5f9fbf0f1fcfdebf1fff6d8fff5f9f1f4">[email&#160;protected]</a></span>
                         </p>
-                        <div class="text-nowrap font-size-18">
-                          <a href="#" class="white mr-10">
-                          <i class="icon bd-twitter"></i>
-                        </a>
-                          <a href="#" class="white mr-10">
-                          <i class="icon bd-facebook"></i>
-                        </a>
-                          <a href="#" class="white">
-                          <i class="icon bd-dribbble"></i>
-                        </a>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -128,49 +117,23 @@
                   <ul class="list-group list-group-full list-group-dividered mb-0">
                     <li class="list-group-item">
                       <div class="media">
-                        <div class="pr-20">
-                          <a class="avatar avatar-lg" href="javascript:void(0)">
-                            <img class="img-responsive" src="../global/portraits/1.jpg"
-                              alt="...">
-                          </a>
-                        </div>
                         <div class="media-body">
-                          <h5 class="mt-0 mb-5">Herman Beck</h5>
-                          <small>San Francisco</small>
+                          <h5 class="mt-0 mb-5">Phone number</h5>
+                          <small>08174896325</small>
                         </div>
                       </div>
                     </li>
                     <li class="list-group-item">
                       <div class="media">
-                        <div class="pr-20">
-                          <a class="avatar avatar-lg" href="javascript:void(0)">
-                            <img class="img-responsive" src="../global/portraits/2.jpg"
-                              alt="...">
-                          </a>
-                        </div>
                         <div class="media-body">
-                          <h5 class="mt-0 mb-5">Mary Adams</h5>
-                          <small>Salt Lake City, Utah</small>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="list-group-item">
-                      <div class="media">
-                        <div class="pr-20">
-                          <a class="avatar avatar-lg" href="javascript:void(0)">
-                            <img class="img-responsive" src="../global/portraits/3.jpg"
-                              alt="...">
-                          </a>
-                        </div>
-                        <div class="media-body">
-                          <h5 class="mt-0 mb-5">Caleb Richards</h5>
-                          <small>Basking Ridge, NJ</small>
+                          <h5 class="mt-0 mb-5">Address</h5>
+                          <small>3rd Mainland Bridge, Lagos</small>
                         </div>
                       </div>
                     </li>
                   </ul>
                   <button type="button" class="btn-raised btn btn-danger btn-floating">
-                    <i class="icon md-plus" aria-hidden="true"></i>
+                    <i class="icon md-edit" aria-hidden="true"></i>
                   </button>
                 </div>
               </div>

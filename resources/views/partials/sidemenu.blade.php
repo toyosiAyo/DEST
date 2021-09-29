@@ -22,45 +22,45 @@
           <ul class="site-menu" data-plugin="menu">
 
             <li class="site-menu-item active">
-              <a href="index.html">
-                <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+              <a href="home">
+                <i class="site-menu-icon md-home" aria-hidden="true"></i>
                 <span class="site-menu-title">Dashboard</span>
               </a>
             </li>
             <li class="site-menu-item has-sub">
               <a href="javascript:void(0)">
-                <i class="site-menu-icon md-view-compact" aria-hidden="true"></i>
+                <i class="site-menu-icon md-file-text" aria-hidden="true"></i>
                 <span class="site-menu-title">Application</span>
                 <span class="site-menu-arrow"></span>
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a href="layouts/menubar-fold.html">
+                  <a href="#">
                     <span class="site-menu-title">Create New</span>
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a href="layouts/menubar-disable-hover.html">
+                  <a href="#">
                     <span class="site-menu-title">View</span>
                   </a>
                 </li>
               </ul>
             </li>
             <li class="site-menu-item">
-              <a href="index.html">
-                <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+              <a href="#">
+                <i class="site-menu-icon md-card" aria-hidden="true"></i>
                 <span class="site-menu-title">Payment History</span>
               </a>
             </li>
             <li class="site-menu-item">
-              <a href="index.html">
-                <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+              <a href="#">
+                <i class="site-menu-icon md-settings" aria-hidden="true"></i>
                 <span class="site-menu-title">Settings</span>
               </a>
             </li>
             <li class="site-menu-item">
-              <a href="index.html">
-                <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+              <a href="/">
+                <i class="site-menu-icon md-power" aria-hidden="true"></i>
                 <span class="site-menu-title">Logout</span>
               </a>
             </li>            
