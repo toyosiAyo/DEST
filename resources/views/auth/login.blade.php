@@ -28,7 +28,12 @@
             </div>
             <h3 class="font-size-24">Log In</h3>
             <p>Log in with your email and password</p>
-
+            @if(Session::get('success'))
+              <p>{{Session::get('success')}}</p>
+              @endif
+              @if(Session::get('fail'))
+              <p>{{Session::get('fail')}}</p>
+            @endif
             <form action="{{route('auth.check')}}" method="post" autocomplete="off">
               @csrf
             <div class="form-group form-material floating" data-plugin="formMaterial">

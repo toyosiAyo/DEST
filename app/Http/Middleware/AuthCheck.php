@@ -17,10 +17,10 @@ class AuthCheck
     public function handle(Request $request, Closure $next)
     {
         if(!session()->has('user') && $request->path() != '/'
-         && $request->path() !='get/account/form'){
+         && $request->path() !='register'){
             return redirect('/')->with('fail','You must login!');
         }
-        if(session()->has('user') && ($request->path() == '/' || $request->path() == 'get/account/form')
+        if(session()->has('user') && ($request->path() == '/' || $request->path() == 'register')
         ){
             return back();
         }
