@@ -5,7 +5,7 @@
   @endsection
     
   @section("content")
-    <body class="animsition dashboard">
+    <body class="animsition dashboard site-menubar-push site-menubar-open site-menubar-fixed">
       <div class="page">
         <div class="page-content container-fluid">
           <div class="row" data-plugin="matchHeight" data-by-row="true">
