@@ -16,7 +16,7 @@ Route::post('save/account/form',[AuthController::class,'save_new_account'])->nam
 
 
 Route::group(['middleware'=>['authcheck']], function() {
-    Route::get('get/account/form',[AuthController::class,'register_form'])->name('get.account.form');
+    Route::get('register',[AuthController::class,'register_form'])->name('get.account.form');
     Route::get('/',[AuthController::class,'auth_login'])->name('auth.login');
     Route::get('dashboard',[AuthController::class,'applicant_dashboard'])->name('applicant.dashboard');
    
