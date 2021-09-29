@@ -36,24 +36,49 @@
           <form action="{{route('save.account.form')}}" method="post" role="form" autocomplete="off">
             @csrf
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="text" class="form-control empty" id="surname" name="surname">
+              <input type="text" value="{{old('surname')}}" class="form-control empty" id="surname" name="surname">
               <label class="floating-label" for="surname">Surname</label>
+              @if ($errors->has('surname'))
+                  <span class="">
+                    <strong>{{ $errors->first('surname') }}</strong>
+                  </span>
+              @endif
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="text" class="form-control empty" id="firstname" name="firstname">
+              <input type="text" value="{{old('firstname')}}" class="form-control empty" id="firstname" name="firstname">
               <label class="floating-label" for="firstname">Firstname</label>
+              @if ($errors->has('firstname'))
+                  <span class="">
+                    <strong>{{ $errors->first('firstname') }}</strong>
+                  </span>
+              @endif
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="text" class="form-control empty" id="othername" name="othername">
+              <input type="text" value="{{old('othername')}}" class="form-control empty" id="othername" name="othername">
               <label class="floating-label" for="othername">Othername</label>
+              @if ($errors->has('othername'))
+                  <span class="">
+                    <strong>{{ $errors->first('othername') }}</strong>
+                  </span>
+              @endif
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="email" class="form-control empty" id="inputEmail" name="email">
+              <input type="email" value="{{old('inputEmail')}}" class="form-control empty" id="inputEmail" name="email">
               <label class="floating-label" for="inputEmail">Email</label>
+              @if ($errors->has('inputEmail'))
+                  <span class="">
+                    <strong>{{ $errors->first('inputEmail') }}</strong>
+                  </span>
+              @endif
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="text" class="form-control empty" id="phone" name="phone">
+              <input type="text" value="{{old('phone')}}" class="form-control empty" id="phone" name="phone">
               <label class="floating-label" for="phone">Phone Number</label>
+              @if ($errors->has('phone'))
+                  <span class="">
+                    <strong>{{ $errors->first('phone') }}</strong>
+                  </span>
+              @endif
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
                   <select class="form-control" id="gender" name="gender">
@@ -64,12 +89,22 @@
                   <label class="floating-label" for="gender">Gender</label>
                 </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="password" class="form-control empty" id="inputPassword" name="password">
+              <input type="password" value="{{old('inputPassword')}}" class="form-control empty" id="inputPassword" name="password">
               <label class="floating-label" for="inputPassword">Password</label>
+              @if ($errors->has('inputPassword'))
+                  <span class="">
+                    <strong>{{ $errors->first('inputPassword') }}</strong>
+                  </span>
+              @endif
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="password" class="form-control empty" id="inputPasswordCheck" name="passwordCheck">
-              <label class="floating-label" for="inputPasswordCheck">Confirm Password</label>
+              <input type="password" value="{{old('password_confirmation')}}" class="form-control empty" id="password_confirmation" name="password_confirmation">
+              <label class="floating-label" for="password_confirmation">Confirm Password</label>
+              @if ($errors->has('password_confirmation'))
+                  <span class="">
+                    <strong>{{ $errors->first('password_confirmation') }}</strong>
+                  </span>
+              @endif
             </div>
             <button type="submit" class="btn btn-primary btn-block">Submit</button>
           </form>
