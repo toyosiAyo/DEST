@@ -36,7 +36,7 @@
           <form action="{{route('save.account.form')}}" method="post" role="form" autocomplete="off">
             @csrf
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="text" value="{{old('surname')}}" class="form-control empty" id="surname" name="surname">
+              <input type="text" value="{{old('surname')}}" class="form-control empty" id="surname" name="surname" required>
               <label class="floating-label" for="surname">Surname</label>
               @if ($errors->has('surname'))
                   <span class="">
@@ -45,7 +45,7 @@
               @endif
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="text" value="{{old('firstname')}}" class="form-control empty" id="firstname" name="firstname">
+              <input type="text" value="{{old('firstname')}}" class="form-control empty" id="firstname" name="firstname" required>
               <label class="floating-label" for="firstname">Firstname</label>
               @if ($errors->has('firstname'))
                   <span class="">
@@ -54,7 +54,7 @@
               @endif
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="text" value="{{old('othername')}}" class="form-control empty" id="othername" name="othername">
+              <input type="text" value="{{old('othername')}}" class="form-control empty" id="othername" name="othername" required>
               <label class="floating-label" for="othername">Othername</label>
               @if ($errors->has('othername'))
                   <span class="">
@@ -63,7 +63,7 @@
               @endif
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="email" value="{{old('inputEmail')}}" class="form-control empty" id="inputEmail" name="email">
+              <input type="email" value="{{old('inputEmail')}}" class="form-control empty" id="inputEmail" name="email" required>
               <label class="floating-label" for="inputEmail">Email</label>
               @if ($errors->has('inputEmail'))
                   <span class="">
@@ -72,7 +72,7 @@
               @endif
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="text" value="{{old('phone')}}" class="form-control empty" id="phone" name="phone">
+              <input type="text" value="{{old('phone')}}" class="form-control empty" id="phone" name="phone" required>
               <label class="floating-label" for="phone">Phone Number</label>
               @if ($errors->has('phone'))
                   <span class="">
@@ -81,7 +81,7 @@
               @endif
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-                  <select class="form-control" id="gender" name="gender">
+                  <select class="form-control" id="gender" name="gender" required>
                     <option>&nbsp;</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -89,7 +89,7 @@
                   <label class="floating-label" for="gender">Gender</label>
                 </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="password" value="{{old('inputPassword')}}" class="form-control empty" id="inputPassword" name="password">
+              <input type="password" value="{{old('inputPassword')}}" class="form-control empty" id="inputPassword" name="password" required>
               <label class="floating-label" for="inputPassword">Password</label>
               @if ($errors->has('inputPassword'))
                   <span class="">
@@ -98,7 +98,7 @@
               @endif
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="password" value="{{old('password_confirmation')}}" class="form-control empty" id="password_confirmation" name="password_confirmation">
+              <input type="password" value="{{old('password_confirmation')}}" class="form-control empty" id="password_confirmation" name="password_confirmation" required>
               <label class="floating-label" for="password_confirmation">Confirm Password</label>
               @if ($errors->has('password_confirmation'))
                   <span class="">
