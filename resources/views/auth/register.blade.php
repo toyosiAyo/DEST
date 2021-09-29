@@ -33,8 +33,9 @@
           </div>
           <h3 class="font-size-24">Create your Profile</h3>
 
-          <form method="post" role="form" autocomplete="off">
-            <div class="form-group form-material floating" data-plugin="formMaterial">
+          <form action="{{route('save.account.form')}}" method="post" role="form" autocomplete="off">
+            @csrf
+          <div class="form-group form-material floating" data-plugin="formMaterial">
               <input type="text" class="form-control empty" id="inputName" name="name">
               <label class="floating-label" for="inputName">Name</label>
               <small>Surname first</small>
@@ -65,7 +66,7 @@
             </div>
             <button type="submit" class="btn btn-primary btn-block">Submit</button>
           </form>
-          <p>Have an account already? Please go to <a href="/">Log In</a></p>
+          <p>Have an account already? Please go to <a href="{{route('auth.login')}}">Log In</a></p>
           @include("partials.auth_footer")
         </div>
 

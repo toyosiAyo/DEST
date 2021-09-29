@@ -29,8 +29,9 @@
             <h3 class="font-size-24">Log In</h3>
             <p>Log in with your email and password</p>
 
-            <form method="post" autocomplete="off">
-              <div class="form-group form-material floating" data-plugin="formMaterial">
+            <form action="{{route('auth.check')}}" method="post" autocomplete="off">
+              @csrf
+            <div class="form-group form-material floating" data-plugin="formMaterial">
                 <input type="email" class="form-control empty" id="inputEmail" name="email">
                 <label class="floating-label" for="inputEmail">Email</label>
               </div>
@@ -48,7 +49,7 @@
               <button type="submit" class="btn btn-primary btn-block">Log in</button>
             </form>
 
-            <p>No account? <a href="register">Create Profile here</a></p>
+            <p>No account? <a href="{{route('get.account.form')}}">Create Profile here</a></p>
             @include("partials.auth_footer")
           </div>
         

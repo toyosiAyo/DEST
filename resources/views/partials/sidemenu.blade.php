@@ -22,7 +22,7 @@
           <ul class="site-menu" data-plugin="menu">
 
             <li class="site-menu-item active">
-              <a href="home">
+              <a href="{{route('applicant.dashboard')}}">
                 <i class="site-menu-icon md-home" aria-hidden="true"></i>
                 <span class="site-menu-title">Dashboard</span>
               </a>
@@ -59,7 +59,7 @@
               </a>
             </li>
             <li class="site-menu-item">
-              <a href="/">
+              <a href="{{route('logout')}}">
                 <i class="site-menu-icon md-power" aria-hidden="true"></i>
                 <span class="site-menu-title">Logout</span>
               </a>
