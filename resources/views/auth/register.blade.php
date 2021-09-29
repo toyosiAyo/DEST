@@ -35,10 +35,17 @@
 
           <form action="{{route('save.account.form')}}" method="post" role="form" autocomplete="off">
             @csrf
-          <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="text" class="form-control empty" id="inputName" name="name">
-              <label class="floating-label" for="inputName">Name</label>
-              <small>Surname first</small>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+              <input type="text" class="form-control empty" id="surname" name="surname">
+              <label class="floating-label" for="surname">Surname</label>
+            </div>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+              <input type="text" class="form-control empty" id="firstname" name="firstname">
+              <label class="floating-label" for="firstname">Firstname</label>
+            </div>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+              <input type="text" class="form-control empty" id="othername" name="othername">
+              <label class="floating-label" for="othername">Othername</label>
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
               <input type="email" class="form-control empty" id="inputEmail" name="email">
@@ -49,12 +56,12 @@
               <label class="floating-label" for="phone">Phone Number</label>
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-                  <select class="form-control">
+                  <select class="form-control" id="gender" name="gender">
                     <option>&nbsp;</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                   </select>
-                  <label class="floating-label">Gender</label>
+                  <label class="floating-label" for="gender">Gender</label>
                 </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
               <input type="password" class="form-control empty" id="inputPassword" name="password">
