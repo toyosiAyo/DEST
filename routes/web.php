@@ -18,5 +18,6 @@ Route::get('/forgot', function () {
 Route::get('/home', function () {
     return view('/pages/home');
 });
-
-
+Route::get('/create_application', function () {
+    return view('/pages/create_application');
+});

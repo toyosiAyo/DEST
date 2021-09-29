@@ -35,7 +35,7 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a href="#">
+                  <a href="create_application">
                     <span class="site-menu-title">Create New</span>
                   </a>
                 </li>
