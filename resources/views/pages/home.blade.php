@@ -20,7 +20,7 @@
                     <span class="float-right grey-700 font-size-30">1</span>
                   </div>
                   <div class="mb-20 grey-500">
-                     Create New
+                     <a href="create_application">Create New</a>
                   </div>
                   <div class="ct-chart h-50"></div>
                 </div>

@@ -52,6 +52,9 @@
                             role="tabpanel">
                             <div class="panel-body">
                               Payment Widget Here
+                              <div class="animation-example animation-hover hover">
+                                <button type="button" class="btn btn-dark animation-scale-up">Pay Application Fee (₦5,000) </button>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -74,6 +77,9 @@
                             role="tabpanel">
                             <div class="panel-body">
                               Payment Widget Here
+                              <div class="animation-example animation-hover hover">
+                                <button type="button" class="btn btn-dark animation-scale">Pay Application Fee (₦5,000)</button>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -96,6 +102,9 @@
                             role="tabpanel">
                             <div class="panel-body">
                               Payment Widget Here
+                              <div class="animation-example animation-hover hover">
+                                <button type="button" class="btn btn-dark animation-shake">Pay Application Fee (₦5,000)</button>
+                              </div>
                             </div>
                           </div>
                         </div>
