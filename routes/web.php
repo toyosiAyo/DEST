@@ -27,3 +27,6 @@ Route::group(['middleware'=>['authcheck']], function() {
 Route::get('/create_application', function () {
     return view('/pages/create_application');
 });
+Route::get('/form', function () {
+    return view('/pages/form');
+});
