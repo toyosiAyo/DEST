@@ -3,7 +3,7 @@
   @section("title")
       Application Form
   @endsection
-    
+
   @section("content")
     <body class="animsition page-faq site-menubar-push site-menubar-open site-menubar-fixed">
       <!-- Page -->
@@ -95,12 +95,12 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group row form-material">
+                                                <div class="form-group row form-material example">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Date of Birth
                                                         <span class="required">*</span>
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
-                                                        <input type="date" class="form-control" id="dob" name="dob" 
+                                                        <input type="date" data-plugin="datepicker" class="form-control" id="dob" name="dob" 
                                                         required="" />
                                                     </div>
                                                 </div>
@@ -130,6 +130,15 @@
                                                         </select>
                                                     </div>
                                                 </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Name of Sponsor 
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class=" col-xl-12 col-md-9">
+                                                        <input type="text" class="form-control" id="sponsor" name="sponsor" required>
+                                                    </div>
+                                                </div>                                                
                                             </div>
 
                                             <div class="col-xl-6 form-horizontal">
@@ -176,10 +185,17 @@
                                                     <div class="col-xl-12 col-md-9">
                                                         <div class="d-flex flex-column">
                                                             <div class="checkbox-custom checkbox-primary">
-                                                                <input type="checkbox" id="disability" name="disability" value="yes">
-                                                                <label for="disability">Yes</label>
+                                                                <input type="checkbox" id="disability_check" name="disability_check" value="yes">
+                                                                <label for="disability_check">Yes</label>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material disability">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">State your disability</label>
+                                                    <div class=" col-xl-12 col-md-9">
+                                                        <input type="text" class="form-control" id="disability" name="disability">
                                                     </div>
                                                 </div>
 
@@ -201,12 +217,18 @@
                                                     </div>
                                                 </div>
 
-                                                
-                                                
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Address of Sponsor 
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class=" col-xl-12 col-md-9">
+                                                        <input type="text" class="form-control" id="sponsor_address" name="sponsor_address" required>
+                                                    </div>
+                                                </div> 
                                             </div>
 
                                             <div class="form-group form-material col-xl-12 text-right padding-top-m">
-                                                <button type="submit" class="btn btn-primary" id="validateButton1">Submit</button>
+                                                <button type="submit" class="btn btn-primary" id="validateButton1">Next</button>
                                             </div>
                                             </div>
                                         </form>
@@ -234,8 +256,119 @@
                           <div class="panel-collapse collapse show" id="answer-5" aria-labelledby="question-5"
                             role="tabpanel">
                             <div class="panel-body">
-                              Payment Widget Here
-                              
+                                <!-- Panel Full Example -->
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <form id="exampleFullForm" autocomplete="off">
+                                          <div class="row row-lg">
+                                            <div class="col-xl-12 form-horizontal">
+                                                 <div class="form-group row form-material">
+                                                    <button type="button" class="btn btn-sm btn-dark">
+                                                      <i class="icon md-plus text" aria-hidden="true"></i>
+                                                      <span class="text">Add</span>
+                                                    </button>
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Secondary school(s) attended with dates
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class=" col-xl-6 col-md-6">
+                                                        <input type="text" class="form-control" name="sec_school[]" required>
+                                                    </div>
+                                                    <div class="example col-xl-6 col-md-3 row">
+                                                      <div class="input-daterange" data-plugin="datepicker">
+                                                        <div class="input-group">
+                                                          <span class="input-group-addon">
+                                                            <i class="icon md-calendar" aria-hidden="true"></i>
+                                                          </span>
+                                                          <input type="text" class="form-control" name="start[]" />
+                                                          <span class="input-group-addon">to</span>
+                                                          <input type="text" class="form-control" name="end[]" />
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Email
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="icon md-email" aria-hidden="true"></i>
+                                                        </span>
+                                                        <input type="email" value="orieye@gmail.com" class="form-control" name="email" readonly >
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Address
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="icon md-pin" aria-hidden="true"></i>
+                                                        </span>
+                                                        <input type="text" class="form-control" id="address" name="address" 
+                                                            required="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material example">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Date of Birth
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <input type="date" data-plugin="datepicker" class="form-control" id="dob" name="dob" 
+                                                        required="" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Nationality
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <select class="form-control" id="country" name="country" required="">
+                                                            <option value="">Choose Country</option>
+                                                            <option value="apple">Nigeria</option>
+                                                            <option value="google">USA</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">State of Origin
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <select class="form-control" id="state" name="state" required="">
+                                                            <option value="">Choose a State</option>
+                                                            <option value="apple">Abia</option>
+                                                            <option value="google">Adamawa</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Name of Sponsor 
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class=" col-xl-12 col-md-9">
+                                                        <input type="text" class="form-control" id="sponsor" name="sponsor" required>
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+                                            <div class="form-group form-material col-xl-12 text-right padding-top-m">
+                                                <button type="submit" class="btn btn-primary" id="validateButton1">Next</button>
+                                            </div>
+                                          </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            <!-- End Panel Full Example -->
                             </div>
                           </div>
                         </div>
@@ -275,6 +408,19 @@
       </div>
       <!-- End Page -->
 
-      <script src="../assets/examples/js/pages/faq.minfd53.js?v4.0.1"></script>
+      <script> 
+        $(document).ready(function(){
+          $(".disability").hide();
+          $('input[type="checkbox"]').click(function(){
+            if($("#disability_check").prop('checked') == true){
+              $(".disability").show();
+            } 
+            else {
+              $(".disability").hide();
+            }
+          })        
+        })
+      </script>
+      
     </body>
   @endsection
