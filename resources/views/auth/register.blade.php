@@ -68,7 +68,7 @@
               <label class="floating-label" for="inputPassword">Password</label>
             </div>
             <div class="form-group form-material floating" data-plugin="formMaterial">
-              <input type="password" class="form-control empty" id="inputPasswordCheck" name="passwordCheck">
+              <input type="password" class="form-control empty" id="inputPasswordCheck" name="password_confirmation">
               <label class="floating-label" for="inputPasswordCheck">Confirm Password</label>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Submit</button>

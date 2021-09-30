@@ -39,9 +39,8 @@ class AuthController extends Controller
              'otherName'=>'required|string',
              'phone'=>'required|string|unique:applicants',
              'email'=>'required|email|unique:applicants',
-             'password'=>'required|min:4|max:8',
+             'password'=>'required|confirmed|min:4',
          ]) ;
-
          $app = new Applicant;
          
          $app->surname = $request->surname;
