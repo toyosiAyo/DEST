@@ -260,10 +260,10 @@
                                 <div class="panel">
                                     <div class="panel-body">
                                         <form id="exampleFullForm" autocomplete="off">
-                                          <div class="row row-lg">
-                                            <div class="col-xl-12 form-horizontal">
+                                             <div class="row row-lg">
+                                               <div class="col-xl-12 form-horizontal">
                                                  <div class="form-group row form-material">
-                                                    <button type="button" class="btn btn-sm btn-dark">
+                                                    <button id="addRow" type="button" class="btn btn-sm btn-dark">
                                                       <i class="icon md-plus text" aria-hidden="true"></i>
                                                       <span class="text">Add</span>
                                                     </button>
@@ -271,7 +271,7 @@
                                                         <span class="required">*</span>
                                                     </label>
                                                     <div class=" col-xl-6 col-md-6">
-                                                        <input type="text" class="form-control" name="sec_school[]" required>
+                                                      <input type="text" class="form-control" name="sec_school[]" required>
                                                     </div>
                                                     <div class="example col-xl-6 col-md-3 row">
                                                       <div class="input-daterange" data-plugin="datepicker">
@@ -286,6 +286,7 @@
                                                       </div>
                                                     </div>
                                                 </div>
+                                                <div id="newRow"></div>
 
                                                 <div class="form-group row form-material">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Email
@@ -418,7 +419,41 @@
             else {
               $(".disability").hide();
             }
-          })        
+          }) 
+
+            // add row
+          $("#addRow").click(function () {              
+              var html = '';
+              html += '<div id="sec_school" class="col-xl-12 form-horizontal">';
+              html += '<div class="form-group row form-material">';
+              html += '<div class=" col-xl-6 col-md-6">';                         
+              html += '<input type="text" class="form-control" name="sec_school[]" required>';
+              html += '</div>';
+              html += '<div class="example col-xl-6 col-md-3 row">';
+              html += '<div class="input-daterange" data-plugin="datepicker">';
+              html += '<div class="input-group">';
+              html += '<span class="input-group-addon">';
+              html += '<i class="icon md-calendar" aria-hidden="true"></i>';
+              html += '</span>';
+              html += '<input type="text" class="form-control" name="start[]" />';
+              html += '<span class="input-group-addon">to</span>';
+              html += '<input type="text" class="form-control" name="end[]" />';
+              html += '<button id="removeRow" type="button" class="btn btn-sm btn-danger">';
+              html += '<i class="icon md-minus text-active" aria-hidden="true"></i>';
+              html += '<span class="text">Remove</span>';
+              html += '</button>';
+              html += '</div>';
+              html += '</div>';
+              html += '</div>';
+              html += '</div>';
+              html += '</div>';
+              $('#newRow').append(html);
+          });                                                          
+
+          // remove row
+          $(document).on('click', '#removeRow', function () {
+            $(this).closest('#sec_school').remove();
+          });
         })
       </script>
       
