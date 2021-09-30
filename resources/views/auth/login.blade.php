@@ -32,7 +32,12 @@
               <p>{{Session::get('success')}}</p>
               @endif
               @if(Session::get('fail'))
-              <p>{{Session::get('fail')}}</p>
+                <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <i class="icon md-close" aria-hidden="true"></i> {{Session::get('fail')}}
+                </div>
             @endif
             <form action="{{route('auth.check')}}" method="post" autocomplete="off">
               @csrf

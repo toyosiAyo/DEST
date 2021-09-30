@@ -53,165 +53,163 @@
                             <div class="panel-body">
                               <!-- Panel Full Example -->
                                 <div class="panel">
-                                    <div class="panel-heading">
-                                    <h3 class="panel-title">Full Example
-                                        <span class="panel-desc">Basic validation will display a label with the error after the form
-                                        control. </span>
-                                    </h3>
-                                    </div>
                                     <div class="panel-body">
-
-                                    <form id="exampleFullForm" autocomplete="off">
-                                        <div class="row row-lg">
-                                        <div class="col-xl-6 form-horizontal">
-                                            <div class="form-group row form-material">
-                                            <label class="col-xl-12 col-md-3 form-control-label">Username
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class=" col-xl-12 col-md-9">
-                                                <input type="text" class="form-control" name="username" placeholder="John Fish"
-                                                required="">
-                                            </div>
-                                            </div>
-
-                                            <div class="form-group row form-material">
-                                            <label class="col-xl-12 col-md-3 form-control-label">Email
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-xl-12 col-md-9">
-                                                <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="icon md-email" aria-hidden="true"></i>
-                                                </span>
-                                                <input type="email" class="form-control" name="email" placeholder="email@email.com"
-                                                    required="">
-                                                </div>
-                                            </div>
-                                            </div>
-
-                                            <div class="form-group row form-material">
-                                            <label class="col-xl-12 col-md-3 form-control-label">Password
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-xl-12 col-md-9">
-                                                <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="icon md-lock" aria-hidden="true"></i>
-                                                </span>
-                                                <input type="password" class="form-control" name="password" placeholder="Min length 8"
-                                                    required="">
-                                                </div>
-                                            </div>
-                                            </div>
-
-                                            <div class="form-group row form-material">
-                                            <label class="col-xl-12 col-md-3 form-control-label">Birthday
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-xl-12 col-md-9">
-                                                <input type="text" class="form-control" name="birthday" placeholder="YYYY/MM/DD"
-                                                required="" />
-                                            </div>
-                                            </div>
-
-                                            <div class="form-group row form-material">
-                                            <label class="col-xl-12 col-md-3 form-control-label">GitHub</label>
-                                            <div class="col-xl-12 col-md-9">
-                                                <input type="url" class="form-control" name="github" placeholder="https://github.com/amazingSurge">
-                                            </div>
-                                            </div>
-
-                                            <div class="form-group row form-material">
-                                            <label class="col-xl-12 col-md-3 form-control-label">Company</label>
-                                            <div class="col-xl-12 col-md-9">
-                                                <select class="form-control" id="company" name="company" required="">
-                                                <option value="">Choose a Company</option>
-                                                <option value="apple">Apple</option>
-                                                <option value="google">Google</option>
-                                                <option value="microsoft">Microsoft</option>
-                                                <option value="yahoo">Yahoo</option>
-                                                </select>
-                                            </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-6 form-horizontal">
-                                            <div class="form-group row form-material">
-                                            <label class="col-xl-12 col-md-3 form-control-label">Remark Admin is
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-xl-12 col-md-9">
-                                                <div class="d-flex flex-column">
-                                                <div class="radio-custom radio-primary">
-                                                    <input type="radio" id="inputAwesome" name="porto_is" value="awesome" required="">
-                                                    <label for="inputAwesome">Awesome</label>
+                                        <form id="exampleFullForm" autocomplete="off">
+                                            <div class="row row-lg">
+                                            <div class="col-xl-6 form-horizontal">
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Full name
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class=" col-xl-12 col-md-9">
+                                                        <input type="text" class="form-control" value="Orieye Adamu" name="fullname" readonly>
+                                                    </div>
                                                 </div>
 
-                                                <div class="radio-custom radio-primary">
-                                                    <input type="radio" id="inputVeryAwesome" name="porto_is" value="very-awesome">
-                                                    <label for="inputVeryAwesome">Very Awesome</label>
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Email
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="icon md-email" aria-hidden="true"></i>
+                                                        </span>
+                                                        <input type="email" value="orieye@gmail.com" class="form-control" name="email" readonly >
+                                                        </div>
+                                                    </div>
                                                 </div>
 
-                                                <div class="radio-custom radio-primary">
-                                                    <input type="radio" id="inputUltraAwesome" name="porto_is" value="ultra-awesome">
-                                                    <label for="inputUltraAwesome">Ultra Awesome</label>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            </div>
-
-                                            <div class="form-group row form-material">
-                                            <label class="col-xl-12 col-md-3 form-control-label">I will use it for
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-xl-12 col-md-9">
-                                                <div class="d-flex flex-column">
-                                                <div class="checkbox-custom checkbox-primary">
-                                                    <input type="checkbox" id="inputForProject" name="for[]" value="project" required="">
-                                                    <label for="inputForProject">My Project</label>
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Address
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="icon md-pin" aria-hidden="true"></i>
+                                                        </span>
+                                                        <input type="text" class="form-control" id="address" name="address" 
+                                                            required="">
+                                                        </div>
+                                                    </div>
                                                 </div>
 
-                                                <div class="checkbox-custom checkbox-primary">
-                                                    <input type="checkbox" id="inputForWebsite" name="for[]" value="website">
-                                                    <label for="inputForWebsite">My Website</label>
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Date of Birth
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <input type="date" class="form-control" id="dob" name="dob" 
+                                                        required="" />
+                                                    </div>
                                                 </div>
 
-                                                <div class="checkbox-custom checkbox-primary">
-                                                    <input type="checkbox" id="inputForAll" name="for[]" value="all">
-                                                    <label for="inputForAll">All things I do</label>
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Nationality
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <select class="form-control" id="country" name="country" required="">
+                                                            <option value="">Choose Country</option>
+                                                            <option value="apple">Nigeria</option>
+                                                            <option value="google">USA</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">State of Origin
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <select class="form-control" id="state" name="state" required="">
+                                                            <option value="">Choose a State</option>
+                                                            <option value="apple">Abia</option>
+                                                            <option value="google">Adamawa</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </div>
 
-                                            <div class="form-group row form-material">
-                                            <label class="col-xl-12 col-md-3 form-control-label">Skills
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-xl-12 col-md-9">
-                                                <textarea class="form-control" name="skills" rows="3" placeholder="Describe your skills"
-                                                required=""></textarea>
-                                            </div>
-                                            </div>
-                                            <div class="form-group row form-material">
-                                            <label class="col-xl-12 col-md-3 form-control-label">Browsers</label>
-                                            <div class="col-xl-12 col-md-9">
-                                                <select class="form-control" id="browsers" name="browsers" title="Please select at least one browser"
-                                                size="5" multiple="multiple" required="">
-                                                <option value="chrome">Chrome / Safari</option>
-                                                <option value="ff">Firefox</option>
-                                                <option value="ie">Internet Explorer</option>
-                                                <option value="opera">Opera</option>
-                                                </select>
-                                            </div>
-                                            </div>
-                                        </div>
+                                            <div class="col-xl-6 form-horizontal">
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Marital Status
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <div class="d-flex flex-column">
+                                                        <div class="radio-custom radio-primary">
+                                                            <input type="radio" id="single" name="marital" value="single" checked>
+                                                            <label for="single">Single</label>
+                                                        </div>
 
-                                        <div class="form-group form-material col-xl-12 text-right padding-top-m">
-                                            <button type="submit" class="btn btn-primary" id="validateButton1">Submit</button>
-                                        </div>
-                                        </div>
-                                    </form>
+                                                        <div class="radio-custom radio-primary">
+                                                            <input type="radio" id="married" name="marital" value="married">
+                                                            <label for="married">Married</label>
+                                                        </div>
+
+                                                        <div class="radio-custom radio-primary">
+                                                            <input type="radio" id="widowed" name="marital" value="widowed">
+                                                            <label for="widowed">Widowed</label>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Religion
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <select class="form-control" id="religion" name="religion" required="">
+                                                            <option value="">Choose Religion</option>
+                                                            <option value="Christianity"> Christianity</option>
+                                                            <option value="Islamic"> Islamic</option>
+                                                            <option value="Other"> Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Physical Disability?</label>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <div class="d-flex flex-column">
+                                                            <div class="checkbox-custom checkbox-primary">
+                                                                <input type="checkbox" id="disability" name="disability" value="yes">
+                                                                <label for="disability">Yes</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Name of Next of Kin 
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class=" col-xl-12 col-md-9">
+                                                        <input type="text" class="form-control" id="next_of_kin" name="next_of_kin" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Address of Next of Kin 
+                                                        <span class="required">*</span>
+                                                    </label>
+                                                    <div class=" col-xl-12 col-md-9">
+                                                        <input type="text" class="form-control" id="next_of_kin_address" name="next_of_kin_address" required>
+                                                    </div>
+                                                </div>
+
+                                                
+                                                
+                                            </div>
+
+                                            <div class="form-group form-material col-xl-12 text-right padding-top-m">
+                                                <button type="submit" class="btn btn-primary" id="validateButton1">Submit</button>
+                                            </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             <!-- End Panel Full Example -->
