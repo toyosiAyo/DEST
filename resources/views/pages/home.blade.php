@@ -3,6 +3,14 @@
   @section("title")
       Home
   @endsection
+
+  @push('head')
+  <link rel="stylesheet" href="{{ asset('global/vendor/chartist/chartist.minfd53.css?v4.0.1') }}">
+  <link rel="stylesheet" href="{{ asset('global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.minfd53.css?v4.0.1') }}">
+
+  <script src=" {{ asset('global/vendor/chartist/chartist.minfd53.js?v4.0.1') }}"></script>
+  <script src=" {{ asset('global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.minfd53.js?v4.0.1') }}"></script>
+  @endpush
     
   @section("content")
     <body class="animsition dashboard site-menubar-push site-menubar-open site-menubar-fixed">

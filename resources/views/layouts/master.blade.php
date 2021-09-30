@@ -32,9 +32,8 @@
   <link rel="stylesheet" href="{{ asset('global/vendor/waves/waves.minfd53.css?v4.0.1') }}">
 
   <!-- Plugins For This Page -->
-  <link rel="stylesheet" href="{{ asset('global/vendor/chartist/chartist.minfd53.css?v4.0.1') }}">
-  <link rel="stylesheet" href="{{ asset('global/vendor/jvectormap/jquery-jvectormap.minfd53.css?v4.0.1') }}">
-  <link rel="stylesheet" href="{{ asset('global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.minfd53.css?v4.0.1') }}">
+  
+  <!-- <link rel="stylesheet" href="{{ asset('global/vendor/jvectormap/jquery-jvectormap.minfd53.css?v4.0.1') }}"> -->
 
   <!-- Page -->
   <link rel="stylesheet" href="{{ asset('assets/examples/css/dashboard/v1.minfd53.css?v4.0.1') }}">
@@ -45,10 +44,12 @@
   <link rel='stylesheet' href="https://fonts.googleapis.com/css?family=Roboto:400,400italic,700">
 
   <!-- Scripts -->
+  <script src=" {{ asset('global/vendor/jquery/jquery.minfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('global/vendor/breakpoints/breakpoints.minfd53.js?v4.0.1') }}"></script>
   <script>
     Breakpoints();
   </script>
+  @stack('head')
 </head>
   <!-- Page -->
     @include("partials.navbar")
@@ -79,10 +80,8 @@
   <script src=" {{ asset('global/vendor/slidepanel/jquery-slidePanel.minfd53.js?v4.0.1') }}"></script>
 
   <!-- Plugins For This Page -->
-  <script src=" {{ asset('global/vendor/chartist/chartist.minfd53.js?v4.0.1') }}"></script>
-  <script src=" {{ asset('global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.minfd53.js?v4.0.1') }}"></script>
-  <script src=" {{ asset('global/vendor/jvectormap/jquery-jvectormap.minfd53.js?v4.0.1') }}"></script>
-  <script src=" {{ asset('global/vendor/jvectormap/maps/jquery-jvectormap-world-mill-enfd53.js?v4.0.1') }}"></script>
+  <!-- <script src=" {{ asset('global/vendor/jvectormap/jquery-jvectormap.minfd53.js?v4.0.1') }}"></script> -->
+  <!-- <script src=" {{ asset('global/vendor/jvectormap/maps/jquery-jvectormap-world-mill-enfd53.js?v4.0.1') }}"></script> -->
   <script src=" {{ asset('global/vendor/matchheight/jquery.matchHeight-minfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('global/vendor/peity/jquery.peity.minfd53.js?v4.0.1') }}"></script>
 
@@ -113,7 +112,7 @@
   <script src=" {{ asset('global/js/Plugin/switchery.minfd53.js?v4.0.1') }}"></script>
 
   <script src=" {{ asset('global/js/Plugin/matchheight.minfd53.js?v4.0.1') }}"></script>
-  <script src=" {{ asset('global/js/Plugin/jvectormap.minfd53.js?v4.0.1') }}"></script>
+  <!-- <script src=" {{ asset('global/js/Plugin/jvectormap.minfd53.js?v4.0.1') }}"></script> -->
   <script src=" {{ asset('global/js/Plugin/peity.minfd53.js?v4.0.1') }}"></script>
 
 
