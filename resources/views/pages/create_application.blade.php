@@ -121,6 +121,6 @@
       </div>
       <!-- End Page -->
 
-      <script src="../assets/examples/js/pages/faq.minfd53.js?v4.0.1"></script>
+      <script src="{{ asset('assets/examples/js/pages/faq.minfd53.js?v4.0.1') }}"></script>
     </body>
   @endsection
