@@ -41,12 +41,12 @@
             @endif
             <form action="{{route('auth.check')}}" method="post" autocomplete="off">
               @csrf
-            <div class="form-group form-material floating" data-plugin="formMaterial">
-                <input type="email" class="form-control empty" id="inputEmail" name="email">
+              <div class="form-group form-material floating" data-plugin="formMaterial">
+                <input type="email" class="form-control empty" id="inputEmail" name="email" required>
                 <label class="floating-label" for="inputEmail">Email</label>
               </div>
               <div class="form-group form-material floating" data-plugin="formMaterial">
-                <input type="password" class="form-control empty" id="inputPassword" name="password">
+                <input type="password" class="form-control empty" id="inputPassword" name="password" required>
                 <label class="floating-label" for="inputPassword">Password</label>
               </div>
               <div class="form-group clearfix">
