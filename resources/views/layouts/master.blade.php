@@ -30,11 +30,7 @@
   <link rel="stylesheet" href="{{ asset('global/vendor/slidepanel/slidePanel.minfd53.css?v4.0.1') }}">
   <link rel="stylesheet" href="{{ asset('global/vendor/flag-icon-css/flag-icon.minfd53.css?v4.0.1') }}">
   <link rel="stylesheet" href="{{ asset('global/vendor/waves/waves.minfd53.css?v4.0.1') }}">
-
-  <!-- Plugins For This Page -->
   
-  <!-- <link rel="stylesheet" href="{{ asset('global/vendor/jvectormap/jquery-jvectormap.minfd53.css?v4.0.1') }}"> -->
-
   <!-- Page -->
   <link rel="stylesheet" href="{{ asset('assets/examples/css/dashboard/v1.minfd53.css?v4.0.1') }}">
 
@@ -44,6 +40,7 @@
   <link rel='stylesheet' href="https://fonts.googleapis.com/css?family=Roboto:400,400italic,700">
 
   <!-- Scripts -->
+  <script src=" {{ asset('global/vendor/babel-external-helpers/babel-external-helpersfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('global/vendor/jquery/jquery.minfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('global/vendor/breakpoints/breakpoints.minfd53.js?v4.0.1') }}"></script>
   <script>
@@ -62,8 +59,7 @@
   <!-- Footer -->
     @include("partials.footer")
   <!-- Core  -->
-  <script data-cfasync="false" src=" {{ asset('global/js/email-decode.min.js') }}"></script><script src=" {{ asset('global/vendor/babel-external-helpers/babel-external-helpersfd53.js?v4.0.1') }}"></script>
-  <script src=" {{ asset('global/vendor/jquery/jquery.minfd53.js?v4.0.1') }}"></script>
+  <script data-cfasync="false" src=" {{ asset('global/js/email-decode.min.js') }}"></script>
   <script src=" {{ asset('global/vendor/popper-js/umd/popper.minfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('global/vendor/bootstrap/bootstrap.minfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('global/vendor/animsition/animsition.minfd53.js?v4.0.1') }}"></script>
@@ -80,8 +76,6 @@
   <script src=" {{ asset('global/vendor/slidepanel/jquery-slidePanel.minfd53.js?v4.0.1') }}"></script>
 
   <!-- Plugins For This Page -->
-  <!-- <script src=" {{ asset('global/vendor/jvectormap/jquery-jvectormap.minfd53.js?v4.0.1') }}"></script> -->
-  <!-- <script src=" {{ asset('global/vendor/jvectormap/maps/jquery-jvectormap-world-mill-enfd53.js?v4.0.1') }}"></script> -->
   <script src=" {{ asset('global/vendor/matchheight/jquery.matchHeight-minfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('global/vendor/peity/jquery.peity.minfd53.js?v4.0.1') }}"></script>
 
