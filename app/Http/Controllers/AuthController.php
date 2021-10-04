@@ -32,22 +32,23 @@ class AuthController extends Controller
 
 
     public function save_new_account(Request $request){
-            dd($request->all());
+            
          $request->validate([
              'surname'=>'required|string',
-             'firstName'=>'required|string',
-             'otherName'=>'required|string',
-             'phone'=>'required|string|unique:applicants',
-             'email'=>'required|email|unique:applicants',
+             'firstname'=>'required|string',
+             'othername'=>'required|string',
+             'phone'=>'required|string|min:8|max:15|unique:applicants,phone',
+             'email'=>'required|email|unique:applicants,email',
              'password'=>'required|confirmed|min:4',
+             'gender'=>'required|size:1',
          ]) ;
          $app = new Applicant;
-         
          $app->surname = $request->surname;
-         $app->first_name = $request->firstName;
-         $app->other_name = $request->otherName;
+         $app->first_name = $request->firstname;
+         $app->other_name = $request->othername;
          $app->phone = $request->phone;
          $app->email = $request->email;
+         $app->gender = $request->gender;
          $app->password = Hash::make($request->password);
          $save = $app->save();
          if($save){
