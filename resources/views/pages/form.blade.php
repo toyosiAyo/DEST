@@ -4,6 +4,26 @@
       Application Form
   @endsection
 
+  @push('head')
+  <link rel="stylesheet" href="{{ asset('global/vendor/bootstrap-select/bootstrap-select.minfd53.css?v4.0.1') }}">
+  <link rel="stylesheet" href="{{ asset('assets/examples/css/forms/advanced.minfd53.css?v4.0.1') }}">
+  <link rel="stylesheet" href="{{ asset('global/vendor/select2/select2.minfd53.css?v4.0.1') }}">
+  <link rel="stylesheet" href="{{ asset('global/vendor/multi-select/multi-select.minfd53.css?v4.0.1') }}">
+
+
+  <script src=" {{ asset('global/vendor/bootstrap-select/bootstrap-select.minfd53.js?v4.0.1') }}"></script>
+  <script src=" {{ asset('global/vendor/jquery-placeholder/jquery.placeholder.minfd53.js?v4.0.1') }}"></script>
+  <script src=" {{ asset('global/vendor/select2/select2.full.minfd53.js?v4.0.1') }}"></script>
+
+  <script src=" {{ asset('global/js/Plugin/jquery-placeholder.minfd53.js?v4.0.1') }}"></script>
+  <script src=" {{ asset('assets/examples/js/forms/advanced.minfd53.js?v4.0.1') }}"></script>
+  <script src=" {{ asset('global/js/Plugin/bootstrap-select.minfd53.js?v4.0.1') }}"></script>
+  <script src=" {{ asset('global/js/Plugin/select2.minfd53.js?v4.0.1') }}"></script>
+  <script src=" {{ asset('global/vendor/multi-select/jquery.multi-selectfd53.js?v4.0.1') }}"></script>
+  <script src=" {{ asset('global/js/Plugin/multi-select.minfd53.js?v4.0.1') }}"></script>
+  @endpush
+
+
   @section("content")
     <body class="animsition page-faq site-menubar-push site-menubar-open site-menubar-fixed">
       <!-- Page -->
@@ -270,18 +290,15 @@
                                                     <label class="col-xl-12 col-md-3 form-control-label">Secondary school(s) attended with dates
                                                         <span class="required">*</span>
                                                     </label>
-                                                    <div class=" col-xl-6 col-md-6">
-                                                      <input type="text" class="form-control" name="sec_school[]" required>
+                                                    <div class="example col-xl-6 col-md-6">
+                                                      <input type="text" class="form-control" name="sec_school[]" placeholder="Enter school name" required>
                                                     </div>
                                                     <div class="example col-xl-6 col-md-3 row">
                                                       <div class="input-daterange" data-plugin="datepicker">
                                                         <div class="input-group">
-                                                          <span class="input-group-addon">
-                                                            <i class="icon md-calendar" aria-hidden="true"></i>
-                                                          </span>
-                                                          <input type="text" class="form-control" name="start[]" />
+                                                          <input type="date" class="form-control" name="start[]" />
                                                           <span class="input-group-addon">to</span>
-                                                          <input type="text" class="form-control" name="end[]" />
+                                                          <input type="date" class="form-control" name="end[]" />
                                                         </div>
                                                       </div>
                                                     </div>
@@ -289,16 +306,24 @@
                                                 <div id="newRow"></div>
 
                                                 <div class="form-group row form-material">
-                                                    <label class="col-xl-12 col-md-3 form-control-label">Email
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Examinations taken
                                                         <span class="required">*</span>
                                                     </label>
-                                                    <div class="col-xl-12 col-md-9">
+                                                    <div class="example col-xl-6 col-md-6 ">
+                                                      <select class="form-control" data-plugin="selectpicker" data-live-search="true" data-placeholder="Select a State">
+                                                        <option></option>
+                                                          <option value="AK">Alaska</option>
+                                                          <option value="HI">Hawaii</option>
+                                                      </select>
+                                                    </div>
+                                                    <div class="example col-xl-6 col-md-3 row">
+                                                      <div class="input-daterange" data-plugin="datepicker">
                                                         <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="icon md-email" aria-hidden="true"></i>
-                                                        </span>
-                                                        <input type="email" value="orieye@gmail.com" class="form-control" name="email" readonly >
+                                                          <input type="date" class="form-control" name="start[]" />
+                                                          <span class="input-group-addon">to</span>
+                                                          <input type="date" class="form-control" name="end[]" />
                                                         </div>
+                                                      </div>
                                                     </div>
                                                 </div>
 
@@ -426,25 +451,22 @@
               var html = '';
               html += '<div id="sec_school" class="col-xl-12 form-horizontal">';
               html += '<div class="form-group row form-material">';
-              html += '<div class=" col-xl-6 col-md-6">';                         
-              html += '<input type="text" class="form-control" name="sec_school[]" required>';
+              html += '<div class="example col-xl-6 col-md-6">';                         
+              html += '<input type="text" class="form-control" name="sec_school[]" placeholder="Enter school name" required>';
               html += '</div>';
               html += '<div class="example col-xl-6 col-md-3 row">';
               html += '<div class="input-daterange" data-plugin="datepicker">';
               html += '<div class="input-group">';
-              html += '<span class="input-group-addon">';
-              html += '<i class="icon md-calendar" aria-hidden="true"></i>';
-              html += '</span>';
-              html += '<input type="text" class="form-control" name="start[]" />';
+              html += '<input type="date" class="form-control" name="start[]" />';
               html += '<span class="input-group-addon">to</span>';
-              html += '<input type="text" class="form-control" name="end[]" />';
-              html += '<button id="removeRow" type="button" class="btn btn-sm btn-danger">';
+              html += '<input type="date" class="form-control" name="end[]" />';
+              html += '</div>';
+              html += '</div>';
+              html += '</div>';
+              html += '<button id="removeRow" type="button" class="btn btn-sm btn-danger text-left">';
               html += '<i class="icon md-minus text-active" aria-hidden="true"></i>';
               html += '<span class="text">Remove</span>';
               html += '</button>';
-              html += '</div>';
-              html += '</div>';
-              html += '</div>';
               html += '</div>';
               html += '</div>';
               $('#newRow').append(html);

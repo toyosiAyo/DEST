@@ -101,7 +101,7 @@
   <script src=" {{ asset('global/js/config/colors.minfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('assets/js/config/tour.minfd53.js?v4.0.1') }}"></script>
   <script>
-    Config.set('assets', 'assets');
+    Config.set('assets', "{{ asset('assets') }}");
   </script>
 
   <!-- Page -->
