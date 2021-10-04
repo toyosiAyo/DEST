@@ -370,6 +370,58 @@
                                                       </div>
                                                   </div>
                                                 </div>
+
+                                                <div class="form-group row form-material">
+                                                  <label class="col-xl-12 col-md-3 form-control-label">Examinations taken</label>
+                                                  <div class="example col-xl-12 col-md-3">
+                                                    <table class="editable-table table table-striped" id="editableTable">
+                                                      <thead>
+                                                        <tr>
+                                                          <th>Exam</th>
+                                                          <th>Subject</th>
+                                                          <th>Grade</th>
+                                                          <th>Year</th>
+                                                        </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                      @for($i = 1; $i < 10; $i++)
+                                                        <tr>
+                                                          <td>
+                                                            <select class="form-control" data-plugin="selectpicker" 
+                                                              name="exam[]" data-live-search="true" data-allow-clear="true" data-placeholder="Select Exam">
+                                                                <option value="WAEC">WAEC</option>
+                                                                <option value="NECO">NECO</option>
+                                                            </select>
+                                                          </td>
+                                                          <td><select class="form-control" data-plugin="selectpicker" 
+                                                            name="subject[]" data-live-search="true" data-allow-clear="true">
+                                                            <option>Choose Subject</option>
+                                                            <option value="English">English</option>
+                                                            <option value="Mathematics">Further Mathematics</option>
+                                                            </select>
+                                                          </td>
+                                                          <td>
+                                                            <select class="form-control" data-plugin="selectpicker" name="grade[]" 
+                                                              data-live-search="true" data-placeholder="Select a Grade">
+                                                              <option>Choose Grade</option>
+                                                              <option value="A1">A1</option>
+                                                              <option value="B2">B2</option>
+                                                            </select>
+                                                          </td>
+                                                          <td>
+                                                            <select class="form-control" data-plugin="selectpicker" name="year[]" data-live-search="true" data-placeholder="Select a Year">
+                                                              <option>Choose Year</option>
+                                                              <option value="2021">2021</option>
+                                                              <option value="2020">2020</option>
+                                                            </select>
+                                                          </td>
+                                                        </tr>
+                                                      @endfor
+                                                      </tbody>
+                                                    </table>
+                                                  </div>
+                                                </div>
+
                                             </div>
                                             <div class="form-group form-material col-xl-12 text-right padding-top-m">
                                                 <button type="submit" class="btn btn-primary" id="validateButton1">Next</button>
@@ -556,6 +608,8 @@
           });
         })
       </script>
+
+  <script src="../assets/examples/js/tables/editable.minfd53.js?v4.0.1"></script>
       
     </body>
   @endsection
