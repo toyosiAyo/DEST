@@ -304,51 +304,59 @@
                                                       </div>
                                                     </div>
                                                 </div>
-                                                <div id="newSchool"></div>
-
+                                                <div id="newSchool"></div>                                                
                                                 <div class="form-group row form-material">
-                                                  <button id="addExam" type="button" class="btn btn-sm btn-dark">
-                                                    <i class="icon md-plus text" aria-hidden="true"></i>
-                                                    <span class="text">Add</span>
-                                                  </button>
                                                   <label class="col-xl-12 col-md-3 form-control-label">Examinations taken
-                                                      <span class="required">*</span>
+                                                    <span class="required">*</span>
                                                   </label>
-                                                  <div class="example col-xl-3 col-md-3">
-                                                    <select class="form-control" data-plugin="selectpicker" 
-                                                      name="exam[]" data-live-search="true" data-allow-clear="true" data-placeholder="Select Exam">
-                                                        <option value="WAEC">WAEC</option>
-                                                        <option value="NECO">NECO</option>
-                                                    </select>
-                                                  </div>
-                                                  <div class="example col-xl-3 col-md-3 ">
-                                                    <select class="form-control" data-plugin="selectpicker" 
-                                                      name="subject[]" data-live-search="true" data-allow-clear="true">
-                                                      <option>Choose Subject</option>
-                                                      <option value="English">English</option>
-                                                      <option value="Mathematics">Further Mathematics</option>
-                                                    </select>
-                                                  </div>
-                                                  <div class="example col-xl-3 col-md-3">
-                                                    <select class="form-control" data-plugin="selectpicker" name="grade[]" 
-                                                      data-live-search="true" data-placeholder="Select a Grade">
-                                                      <option>Choose Grade</option>
-                                                      <option value="A1">A1</option>
-                                                      <option value="B2">B2</option>
-                                                    </select>
-                                                  </div>
-                                                  <div class="example col-xl-3 col-md-3">
-                                                    <select class="form-control" data-plugin="selectpicker" name="year[]" data-live-search="true" data-placeholder="Select a Year">
-                                                      <option>Choose Year</option>
-                                                      <option value="2021">2021</option>
-                                                      <option value="2020">2020</option>
-                                                    </select>
+                                                  <div class="example col-xl-12 col-md-3">
+                                                    <table class="editable-table table table-striped" id="editableTable">
+                                                      <thead>
+                                                        <tr>
+                                                          <th>Exam</th>
+                                                          <th>Subject</th>
+                                                          <th>Grade</th>
+                                                          <th>Year</th>
+                                                        </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                      @for($i = 1; $i < 10; $i++)
+                                                        <tr>
+                                                          <td>
+                                                            <select class="form-control" name="exam[]" required>
+                                                                <option value="WAEC">WAEC</option>
+                                                                <option value="NECO">NECO</option>
+                                                            </select>
+                                                          </td>
+                                                          <td><select class="form-control" name="subject[]">
+                                                            <option>Choose Subject</option>
+                                                            <option value="English">English</option>
+                                                            <option value="Mathematics">Further Mathematics</option>
+                                                            </select>
+                                                          </td>
+                                                          <td>
+                                                            <select class="form-control" name="grade[]" >
+                                                              <option>Choose Grade</option>
+                                                              <option value="A1">A1</option>
+                                                              <option value="B2">B2</option>
+                                                            </select>
+                                                          </td>
+                                                          <td>
+                                                            <select class="form-control" name="year[]">
+                                                              <option>Choose Year</option>
+                                                              <option value="2021">2021</option>
+                                                              <option value="2020">2020</option>
+                                                            </select>
+                                                          </td>
+                                                        </tr>
+                                                      @endfor
+                                                      </tbody>
+                                                    </table>
                                                   </div>
                                                 </div>
-                                                <div id="newExam"></div>
 
                                                 <div class="form-group row form-material">
-                                                  <button id="addQulaification" type="button" class="btn btn-sm btn-dark">
+                                                  <button id="addQualification" type="button" class="btn btn-sm btn-dark">
                                                     <i class="icon md-plus text" aria-hidden="true"></i>
                                                     <span class="text">Add</span>
                                                   </button>
@@ -370,57 +378,7 @@
                                                       </div>
                                                   </div>
                                                 </div>
-
-                                                <div class="form-group row form-material">
-                                                  <label class="col-xl-12 col-md-3 form-control-label">Examinations taken</label>
-                                                  <div class="example col-xl-12 col-md-3">
-                                                    <table class="editable-table table table-striped" id="editableTable">
-                                                      <thead>
-                                                        <tr>
-                                                          <th>Exam</th>
-                                                          <th>Subject</th>
-                                                          <th>Grade</th>
-                                                          <th>Year</th>
-                                                        </tr>
-                                                      </thead>
-                                                      <tbody>
-                                                      @for($i = 1; $i < 10; $i++)
-                                                        <tr>
-                                                          <td>
-                                                            <select class="form-control" data-plugin="selectpicker" 
-                                                              name="exam[]" data-live-search="true" data-allow-clear="true" data-placeholder="Select Exam">
-                                                                <option value="WAEC">WAEC</option>
-                                                                <option value="NECO">NECO</option>
-                                                            </select>
-                                                          </td>
-                                                          <td><select class="form-control" data-plugin="selectpicker" 
-                                                            name="subject[]" data-live-search="true" data-allow-clear="true">
-                                                            <option>Choose Subject</option>
-                                                            <option value="English">English</option>
-                                                            <option value="Mathematics">Further Mathematics</option>
-                                                            </select>
-                                                          </td>
-                                                          <td>
-                                                            <select class="form-control" data-plugin="selectpicker" name="grade[]" 
-                                                              data-live-search="true" data-placeholder="Select a Grade">
-                                                              <option>Choose Grade</option>
-                                                              <option value="A1">A1</option>
-                                                              <option value="B2">B2</option>
-                                                            </select>
-                                                          </td>
-                                                          <td>
-                                                            <select class="form-control" data-plugin="selectpicker" name="year[]" data-live-search="true" data-placeholder="Select a Year">
-                                                              <option>Choose Year</option>
-                                                              <option value="2021">2021</option>
-                                                              <option value="2020">2020</option>
-                                                            </select>
-                                                          </td>
-                                                        </tr>
-                                                      @endfor
-                                                      </tbody>
-                                                    </table>
-                                                  </div>
-                                                </div>
+                                                <div id="newQulalification"></div>
 
                                             </div>
                                             <div class="form-group form-material col-xl-12 text-right padding-top-m">
@@ -430,7 +388,7 @@
                                         </form>
                                     </div>
                                 </div>
-                            <!-- End Panel Full Example -->
+                                <!-- End Panel Full Example -->
                             </div>
                           </div>
                         </div>
@@ -452,59 +410,89 @@
                           <div class="panel-collapse collapse show" id="answer-8" aria-labelledby="question-8"
                             role="tabpanel">
                             <div class="panel-body">
-                              <table class="editable-table table table-striped" id="editableTable">
-                                <thead>
-                                  <tr>
-                                    <th>Name</th>
-                                    <th>Cost</th>
-                                    <th>Profit</th>
-                                    <th>Fun</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>Car</td>
-                                    <td>100</td>
-                                    <td>200</td>
-                                    <td>0</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Bike</td>
-                                    <td>330</td>
-                                    <td>240</td>
-                                    <td>1</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Plane</td>
-                                    <td>430</td>
-                                    <td>540</td>
-                                    <td>3</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Yacht</td>
-                                    <td>100</td>
-                                    <td>200</td>
-                                    <td>0</td>
-                                  </tr>
-                                  <tr>
-                                    <td>Segway</td>
-                                    <td>330</td>
-                                    <td>240</td>
-                                    <td>1</td>
-                                  </tr>
-                                </tbody>
-                                <tfoot>
-                                  <tr>
-                                    <th>
-                                      <strong>Total</strong>
-                                    </th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                  </tr>
-                                </tfoot>
-                              </table>
+                              <!-- Panel Full Example -->
+                              <div class="panel">
+                                <div class="panel-body">
+                                  <form id="exampleFullForm" autocomplete="off">
+                                    <div class="row row-lg">
+                                      <div class="col-xl-12 form-horizontal">
+                                        <div class="form-group row form-material">
+                                          <label class="col-xl-12 col-md-3 form-control-label">(First Choice) Information on Programme of Study
+                                            <span class="required">*</span>
+                                          </label>
+                                        <div class="example col-xl-3 col-md-3">
+                                          <select class="form-control" data-plugin="selectpicker" required
+                                            name="faculty" data-live-search="true" data-allow-clear="true">
+                                            <option value="Science">Natural Science</option>
+                                            <option value="Humanities">Humanities</option>
+                                          </select>
+                                        </div>
+                                        <div class="example col-xl-3 col-md-3 ">
+                                          <select class="form-control" data-plugin="selectpicker" required
+                                            name="department" data-live-search="true" data-allow-clear="true">
+                                            <option value="CMP">Computer Science</option>
+                                            <option value="LAW">LAW</option>
+                                          </select>
+                                        </div>
+                                        <div class="example col-xl-3 col-md-3">
+                                          <select class="form-control" data-plugin="selectpicker" required
+                                            name="programme" data-live-search="true" data-allow-clear="true">
+                                            <option value="CMP">Computer Science</option>
+                                            <option value="LAW">LAW</option>
+                                          </select>
+                                        </div>
+                                        <div class="example col-xl-3 col-md-3">
+                                          <select class="form-control" data-plugin="selectpicker" required
+                                            name="combination" data-live-search="true" data-allow-clear="true">
+                                            <option value="CMP">Mathematics-Physics-Chemistry</option>
+                                            <option value="LAW">Litrature-Government-CRS</option>
+                                          </select>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-xl-12 form-horizontal">
+                                        <div class="form-group row form-material">
+                                          <label class="col-xl-12 col-md-3 form-control-label">(Second choice) Information on Programme of Study
+                                            <span class="required">*</span>
+                                          </label>
+                                        <div class="example col-xl-3 col-md-3">
+                                          <select class="form-control" data-plugin="selectpicker" required
+                                            name="faculty" data-live-search="true" data-allow-clear="true">
+                                            <option value="Science">Natural Science</option>
+                                            <option value="Humanities">Humanities</option>
+                                          </select>
+                                        </div>
+                                        <div class="example col-xl-3 col-md-3 ">
+                                          <select class="form-control" data-plugin="selectpicker" required
+                                            name="department" data-live-search="true" data-allow-clear="true">
+                                            <option value="CMP">Computer Science</option>
+                                            <option value="LAW">LAW</option>
+                                          </select>
+                                        </div>
+                                        <div class="example col-xl-3 col-md-3">
+                                          <select class="form-control" data-plugin="selectpicker" required
+                                            name="programme" data-live-search="true" data-allow-clear="true">
+                                            <option value="CMP">Computer Science</option>
+                                            <option value="LAW">LAW</option>
+                                          </select>
+                                        </div>
+                                        <div class="example col-xl-3 col-md-3">
+                                          <select class="form-control" data-plugin="selectpicker" required
+                                            name="combination" data-live-search="true" data-allow-clear="true">
+                                            <option value="CMP">Mathematics-Physics-Chemistry</option>
+                                            <option value="LAW">Litrature-Government-CRS</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group form-material col-xl-12 text-right padding-top-m">
+                                      <button type="submit" class="btn btn-primary" id="validateButton1">Next</button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
                             </div>
+                            <!-- End Panel Full Example -->
                           </div>
                         </div>
                       </div>
@@ -558,53 +546,42 @@
               $('#newSchool').append(html);
           });   
 
-          $("#addExam").click(function () {              
+          $("#addQualification").click(function () {              
               var html = '';
-              html += '<div id="exam" class="col-xl-12 form-horizontal">';
+              html += '<div id="qualification" class="col-xl-12 form-horizontal">';
               html += '<div class="form-group row form-material">';
               html += '<div class="example col-xl-3 col-md-3">';                         
-              html += '<select class="form-control" data-plugin="selectpicker" name="exam[]" data-live-search="true" data-allow-clear="true" data-placeholder="Select Exam">';
-              html += '<option value="WAEC">WAEC</option>';
-              html += '<option value="NECO">NECO</option>';
-              html += '</select>';
+              html += '<input type="text" class="form-control" name="institution_name[]" placeholder="Name of institution">';
               html += '</div>';
-              html += '<div class="example col-xl-3 col-md-3">';                         
-              html += '<select class="form-control" data-plugin="selectpicker" name="subject[]" data-live-search="true" data-allow-clear="true">';
-              html += '<option>Choose Subject</option>';
-              html += '<option value="Mathematics">Further Mathematics</option>';
-              html += '<option value="Mathematics">Mathematics</option>';
-              html += '</select>';
+              html += '<div class="example col-xl-2 col-md-3">';
+              html += '<input type="text" class="form-control" name="institution_address[]" placeholder="Address">';
               html += '</div>';
-              html += '<div class="example col-xl-3 col-md-3">';                         
-              html += '<select class="form-control" data-plugin="selectpicker" name="grade[]" data-live-search="true" data-placeholder="Select a Grade">';
-              html += '<option>Choose Grade</option>';
-              html += '<option value="A1">A1</option>';
-              html += '<option value="B2">B2</option>';
-              html += '</select>';
+              html += '<div class="example col-xl-2 col-md-3">';
+              html += '<input type="text" class="form-control" name="degree[]" placeholder="Grade/Degree">';
               html += '</div>';
-              html += '<div class="example col-xl-3 col-md-3">';
-              html += '<select class="form-control" data-plugin="selectpicker" name="year[]" data-live-search="true" data-placeholder="Select a Year">';
-              html += '<option>Choose Year</option>';
-              html += '<option value="2021">2021</option>';
-              html += '<option value="2020">2020</option>';
-              html += '</select>';
+              html += '<div class="example col-xl-5 col-md-3 row">';
+              html += '<div class="input-group">';
+              html += '<input type="date" class="form-control" name="start[]" />';
+              html += '<span class="input-group-addon">to</span>';
+              html += '<input type="date" class="form-control" name="end[]" />';
               html += '</div>';
-              html += '<button id="removeExam" type="button" class="btn btn-sm btn-danger text-left">';
+              html += '</div>';
+              html += '<button id="removeQualification" type="button" class="btn btn-sm btn-danger text-left">';
               html += '<i class="icon md-minus text-active" aria-hidden="true"></i>';
               html += '<span class="text">Remove</span>';
               html += '</button>';
               html += '</div>';
               html += '</div>';
-              $('#newExam').append(html);
-          });      
+              $('#newQulalification').append(html);
+          });   
                                                                                                               
-                                                             
           // remove row
           $(document).on('click', '#removeSchool', function () {
             $(this).closest('#sec_school').remove();
           });
-          $(document).on('click', '#removeExam', function () {
-            $(this).closest('#exam').remove();
+          
+          $(document).on('click', '#removeQualification', function () {
+            $(this).closest('#qualification').remove();
           });
         })
       </script>
