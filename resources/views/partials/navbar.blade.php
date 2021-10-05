@@ -48,7 +48,7 @@
               </span>
             </a>
             <div class="dropdown-menu" role="menu">
-              <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Profile</a>
+              <a class="dropdown-item" href="profile" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Profile</a>
               <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> Payments</a>
               <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-settings" aria-hidden="true"></i> Settings</a>
               <div class="dropdown-divider"></div>
