@@ -131,18 +131,10 @@
                         </div>
                       </div>
                     </li>
-                    <li class="list-group-item">
-                      <div class="media">
-                        <div class="media-body">
-                          <h5 class="mt-0 mb-5">Address</h5>
-                          <small>3rd Mainland Bridge, Lagos</small>
-                        </div>
-                      </div>
-                    </li>
                   </ul>
-                  <button type="button" class="btn-raised btn btn-danger btn-floating">
+                  <a href="profile" class="btn-raised btn btn-danger btn-floating">
                     <i class="icon md-edit" aria-hidden="true"></i>
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
