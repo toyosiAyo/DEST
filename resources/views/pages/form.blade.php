@@ -23,6 +23,8 @@
   <script src=" {{ asset('global/vendor/editable-table/mindmup-editabletablefd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('global/js/Plugin/editable-table.minfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('assets/examples/js/tables/editable.minfd53.js?v4.0.1') }}"></script>
+
+  <script src=" {{ asset('global/js/Plugin/input-group-file.minfd53.js?v4.0.1') }}"></script>
   @endpush
 
   @section("content")
@@ -411,86 +413,113 @@
                             role="tabpanel">
                             <div class="panel-body">
                               <!-- Panel Full Example -->
-                              <div class="panel">
-                                <div class="panel-body">
-                                  <form id="exampleFullForm" autocomplete="off">
-                                    <div class="row row-lg">
-                                      <div class="col-xl-12 form-horizontal">
-                                        <div class="form-group row form-material">
-                                          <label class="col-xl-12 col-md-3 form-control-label">(First Choice) Information on Programme of Study
-                                            <span class="required">*</span>
-                                          </label>
-                                        <div class="example col-xl-3 col-md-3">
-                                          <select class="form-control" data-plugin="selectpicker" required
-                                            name="faculty" data-live-search="true" data-allow-clear="true">
-                                            <option value="Science">Natural Science</option>
-                                            <option value="Humanities">Humanities</option>
-                                          </select>
-                                        </div>
-                                        <div class="example col-xl-3 col-md-3 ">
-                                          <select class="form-control" data-plugin="selectpicker" required
-                                            name="department" data-live-search="true" data-allow-clear="true">
-                                            <option value="CMP">Computer Science</option>
-                                            <option value="LAW">LAW</option>
-                                          </select>
-                                        </div>
-                                        <div class="example col-xl-3 col-md-3">
-                                          <select class="form-control" data-plugin="selectpicker" required
-                                            name="programme" data-live-search="true" data-allow-clear="true">
-                                            <option value="CMP">Computer Science</option>
-                                            <option value="LAW">LAW</option>
-                                          </select>
-                                        </div>
-                                        <div class="example col-xl-3 col-md-3">
-                                          <select class="form-control" data-plugin="selectpicker" required
-                                            name="combination" data-live-search="true" data-allow-clear="true">
-                                            <option value="CMP">Mathematics-Physics-Chemistry</option>
-                                            <option value="LAW">Litrature-Government-CRS</option>
-                                          </select>
-                                        </div>
-                                      </div>
-
-                                      <div class="col-xl-12 form-horizontal">
-                                        <div class="form-group row form-material">
-                                          <label class="col-xl-12 col-md-3 form-control-label">(Second choice) Information on Programme of Study
-                                            <span class="required">*</span>
-                                          </label>
-                                        <div class="example col-xl-3 col-md-3">
-                                          <select class="form-control" data-plugin="selectpicker" required
-                                            name="faculty" data-live-search="true" data-allow-clear="true">
-                                            <option value="Science">Natural Science</option>
-                                            <option value="Humanities">Humanities</option>
-                                          </select>
-                                        </div>
-                                        <div class="example col-xl-3 col-md-3 ">
-                                          <select class="form-control" data-plugin="selectpicker" required
-                                            name="department" data-live-search="true" data-allow-clear="true">
-                                            <option value="CMP">Computer Science</option>
-                                            <option value="LAW">LAW</option>
-                                          </select>
-                                        </div>
-                                        <div class="example col-xl-3 col-md-3">
-                                          <select class="form-control" data-plugin="selectpicker" required
-                                            name="programme" data-live-search="true" data-allow-clear="true">
-                                            <option value="CMP">Computer Science</option>
-                                            <option value="LAW">LAW</option>
-                                          </select>
-                                        </div>
-                                        <div class="example col-xl-3 col-md-3">
-                                          <select class="form-control" data-plugin="selectpicker" required
-                                            name="combination" data-live-search="true" data-allow-clear="true">
-                                            <option value="CMP">Mathematics-Physics-Chemistry</option>
-                                            <option value="LAW">Litrature-Government-CRS</option>
-                                          </select>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="form-group form-material col-xl-12 text-right padding-top-m">
-                                      <button type="submit" class="btn btn-primary" id="validateButton1">Next</button>
-                                    </div>
+                              <form id="exampleFullForm" autocomplete="off">
+                                <div class="col-xl-12 form-horizontal">
+                                  <div class="form-group row form-material">
+                                    <label class="col-xl-12 col-md-3 form-control-label">(First Choice) Information on Programme of Study
+                                      <span class="required">*</span>
+                                    </label>
+                                  <div class="example col-xl-3 col-md-3">
+                                    <select class="form-control" data-plugin="selectpicker" required
+                                      name="faculty" data-live-search="true" data-allow-clear="true">
+                                      <option>Select Faculty</option>
+                                      <option value="Science">Natural Science</option>
+                                      <option value="Humanities">Humanities</option>
+                                    </select>
                                   </div>
-                                </form>
-                              </div>
+                                  <div class="example col-xl-3 col-md-3 ">
+                                    <select class="form-control" data-plugin="selectpicker" required
+                                      name="department" data-live-search="true" data-allow-clear="true">
+                                      <option>Select Department</option>
+                                      <option value="CMP">Computer Science</option>
+                                      <option value="LAW">LAW</option>
+                                    </select>
+                                  </div>
+                                  <div class="example col-xl-3 col-md-3">
+                                    <select class="form-control" data-plugin="selectpicker" required
+                                      name="programme" data-live-search="true" data-allow-clear="true">
+                                      <option>Select programme</option>
+                                      <option value="CMP">Computer Science</option>
+                                      <option value="LAW">LAW</option>
+                                    </select>
+                                  </div>
+                                  <div class="example col-xl-3 col-md-3">
+                                    <select class="form-control" data-plugin="selectpicker" required
+                                      name="combination" data-live-search="true" data-allow-clear="true">
+                                      <option>Select JUPEB Combination</option>
+                                      <option value="CMP">Mathematics-Physics-Chemistry</option>
+                                      <option value="LAW">Litrature-Government-CRS</option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                                <div class="col-xl-12 form-horizontal">
+                                  <div class="form-group row form-material">
+                                    <label class="col-xl-12 col-md-3 form-control-label">(Second choice) Information on Programme of Study
+                                      <span class="required">*</span>
+                                    </label>
+                                  <div class="example col-xl-3 col-md-3">
+                                    <select class="form-control" data-plugin="selectpicker" required
+                                      name="faculty" data-live-search="true" data-allow-clear="true">
+                                      <option>Select Faculty</option>
+                                      <option value="Science">Natural Science</option>
+                                      <option value="Humanities">Humanities</option>
+                                    </select>
+                                  </div>
+                                  <div class="example col-xl-3 col-md-3 ">
+                                    <select class="form-control" data-plugin="selectpicker" required
+                                      name="department" data-live-search="true" data-allow-clear="true">
+                                      <option>Select Department</option>
+                                      <option value="CMP">Computer Science</option>
+                                      <option value="LAW">LAW</option>
+                                    </select>
+                                  </div>
+                                  <div class="example col-xl-3 col-md-3">
+                                    <select class="form-control" data-plugin="selectpicker" required
+                                      name="programme" data-live-search="true" data-allow-clear="true">
+                                      <option>Select programme</option>
+                                      <option value="CMP">Computer Science</option>
+                                      <option value="LAW">LAW</option>
+                                    </select>
+                                  </div>
+                                  <div class="example col-xl-3 col-md-3">
+                                    <select class="form-control" data-plugin="selectpicker" required
+                                      name="combination" data-live-search="true" data-allow-clear="true">
+                                      <option>Select JUPEB Combination</option>
+                                      <option value="CMP">Mathematics-Physics-Chemistry</option>
+                                      <option value="LAW">Litrature-Government-CRS</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                  
+                                <div class="form-group col-xl-4 col-md-3">
+                                  <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                    <input type="text" class="form-control" placeholder="Upload Signature" required readonly="">
+                                    <span class="input-group-btn">
+                                      <span class="btn btn-primary btn-file">
+                                        <i class="icon md-upload" aria-hidden="true"></i>
+                                        <input type="file" name="signature">
+                                      </span>
+                                    </span>
+                                  </div>
+                                </div>
+                                <div class="checkbox-custom checkbox-success">
+                                  <input type="checkbox" name="declaration" required />
+                                  <label><small>I declare that I wish to enter the Redeemer's University Foundation degree Programme in the 2021/2022 session.
+                                    The credentials given in this form are correct to the best of my knowledge. If admitted to the University,
+                                    I shall regard myself bound by the ordinance, code of conduct, statuses and regulations of the University as
+                                    far as they affect me.
+                                    I understand that withholding any information requested or giving false information may make me ineligible for 
+                                    admission, registration, matriculation or expulsion from the University.
+                                    If discovered at any time that I do not possess any of the qualifications which I claim to have obtained, I will
+                                    be expelled from the University and shall not be re-admitted for the same or any other programme, even if I have
+                                    upgraded my previous qualifications or possess additional qualifications.</small>
+                                  </label>
+                                </div>
+                                <div class="form-group form-material col-xl-12 text-right padding-top-m">
+                                  <button type="submit" class="btn btn-primary" id="validateButton1">Submit Application</button>
+                                </div>
+                              </form>
                             </div>
                             <!-- End Panel Full Example -->
                           </div>
@@ -587,6 +616,7 @@
       </script>
 
   <script src="../assets/examples/js/tables/editable.minfd53.js?v4.0.1"></script>
+  
       
     </body>
   @endsection
