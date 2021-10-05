@@ -4,7 +4,7 @@
             <img class="cover-image" src="assets/examples/images/dashboard-header.jpg" alt="...">
             <div class="overlay-panel vertical-align overlay-background">
                 <div class="vertical-align-middle">
-                    <a class="avatar avatar-lg" href="javascript:void(0)">
+                    <a class="avatar avatar-lg" href="profile">
                     <img src="../global/portraits/1.jpg" alt="">
                     </a>
                     <div class="site-menubar-info">
