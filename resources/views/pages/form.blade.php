@@ -6,25 +6,14 @@
 
   @push('head')
   <link rel="stylesheet" href="{{ asset('global/vendor/bootstrap-select/bootstrap-select.minfd53.css?v4.0.1') }}">
-  <link rel="stylesheet" href="{{ asset('assets/examples/css/forms/advanced.minfd53.css?v4.0.1') }}">
   <link rel="stylesheet" href="{{ asset('global/vendor/select2/select2.minfd53.css?v4.0.1') }}">
 
-  <link rel="stylesheet" href="{{ asset('global/vendor/editable-table/editable-table.minfd53.css?v4.0.1') }}">
 
   <script src=" {{ asset('global/vendor/bootstrap-select/bootstrap-select.minfd53.js?v4.0.1') }}"></script>
-  <script src=" {{ asset('global/vendor/jquery-placeholder/jquery.placeholder.minfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('global/vendor/select2/select2.full.minfd53.js?v4.0.1') }}"></script>
 
-  <script src=" {{ asset('global/js/Plugin/jquery-placeholder.minfd53.js?v4.0.1') }}"></script>
-  <script src=" {{ asset('assets/examples/js/forms/advanced.minfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('global/js/Plugin/bootstrap-select.minfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('global/js/Plugin/select2.minfd53.js?v4.0.1') }}"></script>
-
-  <script src=" {{ asset('global/vendor/editable-table/mindmup-editabletablefd53.js?v4.0.1') }}"></script>
-  <script src=" {{ asset('global/js/Plugin/editable-table.minfd53.js?v4.0.1') }}"></script>
-  <script src=" {{ asset('assets/examples/js/tables/editable.minfd53.js?v4.0.1') }}"></script>
-
-  <script src=" {{ asset('global/js/Plugin/input-group-file.minfd53.js?v4.0.1') }}"></script>
   @endpush
 
   @section("content")
@@ -33,7 +22,7 @@
       <div class="page">
         <div class="page-header">
           <h1 class="page-title">Application Form (Foundation)</h1>
-          <small>NOTE: Fill in all details correctly</small>
+          <small>NOTE: Fill in all details correctly, also fields marked <span class="required" style="color:red">*</span> are required </small>
         </div>
 
         <div class="page-content container-fluid">
@@ -61,7 +50,7 @@
                 <div class="panel-body">
                   <div class="tab-content">
                     <!-- Categroy 1 -->
-                    <div class=" tab-pane animation-fade active" id="category-1" role="tabpanel">
+                    <div class="tab-pane active" id="category-1" role="tabpanel">
                       <div class="panel-group panel-group-simple panel-group-continuous" id="accordion2"
                         aria-multiselectable="true" role="tablist">
                         <div class="panel">
@@ -82,7 +71,7 @@
                                             <div class="col-xl-6 form-horizontal">
                                                 <div class="form-group row form-material">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Full name
-                                                        <span class="required">*</span>
+                                                        <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class=" col-xl-12 col-md-9">
                                                         <input type="text" class="form-control" value="Orieye Adamu" name="fullname" readonly>
@@ -91,7 +80,7 @@
 
                                                 <div class="form-group row form-material">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Email
-                                                        <span class="required">*</span>
+                                                        <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
                                                         <div class="input-group">
@@ -105,7 +94,7 @@
 
                                                 <div class="form-group row form-material">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Address
-                                                        <span class="required">*</span>
+                                                        <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
                                                         <div class="input-group">
@@ -120,7 +109,7 @@
 
                                                 <div class="form-group row form-material example">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Date of Birth
-                                                        <span class="required">*</span>
+                                                        <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
                                                         <input type="date" data-plugin="datepicker" class="form-control" id="dob" name="dob" 
@@ -130,7 +119,7 @@
 
                                                 <div class="form-group row form-material">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Nationality
-                                                        <span class="required">*</span>
+                                                        <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
                                                         <select class="form-control" id="country" name="country" required="">
@@ -143,7 +132,7 @@
 
                                                 <div class="form-group row form-material">
                                                     <label class="col-xl-12 col-md-3 form-control-label">State of Origin
-                                                        <span class="required">*</span>
+                                                        <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
                                                         <select class="form-control" id="state" name="state" required="">
@@ -156,7 +145,7 @@
 
                                                 <div class="form-group row form-material">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Name of Sponsor 
-                                                        <span class="required">*</span>
+                                                        <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class=" col-xl-12 col-md-9">
                                                         <input type="text" class="form-control" id="sponsor" name="sponsor" required>
@@ -167,7 +156,7 @@
                                             <div class="col-xl-6 form-horizontal">
                                                 <div class="form-group row form-material">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Marital Status
-                                                        <span class="required">*</span>
+                                                        <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
                                                         <div class="d-flex flex-column">
@@ -191,7 +180,7 @@
 
                                                 <div class="form-group row form-material">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Religion
-                                                        <span class="required">*</span>
+                                                        <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
                                                         <select class="form-control" id="religion" name="religion" required="">
@@ -224,7 +213,7 @@
 
                                                 <div class="form-group row form-material">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Name of Next of Kin 
-                                                        <span class="required">*</span>
+                                                        <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class=" col-xl-12 col-md-9">
                                                         <input type="text" class="form-control" id="next_of_kin" name="next_of_kin" required>
@@ -233,7 +222,7 @@
 
                                                 <div class="form-group row form-material">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Address of Next of Kin 
-                                                        <span class="required">*</span>
+                                                        <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class=" col-xl-12 col-md-9">
                                                         <input type="text" class="form-control" id="next_of_kin_address" name="next_of_kin_address" required>
@@ -242,7 +231,7 @@
 
                                                 <div class="form-group row form-material">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Address of Sponsor 
-                                                        <span class="required">*</span>
+                                                        <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class=" col-xl-12 col-md-9">
                                                         <input type="text" class="form-control" id="sponsor_address" name="sponsor_address" required>
@@ -266,7 +255,7 @@
                     <!-- End Categroy 1 -->
 
                     <!-- Categroy 2 -->
-                    <div class="tab-pane animation-fade" id="category-2" role="tabpanel">
+                    <div class="tab-pane" id="category-2" role="tabpanel">
                       <div class="panel-group panel-group-simple panel-group-continuous" id="accordion"
                         aria-multiselectable="true" role="tablist">
                         <div class="panel">
@@ -291,7 +280,7 @@
                                                       <span class="text">Add</span>
                                                     </button>
                                                     <label class="col-xl-12 col-md-3 form-control-label">Secondary school(s) attended with dates
-                                                        <span class="required">*</span>
+                                                        <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class="example col-xl-6 col-md-6">
                                                       <input type="text" class="form-control" name="sec_school[]" placeholder="Enter school name" required>
@@ -309,7 +298,7 @@
                                                 <div id="newSchool"></div>                                                
                                                 <div class="form-group row form-material">
                                                   <label class="col-xl-12 col-md-3 form-control-label">Examinations taken
-                                                    <span class="required">*</span>
+                                                    <span class="required" style="color:red">*</span>
                                                   </label>
                                                   <div class="example col-xl-12 col-md-3">
                                                     <table class="editable-table table table-striped" id="editableTable">
@@ -399,7 +388,7 @@
                     <!-- End Categroy 2 -->
 
                     <!-- Categroy 3 -->
-                    <div class="tab-pane animation-fade" id="category-3" role="tabpanel">
+                    <div class="tab-pane" id="category-3" role="tabpanel">
                       <div class="panel-group panel-group-simple panel-group-continuous" id="accordion1"
                         aria-multiselectable="true" role="tablist">
                         <div class="panel">
@@ -417,7 +406,7 @@
                                 <div class="col-xl-12 form-horizontal">
                                   <div class="form-group row form-material">
                                     <label class="col-xl-12 col-md-3 form-control-label">(First Choice) Information on Programme of Study
-                                      <span class="required">*</span>
+                                      <span class="required" style="color:red">*</span>
                                     </label>
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" data-plugin="selectpicker" required
@@ -456,7 +445,7 @@
                                 <div class="col-xl-12 form-horizontal">
                                   <div class="form-group row form-material">
                                     <label class="col-xl-12 col-md-3 form-control-label">(Second choice) Information on Programme of Study
-                                      <span class="required">*</span>
+                                      <span class="required" style="color:red">*</span>
                                     </label>
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" data-plugin="selectpicker" required
@@ -504,8 +493,8 @@
                                   </div>
                                 </div>
                                 <div class="checkbox-custom checkbox-success">
-                                  <input type="checkbox" name="declaration" required />
-                                  <label><small>I declare that I wish to enter the Redeemer's University Foundation degree Programme in the 2021/2022 session.
+                                  <input type="checkbox" id="declaration" name="declaration" required />
+                                  <label for="declaration"><small>I declare that I wish to enter the Redeemer's University Foundation degree Programme in the 2021/2022 session.
                                     The credentials given in this form are correct to the best of my knowledge. If admitted to the University,
                                     I shall regard myself bound by the ordinance, code of conduct, statuses and regulations of the University as
                                     far as they affect me.
@@ -613,10 +602,7 @@
             $(this).closest('#qualification').remove();
           });
         })
-      </script>
-
-  <script src="../assets/examples/js/tables/editable.minfd53.js?v4.0.1"></script>
-  
+      </script>      
       
     </body>
   @endsection
