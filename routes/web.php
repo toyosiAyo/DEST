@@ -30,3 +30,6 @@ Route::get('/create_application', function () {
 Route::get('/form', function () {
     return view('/pages/form');
 });
+Route::get('/profile', function () {
+    return view('/pages/profile');
+});
