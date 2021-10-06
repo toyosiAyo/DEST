@@ -47,7 +47,7 @@
               </ul>
             </li>
             <li class="site-menu-item">
-              <a href="#">
+              <a href="payments">
                 <i class="site-menu-icon md-card" aria-hidden="true"></i>
                 <span class="site-menu-title">Payment History</span>
               </a>
