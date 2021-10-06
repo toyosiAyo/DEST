@@ -481,15 +481,27 @@
                                   </div>
                                 </div>
                                   
-                                <div class="form-group col-xl-4 col-md-3">
-                                  <div class="input-group input-group-file" data-plugin="inputGroupFile">
-                                    <input type="text" class="form-control" placeholder="Upload Signature" required readonly="">
-                                    <span class="input-group-btn">
-                                      <span class="btn btn-primary btn-file">
-                                        <i class="icon md-upload" aria-hidden="true"></i>
-                                        <input type="file" name="signature">
-                                      </span>
-                                    </span>
+                                <div class="col-xl-12 form-horizontal">
+                                  <div class="form-group row form-material">
+                                    <div class="example col-xl-6 col-md-3">
+                                      <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                        <input type="text" class="form-control" placeholder="Upload Signature" required readonly="">
+                                        <span class="input-group-btn">
+                                          <span class="btn btn-primary btn-file">
+                                            <i class="icon md-upload" aria-hidden="true"></i>
+                                            <input type="file" name="signature">
+                                          </span>
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div class="example col-xl-6 col-md-3">
+                                      <select class="form-control" data-plugin="selectpicker" required
+                                        name="screening_date" data-live-search="true" data-allow-clear="true">
+                                        <option>Select Screening Date</option>
+                                        <option value="17/10/2021">17/10/2021</option>
+                                        <option value="20/10/2021">20/10/2021</option>
+                                      </select>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="checkbox-custom checkbox-success">
