@@ -33,3 +33,6 @@ Route::get('/form', function () {
 Route::get('/profile', function () {
     return view('/pages/profile');
 });
+Route::get('/payments', function () {
+    return view('/pages/payment_history');
+});
