@@ -21,7 +21,8 @@
                                     <img src="../../global/portraits/5.jpg" alt="...">
                                 </a>
                                 <h4 class="profile-user">Terrance arnold</h4>
-                                <button type="button" class="btn btn-primary">Follow</button>
+                                <input type="file" name="profile_image"> <hr>
+                                <button type="button" class="btn btn-primary">Update Profile Image</button>
                             </div>
                         </div>
                         <!-- End Page Widget -->
