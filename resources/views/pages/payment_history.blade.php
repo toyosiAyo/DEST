@@ -18,7 +18,7 @@
                             <div class="table-responsive h-250" data-plugin="scrollable">
                                 <div data-role="container">
                                     <div data-role="content">
-                                        <table class="table table-hover table-striped">
+                                        <table class="table table-responsive-sm table-hover table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Transaction ID</th>
@@ -30,14 +30,14 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>568968</td>
+                                                    <td>56</td>
                                                     <td>7500</td>
                                                     <td>5/29/2017</td>
                                                     <td><span class="badge badge-warning">PENDING</span></td>
                                                     <td><button type="button" class="btn btn-danger"><i class="icon md-refresh" aria-hidden="true"></i> Requery</button></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>568968</td>
+                                                    <td>57</td>
                                                     <td>7500</td>
                                                     <td>5/29/2017</td>
                                                     <td><span class="badge badge-warning">PENDING</span></td>
