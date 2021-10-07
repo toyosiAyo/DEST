@@ -38,7 +38,7 @@
                 <div class="panel-body">
                   <div class="tab-content">
                     <!-- Categroy 1 -->
-                    <div class=" tab-pane animation-fade active" id="category-1" role="tabpanel">
+                    <div class=" tab-pane active" id="category-1" role="tabpanel">
                       <div class="panel-group panel-group-simple panel-group-continuous" id="accordion2"
                         aria-multiselectable="true" role="tablist">
                         <div class="panel">
@@ -63,7 +63,7 @@
                     <!-- End Categroy 1 -->
 
                     <!-- Categroy 2 -->
-                    <div class="tab-pane animation-fade" id="category-2" role="tabpanel">
+                    <div class="tab-pane" id="category-2" role="tabpanel">
                       <div class="panel-group panel-group-simple panel-group-continuous" id="accordion"
                         aria-multiselectable="true" role="tablist">
                         <div class="panel">
@@ -88,7 +88,7 @@
                     <!-- End Categroy 2 -->
 
                     <!-- Categroy 3 -->
-                    <div class="tab-pane animation-fade" id="category-3" role="tabpanel">
+                    <div class="tab-pane" id="category-3" role="tabpanel">
                       <div class="panel-group panel-group-simple panel-group-continuous" id="accordion1"
                         aria-multiselectable="true" role="tablist">
                         <div class="panel">
