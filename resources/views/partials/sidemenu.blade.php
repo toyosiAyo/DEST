@@ -40,7 +40,7 @@
                   </a>
                 </li>
                 <li class="site-menu-item">
-                  <a href="#">
+                  <a href="application">
                     <span class="site-menu-title">View</span>
                   </a>
                 </li>
