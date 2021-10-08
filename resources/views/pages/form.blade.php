@@ -32,12 +32,12 @@
               <div class="panel">
                 <div class="panel-body">
                   <div class="list-group faq-list" role="tablist">
-                    <a class="list-group-item active" data-toggle="tab" href="#category-1" aria-controls="category-1"
-                      role="tab">Basic Information</a>
-                    <a class="list-group-item" data-toggle="tab" href="#category-2" aria-controls="category-2"
-                      role="tab">Academic Information</a>
-                    <a class="list-group-item" data-toggle="tab" href="#category-3" aria-controls="category-3"
-                      role="tab">Declaration</a>
+                    <button class="btn btn-primary list-group-item" data-target="#category-1" data-toggle="tab" aria-controls="category-1"
+                      role="tab">Basic Information</button><br>
+                    <button class="btn btn-dark list-group-item" data-target="#category-2" data-toggle="tab" aria-controls="category-2"
+                      role="tab">Academic Information</button><br>
+                    <button class="btn btn-info list-group-item" data-target="#category-3" data-toggle="tab" aria-controls="category-3"
+                      role="tab">Declaration</button>
                   </div>
                 </div>
               </div>
