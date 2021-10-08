@@ -36,3 +36,6 @@ Route::get('/profile', function () {
 Route::get('/payments', function () {
     return view('/pages/payment_history');
 });
+Route::get('/application', function () {
+    return view('/pages/applications');
+});
