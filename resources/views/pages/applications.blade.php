@@ -57,10 +57,10 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Modal Title</h4>
+                <h4 class="modal-title">Application details</h4>
             </div>
             <div class="modal-body">
-                <p>One fine body…</p>
+                <p>My applicatioon details</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Close</button>
