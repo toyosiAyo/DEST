@@ -51,9 +51,9 @@
                           <div class="panel-collapse collapse show" id="answer-1" aria-labelledby="question-1"
                             role="tabpanel">
                             <div class="panel-body">
-                              Payment Widget Here
+                              Foundation Programme description here
                               <div class="animation-example animation-hover hover">
-                                <button type="button" class="btn btn-dark animation-scale-up">Pay Application Fee (₦5,000) </button>
+                                <button type="button" class="btn btn-dark animation-scale-up">Create Application </button>
                               </div>
                             </div>
                           </div>
@@ -76,9 +76,9 @@
                           <div class="panel-collapse collapse show" id="answer-5" aria-labelledby="question-5"
                             role="tabpanel">
                             <div class="panel-body">
-                              Payment Widget Here
+                            Pre-degree Programme description Here
                               <div class="animation-example animation-hover hover">
-                                <button type="button" class="btn btn-dark animation-scale">Pay Application Fee (₦5,000)</button>
+                                <button type="button" class="btn btn-dark animation-scale">Create Application</button>
                               </div>
                             </div>
                           </div>
@@ -101,9 +101,9 @@
                           <div class="panel-collapse collapse show" id="answer-8" aria-labelledby="question-8"
                             role="tabpanel">
                             <div class="panel-body">
-                              Payment Widget Here
+                            HND Conversion Programme description Here
                               <div class="animation-example animation-hover hover">
-                                <button type="button" class="btn btn-dark animation-shake">Pay Application Fee (₦5,000)</button>
+                                <button type="button" class="btn btn-dark animation-shake">Create Application</button>
                               </div>
                             </div>
                           </div>
