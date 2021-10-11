@@ -27,9 +27,17 @@ Route::group(['middleware'=>['authcheck']], function() {
 Route::get('/create_application', function () {
     return view('/pages/create_application');
 });
-Route::get('/form', function () {
-    return view('/pages/form');
-});
+
+
+// Route::get('/form', function () {
+//     return view('/pages/form');
+// });
+
+
+Route::post('save/app/form',[ApplicationController::class,'save_app_form'])->name('save.app.form');
+Route::get('form',[ApplicationController::class,'get_app_form'])->name('get.app.form');
+
+
 Route::get('/profile', function () {
     return view('/pages/profile');
 });

@@ -6,6 +6,20 @@ use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
+
+    
+    public function get_app_form(Request $request){
+        return view('/pages/form');
+       
+    }
+
+    public function save_app_form(Request $request){
+
+        dd($request->all());
+    }
+
+
+   
 //    $country_list = array(
 // 		"Afghanistan",
 // 		"Albania",
