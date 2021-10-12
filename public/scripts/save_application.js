@@ -12,7 +12,7 @@ $(document).ready(function($){
         });
 
         function submitFormBasic(e) { 
-            var formData = $("#editVendorForm").serialize();
+            var formData = $("#form_basic").serialize();
             var type = "POST";
             var ajaxurl = 'save/app/form';
 
