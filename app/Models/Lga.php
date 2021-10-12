@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Applicant extends Model
+class Lga extends Model
 {
     use HasFactory;
-
-    protected $table="applicants";
+    protected $table="lga";
 }
