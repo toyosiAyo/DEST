@@ -14,6 +14,8 @@
 
   <script src=" {{ asset('global/js/Plugin/bootstrap-select.minfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('global/js/Plugin/select2.minfd53.js?v4.0.1') }}"></script>
+  <script src="{{ asset('scripts/save_application.js') }}"></script>
+  <script src="{{ asset('scripts/validation.min.js') }}"></script>
   @endpush
 
   @section("content")
@@ -66,7 +68,8 @@
                               <!-- Panel Full Example -->
                                 <div class="panel">
                                     <div class="panel-body">
-                                        <form id="exampleFullForm" autocomplete="off">
+                                        <form id="form_basic" method="post" autocomplete="off">
+                                            @csrf
                                             <div class="row row-lg">
                                             <div class="col-xl-6 form-horizontal">
                                                 <div class="form-group row form-material">
@@ -240,7 +243,7 @@
                                             </div>
 
                                             <div class="form-group form-material col-xl-12 text-right padding-top-m">
-                                                <button type="submit" class="btn btn-primary" id="validateButton1">Next</button>
+                                                <button type="submit" class="btn btn-primary" id="btn_basic">Next</button>
                                             </div>
                                             </div>
                                         </form>
