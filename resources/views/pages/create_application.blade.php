@@ -53,7 +53,7 @@
                             <div class="panel-body">
                               Foundation Programme description here
                               <div class="animation-example animation-hover hover">
-                                <button type="button" class="btn btn-dark animation-scale-up">Create Application </button>
+                                <button type="button" id="btn_foundation" class="btn btn-dark animation-scale-up">Create Application </button>
                               </div>
                             </div>
                           </div>
@@ -122,5 +122,6 @@
       <!-- End Page -->
 
       <script src="{{ asset('assets/examples/js/pages/faq.minfd53.js?v4.0.1') }}"></script>
+      <script src=" {{ asset('scripts/create_application.js') }}"></script>
     </body>
   @endsection

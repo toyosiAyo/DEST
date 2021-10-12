@@ -19,7 +19,7 @@ class ApplicationController extends Controller
 
     public function save_app_form(Request $request){
 
-        dd($request->all());
+        dd($request->next_of_kin_address);
     }
 
 
