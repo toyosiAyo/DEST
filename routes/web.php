@@ -31,9 +31,9 @@ Route::get('create_application',[ApplicationController::class,'create_applicatio
 
 
 
-Route::get('/create_application', function () {
-    return view('/pages/create_application');
-});
+// Route::get('/create_application', function () {
+//     return view('/pages/create_application');
+// });
 
 
 // Route::get('/form', function () {

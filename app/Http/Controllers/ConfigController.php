@@ -6,19 +6,21 @@ use App\Models\Applicant;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\Lga;
+use App\Models\Setting;
 use Illuminate\Http\Request;
+
 
 class ConfigController extends Controller
 {
-    //
-    // public static  function settings($request){
-    //     if ($request->has('session') && $request->filled('session') && $request->has('semester') && $request->filled('semester')){
-    //         $settings = Setting::where('semester_name', $request->semester)->where('session_name',$request->session)->first();
-    //         return $settings;
-    //     }
-    //     $settings = Setting::where('status', 'active')->first();
-    //     return $settings;
-    // }
+    
+    public  function settings($request){
+        if ($request->has('settingId') && $request->filled('settingId') ){
+            $settings = Setting::where('id', $request->settingId)->first();
+            return $settings;
+        }
+        $settings = Setting::where('status', 'active')->first();
+        return $settings;
+    }
 
 //ALTER TABLE `state` MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
