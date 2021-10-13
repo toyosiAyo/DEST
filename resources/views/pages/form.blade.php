@@ -14,11 +14,17 @@
 
   <script src=" {{ asset('global/js/Plugin/bootstrap-select.minfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('global/js/Plugin/select2.minfd53.js?v4.0.1') }}"></script>
+  <script src="{{ asset('scripts/misc.js') }}"></script>
   <script src="{{ asset('scripts/save_application.js') }}"></script>
   <script src="{{ asset('scripts/validation.min.js') }}"></script>
   @endpush
 
   @section("content")
+    <style>
+      .invalid {
+        color:#ff0000;
+      }
+    </style>
     <body class="animsition page-faq site-menubar-push site-menubar-open site-menubar-fixed">
       <!-- Page -->
       <div class="page">
@@ -34,11 +40,11 @@
               <div class="panel">
                 <div class="panel-body">
                   <div class="list-group faq-list" role="tablist">
-                    <button class="btn btn-primary list-group-item" data-target="#category-1" data-toggle="tab" aria-controls="category-1"
+                    <button id="basic_info" class="btn btn-primary list-group-item" data-target="#category-1" data-toggle="tab" aria-controls="category-1"
                       role="tab">Basic Information</button><br>
-                    <button class="btn btn-dark list-group-item" data-target="#category-2" data-toggle="tab" aria-controls="category-2"
+                    <button id="academic_info" class="btn btn-dark list-group-item" data-target="#category-2" data-toggle="tab" aria-controls="category-2"
                       role="tab">Academic Information</button><br>
-                    <button class="btn btn-info list-group-item" data-target="#category-3" data-toggle="tab" aria-controls="category-3"
+                    <button id="declaration_info" class="btn btn-info list-group-item" data-target="#category-3" data-toggle="tab" aria-controls="category-3"
                       role="tab">Declaration</button>
                   </div>
                 </div>
@@ -104,8 +110,9 @@
                                                         <span class="input-group-addon">
                                                             <i class="icon md-pin" aria-hidden="true"></i>
                                                         </span>
-                                                        <input type="text" class="form-control" id="address" name="address" 
+                                                        <input type="text" class="form-control" id="address_resident" name="address_resident" 
                                                             required="">
+                                                          <input type="hidden" class="form-control" value="basic" id="basic" name="basic">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -117,6 +124,15 @@
                                                     <div class="col-xl-12 col-md-9">
                                                         <input type="date" data-plugin="datepicker" class="form-control" id="dob" name="dob" 
                                                         required="" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">City of Residence 
+                                                        <span class="required" style="color:red">*</span>
+                                                    </label>
+                                                    <div class=" col-xl-12 col-md-9">
+                                                        <input type="text" class="form-control" id="city_resident" name="city_resident" required>
                                                     </div>
                                                 </div>
 
@@ -138,22 +154,40 @@
                                                         <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
-                                                        <select class="form-control" id="state" name="state" required="">
+                                                        <select class="form-control" id="state_origin" name="state_origin" required="">
                                                             <option value="">Choose a State</option>
-                                                            <option value="apple">Abia</option>
-                                                            <option value="google">Adamawa</option>
+                                                            <option value="Abia">Abia</option>
+                                                            <option value="Adamawa">Adamawa</option>
                                                         </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row form-material">
-                                                    <label class="col-xl-12 col-md-3 form-control-label">Name of Sponsor 
+                                                    <label class="col-xl-12 col-md-3 form-control-label">LGA
                                                         <span class="required" style="color:red">*</span>
                                                     </label>
-                                                    <div class=" col-xl-12 col-md-9">
-                                                        <input type="text" class="form-control" id="sponsor" name="sponsor" required>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <select class="form-control" id="lga_origin" name="lga_origin" required="">
+                                                            <option value="">Choose LGA</option>
+                                                            <option value="Alimosho">Alimosho</option>
+                                                            <option value="Somolu">Somolu</option>
+                                                        </select>
                                                     </div>
-                                                </div>                                                
+                                                </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Religion
+                                                        <span class="required" style="color:red">*</span>
+                                                    </label>
+                                                    <div class="col-xl-12 col-md-9">
+                                                        <select class="form-control" id="religion" name="religion" required="">
+                                                            <option value="">Choose Religion</option>
+                                                            <option value="Christianity"> Christianity</option>
+                                                            <option value="Islamic"> Islamic</option>
+                                                            <option value="Other"> Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>                                                                                                
                                             </div>
 
                                             <div class="col-xl-6 form-horizontal">
@@ -179,21 +213,7 @@
                                                         </div>
                                                         </div>
                                                     </div>
-                                                </div>
-
-                                                <div class="form-group row form-material">
-                                                    <label class="col-xl-12 col-md-3 form-control-label">Religion
-                                                        <span class="required" style="color:red">*</span>
-                                                    </label>
-                                                    <div class="col-xl-12 col-md-9">
-                                                        <select class="form-control" id="religion" name="religion" required="">
-                                                            <option value="">Choose Religion</option>
-                                                            <option value="Christianity"> Christianity</option>
-                                                            <option value="Islamic"> Islamic</option>
-                                                            <option value="Other"> Other</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                </div>  
 
                                                 <div class="form-group row form-material">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Physical Disability?</label>
@@ -224,6 +244,24 @@
                                                 </div>
 
                                                 <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Phone number of Next of Kin 
+                                                        <span class="required" style="color:red">*</span>
+                                                    </label>
+                                                    <div class=" col-xl-12 col-md-9">
+                                                        <input type="tel" class="form-control" id="nok_phone" name="nok_phone" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Relationship with Next of Kin 
+                                                        <span class="required" style="color:red">*</span>
+                                                    </label>
+                                                    <div class=" col-xl-12 col-md-9">
+                                                        <input type="text" class="form-control" id="nok_relationship" name="nok_relationship" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material">
                                                     <label class="col-xl-12 col-md-3 form-control-label">Address of Next of Kin 
                                                         <span class="required" style="color:red">*</span>
                                                     </label>
@@ -233,13 +271,31 @@
                                                 </div>
 
                                                 <div class="form-group row form-material">
-                                                    <label class="col-xl-12 col-md-3 form-control-label">Address of Sponsor 
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Name of Sponsor 
                                                         <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class=" col-xl-12 col-md-9">
-                                                        <input type="text" class="form-control" id="sponsor_address" name="sponsor_address" required>
+                                                        <input type="text" class="form-control" id="sponsor_name" name="sponsor_name" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Email address of Sponsor 
+                                                        <span class="required" style="color:red">*</span>
+                                                    </label>
+                                                    <div class=" col-xl-12 col-md-9">
+                                                        <input type="email" class="form-control" id="sponsor_email" name="sponsor_email" required>
                                                     </div>
                                                 </div> 
+
+                                                <div class="form-group row form-material">
+                                                    <label class="col-xl-12 col-md-3 form-control-label">Phone number of Sponsor 
+                                                        <span class="required" style="color:red">*</span>
+                                                    </label>
+                                                    <div class=" col-xl-12 col-md-9">
+                                                        <input type="tel" class="form-control" id="sponsor_phone" name="sponsor_phone" required>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="form-group form-material col-xl-12 text-right padding-top-m">
@@ -274,7 +330,8 @@
                                 <!-- Panel Full Example -->
                                 <div class="panel">
                                     <div class="panel-body">
-                                        <form id="exampleFullForm" autocomplete="off">
+                                        <form method="post" id="form_academic" autocomplete="off">
+                                            @csrf
                                              <div class="row row-lg">
                                                <div class="col-xl-12 form-horizontal">
                                                  <div class="form-group row form-material">
@@ -286,19 +343,21 @@
                                                         <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class="example col-xl-6 col-md-6">
-                                                      <input type="text" class="form-control" name="sec_school[]" placeholder="Enter school name" required>
+                                                      <input type="text" class="form-control"  name="sec_school[]" placeholder="Enter school name" required>
+                                                      <input type="hidden" class="form-control" value="academic" id="academic" name="academic">
                                                     </div>
                                                     <div class="example col-xl-6 col-md-3 row">
                                                       <div class="input-daterange" data-plugin="datepicker">
                                                         <div class="input-group">
-                                                          <input type="date" class="form-control" name="start[]" />
+                                                          <input type="date" class="form-control" name="school_start[]" required/>
                                                           <span class="input-group-addon">to</span>
-                                                          <input type="date" class="form-control" name="end[]" />
+                                                          <input type="date" class="form-control" name="school_end[]" required/>
                                                         </div>
                                                       </div>
                                                     </div>
                                                 </div>
-                                                <div id="newSchool"></div>                                                
+                                                <div id="newSchool"></div> 
+
                                                 <div class="form-group row form-material">
                                                   <label class="col-xl-12 col-md-3 form-control-label">Examinations taken
                                                     <span class="required" style="color:red">*</span>
@@ -318,25 +377,26 @@
                                                         <tr>
                                                           <td>
                                                             <select class="form-control" name="exam[]" required>
+                                                                <option>Select Exam</option>
                                                                 <option value="WAEC">WAEC</option>
                                                                 <option value="NECO">NECO</option>
                                                             </select>
                                                           </td>
-                                                          <td><select class="form-control" name="subject[]">
+                                                          <td><select class="form-control" name="subject[]" required>
                                                             <option>Choose Subject</option>
                                                             <option value="English">English</option>
                                                             <option value="Mathematics">Further Mathematics</option>
                                                             </select>
                                                           </td>
                                                           <td>
-                                                            <select class="form-control" name="grade[]" >
+                                                            <select class="form-control" name="grade[]" required>
                                                               <option>Choose Grade</option>
                                                               <option value="A1">A1</option>
                                                               <option value="B2">B2</option>
                                                             </select>
                                                           </td>
                                                           <td>
-                                                            <select class="form-control" name="year[]">
+                                                            <select class="form-control" name="year[]" required>
                                                               <option>Choose Year</option>
                                                               <option value="2021">2021</option>
                                                               <option value="2020">2020</option>
@@ -366,9 +426,9 @@
                                                   </div>
                                                   <div class="example col-xl-5 col-md-3 row">
                                                       <div class="input-group">
-                                                        <input type="date" class="form-control" name="start[]" />
+                                                        <input type="date" class="form-control" name="inst_start[]" />
                                                         <span class="input-group-addon">to</span>
-                                                        <input type="date" class="form-control" name="end[]" />
+                                                        <input type="date" class="form-control" name="inst_end[]" />
                                                       </div>
                                                   </div>
                                                 </div>
@@ -376,7 +436,7 @@
 
                                             </div>
                                             <div class="form-group form-material col-xl-12 text-right padding-top-m">
-                                                <button type="submit" class="btn btn-primary" id="validateButton1">Next</button>
+                                                <button type="submit" class="btn btn-primary" id="btn_academic">Next</button>
                                             </div>
                                           </div>
                                         </form>
@@ -405,15 +465,17 @@
                             role="tabpanel">
                             <div class="panel-body">
                               <!-- Panel Full Example -->
-                              <form id="exampleFullForm" autocomplete="off">
+                              <form method="post" id="form_declaration" autocomplete="off">
+                                @csrf
                                 <div class="col-xl-12 form-horizontal">
                                   <div class="form-group row form-material">
                                     <label class="col-xl-12 col-md-3 form-control-label">(First Choice) Information on Programme of Study
                                       <span class="required" style="color:red">*</span>
                                     </label>
                                   <div class="example col-xl-3 col-md-3">
+                                  <input type="hidden" class="form-control" value="declaration" id="declaration" name="declaration">
                                     <select class="form-control" data-plugin="selectpicker" required
-                                      name="faculty" data-live-search="true" data-allow-clear="true">
+                                      name="faculty" id="faculty" data-live-search="true" data-allow-clear="true">
                                       <option>Select Faculty</option>
                                       <option value="Science">Natural Science</option>
                                       <option value="Humanities">Humanities</option>
@@ -421,7 +483,7 @@
                                   </div>
                                   <div class="example col-xl-3 col-md-3 ">
                                     <select class="form-control" data-plugin="selectpicker" required
-                                      name="department" data-live-search="true" data-allow-clear="true">
+                                      name="department" id="department" data-live-search="true" data-allow-clear="true">
                                       <option>Select Department</option>
                                       <option value="CMP">Computer Science</option>
                                       <option value="LAW">LAW</option>
@@ -429,7 +491,7 @@
                                   </div>
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" data-plugin="selectpicker" required
-                                      name="programme" data-live-search="true" data-allow-clear="true">
+                                      name="programme" id="programme" data-live-search="true" data-allow-clear="true">
                                       <option>Select programme</option>
                                       <option value="CMP">Computer Science</option>
                                       <option value="LAW">LAW</option>
@@ -437,7 +499,7 @@
                                   </div>
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" data-plugin="selectpicker" required
-                                      name="combination" data-live-search="true" data-allow-clear="true">
+                                      name="combination" id="combination" data-live-search="true" data-allow-clear="true">
                                       <option>Select JUPEB Combination</option>
                                       <option value="CMP">Mathematics-Physics-Chemistry</option>
                                       <option value="LAW">Litrature-Government-CRS</option>
@@ -452,7 +514,7 @@
                                     </label>
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" data-plugin="selectpicker" required
-                                      name="faculty" data-live-search="true" data-allow-clear="true">
+                                      name="faculty2" id="faculty2" data-live-search="true" data-allow-clear="true">
                                       <option>Select Faculty</option>
                                       <option value="Science">Natural Science</option>
                                       <option value="Humanities">Humanities</option>
@@ -460,7 +522,7 @@
                                   </div>
                                   <div class="example col-xl-3 col-md-3 ">
                                     <select class="form-control" data-plugin="selectpicker" required
-                                      name="department" data-live-search="true" data-allow-clear="true">
+                                      name="department2" id="department2" data-live-search="true" data-allow-clear="true">
                                       <option>Select Department</option>
                                       <option value="CMP">Computer Science</option>
                                       <option value="LAW">LAW</option>
@@ -468,7 +530,7 @@
                                   </div>
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" data-plugin="selectpicker" required
-                                      name="programme" data-live-search="true" data-allow-clear="true">
+                                      name="programme2" id="programme2" data-live-search="true" data-allow-clear="true">
                                       <option>Select programme</option>
                                       <option value="CMP">Computer Science</option>
                                       <option value="LAW">LAW</option>
@@ -476,7 +538,7 @@
                                   </div>
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" data-plugin="selectpicker" required
-                                      name="combination" data-live-search="true" data-allow-clear="true">
+                                      name="combination2" id="combination2" data-live-search="true" data-allow-clear="true">
                                       <option>Select JUPEB Combination</option>
                                       <option value="CMP">Mathematics-Physics-Chemistry</option>
                                       <option value="LAW">Litrature-Government-CRS</option>
@@ -488,18 +550,18 @@
                                   <div class="form-group row form-material">
                                     <div class="example col-xl-6 col-md-3">
                                       <div class="input-group input-group-file" data-plugin="inputGroupFile">
-                                        <input type="text" class="form-control" placeholder="Upload Signature" required readonly="">
+                                        <input type="text" class="form-control" placeholder="Upload Signature" readonly="">
                                         <span class="input-group-btn">
                                           <span class="btn btn-primary btn-file">
                                             <i class="icon md-upload" aria-hidden="true"></i>
-                                            <input type="file" name="signature">
+                                            <input type="file" id="signature" name="signature" required> 
                                           </span>
                                         </span>
                                       </div>
                                     </div>
                                     <div class="example col-xl-6 col-md-3">
                                       <select class="form-control" data-plugin="selectpicker" required
-                                        name="screening_date" data-live-search="true" data-allow-clear="true">
+                                        name="screening_date" id="screening_date" data-live-search="true" data-allow-clear="true">
                                         <option>Select Screening Date</option>
                                         <option value="17/10/2021">17/10/2021</option>
                                         <option value="20/10/2021">20/10/2021</option>
@@ -508,8 +570,8 @@
                                   </div>
                                 </div>
                                 <div class="checkbox-custom checkbox-success">
-                                  <input type="checkbox" id="declaration" name="declaration" required />
-                                  <label for="declaration"><small>I declare that I wish to enter the Redeemer's University Foundation degree Programme in the 2021/2022 session.
+                                  <input type="checkbox" id="accept_terms" name="accept_terms" required />
+                                  <label for="accept_terms"><small>I declare that I wish to enter the Redeemer's University Foundation degree Programme in the 2021/2022 session.
                                     The credentials given in this form are correct to the best of my knowledge. If admitted to the University,
                                     I shall regard myself bound by the ordinance, code of conduct, statuses and regulations of the University as
                                     far as they affect me.
@@ -521,7 +583,7 @@
                                   </label>
                                 </div>
                                 <div class="form-group form-material col-xl-12 text-right padding-top-m">
-                                  <button type="submit" class="btn btn-primary" id="validateButton1">Submit Application</button>
+                                  <button type="submit" class="btn btn-primary" id="btn_declaration">Submit Application</button>
                                 </div>
                               </form>
                             </div>
@@ -540,84 +602,5 @@
         </div>
       </div>
       <!-- End Page -->
-
-      <script> 
-        $(document).ready(function(){
-          $(".disability").hide();
-          $('input[type="checkbox"]').click(function(){
-            if($("#disability_check").prop('checked') == true){
-              $(".disability").show();
-            } 
-            else {
-              $(".disability").hide();
-            }
-          }) 
-
-            // add row
-          $("#addSchool").click(function () {              
-              var html = '';
-              html += '<div id="sec_school" class="col-xl-12 form-horizontal">';
-              html += '<div class="form-group row form-material">';
-              html += '<div class="example col-xl-6 col-md-6">';                         
-              html += '<input type="text" class="form-control" name="sec_school[]" placeholder="Enter school name" required>';
-              html += '</div>';
-              html += '<div class="example col-xl-6 col-md-3 row">';
-              html += '<div class="input-daterange" data-plugin="datepicker">';
-              html += '<div class="input-group">';
-              html += '<input type="date" class="form-control" name="start[]" />';
-              html += '<span class="input-group-addon">to</span>';
-              html += '<input type="date" class="form-control" name="end[]" />';
-              html += '</div>';
-              html += '</div>';
-              html += '</div>';
-              html += '<button id="removeSchool" type="button" class="btn btn-sm btn-danger text-left">';
-              html += '<i class="icon md-minus text-active" aria-hidden="true"></i>';
-              html += '<span class="text">Remove</span>';
-              html += '</button>';
-              html += '</div>';
-              html += '</div>';
-              $('#newSchool').append(html);
-          });   
-
-          $("#addQualification").click(function () {              
-              var html = '';
-              html += '<div id="qualification" class="col-xl-12 form-horizontal">';
-              html += '<div class="form-group row form-material">';
-              html += '<div class="example col-xl-3 col-md-3">';                         
-              html += '<input type="text" class="form-control" name="institution_name[]" placeholder="Name of institution">';
-              html += '</div>';
-              html += '<div class="example col-xl-2 col-md-3">';
-              html += '<input type="text" class="form-control" name="institution_address[]" placeholder="Address">';
-              html += '</div>';
-              html += '<div class="example col-xl-2 col-md-3">';
-              html += '<input type="text" class="form-control" name="degree[]" placeholder="Grade/Degree">';
-              html += '</div>';
-              html += '<div class="example col-xl-5 col-md-3 row">';
-              html += '<div class="input-group">';
-              html += '<input type="date" class="form-control" name="start[]" />';
-              html += '<span class="input-group-addon">to</span>';
-              html += '<input type="date" class="form-control" name="end[]" />';
-              html += '</div>';
-              html += '</div>';
-              html += '<button id="removeQualification" type="button" class="btn btn-sm btn-danger text-left">';
-              html += '<i class="icon md-minus text-active" aria-hidden="true"></i>';
-              html += '<span class="text">Remove</span>';
-              html += '</button>';
-              html += '</div>';
-              html += '</div>';
-              $('#newQulalification').append(html);
-          });   
-                                                                                                              
-          // remove row
-          $(document).on('click', '#removeSchool', function () {
-            $(this).closest('#sec_school').remove();
-          });
-          
-          $(document).on('click', '#removeQualification', function () {
-            $(this).closest('#qualification').remove();
-          });
-        })
-      </script>      
-      
     </body>
   @endsection
