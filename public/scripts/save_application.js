@@ -7,7 +7,8 @@ $(document).ready(function($){
 
     $("#btn_basic").click(function(){ 
         $("#form_basic").validate({
-            submitHandler: submitFormBasic 
+            submitHandler: submitFormBasic,
+            errorClass: "invalid"
         });
 
         function submitFormBasic(e) { 
@@ -39,7 +40,8 @@ $(document).ready(function($){
 
     $("#btn_academic").click(function(){ 
         $("#form_academic").validate({
-            submitHandler: submitFormAcademic 
+            submitHandler: submitFormAcademic,
+            errorClass: "invalid" 
         });
 
         function submitFormAcademic(e) { 
@@ -71,7 +73,8 @@ $(document).ready(function($){
 
     $("#btn_declaration").click(function(){ 
         $("#form_declaration").validate({
-            submitHandler: submitFormAcademic 
+            submitHandler: submitFormAcademic,
+            errorClass: "invalid" 
         });
 
         function submitFormAcademic(e) { 
