@@ -16,6 +16,7 @@ $(document).ready(function($){
             var type = "POST";
             var ajaxurl = 'save/app/form';
 
+
             $.ajax({
                 type: type,
                 url: ajaxurl,
@@ -27,6 +28,8 @@ $(document).ready(function($){
                 success: function (response) {
                     console.log(response);
                     $("#btn_basic").html('Next')
+                    $("#basic_info").prop("disabled", true)
+                    $("#academic_info").prop("disabled", false)
                     $("#academic_info").trigger("click")
                 },
                 error: function (response) {
@@ -60,7 +63,9 @@ $(document).ready(function($){
                 success: function (response) {
                     console.log(response);
                     $("#btn_academic").html('Next')
-                    $("#academic_info").trigger("click")
+                    $("#academic_info").prop("disabled", true)
+                    $("#declaration_info").prop("disabled", false)
+                    $("#declaration_info").trigger("click")
                 },
                 error: function (response) {
                     console.log(response);
@@ -73,11 +78,11 @@ $(document).ready(function($){
 
     $("#btn_declaration").click(function(){ 
         $("#form_declaration").validate({
-            submitHandler: submitFormAcademic,
+            submitHandler: submitFormDeclaration,
             errorClass: "invalid" 
         });
 
-        function submitFormAcademic(e) { 
+        function submitFormDeclaration(e) { 
             var formData = $("#form_declaration").serialize();
             var type = "POST";
             var ajaxurl = 'save/app/form';
@@ -93,11 +98,11 @@ $(document).ready(function($){
                 success: function (response) {
                     console.log(response);
                     $("#btn_declaration").html('Next')
-                    $("#academic_info").trigger("click")
+                    window.location.href ='application'
                 },
                 error: function (response) {
                     console.log(response);
-                    $("#btn_academic").html('Next');
+                    $("#btn_declaration").html('Next');
                 }
             });
 
