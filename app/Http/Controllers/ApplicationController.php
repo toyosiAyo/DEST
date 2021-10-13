@@ -8,7 +8,7 @@ use App\Models\Applicant;
 class ApplicationController extends Controller
 {
 
-    //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
+    //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
     public function get_app_form(Request $request){
         
         return view('/pages/form');
