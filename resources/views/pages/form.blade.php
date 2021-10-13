@@ -112,7 +112,7 @@
                                                         </span>
                                                         <input type="text" class="form-control" id="address_resident" name="address_resident" 
                                                             required="">
-                                                          <input type="hidden" class="form-control" value="basic" id="basic" name="basic">
+                                                          <input type="hidden" class="form-control" value="basic" id="check_step" name="check_step">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -344,7 +344,7 @@
                                                     </label>
                                                     <div class="example col-xl-6 col-md-6">
                                                       <input type="text" class="form-control"  name="sec_school[]" placeholder="Enter school name" required>
-                                                      <input type="hidden" class="form-control" value="academic" id="academic" name="academic">
+                                                      <input type="hidden" class="form-control" value="academic" id="check_step" name="check_step">
                                                     </div>
                                                     <div class="example col-xl-6 col-md-3 row">
                                                       <div class="input-daterange" data-plugin="datepicker">
@@ -473,7 +473,7 @@
                                       <span class="required" style="color:red">*</span>
                                     </label>
                                   <div class="example col-xl-3 col-md-3">
-                                  <input type="hidden" class="form-control" value="declaration" id="declaration" name="declaration">
+                                  <input type="hidden" class="form-control" value="declaration" id="check_step" name="check_step">
                                     <select class="form-control" data-plugin="selectpicker" required
                                       name="faculty" id="faculty" data-live-search="true" data-allow-clear="true">
                                       <option>Select Faculty</option>
