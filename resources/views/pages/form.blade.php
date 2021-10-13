@@ -43,9 +43,9 @@
                     <button id="basic_info" class="btn btn-primary list-group-item" data-target="#category-1" data-toggle="tab" aria-controls="category-1"
                       role="tab">Basic Information</button><br>
                     <button id="academic_info" class="btn btn-dark list-group-item" data-target="#category-2" data-toggle="tab" aria-controls="category-2"
-                      role="tab">Academic Information</button><br>
+                      role="tab" disabled>Academic Information</button><br>
                     <button id="declaration_info" class="btn btn-info list-group-item" data-target="#category-3" data-toggle="tab" aria-controls="category-3"
-                      role="tab">Declaration</button>
+                      role="tab" disabled>Declaration</button>
                   </div>
                 </div>
               </div>
