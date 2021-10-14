@@ -53,7 +53,7 @@
                             <div class="panel-body">
                               Foundation Programme description here
                               <form method="post" id="foundation_payment">
-                                <input type="hidden" value="{{}}" name="email" id="email" />
+                                <input type="hidden" value="" name="email" id="email" />
                                 <input type="hidden" value="foundation" name="payType" id="payType" />
                                 <div class="animation-example animation-hover hover">
                                   <button type="button" id="btn_foundation" class="btn btn-dark animation-scale-up">Create Application </button>
