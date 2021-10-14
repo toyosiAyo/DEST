@@ -57,7 +57,7 @@
                                 <input type="hidden" value="" name="email" id="email" />
                                 <input type="hidden" value="foundation" name="payType" id="payType" />
                                 <div class="animation-example animation-hover hover">
-                                  <button type="button" id="btn_foundation" class="btn btn-dark animation-scale-up">Create Application </button>
+                                  <button type="submit" id="btn_foundation" class="btn btn-dark animation-scale-up">Create Application </button>
                                 </div>
                               </form>
                             </div>
@@ -126,6 +126,9 @@
       </div>
       <!-- End Page -->
 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha512/0.8.0/sha512.min.js"></script>
+      <script src=" https://login.remita.net/payment/v1/remita-pay-inline.bundle.js"></script>
       <script src="{{ asset('assets/examples/js/pages/faq.minfd53.js?v4.0.1') }}"></script>
       <script src=" {{ asset('scripts/create_application.js') }}"></script>
     </body>
