@@ -47,9 +47,9 @@ Route::any('get_state_given_country',[ConfigController::class,'get_state_given_c
 
 
 
-Route::post('save/app/form',[ApplicationController::class,'save_app_form'])->name('save.app.form');
-Route::get('get_app_form',[ApplicationController::class,'get_app_form'])->name('get.app.form');
-Route::get('create_application',[ApplicationController::class,'create_application'])->name('create.application');
+// Route::post('save/app/form',[ApplicationController::class,'save_app_form'])->name('save.app.form');
+// Route::get('get_app_form',[ApplicationController::class,'get_app_form'])->name('get.app.form');
+// Route::get('create_application',[ApplicationController::class,'create_application'])->name('create.application');
 
 
 Route::get('/profile', function () {

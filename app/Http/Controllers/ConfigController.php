@@ -8,6 +8,8 @@ use App\Models\State;
 use App\Models\Lga;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 
 class ConfigController extends Controller
@@ -24,7 +26,19 @@ class ConfigController extends Controller
 
 //ALTER TABLE `state` MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
-
+public function auth_user($email){
+    $data =  DB::table('applicants')->select('id','email',
+    'surname','first_name','other_name',
+    'phone','gender','dob','religion',
+    'marital_status','disability',
+    'address_resident','city_resident','state_resident',
+    'country_resident','state_origin','lga_origin',
+    'country_origin','sponsor_name','sponsor_relationship',
+    'sponsor_email','sponsor_phone','nok_name',
+    'nok_relationship','nok_email','nok_phone',
+    'nok_address','profile_pix','deleted_active')->where('email',$email)->first();
+    return $data;
+}
 public function get_lga_state_country(Request $request){
         
     try {

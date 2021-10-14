@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RemitaConfig extends Controller
 {
@@ -11,22 +12,22 @@ class RemitaConfig extends Controller
 
         $validator = Validator::make($request->all(), [ 
             'payType' => 'required|string',
-            'mat_no' => 'required|string',
+            'email' => 'required|string',
         ]);
         if ($validator->fails()) {
-            return response()->json(['status'=>'Nok','msg'=>'parameter error(payType or mat_no)','rsp'=>''], 400);
+            return response()->json(['status'=>'Nok','msg'=>'parameter error(payType or email)','rsp'=>''], 400);
         }
 
-        $session_id = app('App\Http\Controllers\AuthController')->get_current_session()->session_id_FK;
+        $session_id = app('App\Http\Controllers\ConfigController')->settings()->id;
         $payType_r = trim(strtoupper($request->payType));
-        $mat_no_r = $request->mat_no;
+        $email_r = $request->email;
         if(!$this->getRemitaPaymentConfig2($serviceTypeID,$merchantId, $apiKey ,$payType_r)){
            
-            return response()->json(['status'=>'Nok','msg'=>'Error getting serviceTypeID, Line ... RemitaSpecialPayment Controller','rsp'=>''], 400);
+            return response()->json(['status'=>'Nok','msg'=>'Error getting serviceTypeID, Line ... RemitaApplicantPayment Controller','rsp'=>''], 400);
 
         }
 
-        if($this->check_pend_rrr_from_db($mat_no_r,$payType_r,$pend_rrr,$pend_orderID,$session_id,$rtMsg)){
+        if($this->check_pend_rrr_from_db($email_r,$payType_r,$pend_rrr,$pend_orderID,$session_id,$rtMsg)){
            
            return response()->json(['status'=>'ok','msg'=>$rtMsg,'p_rrr'=>$pend_rrr,'p_orderID'=>$pend_orderID], 201);
 
@@ -45,7 +46,7 @@ class RemitaConfig extends Controller
      
         $validator = Validator::make($request->all(), [ 
             'payType' => 'required|string',
-            'mat_no' => 'required|string',
+            'email' => 'required|string',
             'payerName' => 'required|string',
             'rrr' => 'required|string',
             'orderID' => 'required|string',
@@ -65,8 +66,8 @@ class RemitaConfig extends Controller
 
             $timesammp = DATE("dmyHis"); 
             $session =  app('App\Http\Controllers\AuthController')->get_current_session()->session_id_FK;
-            $payment = new SpecialPayment();
-            $payment->matric_number = $request->mat_no;
+            $payment = new ApplicantPayment();
+            $payment->email = $request->email;
             $payment->names = $request->payerName;
             $payment->amount = $request->amount;
             $payment->rrr = $request->rrr;
@@ -89,11 +90,11 @@ class RemitaConfig extends Controller
 
 
 
-   public function check_pend_rrr_from_db($mat_no_r,$payType_r,&$pend_rrr,&$pend_orderID,$session_id,&$rtMsg){
+   public function check_pend_rrr_from_db($email_r,$payType_r,&$pend_rrr,&$pend_orderID,$session_id,&$rtMsg){
         try {    
             $rtMsg = "Defualt from check_pend_rrr_from_db";  
-            $data = DB::table('t_payment_special_remita')
-            ->where('matric_number',$mat_no_r)
+            $data = DB::table('application_payments')
+            ->where('email',$email_r)
             ->where('pay_type',$payType_r)
             ->where('session',$session_id)
             ->where('status_code','025')
@@ -119,16 +120,16 @@ class RemitaConfig extends Controller
 
         $validator = Validator::make($request->all(), [
              'payType' => 'required|string',
-             'mat_no' => 'required|string',
+             'email' => 'required|string', 
             ]);
         if ($validator->fails()) {
-            return response()->json(['status'=>'Nok','msg'=>'Error with payType or mat_no','rsp'=>''], 400);
+            return response()->json(['status'=>'Nok','msg'=>'Error with payType or email','rsp'=>''], 400);
         }
         try {
             $payType = $request->payType;
             $orderID = $this->remita_generate_trans_ID();
             if($this->getRemitaPaymentConfig2($serviceTypeID,$merchantId, $apiKey ,$payType)){
-                $stud = Students::findOrFail($request->mat_no);
+                $stud = Students::findOrFail($request->email);
                 return response()->json(['status'=>'ok','msg'=>'success',
                'data'=>[ 'serviceTypeID'=>$serviceTypeID,
                'merchantId'=>$merchantId,'apiKey'=>$apiKey,
@@ -138,7 +139,7 @@ class RemitaConfig extends Controller
             
             }
     
-            return response()->json(['status'=>'Nok','msg'=>'Error getting serviceTypeID, Line ... RemitaSpecialPayment Controller','rsp'=>''], 400);
+            return response()->json(['status'=>'Nok','msg'=>'Error getting serviceTypeID, Line ... RemitaApplicantPayment Controller','rsp'=>''], 400);
             
            
         } catch (\Throwable $th) {
@@ -176,62 +177,6 @@ class RemitaConfig extends Controller
          else if($payType == "ANNUAL_TAB_MAINT_FEE"){
              return "8201440958";
          }
-         else if($payType == "ATS_REGISTRATION_FEES"){
-             return "8197136992";
-         }
-         else if($payType == "ATS_LECTURE_FEES"){
-             return "8197131649";
-         }
-         else if($payType == "ATS_LECTURE_FEES_HALF"){
-             return "8197120781";
-         }
-       
-         else if($payType == "SAMSUNG_TAB_92500"){
-            return "8201354740";
-        }
-        else if($payType == "SAMSUNG_TAB"){
-            return "8197088683";
-        }
-        else if($payType == "CONVOCATION_FEE_2021_PG"){
-            return "8176753193";
-        }
-        else if($payType == "CONVOCATION_FEE_2021_UNDERGRADUATE"){
-            return "7122972919";
-        }
-        else if($payType == "CONVOCATION_FEE_2020"){
-            return "8201465747";
-        }
-        else if($payType == "CONVOCATION_FEE_2019"){
-            return "8201409265";
-        }
-        else if($payType == "CONVOCATION_FEE_2017"){
-            return "8201413554";
-        }
-        else if($payType == "CONVOCATION_FEE_2016"){
-            return "8201416145";
-        }
-    
-        else if($payType == "TRANSCRIPT_US_CANADA_UNDERGRAD"){
-            return "8201449890";
-        }
-        else if($payType == "TRANSCRIPT_NIGERIA_UNDERGRAD"){
-            return "8201452263";
-        }
-        else if($payType == "TRANSCRIPT_FAR_EUROPE_UNDERGRAD"){
-            return "8201380610";
-        }
-        else if($payType == "TRANSCRIPT_EUROPE_AFRICA_UNDERGRAD"){
-            return "8201376113";
-        }
-        else if($payType == "TRANSCRIPT_ASIA_UNDERGRAD"){
-            return "8201462144";
-        }
-        else if($payType == "SAMSUNG_TAB_92500_HALF"){
-            return "8201360055";
-        }
-        else if($payType == "SAMSUNG_TAB_HALF"){
-            return "8201447076";
-        }
         
      }
     
@@ -254,7 +199,7 @@ class RemitaConfig extends Controller
             $txId = $txId . rand(0, 9);
             $txId = $txId . $this->frnt_2_digit_pad_wit_zero(idate("s"));  // seconds
     
-            return "13-" . $txId;
+            return "14-" . $txId;
         } catch (Exception $ex) {
             return false;
         }

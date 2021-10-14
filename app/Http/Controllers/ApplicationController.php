@@ -11,12 +11,25 @@ class ApplicationController extends Controller
 
     //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
     public function get_app_form(Request $request){
-        
-        return view('/pages/form');
+        if($request->session()->has('user')){
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            return view('/pages/form')->with('data', $data);
+          }
+          else{
+              dd("No Session");  
+          }
        
     }
     public function create_application(Request $request){
-        return view('/pages/create_application');
+        if($request->session()->has('user')){
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            return view('/pages/create_application')->with('data', $data);
+          }
+          else{
+              dd("No Session");  
+          }
+       
+      
        
     }
 
@@ -26,7 +39,7 @@ class ApplicationController extends Controller
       
         
         if($request->check_step == 'basic'){
-            $app =  Applicant::findOrFail(1);
+            $app =  Applicant::findOrFail('teewhy@gmail.com');
             if($request->disability_check == "yes") $app->disability = $request->disability;
             $app->address_resident = $request->address_resident;
             $app->dob = $request->dob;

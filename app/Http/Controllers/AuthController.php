@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Applicant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 //use App\Http\Controllers\FreakMailer;
 
@@ -76,9 +77,17 @@ class AuthController extends Controller
        }
     }
 
-    public function applicant_dashboard(){
-        $data = ['user'=> Applicant::where('email',session('user'))->first()];
-      return view('pages.home',$data);
+    public function applicant_dashboard(Request $request){
+       
+        if($request->session()->has('user')){
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            return view('pages.home')->with('data', $data);
+          }
+          else{
+              dd("No Session");  
+          }
+       
+       
     }
 
 

@@ -4,6 +4,7 @@
       Create application
   @endsection
     
+  
   @section("content")
     <body class="animsition page-faq site-menubar-push site-menubar-open site-menubar-fixed">
       <!-- Page -->
