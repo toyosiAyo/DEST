@@ -1,7 +1,7 @@
 $(document).ready(function() {
     const getRemitaConfig = (callback) => {
         $.ajax({
-          url: `https://hostel.run.edu.ng/api/get/remita/config?email=${email}&payType=${payType}`,
+          url: `get_remita_config?email=${email}&payType=${payType}`,
           type: 'GET',
           success: callback
         })
@@ -31,7 +31,7 @@ $(document).ready(function() {
             if(response.amount !== "" && response.transactionId !== "" && response.paymentReference !== ""){
               $.ajax({
                 type : 'POST', 
-                url  : `https://hostel.run.edu.ng/api/update/special/remita/payment?paymentReference=${response.paymentReference}&desc=${payType}&transactionId=${response.transactionId}&amount=${response.amount}&email=${email}`,
+                url  : `update_applicant_payment?paymentReference=${response.paymentReference}&desc=${payType}&transactionId=${response.transactionId}&amount=${response.amount}&email=${email}`,
                 beforeSend: function() { 
                  $("#btn_foundation").html('<i class="fa fa-spinner fa-spin"></i> Logging Payment...');
                 },
@@ -106,7 +106,7 @@ $(document).ready(function() {
         
         $.ajax({
             type : 'GET', 
-            url  : `https://hostel.run.edu.ng/api/check/pend/rrr?email=${email}&payType=${payType}`,
+            url  : `check_pend_rrr?email=${email}&payType=${payType}`,
             beforeSend: function() { 
              $("#btn_foundation").html('<i class="fa fa-spinner fa-spin"></i> Processing...');
             },
@@ -125,7 +125,7 @@ $(document).ready(function() {
                    console.log(rrr);
                    $.ajax({
                       type : 'POST', 
-                      url  : `https://hostel.run.edu.ng/api/log/new/rrr?email=${email}&rrr=${rrr}&amount=${amount}&payerName=${fullname}&payType=${payType}&statuscode=${objJson.statuscode}&statusMsg=${objJson.status}&orderID=${orderId}`,
+                      url  : `log_new_rrr?email=${email}&rrr=${rrr}&amount=${amount}&payerName=${fullname}&payType=${payType}&statuscode=${objJson.statuscode}&statusMsg=${objJson.status}&orderID=${orderId}`,
                       beforeSend: function() { 
                        $("#btn_foundation").html('<i class="fa fa-spinner fa-spin"></i> Logging RRR...');
                       },
