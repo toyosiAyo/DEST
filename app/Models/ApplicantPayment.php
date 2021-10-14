@@ -9,5 +9,5 @@ class ApplicantPayment extends Model
 {
     use HasFactory;
 
-    protected $table="";
+    protected $table="application_payments";
 }

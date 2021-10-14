@@ -5,14 +5,33 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Applicant;
 use App\Models\Application;
+use App\Models\ApplicantPayment;
 
 class ApplicationController extends Controller
 {
 
     //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
     public function get_app_form(Request $request){
+
         if($request->session()->has('user')){
-            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        //     Product::select(['id', 'name', 'img', 'safe_name', 'sku', 'productstatusid'])
+        // ->whereIn('id', ProductCategory::select(['product_id'])
+        // ->whereIn('category_id', ['223', '15'])
+        //  )
+        // ->where('active', 1)
+        // ->get();
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            dd($data);
+        // $check = ApplicantPayment::select('rrr')->where(['status_code'=>'00','email'=>'teewhy@gmail.com'])
+        // ->whereNotIn('rrr', Application::select('used_pin'))->get();
+        //    dd($check);
+        $get_pay = ApplicantPayment::where(['status_code'=>'00','email'=>'teewhy@gmail.com'])
+        ->select('rrr')->first();
+        dd($get_pay->rrr);
+        
+        //->whereNotIn('rrr', Application::select('used_pin'))->get();
+         //  dd($check);
+            
             return view('/pages/form')->with('data', $data);
           }
           else{
