@@ -43,9 +43,9 @@
                     <button id="basic_info" class="btn btn-primary list-group-item" data-target="#category-1" data-toggle="tab" aria-controls="category-1"
                       role="tab">Basic Information</button><br>
                     <button id="academic_info" class="btn btn-dark list-group-item" data-target="#category-2" data-toggle="tab" aria-controls="category-2"
-                      role="tab" disabled>Academic Information</button><br>
+                      role="tab" >Academic Information</button><br>
                     <button id="declaration_info" class="btn btn-info list-group-item" data-target="#category-3" data-toggle="tab" aria-controls="category-3"
-                      role="tab" disabled>Declaration</button>
+                      role="tab" >Declaration</button>
                   </div>
                 </div>
               </div>
@@ -377,27 +377,27 @@
                                                         <tr>
                                                           <td>
                                                             <select class="form-control" name="exam[]" required>
-                                                                <option>Select Exam</option>
+                                                                <option value="" >Select Exam</option>
                                                                 <option value="WAEC">WAEC</option>
                                                                 <option value="NECO">NECO</option>
                                                             </select>
                                                           </td>
                                                           <td><select class="form-control" name="subject[]" required>
-                                                            <option>Choose Subject</option>
+                                                            <option value="">Choose Subject</option>
                                                             <option value="English">English</option>
                                                             <option value="Mathematics">Further Mathematics</option>
                                                             </select>
                                                           </td>
                                                           <td>
                                                             <select class="form-control" name="grade[]" required>
-                                                              <option>Choose Grade</option>
+                                                              <option value=""> Choose Grade</option>
                                                               <option value="A1">A1</option>
                                                               <option value="B2">B2</option>
                                                             </select>
                                                           </td>
                                                           <td>
                                                             <select class="form-control" name="year[]" required>
-                                                              <option>Choose Year</option>
+                                                              <option value="">Choose Year</option>
                                                               <option value="2021">2021</option>
                                                               <option value="2020">2020</option>
                                                             </select>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Applicant;
+use App\Models\Application;
 
 class ApplicationController extends Controller
 {
@@ -22,36 +23,9 @@ class ApplicationController extends Controller
  
     public function save_app_form(Request $request){
         //$settings = app('App\Http\Controllers\ConfigController')->settings($request)->semester_name;
-       //Fields for validation here
-        //"address_resident" 
-        //"basic" => "basic"
-        //"dob" 
-        //"city_resident" 
-        //"country" 
-       // "state_origin" 
-       // "lga_origin" 
-       // "religion" 
-       // "marital" 
-       // "disability_check" => "yes"
-        //"disability" => "GOD"
-        //"next_of_kin"
-        //"nok_phone" 
-        //"nok_relationship" 
-       // "next_of_kin_address" 
-        //"sponsor_name" 
-        //"sponsor_email" 
-        //"sponsor_phone" 
-
-        // dob email2  religion marital_status disability address_resident
-        // city_resident state_resident country_resident state_origin
-        // lga_origin  country_origin sponsor_name sponsor_relationship
-        // sponsor_email sponsor_phone nok_name nok_relationship 
-        // nok_email 	nok_phone nok_address gender
-        // profile_pix deleted_active 
-
+      
         
         if($request->check_step == 'basic'){
-            dd($request->all());
             $app =  Applicant::findOrFail(1);
             if($request->disability_check == "yes") $app->disability = $request->disability;
             $app->address_resident = $request->address_resident;
@@ -78,10 +52,79 @@ class ApplicationController extends Controller
             }
 
         }elseif($request->check_step == 'academic'){
-            return "Yes";
-            dd($request->all());
+            
+            $sec_sch = []; 
+            $o_level = []; 
+            $other_cert  = []; 
+            // SECONDARY SCHOOL;
+            if(sizeof($request->sec_school) == 0 || sizeof($request->school_start) == 0  || sizeof($request->school_end) == 0  ) {
+                return response()->json(['status'=>'Nok','msg'=>'failed, Your secondary school fields are required'],401);   
+            }
+            elseif(sizeof($request->sec_school) > 0 && sizeof($request->sec_school) == sizeof($request->school_start )
+             && sizeof($request->sec_school) == sizeof($request->school_end )  ){
+                foreach($request->sec_school as $index => $value){
+                    $sch = 'sch'.$index+1;
+                    //NOTE: Use find and replace ~ to avoid future error here
+                    $sec_sch[$sch] = $request->sec_school[$index]."~".$request->school_start[$index]."~".$request->school_end[$index];
+                }
+                }else{return response()->json(['status'=>'Nok','msg'=>'failed, Your secondary school fields are required'],401);   }
+           //O-LEVEL;
+                if(count(array_unique($request->exam)) > 2 || count(array_unique($request->year )) >2){
+            return response()->json(['status'=>'Nok','msg'=>'failed, Like you have more than two sittings for your O-leve'],401); 
+            }else{
+            if(sizeof($request->exam) < 5 && sizeof($request->exam) == sizeof($request->subject) &&  sizeof($request->subject) == sizeof($request->grade ) && sizeof($request->grade) == sizeof($request->year ) 
+                ){
+                foreach($request->exam as $index => $value){
+                    $sub = 'sub'.$index+1;
+                    $o_level[$sub] = $request->exam[$index]."~".$request->subject[$index]."~".$request->grade[$index]."~".$request->year[$index];
+                }
+                
+            }else{
+                return response()->json(['status'=>'Nok','msg'=>'failed, Minimum of five subjects is required!'],401); 
+            }
+
+            }
+            if($request->has('institution_name') && $request->filled('institution_name') ) {
+            if(sizeof($request->institution_name) == sizeof($request->institution_address ) && 
+            sizeof($request->degree) == sizeof($request->institution_address ) &&  
+            sizeof($request->inst_start) == sizeof($request->institution_name ) &&  
+            sizeof($request->inst_end) == sizeof($request->degree )  
+            ){
+            foreach($request->institution_name as $index => $value){
+                $inst = 'inst'.$index+1;
+                $other_cert[$inst] = $request->institution_name[$index]."~".$request->institution_address[$index]."~".$request->degree[$index]."~".$request->inst_start[$index]."~".$request->inst_end[$index];
+
+            }
+            }else{return response()->json(['status'=>'Nok','msg'=>'failed, Kindly complete fields for Other Qualifications'],401);   }
+            }  
+            
+            $app2 = new Application();
+            $app2->submitted_by = "teewhy@gmail.com";
+            $app2->sec_sch = $sec_sch;
+            $app2->o_level = $o_level;
+            $app2->other_cert = $other_cert;
+            $save = $app2->save();
+            if($save){
+                return response()->json(['status'=>'ok','msg'=>'success, profile created',],201); 
+            }else{
+                return response()->json(['status'=>'Nok','msg'=>'failed creating profile'],401); 
+            }
+              
 
         }elseif($request->check_step == 'declaration'){
+           
+            
+            // "faculty" => "Science"
+            // "department" => "CMP"
+            // "programme" => "CMP"
+            // "combination" => "CMP"
+            // "faculty2" => "Humanities"
+            // "department2" => "LAW"
+            // "programme2" => "LAW"
+            // "combination2" => "LAW"
+            // "screening_date" => "17/10/2021"
+            // "accept_terms" => "on"
+
             dd($request->all());
         }else{
             return response()->json(['status'=>'Nok','msg'=>'failed, Error with check_step supplied: save_app_form(Request $request)  '],401); 
