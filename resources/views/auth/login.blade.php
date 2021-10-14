@@ -14,17 +14,14 @@
         <div class="page-content">
           <div class="page-brand-info">
             <div class="brand">
-              <img class="brand-img" src="{{ asset('assets/images/logo%402x.png') }}" alt="...">
-              <h2 class="brand-text font-size-40">RUN DEST</h2>
+              <img class="brand-img" src="{{ asset('assets/images/run_logo.png') }}" alt="...">
+              <p class="brand-text font-size-40">RUN DEST</p>
             </div>
-            <!-- <p class="font-size-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.</p> -->
           </div>
 
           <div class="page-login-main">
             <div class="brand hidden-md-up">
-              <img class="brand-img" src="{{ asset('assets/images/logo-colored%402x.png') }}" alt="...">
-              <h3 class="brand-text font-size-40">RUN DEST</h3>
+              <img class="brand-img" src="{{ asset('assets/images/run_logo.png') }}" alt="..."><span class="brand-text font-size-40">RUN DEST</span>
             </div>
             <h3 class="font-size-24">Log In</h3>
             <p>Log in with your email and password</p>
@@ -58,7 +55,6 @@
               </div>
               <button type="submit" class="btn btn-primary btn-block">Log in</button>
             </form>
-
             <p>No account? <a href="{{route('get.account.form')}}">Create Profile here</a></p>
             @include("partials.auth_footer")
           </div>
