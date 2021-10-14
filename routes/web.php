@@ -31,8 +31,8 @@ Route::get('create_application',[ApplicationController::class,'create_applicatio
 
 Route::get('get_remita_config',[RemitaConfig::class,'get_remita_config'])->name('get_remita_config');
 Route::get('check_pend_rrr',[RemitaConfig::class,'check_pend_rrr'])->name('check_pend_rrr');
-Route::get('log_new_rrr',[RemitaConfig::class,'log_new_rrr'])->name('log_new_rrr');
-Route::get('update_applicant_payment',[ApplicantPaymentController::class,'update_applicant_payment'])->name('update_applicant_payment');
+Route::post('log_new_rrr',[RemitaConfig::class,'log_new_rrr'])->name('log_new_rrr');
+Route::post('update_applicant_payment',[ApplicantPaymentController::class,'update_applicant_payment'])->name('update_applicant_payment');
 
    
 });
