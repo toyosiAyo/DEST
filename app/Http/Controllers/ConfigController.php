@@ -25,7 +25,10 @@ class ConfigController extends Controller
     }
 
 //ALTER TABLE `state` MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+// ALTER TABLE tableName MODIFY COLUMN id INT; /* First you should drop auto increment */
+// ALTER TABLE tableName DROP PRIMARY KEY; /* Dop primary key */
+// ALTER TABLE tableName ADD PRIMARY KEY (new_id); /* Set primary key to the new column */
+// ALTER TABLE tableName MODIFY COLUMN new_id INT AUTO_INCREMENT; /*
 public function auth_user($email){
     $data =  DB::table('applicants')->select('id','email',
     'surname','first_name','other_name',
