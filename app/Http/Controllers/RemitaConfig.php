@@ -59,13 +59,13 @@ class RemitaConfig extends Controller
         }
 
         try {
-             if(!$this->confirm_description_to_amount_from_db($request->amount,$request->payType)){
-                return response()->json(['status'=>'Nok','msg'=>'Amount does not match','rsp'=>''], 400);
+            //  if(!$this->confirm_description_to_amount_from_db($request->amount,$request->payType)){
+            //     return response()->json(['status'=>'Nok','msg'=>'Amount does not match','rsp'=>''], 400);
  
-             }
+            //  }
 
             $timesammp = DATE("dmyHis"); 
-            $session =  app('App\Http\Controllers\AuthController')->get_current_session()->session_id_FK;
+            $session =   app('App\Http\Controllers\ConfigController')->settings($request)->id;
             $payment = new ApplicantPayment();
             $payment->email = $request->email;
             $payment->names = $request->payerName;
@@ -126,7 +126,7 @@ class RemitaConfig extends Controller
             return response()->json(['status'=>'Nok','msg'=>'Error with payType or email','rsp'=>''], 400);
         }
         try {
-            $payType = $request->payType;
+            $payType = trim(strtoupper($request->payType));
             $orderID = $this->remita_generate_trans_ID();
             if($this->getRemitaPaymentConfig2($serviceTypeID,$merchantId, $apiKey ,$payType)){
                 $stud = Students::findOrFail($request->email);
@@ -168,7 +168,7 @@ class RemitaConfig extends Controller
      
      public function get_service_id_given_payType($payType){
       
-          if($payType == "CONVOCATION_FEE_2015"){
+          if($payType == "FOUNDATION"){
              return "8201419983";
          }
          else if($payType == "CONVOCATION_FEE_2014"){

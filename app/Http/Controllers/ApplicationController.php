@@ -14,25 +14,21 @@ class ApplicationController extends Controller
     public function get_app_form(Request $request){
 
         if($request->session()->has('user')){
-        //     Product::select(['id', 'name', 'img', 'safe_name', 'sku', 'productstatusid'])
-        // ->whereIn('id', ProductCategory::select(['product_id'])
-        // ->whereIn('category_id', ['223', '15'])
-        //  )
-        // ->where('active', 1)
-        // ->get();
+      
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            dd($data);
-        // $check = ApplicantPayment::select('rrr')->where(['status_code'=>'00','email'=>'teewhy@gmail.com'])
-        // ->whereNotIn('rrr', Application::select('used_pin'))->get();
-        //    dd($check);
-        $get_pay = ApplicantPayment::where(['status_code'=>'00','email'=>'teewhy@gmail.com'])
-        ->select('rrr')->first();
-        dd($get_pay->rrr);
-        
-        //->whereNotIn('rrr', Application::select('used_pin'))->get();
-         //  dd($check);
+         
+      $rrr = ApplicantPayment::where(['status_code'=>'00','email'=>$data->email])->select('rrr')->first();
+      if($rrr == Null){
+        return response()->json(['status'=>'Nok','msg'=>'Like no rrr or pend rr',],401); 
+      }else{
+        if (Application::where('used_pin',ApplicantPayment::where(['status_code'=>'00','email'=>$data->email])
+        ->select('rrr')->first()->rrr)->exists()) {
+            return response()->json(['status'=>'Nok','msg'=>'pin used',],401); 
+         }else{
             
-            return view('/pages/form')->with('data', $data);
+            return response()->json(['status'=>'ok','msg'=>'pin available',],200); 
+         }
+        }
           }
           else{
               dd("No Session");  

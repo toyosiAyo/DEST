@@ -10,7 +10,7 @@ class Applicant extends Model
     use HasFactory;
 
     protected $table="applicants";
-    protected $primaryKey = 'email';
+    //protected $primaryKey = 'email';
 
     protected $hidden = [
         'password',
