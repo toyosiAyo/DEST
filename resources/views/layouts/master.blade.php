@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{{ asset('global/css/bootstrap.minfd53.css?v4.0.1') }}">
   <link rel="stylesheet" href="{{ asset('global/css/bootstrap-extend.minfd53.css?v4.0.1') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/site.minfd53.css?v4.0.1') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Skin tools (demo site only) -->
   <link rel="stylesheet" href="{{ asset('global/css/skintools.minfd53.css?v4.0.1') }}">
