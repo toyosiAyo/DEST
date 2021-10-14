@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\ApplicantPayment;
 class ApplicantPaymentController extends Controller
 {
 
-    public function update_special_remita_payment(Request $request){
+    public function update_applicant_payment(Request $request){
        
-        $validator = Validator::make($request->all(), [ 'mat_no' => 'required|string',
+        $validator = Validator::make($request->all(), [ 'email' => 'required|string',
             'paymentReference' => 'required|string',
             'desc' => 'required|string',]);
         if ($validator->fails()) {
-            return response()->json(['status'=>'Nok','msg'=>'Error: mat_no/paymentReference required','rsp'=>''], 400);
+            return response()->json(['status'=>'Nok','msg'=>'Error: email/paymentReference required','rsp'=>''], 400);
         }
         try {
             if($request->has('transactionId') && !empty($request->input('transactionId'))) {
@@ -37,7 +37,7 @@ class ApplicantPaymentController extends Controller
 
     public function update_special_remita_payment_db($rrr,$rem_transactionId,&$rtMsg){
         try{
-        $data = SpecialPayment::where('rrr',$rrr)->first();
+        $data = ApplicantPayment::where('rrr',$rrr)->first();
         if(empty($data)){ $rtMsg = response()->json(['status'=>'Nok','msg'=>'No match RRR record from DB','rsp'=>''],400);return true;}
         if(trim($data->status_code )== "025" && trim($data->status_msg) == "pending"){
         $data->remita_transaction_id = $rem_transactionId;
