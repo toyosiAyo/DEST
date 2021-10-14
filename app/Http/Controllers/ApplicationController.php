@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Applicant;
 use App\Models\Application;
 use App\Models\ApplicantPayment;
+use Illuminate\Support\Facades\Validator;
 
 class ApplicationController extends Controller
 {
