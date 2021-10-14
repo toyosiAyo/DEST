@@ -113,9 +113,9 @@
                         <img src="../global/portraits/5.jpg" alt="">
                       </a>
                       <div class="float-left">
-                        <div class="font-size-20">Robin Ahrens</div>
+                        <div class="font-size-20">{{$data->surname.' '.$data->first_name}}</div>
                         <p class="mb-20 text-nowrap">
-                          <span class="text-break"><a href="https://getbootstrapadmin.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="98f5f9fbf0f1fcfdebf1fff6d8fff5f9f1f4">[email&#160;protected]</a></span>
+                          <span class="text-break">{{$data->email}}</span>
                         </p>
                       </div>
                     </div>
@@ -127,7 +127,7 @@
                       <div class="media">
                         <div class="media-body">
                           <h5 class="mt-0 mb-5">Phone number</h5>
-                          <small>08174896325</small>
+                          <small>{{$data->phone}}</small>
                         </div>
                       </div>
                     </li>
