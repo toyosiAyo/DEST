@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class RemitaConfig extends Controller
 {
@@ -129,13 +130,8 @@ class RemitaConfig extends Controller
             $payType = trim(strtoupper($request->payType));
             $orderID = $this->remita_generate_trans_ID();
             if($this->getRemitaPaymentConfig2($serviceTypeID,$merchantId, $apiKey ,$payType)){
-                $stud = Students::findOrFail($request->email);
                 return response()->json(['status'=>'ok','msg'=>'success',
-               'data'=>[ 'serviceTypeID'=>$serviceTypeID,
-               'merchantId'=>$merchantId,'apiKey'=>$apiKey,
-               'payType'=>$payType,'orderID'=>$orderID,'surname'=>$stud->surname,
-               'firstname'=>$stud->firstname,'othernames'=>$stud->othernames,
-               'phone'=>$stud->student_phone,'email'=>$stud->email1]], 200);
+               'data'=>[app('App\Http\Controllers\ConfigController')->auth_user(session('user'))]], 200);
             
             }
     
