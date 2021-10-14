@@ -8,8 +8,8 @@
                     <img src="../global/portraits/1.jpg" alt="">
                     </a>
                     <div class="site-menubar-info">
-                        <h5 class="site-menubar-user">Machi</h5>
-                        <p class="site-menubar-email"><a href="https://getbootstrapadmin.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e131f1d16171a1b0d1719103e19131f1712501d1113">[email&#160;protected]</a></p>
+                        <h5 class="site-menubar-user">{{$data->surname.' '.$data->first_name}}</h5>
+                        <p class="site-menubar-email">{{$data->email}}</p>
                     </div>
                 </div>
             </div>
