@@ -11,7 +11,7 @@
         <i class="icon md-more" aria-hidden="true"></i>
       </button>
       <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
-        <img class="navbar-brand-logo" src="assets/images/logo.png" title="RUN DEST">
+        <img class="navbar-brand-logo" src="{{ asset('assets/images/run_logo.png') }}" title="RUN DEST">
         <span class="navbar-brand-text hidden-xs-down"> RUN DEST</span>
       </div>
     </div>
@@ -99,9 +99,9 @@
 
         <div class="navbar-brand navbar-brand-center">
           <a href="#">
-            <img class="navbar-brand-logo navbar-brand-logo-normal" src="assets/images/logo.png"
+            <img class="navbar-brand-logo-normal" style="height:85px" src="assets/images/DEST_logo.png"
               title="RUN DEST">
-            <img class="navbar-brand-logo navbar-brand-logo-special" src="assets/images/logo-colored.png"
+            <img class="navbar-brand-logo navbar-brand-logo-special" src="assets/images/DEST_logo-colored.png"
               title="RUN DEST">
           </a>
         </div>
