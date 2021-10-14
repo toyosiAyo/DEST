@@ -99,7 +99,7 @@
 
         <div class="navbar-brand navbar-brand-center">
           <a href="#">
-            <img class="navbar-brand-logo-normal" style="height:85px" src="assets/images/DEST_logo.png"
+            <img class=" navbar-brand-logo-normal" style="height:65px; width:123%" src="assets/images/DEST_logo.png"
               title="RUN DEST">
             <img class="navbar-brand-logo navbar-brand-logo-special" src="assets/images/DEST_logo-colored.png"
               title="RUN DEST">
