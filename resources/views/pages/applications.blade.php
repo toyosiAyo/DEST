@@ -60,11 +60,12 @@
                 <h4 class="modal-title">Application details</h4>
             </div>
             <div class="modal-body">
-                <p>My applicatioon details</p>
+                <!-- <p>My applicatioon details</p> -->
+                <span>Your application is still pending</span>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
             </div>
             </div>
         </div>
