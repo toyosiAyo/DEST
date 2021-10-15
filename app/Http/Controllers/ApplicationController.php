@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Applicant;
 use App\Models\Application;
 use App\Models\ApplicantPayment;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ApplicationController extends Controller
@@ -15,30 +16,90 @@ class ApplicationController extends Controller
     public function get_app_form(Request $request){
 
         if($request->session()->has('user')){
-      
+           
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-         
-      $rrr = ApplicantPayment::where(['status_code'=>'00','email'=>$data->email])->select('rrr')->first();
-      if($rrr == Null){
-        return response()->json(['status'=>'Nok','msg'=>'Like no rrr or pend rr',],401); 
-      }else{
-        if (Application::where('used_pin',ApplicantPayment::where(['status_code'=>'00','email'=>$data->email])
-        ->select('rrr')->first()->rrr)->exists()) {
-            return response()->json(['status'=>'Nok','msg'=>'pin used',],401); 
-         }else{
-            
-            return response()->json(['status'=>'ok','msg'=>'pin available',],200); 
-         }
+        // DB::table('application_payments')->select('application_payments.rrr')
+        // ->join('applications','application_payments.rrr','=','applications.used_pin')
+        // ->where('application_payments.email',  $data->email)
+        // ->where('applications.submitted_by', $data->email)
+        // ->get()
+        // $all =  DB::table('application_payments')->select('application_payments.rrr')
+        // ->whereNotIn('application_payments.rrr',
+        //    ['260514910326']
+        // )->get();
+        // $all = DB::table('application_payments')->select('application_payments.rrr')
+        //     ->whereNOTIn('application_payments.rrr',function($query){
+        //        $query->select('applications.used_pin')->from('applications');
+        //     })->get();
+        // $all = DB::select(DB::raw("SELECT rrr FROM application_payments 
+        // WHERE email = :somevariable"), array( 'somevariable' => $data->email,));
+        $rrr =  DB::select(DB::raw("SELECT rrr FROM application_payments 
+        JOIN applications ON application_payments.rrr = applications.used_pin 
+        WHERE email = '$data->email'"));
+        $array_rrr = [];
+       if(!empty($rrr)){
+            foreach($rrr as $key => $val){
+                $array_rrr =  $val->rrr;
+            }
+       }
+       //dd($array_rrr);
+       $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
+        WHERE rrr NOT IN ($array_rrr)"));
+        if(!empty($all)){
+            //$form_view  = view('/pages/form')->with('data',$data);
+            return true;
         }
+        return false;
+       
+    
+           // dd($all);
+    //   $rrr = ApplicantPayment::where(['status_code'=>'00','email'=>$data->email])->select('rrr')->first();
+    //   if($rrr == Null){
+    //     return response()->json(['status'=>'Nok','msg'=>'Like no rrr or pend rr',]); 
+    //   }else{
+    //     if (Application::where('used_pin',ApplicantPayment::where(['status_code'=>'00','email'=>$data->email])
+    //     ->select('rrr')->first()->rrr)->exists()) {
+    //         return response()->json(['status'=>'Nok','msg'=>'pin used',],401); 
+    //      }else{
+            
+    //         return response()->json(['status'=>'ok','msg'=>'pin available',],200); 
+    //      }
+    //     }
           }
           else{
               dd("No Session");  
           }
        
     }
+
+    public function redirect_pag($request)  {
+        if($request->session()->has('user')){
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        return view('/pages/form')->with('data',$data);
+        }
+ }
     public function create_application(Request $request){
         if($request->session()->has('user')){
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+           
+    //      $rrr =  DB::select(DB::raw("SELECT rrr FROM application_payments 
+    //     JOIN applications ON application_payments.rrr = applications.used_pin 
+    //     WHERE email = '$data->email'"));
+    //     $array_rrr = [];
+    //    if(!empty($rrr)){
+    //         foreach($rrr as $key => $val){
+    //             $array_rrr =  $val->rrr;
+    //         }
+    //    }
+    //    //dd($array_rrr);
+    //    $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
+    //     WHERE rrr NOT IN ($array_rrr)"));
+    //     if(!empty($all)){
+    //         return redirect('/get_app_form');
+    //     }
+    //     return "Not DOne";
+       
+           
             return view('/pages/create_application')->with('data', $data);
           }
           else{
