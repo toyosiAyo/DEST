@@ -41,13 +41,15 @@ class ApplicationController extends Controller
             foreach($rrr as $key => $val){
                 $array_rrr =  $val->rrr;
             }
+            $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
+            WHERE rrr NOT IN ($array_rrr)"));
+             if(!empty($all)){
+                //$form_view  = view('/pages/form')->with('data',$data);
+                return true;
        }
        //dd($array_rrr);
-       $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-        WHERE rrr NOT IN ($array_rrr)"));
-        if(!empty($all)){
-            //$form_view  = view('/pages/form')->with('data',$data);
-            return true;
+       return false;
+       
         }
         return false;
        
