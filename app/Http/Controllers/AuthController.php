@@ -111,6 +111,16 @@ class AuthController extends Controller
           }
     }
 
+    public function view_payments(Request $request){
+        if($request->session()->has('user')){
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            return view('pages.payment_history')->with('data', $data);
+          }
+          else{
+              dd("No Session");  
+          }
+    }
+
 
     public function forgot_password(){
 
