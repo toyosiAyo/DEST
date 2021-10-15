@@ -81,10 +81,10 @@
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <td>App ID</td>
-                        <td>Programme</td>
-                        <td>Status</td>
-                        <td class="text-left">Date</td>
+                        <td><strong>App ID</strong></td>
+                        <td><strong>Programme</strong></td>
+                        <td><strong>Status</strong></td>
+                        <td class="text-left"><strong>Date</strong></td>
                       </tr>
                     </thead>
                     <tbody>
@@ -92,7 +92,7 @@
                         <td>001</td>
                         <td>Foundation (LAW)</td>
                         <td>
-                          <span class="badge badge-success">Approved</span>
+                          <span class="badge badge-warning">Pending</span>
                         </td>
                         <td>17/09/2021</td>
                       </tr>                     
