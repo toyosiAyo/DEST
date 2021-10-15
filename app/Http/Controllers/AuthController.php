@@ -91,6 +91,17 @@ class AuthController extends Controller
     }
 
 
+    public function user_profile(Request $request){
+        if($request->session()->has('user')){
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            return view('pages.profile')->with('data', $data);
+          }
+          else{
+              dd("No Session");  
+          }
+    }
+
+
     public function forgot_password(){
 
         return view('auth.forgot-password');

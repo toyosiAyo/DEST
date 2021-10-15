@@ -18,6 +18,7 @@ class ApplicationController extends Controller
         if($request->session()->has('user')){
            
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        return view('/pages/form')->with('data',$data);
         // DB::table('application_payments')->select('application_payments.rrr')
         // ->join('applications','application_payments.rrr','=','applications.used_pin')
         // ->where('application_payments.email',  $data->email)

@@ -19,7 +19,7 @@ class RemitaConfig extends Controller
             return response()->json(['status'=>'Nok','msg'=>'parameter error(payType or email)','rsp'=>''], 400);
         }
 
-        $session_id = app('App\Http\Controllers\ConfigController')->settings()->id;
+        $session_id = app('App\Http\Controllers\ConfigController')->settings($request)->id;
         $payType_r = trim(strtoupper($request->payType));
         $email_r = $request->email;
         if(!$this->getRemitaPaymentConfig2($serviceTypeID,$merchantId, $apiKey ,$payType_r)){
@@ -135,8 +135,9 @@ class RemitaConfig extends Controller
               // return redirect('/get_app_form');//view('/pages/form')->with('data',$data);
            }
             if($this->getRemitaPaymentConfig2($serviceTypeID,$merchantId, $apiKey ,$payType)){
-                return response()->json(['status'=>'ok','msg'=>'success',
-               'data'=>[app('App\Http\Controllers\ConfigController')->auth_user(session('user'))]], 200);
+                return response()->json(['status'=>'Nok','msg'=>'success',
+               'data'=>[app('App\Http\Controllers\ConfigController')->auth_user(session('user'))],
+               'serviceTypeID'=>$serviceTypeID,'merchantId'=>$merchantId, 'apiKey'=>$apiKey,'orderID '=>$orderID ], 200);
             
             }
     

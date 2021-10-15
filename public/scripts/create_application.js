@@ -103,6 +103,7 @@ $(document).ready(function() {
             "description": desc
           }),
         };
+        console.log(settings)
         
         $.ajax({
             type : 'GET', 
@@ -111,6 +112,7 @@ $(document).ready(function() {
              $("#btn_foundation").html('<i class="fa fa-spinner fa-spin"></i> Processing...');
             },
             success: function (response) {
+              console.log(response.status)
               if(response.status == 'ok'){
                 rrr = response.p_rrr;
                 console.log(rrr);
@@ -195,24 +197,24 @@ $(document).ready(function() {
         
         
         getRemitaConfig(function(response) {
-            console.log(response)
-            config_data = JSON.parse(response);
             if(response.status === 'Nok'){
-                merchantId = response.data.merchantId;
-                serviceTypeId = response.data.serviceTypeID;
-                apiKey = response.data.apiKey;
-                orderId = response.data.orderID;
-                phone = response.data.phone;
-                firstname = response.data.firstname;
-                surname = response.data.surname;
+              console.log(response.data[0].email)
+
+                merchantId = response.merchantId;
+                serviceTypeId = response.serviceTypeID;
+                apiKey = response.apiKey;
+                orderId = response.orderID;
+                phone = response.data[0].phone;
+                firstname = response.data[0].first_name;
+                surname = response.data[0].surname;
                 fullname = firstname + ' ' + surname;
-                console.log(serviceTypeId);
+                console.log(fullname);
                 setTimeout(function() {
                     processPayment();
                 }, 5000);
             }
             else if(response.status === 'ok'){
-               window.location.href = 'get_app_form'
+               window.location.href = 'dashboard'
             }
             else{ return false }
         });
