@@ -54,6 +54,7 @@
                             <div class="panel-body">
                               Foundation Programme description here
                               <form method="post" id="foundation_payment">
+                                @csrf
                                 <input type="hidden" value="{{$data->email}}" name="email" id="email" />
                                 <input type="hidden" value="foundation" name="payType" id="payType" />
                                 <input type="hidden" value="10000" name="amount" id="amount" />

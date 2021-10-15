@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Models\ApplicantPayment;
 
 class RemitaConfig extends Controller
 {
@@ -58,7 +59,7 @@ class RemitaConfig extends Controller
         if ($validator->fails()) {
             return response()->json(['status'=>'Nok','msg'=>'Error with supplied parama while loging new RRR','rsp'=>''], 400);
         }
-
+        
         try {
             //  if(!$this->confirm_description_to_amount_from_db($request->amount,$request->payType)){
             //     return response()->json(['status'=>'Nok','msg'=>'Amount does not match','rsp'=>''], 400);
@@ -72,6 +73,7 @@ class RemitaConfig extends Controller
             $payment->names = $request->payerName;
             $payment->amount = $request->amount;
             $payment->rrr = $request->rrr;
+            
             $payment->trans_ref = $request->orderID;
             $payment->pay_type = $request->payType;
             $payment->session = $session;
@@ -182,6 +184,7 @@ class RemitaConfig extends Controller
         
      }
     
+     
 
 
 
