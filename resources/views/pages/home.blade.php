@@ -45,7 +45,7 @@
                     <span class="float-right grey-700 font-size-30">0</span>
                   </div>
                   <div class="mb-20 grey-500">
-                    View
+                    <a href="application">View</a>
                   </div>
                   <div class="ct-chart h-50"></div>
                 </div>
