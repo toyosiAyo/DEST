@@ -195,6 +195,7 @@ $(document).ready(function() {
         
         
         getRemitaConfig(function(response) {
+            console.log(response)
             //config_data = JSON.parse(response);
             if(response.status === 'Nok'){
                 merchantId = response.data.merchantId;
@@ -211,7 +212,7 @@ $(document).ready(function() {
                 }, 5000);
             }
             else if(response.status === 'ok'){
-               // window.location.href = 'get_app_form'
+               window.location.href = 'home'
             }
             else{ return false }
         });
