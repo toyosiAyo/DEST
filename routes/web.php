@@ -34,6 +34,7 @@ Route::get('check_pend_rrr',[RemitaConfig::class,'check_pend_rrr'])->name('check
 Route::post('log_new_rrr',[RemitaConfig::class,'log_new_rrr'])->name('log_new_rrr');
 Route::post('update_applicant_payment',[ApplicantPaymentController::class,'update_applicant_payment'])->name('update_applicant_payment');
 Route::get('profile',[AuthController::class,'user_profile'])->name('profile');
+Route::get('application',[AuthController::class,'view_applications'])->name('application');
 
    
 });
@@ -68,6 +69,6 @@ Route::get('profile',[AuthController::class,'user_profile'])->name('profile');
 Route::get('/payments', function () {
     return view('/pages/payment_history');
 });
-Route::get('/application', function () {
-    return view('/pages/applications');
-});
+// Route::get('/application', function () {
+//     return view('/pages/applications');
+// });
