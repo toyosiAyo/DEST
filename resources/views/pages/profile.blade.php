@@ -20,7 +20,7 @@
                                 <a class="avatar avatar-lg" href="javascript:void(0)">
                                     <img src="../../global/portraits/5.jpg" alt="...">
                                 </a>
-                                <h4 class="profile-user">Terrance arnold</h4>
+                                <h4 class="profile-user">{{$data->surname.' '.$data->first_name}}</h4>
                                 <input type="file" name="profile_image"> <hr>
                                 <button type="button" class="btn btn-primary">Update Profile Image</button>
                             </div>
@@ -48,7 +48,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="icon md-email" aria-hidden="true"></i>
                                                         </span>
-                                                        <input type="email" value="orieye@gmail.com" class="form-control" name="email" required>
+                                                        <input type="email" value="{{$data->email}}" class="form-control" name="email" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -61,7 +61,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="icon md-phone" aria-hidden="true"></i>
                                                         </span>
-                                                        <input type="tel" value="07021354678" class="form-control" name="phone" required>
+                                                        <input type="tel" value="{{$data->phone}}" class="form-control" name="phone" required>
                                                         </div>
                                                     </div>
                                                 </div>
