@@ -212,7 +212,7 @@ $(document).ready(function() {
                 }, 5000);
             }
             else if(response.status === 'ok'){
-               window.location.href = 'home'
+               window.location.href = 'dashboard'
             }
             else{ return false }
         });
