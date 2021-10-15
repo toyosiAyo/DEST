@@ -211,7 +211,7 @@ $(document).ready(function() {
                 }, 5000);
             }
             else if(response.status === 'ok'){
-               // window.location.href = 'get_app_form'
+               window.location.href = 'home'
             }
             else{ return false }
         });
