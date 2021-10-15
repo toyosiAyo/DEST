@@ -56,6 +56,7 @@
                               <form method="post" id="foundation_payment">
                                 <input type="hidden" value="{{$data->email}}" name="email" id="email" />
                                 <input type="hidden" value="foundation" name="payType" id="payType" />
+                                <input type="hidden" value="10000" name="amount" id="amount" />
                                 <div class="animation-example animation-hover hover">
                                   <button type="submit" id="btn_foundation" class="btn btn-dark animation-scale-up">Create Application </button>
                                 </div>
