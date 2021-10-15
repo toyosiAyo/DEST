@@ -195,6 +195,7 @@ $(document).ready(function() {
         
         
         getRemitaConfig(function(response) {
+            console.log(response)
             //config_data = JSON.parse(response);
             if(response.status === 'Nok'){
                 merchantId = response.data.merchantId;
