@@ -46,7 +46,7 @@ $(document).ready(function() {
                     toastr.options;
                     toastr['success']('Transaction Successful');
                     $("#btn_foundation").html('Create Application');
-                    window.location.href = 'get_app_form'
+                    window.location.href = 'app_form'
                   } 
                   else{
                     toastr.options;
@@ -214,7 +214,7 @@ $(document).ready(function() {
                 }, 5000);
             }
             else if(response.status === 'ok'){
-              window.location.href = 'dashboard'
+              window.location.href = 'app_form'
              }
             else{ return false }
         });
