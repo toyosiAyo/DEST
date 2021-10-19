@@ -79,7 +79,10 @@ class ApplicationController extends Controller
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             if($this->checkForUsedPin()){
                 return view('/pages/form')->with('data',$data);
-            };
+            }
+            else {
+                return view('/pages/create_application')->with('data',$data);
+            }
             
         }
     }
