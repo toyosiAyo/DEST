@@ -137,9 +137,9 @@ class RemitaConfig extends Controller
               // return redirect('/get_app_form');//view('/pages/form')->with('data',$data);
            }
             if($this->getRemitaPaymentConfig2($serviceTypeID,$merchantId, $apiKey ,$payType)){
-                return response()->json(['status'=>'Nok','msg'=>'success',
+                return response()->json(['status'=>'NoPayment','msg'=>'success',
                'data'=>[app('App\Http\Controllers\ConfigController')->auth_user(session('user'))],
-               'serviceTypeID'=>$serviceTypeID,'merchantId'=>$merchantId, 'apiKey'=>$apiKey,'orderID '=>$orderID ], 200);
+               'serviceTypeID'=>$serviceTypeID,'merchantId'=>$merchantId, 'apiKey'=>$apiKey,'orderID'=>$orderID ], 200);
             
             }
     
