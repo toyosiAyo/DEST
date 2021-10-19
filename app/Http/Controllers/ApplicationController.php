@@ -77,22 +77,29 @@ class ApplicationController extends Controller
     public function redirect_page(Request $request){
         if($request->session()->has('user')){
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            $rrr =  DB::select(DB::raw("SELECT rrr FROM application_payments 
+            if($this->checkForUsedPin()){
+                return view('/pages/form')->with('data',$data);
+            };
+            
+        }
+    }
+
+    public function checkForUsedPin(){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $rrr =  DB::select(DB::raw("SELECT rrr FROM application_payments 
                 JOIN applications ON application_payments.rrr = applications.used_pin 
                 WHERE email = '$data->email'"));
                 $array_rrr = [];
-            if(!empty($rrr)){
-                foreach($rrr as $key => $val){
-                    $array_rrr =  $val->rrr;
-                }
-                $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-                WHERE rrr NOT IN ($array_rrr)"));
-                if(!empty($all)){
-                    $form_view  = view('/pages/form')->with('data',$data);
-                    return $form_view;
-                }
-                return false;
+        if(!empty($rrr)){
+            foreach($rrr as $key => $val){
+                $array_rrr =  $val->rrr;
             }
+            $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
+            WHERE rrr NOT IN ($array_rrr)"));
+            if(!empty($all)){
+                return true;
+            }
+            return false;
         }
     }
 
