@@ -19,7 +19,7 @@ $(document).ready(function() {
           firstName: firstname,
           lastName: surname,
           email: email,
-          narration: "Special Payment",
+          narration: "Application Payment",
           amount: amount,
           processRrr: true,
           extendedData: {
@@ -85,9 +85,6 @@ $(document).ready(function() {
     }
     
     const processPayment = () => {
-        console.log(payType)
-        console.log(serviceTypeId)
-        console.log(email)
         toHash = merchantId+serviceTypeId+orderId+amount+apiKey;
         apiHash = sha512(toHash);
         settings = {
@@ -202,38 +199,24 @@ $(document).ready(function() {
         
         
         getRemitaConfig(function(response) {
-            //if(response.status === 'Nok'){
-              //console.log(response.data[0].email)
-
-                // merchantId = response.merchantId;
-                // serviceTypeId = response.serviceTypeID;
-                // apiKey = response.apiKey;
-                // orderId = response.orderID;
-                // phone = response.data[0].phone;
-                // firstname = response.data[0].first_name;
-                // surname = response.data[0].surname;
-                // fullname = firstname + ' ' + surname;
-                
-                
-               
-                merchantId = "4161150426";
-                serviceTypeId = "8201419983";
-                apiKey = "258341";
-                orderId = '20-14421144859893279';
-                phone = "08036431379";
-                firstname = 'Teewhy';
-                surname = 'Teewhy';
-                fullname = firstname + ' ' + surname;
-                console.log(fullname);
+            if(response.status === 'NoPayment'){
+                merchantId = response.merchantId;
+                serviceTypeId = response.serviceTypeID;
+                apiKey = response.apiKey;
+                orderId = response.orderID;
+                phone = response.data[0].phone;
+                firstname = response.data[0].first_name;
+                surname = response.data[0].surname;
+                fullname = firstname + ' ' + surname;              
 
                 setTimeout(function() {
                     processPayment();
                 }, 5000);
-            
-            // else if(response.status === 'ok'){
-            //    window.location.href = 'dashboard'
-            // }
-            //else{ return false }
+            }
+            else if(response.status === 'ok'){
+              window.location.href = 'dashboard'
+             }
+            else{ return false }
         });
         
     });
