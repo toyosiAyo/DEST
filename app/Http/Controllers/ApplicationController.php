@@ -13,12 +13,13 @@ class ApplicationController extends Controller
 {
 
     //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
-    public function get_app_form(Request $request){
+    public function get_app_formmm(Request $request){
 
         if($request->session()->has('user')){
            
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-        return view('/pages/form')->with('data',$data);
+        //return view('/pages/form')->with('data',$data);
+
         // DB::table('application_payments')->select('application_payments.rrr')
         // ->join('applications','application_payments.rrr','=','applications.used_pin')
         // ->where('application_payments.email',  $data->email)
@@ -45,12 +46,10 @@ class ApplicationController extends Controller
             $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
             WHERE rrr NOT IN ($array_rrr)"));
              if(!empty($all)){
-                //$form_view  = view('/pages/form')->with('data',$data);
+                // $form_view  = view('/pages/form')->with('data',$data);
                 return true;
-       }
-       //dd($array_rrr);
-       return false;
-       
+            }
+            return false;
         }
         return false;
        
@@ -75,12 +74,38 @@ class ApplicationController extends Controller
        
     }
 
-    public function redirect_pag($request)  {
+    public function get_app_form(Request $request){
         if($request->session()->has('user')){
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-        return view('/pages/form')->with('data',$data);
+            if($this->checkForUsedPin()){
+                return view('/pages/form')->with('data',$data);
+            }
+            else {
+                return view('/pages/create_application')->with('data',$data);
+            }
+            
         }
- }
+    }
+
+    public function checkForUsedPin(){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $rrr =  DB::select(DB::raw("SELECT rrr FROM application_payments 
+                JOIN applications ON application_payments.rrr = applications.used_pin 
+                WHERE email = '$data->email'"));
+                $array_rrr = [];
+        if(!empty($rrr)){
+            foreach($rrr as $key => $val){
+                $array_rrr =  $val->rrr;
+            }
+            $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
+            WHERE rrr NOT IN ($array_rrr)"));
+            if(!empty($all)){
+                return true;
+            }
+            return false;
+        }
+    }
+
     public function create_application(Request $request){
         if($request->session()->has('user')){
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));

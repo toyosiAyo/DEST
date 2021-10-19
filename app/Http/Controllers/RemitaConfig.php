@@ -131,15 +131,14 @@ class RemitaConfig extends Controller
         try {
             $payType = trim(strtoupper($request->payType));
             $orderID = $this->remita_generate_trans_ID();
-           if( app('App\Http\Controllers\ApplicationController')->get_app_form($request)){
+           if( app('App\Http\Controllers\ApplicationController')->checkForUsedPin($request)){
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             return response()->json(['status'=>'ok','msg'=>'success','rsp'=>''], 200);
-              // return redirect('/get_app_form');//view('/pages/form')->with('data',$data);
            }
             if($this->getRemitaPaymentConfig2($serviceTypeID,$merchantId, $apiKey ,$payType)){
-                return response()->json(['status'=>'Nok','msg'=>'success',
+                return response()->json(['status'=>'NoPayment','msg'=>'success',
                'data'=>[app('App\Http\Controllers\ConfigController')->auth_user(session('user'))],
-               'serviceTypeID'=>$serviceTypeID,'merchantId'=>$merchantId, 'apiKey'=>$apiKey,'orderID '=>$orderID ], 200);
+               'serviceTypeID'=>$serviceTypeID,'merchantId'=>$merchantId, 'apiKey'=>$apiKey,'orderID'=>$orderID ], 200);
             
             }
     

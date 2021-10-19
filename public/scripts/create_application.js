@@ -19,7 +19,7 @@ $(document).ready(function() {
           firstName: firstname,
           lastName: surname,
           email: email,
-          narration: "Special Payment",
+          narration: "Application Payment",
           amount: amount,
           processRrr: true,
           extendedData: {
@@ -46,7 +46,7 @@ $(document).ready(function() {
                     toastr.options;
                     toastr['success']('Transaction Successful');
                     $("#btn_foundation").html('Create Application');
-                    window.location.href = 'get_app_form'
+                    window.location.href = 'app_form'
                   } 
                   else{
                     toastr.options;
@@ -85,9 +85,6 @@ $(document).ready(function() {
     }
     
     const processPayment = () => {
-        console.log(payType)
-        console.log(serviceTypeId)
-        console.log(email)
         toHash = merchantId+serviceTypeId+orderId+amount+apiKey;
         apiHash = sha512(toHash);
         settings = {
@@ -202,6 +199,7 @@ $(document).ready(function() {
         
         
         getRemitaConfig(function(response) {
+<<<<<<< HEAD
             //if(response.status === 'Nok'){
               //console.log(response.data[0].email)
 
@@ -225,15 +223,26 @@ $(document).ready(function() {
                 surname = 'Teewhy';
                 fullname = firstname + ' ' + surname;
                 console.log(fullname);
+=======
+            if(response.status === 'NoPayment'){
+                merchantId = response.merchantId;
+                serviceTypeId = response.serviceTypeID;
+                apiKey = response.apiKey;
+                orderId = response.orderID;
+                phone = response.data[0].phone;
+                firstname = response.data[0].first_name;
+                surname = response.data[0].surname;
+                fullname = firstname + ' ' + surname;              
+>>>>>>> 7093288463b50a58b59b65ddf5dd4b54a550ccb8
 
                 setTimeout(function() {
                     processPayment();
                 }, 5000);
-            
-            // else if(response.status === 'ok'){
-            //    window.location.href = 'dashboard'
-            // }
-            //else{ return false }
+            }
+            else if(response.status === 'ok'){
+              window.location.href = 'app_form'
+             }
+            else{ return false }
         });
         
     });

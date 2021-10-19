@@ -25,7 +25,7 @@ Route::group(['middleware'=>['authcheck']], function() {
 
 
 Route::post('save/app/form',[ApplicationController::class,'save_app_form'])->name('save.app.form');
-Route::get('get_app_form',[ApplicationController::class,'get_app_form'])->name('get.app.form');
+Route::get('app_form',[ApplicationController::class,'get_app_form'])->name('app.form');
 Route::get('create_application',[ApplicationController::class,'create_application'])->name('create.application');
 
 
