@@ -13,7 +13,7 @@ class ApplicationController extends Controller
 {
 
     //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
-    public function get_app_form(Request $request){
+    public function get_app_formmm(Request $request){
 
         if($request->session()->has('user')){
            
@@ -74,7 +74,7 @@ class ApplicationController extends Controller
        
     }
 
-    public function redirect_page(Request $request){
+    public function get_app_form(Request $request){
         if($request->session()->has('user')){
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             if($this->checkForUsedPin()){
