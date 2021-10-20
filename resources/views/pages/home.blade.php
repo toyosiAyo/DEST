@@ -25,7 +25,7 @@
                     <div class="grey-800 float-left py-10">
                       <i class="icon md-file-text grey-600 font-size-24 vertical-align-bottom mr-5"></i>Applications
                     </div>
-                    <span class="float-right grey-700 font-size-30">1</span>
+                    <span class="float-right grey-700 font-size-30">{{$count}}</span>
                   </div>
                   <div class="mb-20 grey-500">
                      <a href="create_application">Create New</a>
@@ -59,7 +59,7 @@
                     <div class="grey-800 float-left py-10">
                       <i class="icon md-assignment-check grey-600 font-size-24 vertical-align-bottom mr-5"></i>Approved Applications
                     </div>
-                    <span class="float-right grey-700 font-size-30">1</span>
+                    <span class="float-right grey-700 font-size-30">0</span>
                   </div>
                   <div class="mb-20 grey-500">
                     View
@@ -74,28 +74,31 @@
                 <div class="panel-heading">
                   <h3 class="panel-title">
                     Applications
-                    <span class="badge badge-pill badge-info">1</span>
+                    <span class="badge badge-pill badge-info">{{$count}}</span>
                   </h3>
                 </div>
                 <div class="table-responsive">
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <td><strong>App ID</strong></td>
+                        <td><strong>S/N</strong></td>
                         <td><strong>Programme</strong></td>
                         <td><strong>Status</strong></td>
                         <td class="text-left"><strong>Date</strong></td>
                       </tr>
                     </thead>
                     <tbody>
+                      @php $i = 1; @endphp
+                      @foreach($apps as $app)
                       <tr>
-                        <td>001</td>
-                        <td>Foundation (LAW)</td>
+                        <td>{{ $i }} @php $i++ @endphp</td>
+                        <td>{{ $app->Programme }}</td>
                         <td>
                           <span class="badge badge-warning">Pending</span>
                         </td>
-                        <td>17/09/2021</td>
-                      </tr>                     
+                        <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
+                      </tr>  
+                      @endforeach   
                     </tbody>
                   </table>
                 </div>
