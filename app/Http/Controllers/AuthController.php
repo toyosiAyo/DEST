@@ -83,7 +83,8 @@ class AuthController extends Controller
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             $applications = DB::table('applications')->select('*','first_choice->prog as Programme')
                 ->where('submitted_by', $data->email)->get();
-            return view('pages.home',['apps'=>$applications])->with('data', $data);
+            $count = count($applications);
+            return view('pages.home',['apps'=>$applications,'count'=>$count])->with('data', $data);
           }
           else{
               dd("No Session");  
