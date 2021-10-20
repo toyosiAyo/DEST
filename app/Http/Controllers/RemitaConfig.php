@@ -9,6 +9,12 @@ use App\Models\ApplicantPayment;
 
 class RemitaConfig extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('authcheck');
+       // $this->middleware('log')->only('index');
+       // $this->middleware('subscribed')->except('store');
+    }
     
     public function check_pend_rrr(Request $request){
 
@@ -23,6 +29,7 @@ class RemitaConfig extends Controller
         $session_id = app('App\Http\Controllers\ConfigController')->settings($request)->id;
         $payType_r = trim(strtoupper($request->payType));
         $email_r = $request->email;
+
         if(!$this->getRemitaPaymentConfig2($serviceTypeID,$merchantId, $apiKey ,$payType_r)){
            
             return response()->json(['status'=>'Nok','msg'=>'Error getting serviceTypeID, Line ... RemitaApplicantPayment Controller','rsp'=>''], 400);

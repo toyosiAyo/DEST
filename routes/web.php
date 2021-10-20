@@ -10,7 +10,6 @@ use App\Http\Controllers\ApplicantPaymentController;
 
 
 
-
 Route::get('forgot/password',[AuthController::class,'forgot_password'])->name('forgot.password');
 Route::post('forgot/password',[AuthController::class,'forgot_password_post'])->name('forgot.password');
 Route::post('auth/check',[AuthController::class,'auth_check'])->name('auth.check');
@@ -36,6 +35,8 @@ Route::post('update_applicant_payment',[ApplicantPaymentController::class,'updat
 Route::get('profile',[AuthController::class,'user_profile'])->name('profile');
 Route::get('application',[AuthController::class,'view_applications'])->name('application');
 Route::get('payments',[AuthController::class,'view_payments'])->name('payments');
+
+
 
    
 });

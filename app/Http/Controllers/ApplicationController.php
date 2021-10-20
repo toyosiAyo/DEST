@@ -11,106 +11,21 @@ use Illuminate\Support\Facades\Validator;
 
 class ApplicationController extends Controller
 {
+        public function __construct()
+    {
+        $this->middleware('authcheck');
+       // $this->middleware('log')->only('index');
+       // $this->middleware('subscribed')->except('store');
+    }
 
     //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
-    public function get_app_formmm(Request $request){
 
-        if($request->session()->has('user')){
+   
+    // public function get_app_formmm(Request $request){
            
-        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-        //return view('/pages/form')->with('data',$data);
-
-        // DB::table('application_payments')->select('application_payments.rrr')
-        // ->join('applications','application_payments.rrr','=','applications.used_pin')
-        // ->where('application_payments.email',  $data->email)
-        // ->where('applications.submitted_by', $data->email)
-        // ->get()
-        // $all =  DB::table('application_payments')->select('application_payments.rrr')
-        // ->whereNotIn('application_payments.rrr',
-        //    ['260514910326']
-        // )->get();
-        // $all = DB::table('application_payments')->select('application_payments.rrr')
-        //     ->whereNOTIn('application_payments.rrr',function($query){
-        //        $query->select('applications.used_pin')->from('applications');
-        //     })->get();
-        // $all = DB::select(DB::raw("SELECT rrr FROM application_payments 
-        // WHERE email = :somevariable"), array( 'somevariable' => $data->email,));
-        $rrr =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-        JOIN applications ON application_payments.rrr = applications.used_pin 
-        WHERE email = '$data->email'"));
-        $array_rrr = [];
-       if(!empty($rrr)){
-            foreach($rrr as $key => $val){
-                $array_rrr =  $val->rrr;
-            }
-            $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-            WHERE rrr NOT IN ($array_rrr)"));
-             if(!empty($all)){
-                // $form_view  = view('/pages/form')->with('data',$data);
-                return true;
-            }
-            return false;
-        }
-        return false;
+    //     $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
        
-    
-           // dd($all);
-    //   $rrr = ApplicantPayment::where(['status_code'=>'00','email'=>$data->email])->select('rrr')->first();
-    //   if($rrr == Null){
-    //     return response()->json(['status'=>'Nok','msg'=>'Like no rrr or pend rr',]); 
-    //   }else{
-    //     if (Application::where('used_pin',ApplicantPayment::where(['status_code'=>'00','email'=>$data->email])
-    //     ->select('rrr')->first()->rrr)->exists()) {
-    //         return response()->json(['status'=>'Nok','msg'=>'pin used',],401); 
-    //      }else{
-            
-    //         return response()->json(['status'=>'ok','msg'=>'pin available',],200); 
-    //      }
-    //     }
-          }
-          else{
-              dd("No Session");  
-          }
-       
-    }
-
-    public function get_app_form(Request $request){
-        if($request->session()->has('user')){
-            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            if($this->checkForUsedPin()){
-                return view('/pages/form')->with('data',$data);
-            }
-            else {
-                return view('/pages/create_application')->with('data',$data);
-            }
-            
-        }
-    }
-
-    public function checkForUsedPin(){
-        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-        $rrr =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-                JOIN applications ON application_payments.rrr = applications.used_pin 
-                WHERE email = '$data->email'"));
-                $array_rrr = [];
-        if(!empty($rrr)){
-            foreach($rrr as $key => $val){
-                $array_rrr =  $val->rrr;
-            }
-            $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-            WHERE rrr NOT IN ($array_rrr)"));
-            if(!empty($all)){
-                return true;
-            }
-            return false;
-        }
-    }
-
-    public function create_application(Request $request){
-        if($request->session()->has('user')){
-            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-           
-    //      $rrr =  DB::select(DB::raw("SELECT rrr FROM application_payments 
+    //     $rrr =  DB::select(DB::raw("SELECT rrr FROM application_payments 
     //     JOIN applications ON application_payments.rrr = applications.used_pin 
     //     WHERE email = '$data->email'"));
     //     $array_rrr = [];
@@ -118,31 +33,61 @@ class ApplicationController extends Controller
     //         foreach($rrr as $key => $val){
     //             $array_rrr =  $val->rrr;
     //         }
-    //    }
-    //    //dd($array_rrr);
-    //    $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-    //     WHERE rrr NOT IN ($array_rrr)"));
-    //     if(!empty($all)){
-    //         return redirect('/get_app_form');
+    //         $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
+    //         WHERE rrr NOT IN ($array_rrr)"));
+    //          if(!empty($all)){
+    //             // $form_view  = view('/pages/form')->with('data',$data);
+    //             return true;
+    //         }
+    //         return false;
     //     }
-    //     return "Not DOne";
+    //     return false;
+   
+        
        
-           
-            return view('/pages/create_application')->with('data', $data);
-          }
-          else{
-              dd("No Session");  
-          }
-       
-      
-       
+    // }
+
+    public function get_app_form(Request $request){
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            if($this->checkForUsedPin()){
+                return view('/pages/form')->with('data',$data);
+            }
+            else {
+                return view('/pages/create_application')->with('data',$data);
+            } 
     }
+
+
+    public function checkForUsedPin(){
+        try {
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            $used_pin = DB::table('application_payments')
+            ->join('applications','application_payments.rrr','applications.used_pin')
+            ->where('application_payments.email',$data->email)->pluck('rrr'); 
+            $unused_pin = DB::table('application_payments')->select('rrr')
+            ->where('email',$data->email)
+            ->where('status_code','00')->where('pay_type', 'application') ->whereNotIn('rrr', $used_pin)->get();
+            if($unused_pin->count() !=0){
+                $pin = $unused_pin[0]->rrr;
+                return true;
+                return ['status'=>'ok','msg'=>'success','pin'=>$pin];  
+            }
+            return false;
+        } catch (\Throwable $th) {
+            return response()->json(['status'=>'Nok','msg'=>'Failed, in checkForUsedPin() catch '], 401);
+        }
+    }
+
+    public function create_application(Request $request){
+
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            return view('/pages/create_application')->with('data', $data);
+       
+         }
 
  
     public function save_app_form(Request $request){
-        //$settings = app('App\Http\Controllers\ConfigController')->settings($request)->semester_name;
-      
-        
+        //$settings = app('App\Http\Controllers\ConfigController')->settings($request)->semester_name;     
         if($request->check_step == 'basic'){
             $app =  Applicant::findOrFail('teewhy@gmail.com');
             if($request->disability_check == "yes") $app->disability = $request->disability;
@@ -231,6 +176,10 @@ class ApplicationController extends Controller
 
         }elseif($request->check_step == 'declaration'){
            
+            $validator = Validator::make($request->pin, [ 'pin' => 'required|string|min:10',]);
+            if ($validator->fails()) {
+                return response()->json(['error' => 'Pin is required, Minimum of ...'], 401);
+            }
             
             // "faculty" => "Science"
             // "department" => "CMP"
