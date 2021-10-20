@@ -59,7 +59,7 @@
                     <div class="grey-800 float-left py-10">
                       <i class="icon md-assignment-check grey-600 font-size-24 vertical-align-bottom mr-5"></i>Approved Applications
                     </div>
-                    <span class="float-right grey-700 font-size-30">1</span>
+                    <span class="float-right grey-700 font-size-30">0</span>
                   </div>
                   <div class="mb-20 grey-500">
                     View
