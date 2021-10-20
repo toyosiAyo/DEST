@@ -199,6 +199,31 @@ $(document).ready(function() {
         
         
         getRemitaConfig(function(response) {
+<<<<<<< HEAD
+            //if(response.status === 'Nok'){
+              //console.log(response.data[0].email)
+
+                // merchantId = response.merchantId;
+                // serviceTypeId = response.serviceTypeID;
+                // apiKey = response.apiKey;
+                // orderId = response.orderID;
+                // phone = response.data[0].phone;
+                // firstname = response.data[0].first_name;
+                // surname = response.data[0].surname;
+                // fullname = firstname + ' ' + surname;
+                
+                
+               
+                merchantId = "4161150426";
+                serviceTypeId = "8201419983";
+                apiKey = "258341";
+                orderId = '20-15521144859893279';
+                phone = "08036431379";
+                firstname = 'Teewhy';
+                surname = 'Teewhy';
+                fullname = firstname + ' ' + surname;
+                console.log(fullname);
+=======
             if(response.status === 'NoPayment'){
                 merchantId = response.merchantId;
                 serviceTypeId = response.serviceTypeID;
@@ -208,6 +233,7 @@ $(document).ready(function() {
                 firstname = response.data[0].first_name;
                 surname = response.data[0].surname;
                 fullname = firstname + ' ' + surname;              
+>>>>>>> 7093288463b50a58b59b65ddf5dd4b54a550ccb8
 
                 setTimeout(function() {
                     processPayment();
