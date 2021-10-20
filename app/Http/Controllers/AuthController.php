@@ -81,7 +81,9 @@ class AuthController extends Controller
        
         if($request->session()->has('user')){
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            return view('pages.home')->with('data', $data);
+            $applications = DB::table('applications')->select('*','first_choice->prog as Programme')
+                ->where('submitted_by', $data->email)->get();
+            return view('pages.home',['apps'=>$applications])->with('data', $data);
           }
           else{
               dd("No Session");  
@@ -104,7 +106,8 @@ class AuthController extends Controller
     public function view_applications(Request $request){
         if($request->session()->has('user')){
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            $applications = DB::table('applications')->select('*')->where('submitted_by', $data->email)->get();
+            $applications = DB::table('applications')->select('*','first_choice->prog as Programme')
+                ->where('submitted_by', $data->email)->get();
             return view('pages.applications',['apps'=>$applications])->with('data', $data);
         }
         else{
