@@ -81,21 +81,24 @@
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <td><strong>App ID</strong></td>
+                        <td><strong>S/N</strong></td>
                         <td><strong>Programme</strong></td>
                         <td><strong>Status</strong></td>
                         <td class="text-left"><strong>Date</strong></td>
                       </tr>
                     </thead>
                     <tbody>
+                      @php $i = 1; @endphp
+                      @foreach($apps as $app)
                       <tr>
-                        <td>001</td>
-                        <td>Foundation (LAW)</td>
+                        <td>{{ $i }} @php $i++ @endphp</td>
+                        <td>{{ $app->Programme }}</td>
                         <td>
                           <span class="badge badge-warning">Pending</span>
                         </td>
-                        <td>17/09/2021</td>
-                      </tr>                     
+                        <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
+                      </tr>  
+                      @endforeach                   
                     </tbody>
                   </table>
                 </div>
