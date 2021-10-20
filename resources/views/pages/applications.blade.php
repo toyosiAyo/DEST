@@ -21,7 +21,7 @@
                                         <table class="table table-responsive-sm table-hover table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>App ID</th>
+                                                    <th>S/N</th>
                                                     <th>Programme</th>
                                                     <th>Date</th>
                                                     <th>Status</th>
@@ -29,13 +29,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @php $i = 1; @endphp
+                                                @foreach($apps as $app)
                                                 <tr>
-                                                    <td>56</td>
-                                                    <td>Foundation (CMP)</td>
-                                                    <td>5/29/2017</td>
+                                                    <td>{{ $i }} @php $i++ @endphp</td>
+                                                    <td>{{ $app->submitted_by }}</td>
+                                                    <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
                                                     <td><span class="badge badge-warning">PENDING</span></td>
                                                     <td><button type="button" class="btn btn-info" data-target="#exampleNiftyNewspaper" data-toggle="modal"><i class="icon md-trending-up" aria-hidden="true"></i> View</button></td>
                                                 </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
