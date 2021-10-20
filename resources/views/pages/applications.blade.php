@@ -33,7 +33,7 @@
                                                 @foreach($apps as $app)
                                                 <tr>
                                                     <td>{{ $i }} @php $i++ @endphp</td>
-                                                    <td>{{ $app->submitted_by }}</td>
+                                                    <td>{{ $app->Programme }}</td>
                                                     <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
                                                     <td><span class="badge badge-warning">PENDING</span></td>
                                                     <td><button type="button" class="btn btn-info" data-target="#exampleNiftyNewspaper" data-toggle="modal"><i class="icon md-trending-up" aria-hidden="true"></i> View</button></td>
