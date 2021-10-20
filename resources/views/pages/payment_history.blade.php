@@ -21,6 +21,7 @@
                                         <table class="table table-responsive-sm table-hover table-striped">
                                             <thead>
                                                 <tr>
+                                                    <th>S/N</th>
                                                     <th>Transaction ID</th>
                                                     <th>Amount</th>
                                                     <th>Date</th>
@@ -29,20 +30,27 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @php $i = 1; @endphp
+                                                @foreach($payments as $payment)
                                                 <tr>
-                                                    <td>56</td>
-                                                    <td>7500</td>
-                                                    <td>5/29/2017</td>
-                                                    <td><span class="badge badge-warning">PENDING</span></td>
-                                                    <td><button type="button" class="btn btn-danger"><i class="icon md-refresh" aria-hidden="true"></i> Requery</button></td>
+                                                    <td>{{ $i }} @php $i++ @endphp</td>
+                                                    <td>{{ $payment->trans_ref }}</td>
+                                                    <td>{{ $payment->amount }}</td>
+                                                    <td>{{ date("d M Y", strtotime($payment->updated_at)) }}</td>
+                                                    <td>@php echo $payment->status_msg == 'pending' ?
+                                                        '<span class="badge badge-warning"> '.$payment->status_msg.'</span>' :
+                                                        '<span class="badge badge-success">'.$payment->status_msg.'</span>' @endphp
+                                                    </td>
+                                                    <td>@php echo $payment->status_msg == 'pending' ?
+                                                        '<button type="button" class="btn btn-danger">
+                                                            <i class="icon md-refresh" aria-hidden="true"></i> Requery
+                                                        </button>' :
+                                                        '<button type="button" class="btn btn-success">
+                                                            <i class="icon md-print" aria-hidden="true"></i> Print Receipt
+                                                        </button>' @endphp
+                                                    </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>57</td>
-                                                    <td>7500</td>
-                                                    <td>5/29/2017</td>
-                                                    <td><span class="badge badge-warning">PENDING</span></td>
-                                                    <td><button type="button" class="btn btn-danger"><i class="icon md-refresh" aria-hidden="true"></i> Requery</button></td>
-                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
