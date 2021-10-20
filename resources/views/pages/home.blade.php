@@ -25,7 +25,7 @@
                     <div class="grey-800 float-left py-10">
                       <i class="icon md-file-text grey-600 font-size-24 vertical-align-bottom mr-5"></i>Applications
                     </div>
-                    <span class="float-right grey-700 font-size-30">1</span>
+                    <span class="float-right grey-700 font-size-30">{{$count}}</span>
                   </div>
                   <div class="mb-20 grey-500">
                      <a href="create_application">Create New</a>
@@ -74,7 +74,7 @@
                 <div class="panel-heading">
                   <h3 class="panel-title">
                     Applications
-                    <span class="badge badge-pill badge-info">1</span>
+                    <span class="badge badge-pill badge-info">{{$count}}</span>
                   </h3>
                 </div>
                 <div class="table-responsive">
@@ -98,7 +98,7 @@
                         </td>
                         <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
                       </tr>  
-                      @endforeach                   
+                      @endforeach   
                     </tbody>
                   </table>
                 </div>
