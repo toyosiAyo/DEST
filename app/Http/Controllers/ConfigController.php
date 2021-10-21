@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\DB;
 
 class ConfigController extends Controller
 {
+
+  
     public function college_dept_prog(Request $request){
         try {
             //dd($request->facultyId);

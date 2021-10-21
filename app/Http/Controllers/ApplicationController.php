@@ -23,10 +23,26 @@ class ApplicationController extends Controller
    
   
         protected $pin = "";
+
+        public function image_upload(Request $request){
+            // dd($request->all());
+              if($request->hasFile('photo')){
+                  if ($request->file('photo')->isValid()) {
+                  $path = $request->file('photo')->storeAs(
+                      'teachers', 'teewhy'
+                  );
+                      echo "uploaded successfully $path";
+                  }
+              }
+          }
+
+          
     public function get_app_form(Request $request){
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             //if($this->checkForUsedPin($request,$this->pin)){
-                return view('/pages/form')->with('data',$data);
+                $o_level = DB::table('o_level_subjects')->select('id','subject')->get();
+                $sub_grade = array("Choose one...", "A1", "B2", "B3", "C4", "C5", "C6", "D7", "E8", "F9");
+                return view('/pages/form')->with('data',$data)->with('o_level',$o_level)->with('sub_grade',$sub_grade);
             //}
             // else {
             //     return view('/pages/create_application')->with('data',$data);

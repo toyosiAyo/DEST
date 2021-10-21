@@ -10,7 +10,7 @@ use App\Http\Controllers\ApplicantPaymentController;
 
 
 
-Route::get('college_dept_prog',[ConfigController::class,'college_dept_prog'])->name('college_dept_prog');
+Route::post('image_upload',[ConfigController::class,'image_upload'])->name('image_upload');
 
 
 Route::get('forgot/password',[AuthController::class,'forgot_password'])->name('forgot.password');
