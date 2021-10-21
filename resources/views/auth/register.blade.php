@@ -19,8 +19,8 @@
       <div class="page-content">
         <div class="page-brand-info">
           <div class="brand">
-            <img class="brand-img" src="../assets/images/run_logo.png" alt="...">
-            <h2 class="brand-text font-size-40">RUN DEST</h2>
+            <img class="brand-img" src="../assets/images/run_logo.png" alt="..."><span>STUDENT PORTAL</span>
+            <h2 class="brand-text font-size-30">DIRECTORATE OF EDUCATIONAL SERVICES AND TRAINING</h2>
           </div>
           <!-- <p class="font-size-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua.</p> -->
@@ -29,10 +29,25 @@
         <div class="page-register-main">
           <div class="brand hidden-md-up">
             <img class="brand-img" src="../assets/images/run_logo.png" alt="...">
-            <h3 class="brand-text font-size-40">RUN DEST</h3>
+            <h3 class="brand-text font-size-30">RUN DEST</h3>
           </div>
           <h3 class="font-size-24">Create your Profile</h3>
-
+              @if(Session::get('success'))
+                <div class="alert dark alert-icon alert-success alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <i class="icon md-close" aria-hidden="true"></i> {{Session::get('success')}}
+                </div>
+              @endif
+              @if(Session::get('fail'))
+                <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <i class="icon md-close" aria-hidden="true"></i> {{Session::get('fail')}}
+                </div>
+              @endif
           <form action="{{route('save.account.form')}}" method="post" role="form" autocomplete="off">
             @csrf
             <div class="form-group form-material floating" data-plugin="formMaterial">

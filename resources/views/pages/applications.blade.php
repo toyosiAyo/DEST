@@ -18,7 +18,7 @@
                             <div class="table-responsive h-250" data-plugin="scrollable">
                                 <div data-role="container">
                                     <div data-role="content">
-                                        <table class="table table-responsive-sm table-hover table-striped">
+                                        <table id="app_table" class="table table-responsive-sm table-hover table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>S/N</th>
@@ -35,8 +35,15 @@
                                                     <td>{{ $i }} @php $i++ @endphp</td>
                                                     <td>{{ $app->Programme }}</td>
                                                     <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
-                                                    <td><span class="badge badge-warning">PENDING</span></td>
-                                                    <td><button type="button" class="btn btn-info" data-target="#exampleNiftyNewspaper" data-toggle="modal"><i class="icon md-trending-up" aria-hidden="true"></i> View</button></td>
+                                                    <td>@php echo $app->status == 'pending' ? 
+                                                        '<span class="badge badge-warning">'.$app->status.'</span>' :
+                                                        '<span class="badge badge-success">'.$app->status.'</span>' @endphp
+                                                    </td>
+                                                    <td><button type="button" class="btn btn-info view" data-id="{{$app->id}}" 
+                                                            data-status="{{$app->status}}">
+                                                            <i class="icon md-trending-up" aria-hidden="true"></i> View
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -52,7 +59,7 @@
         </div>
     </body>
     <!-- Modal -->
-    <div class="modal fade modal-newspaper" id="exampleNiftyNewspaper" aria-hidden="true"
+    <div class="modal fade modal-newspaper" id="view_app" aria-hidden="true"
         aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-simple">
             <div class="modal-content">
@@ -64,7 +71,7 @@
             </div>
             <div class="modal-body">
                 <!-- <p>My applicatioon details</p> -->
-                <span>Your application is still pending</span>
+                <span id="details"></span>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Close</button>
@@ -74,6 +81,8 @@
         </div>
     </div>
         <!-- End Modal -->
+    <script src="{{ asset('scripts/view_application.js') }}"></script>
+
 
 
 

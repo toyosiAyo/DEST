@@ -43,7 +43,7 @@
             <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
               data-animation="scale-up" role="button">
               <span class="avatar avatar-online">
-                <img src="../global/portraits/5.jpg" alt="...">
+                <img src="../global/portraits/default.png" alt="...">
                 <i></i>
               </span>
             </a>
@@ -99,7 +99,7 @@
 
         <div class="navbar-brand navbar-brand-center">
           <a href="#">
-            <img class="navbar-brand-logo navbar-brand-logo-normal" style="height:65px; width:123%" src="assets/images/run_logo.png"
+            <img class="navbar-brand-logo navbar-brand-logo-normal" style="height:65px; width:113%" src="assets/images/run_logo.png"
               title="RUN DEST">
             <img class="navbar-brand-logo navbar-brand-logo-special" src="assets/images/run_logo.png"
               title="RUN DEST">

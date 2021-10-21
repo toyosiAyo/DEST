@@ -14,19 +14,18 @@
         <div class="page-content">
           <div class="page-brand-info">
             <div class="brand">
-              <img class="brand-img" src="{{ asset('assets/images/run_logo.png') }}" alt="...">
-              <p class="brand-text font-size-40">RUN DEST</p>
+              <img class="brand-img" src="{{ asset('assets/images/run_logo.png') }}" alt="..."> <span>STUDENT PORTAL</span>
+              <h2 class="brand-text font-size-30">DIRECTORATE OF EDUCATIONAL SERVICES AND TRAINING</h2>
             </div>
           </div>
-
           <div class="page-login-main">
             <div class="brand hidden-md-up">
-              <img class="brand-img" src="{{ asset('assets/images/run_logo.png') }}" alt="..."><span class="brand-text font-size-40">RUN DEST</span>
+              <img class="brand-img" src="{{ asset('assets/images/run_logo.png') }}" alt="..."><span class="brand-text font-size-30">RUN DEST</span>
             </div>
             <h3 class="font-size-24">Log In</h3>
             <p>Log in with your email and password</p>
-            @if(Session::get('success'))
-              <p>{{Session::get('success')}}</p>
+              @if(Session::get('success'))
+                <p>{{Session::get('success')}}</p>
               @endif
               @if(Session::get('fail'))
                 <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
@@ -35,7 +34,7 @@
                   </button>
                   <i class="icon md-close" aria-hidden="true"></i> {{Session::get('fail')}}
                 </div>
-            @endif
+              @endif
             <form action="{{route('auth.check')}}" method="post" autocomplete="off">
               @csrf
               <div class="form-group form-material floating" data-plugin="formMaterial">
