@@ -153,7 +153,8 @@
               <h5 class="modal-title">Picture Upload</h5>
           </div>
           <div class="modal-body">
-            <p class="text-danger"><small>You need to upload your passport photo to continue.</small></p>
+            <p class="text-danger"><i class="icon md-alert-triangle red-600 font-size-24 vertical-align-bottom mr-5"></i>
+              <small>You need to upload your passport photo to continue.</small></p>
             <form method="post">
               <img class="avatar avatar-100" id="previewImg" src="../global/portraits/default.png" alt="Placeholder"><hr>
               <p><input type="file" name="photo" accept="image/*" onchange='previewFile(this)' required></p>
