@@ -21,44 +21,20 @@ class ApplicationController extends Controller
     //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
 
    
-    // public function get_app_formmm(Request $request){
-           
-    //     $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-       
-    //     $rrr =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-    //     JOIN applications ON application_payments.rrr = applications.used_pin 
-    //     WHERE email = '$data->email'"));
-    //     $array_rrr = [];
-    //    if(!empty($rrr)){
-    //         foreach($rrr as $key => $val){
-    //             $array_rrr =  $val->rrr;
-    //         }
-    //         $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-    //         WHERE rrr NOT IN ($array_rrr)"));
-    //          if(!empty($all)){
-    //             // $form_view  = view('/pages/form')->with('data',$data);
-    //             return true;
-    //         }
-    //         return false;
-    //     }
-    //     return false;
-   
-        
-       
-    // }
-
+  
+        protected $pin = "";
     public function get_app_form(Request $request){
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            if($this->checkForUsedPin()){
+            //if($this->checkForUsedPin($request,$this->pin)){
                 return view('/pages/form')->with('data',$data);
-            }
-            else {
-                return view('/pages/create_application')->with('data',$data);
-            } 
+            //}
+            // else {
+            //     return view('/pages/create_application')->with('data',$data);
+            // } 
     }
 
 
-    public function checkForUsedPin(){
+    public function checkForUsedPin($request,&$pin){
         try {
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             $used_pin = DB::table('application_payments')
@@ -66,9 +42,10 @@ class ApplicationController extends Controller
             ->where('application_payments.email',$data->email)->pluck('rrr'); 
             $unused_pin = DB::table('application_payments')->select('rrr')
             ->where('email',$data->email)
-            ->where('status_code','00')->where('pay_type', 'application') ->whereNotIn('rrr', $used_pin)->get();
+            ->where('status_code','00')->where('pay_type', $request->payType) ->whereNotIn('rrr', $used_pin)->get();
             if($unused_pin->count() !=0){
                 $pin = $unused_pin[0]->rrr;
+                $this->pin = $unused_pin[0]->rrr;
                 return true;
                 return ['status'=>'ok','msg'=>'success','pin'=>$pin];  
             }

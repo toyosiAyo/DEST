@@ -10,6 +10,9 @@ use App\Http\Controllers\ApplicantPaymentController;
 
 
 
+Route::get('college_dept_prog',[ConfigController::class,'college_dept_prog'])->name('college_dept_prog');
+
+
 Route::get('forgot/password',[AuthController::class,'forgot_password'])->name('forgot.password');
 Route::post('forgot/password',[AuthController::class,'forgot_password_post'])->name('forgot.password');
 Route::post('auth/check',[AuthController::class,'auth_check'])->name('auth.check');

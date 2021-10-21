@@ -14,6 +14,40 @@ use Illuminate\Support\Facades\DB;
 
 class ConfigController extends Controller
 {
+    public function college_dept_prog(Request $request){
+        try {
+            //dd($request->facultyId);
+            $faculties=[];
+            $dept=[];
+            $prog=[];
+            $combination=[];
+            if($request->has('facultyId') && !empty($request->input('facultyId'))) {
+                //Getting all departments for this faculty
+                $dept = DB::table('departments')->select('department_id','department')
+                ->where('college_id_FK',$request->facultyId)->get();
+                
+            } 
+            if($request->has('deptId') && !empty($request->input('deptId'))) {
+                //Getting all programmes for this department
+                $prog = DB::table('programmes')->select('programme_id','programme')
+                ->where('department_id_FK',$request->deptId)->get();
+                
+            } 
+            if($request->has('progId') && !empty($request->input('progId'))) {
+                //Getting subject combination for this programme
+                $combination = DB::table('subject_combination')->select('id','subjects')
+                ->where('programme_id',$request->progId)->get();
+                
+            } 
+
+           $faculties = DB::table('faculty')->select('college_id','college')->get();
+         return response()->json(['status'=>'ok','msg'=>'success','faculties'=>$faculties,'dept'=>$dept,'prog'=>$prog,'combinations'=>$combination], 200);
+           //return $faculties;
+        } catch (\Throwable $th) {
+        return response()->json(['status'=>'Nok','msg'=>'Error from catch... college_dept_prog()','rsp'=>''], 401);
+
+        }
+    }
     
     public  function settings($request){
         if ($request->has('settingId') && $request->filled('settingId') ){
@@ -30,6 +64,7 @@ class ConfigController extends Controller
 // ALTER TABLE tableName ADD PRIMARY KEY (new_id); /* Set primary key to the new column */
 // ALTER TABLE tableName MODIFY COLUMN new_id INT AUTO_INCREMENT; /*
 public function auth_user($email){
+ try {
     $data =  DB::table('applicants')->select('id','email',
     'surname','first_name','other_name',
     'phone','gender','dob','religion',
@@ -41,6 +76,10 @@ public function auth_user($email){
     'nok_relationship','nok_email','nok_phone',
     'nok_address','profile_pix','deleted_active')->where('email',$email)->first();
     return $data;
+ } catch (\Throwable $th) {
+    return response()->json(['status'=>'Nok','msg'=>'Error from catch... auth_user()','rsp'=>''], 401);
+
+ }
 }
 public function get_lga_state_country(Request $request){
         
