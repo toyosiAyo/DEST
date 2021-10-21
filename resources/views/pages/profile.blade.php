@@ -18,7 +18,7 @@
                         <div class="card card-shadow text-center">
                             <div class="card-block">
                                 <a class="avatar avatar-lg" href="javascript:void(0)">
-                                    <img src="../../global/portraits/5.jpg" alt="...">
+                                    <img src="../../global/portraits/default.png" alt="...">
                                 </a>
                                 <h4 class="profile-user">{{$data->surname.' '.$data->first_name}}</h4>
                                 <input type="file" name="profile_image"> <hr>

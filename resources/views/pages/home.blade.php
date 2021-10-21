@@ -10,6 +10,7 @@
 
   <script src=" {{ asset('global/vendor/chartist/chartist.minfd53.js?v4.0.1') }}"></script>
   <script src=" {{ asset('global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.minfd53.js?v4.0.1') }}"></script>
+  <script src="{{ asset('scripts/previewImage.js') }}"></script>
   @endpush
     
   @section("content")
@@ -113,7 +114,7 @@
                   <div class="overlay-panel vertical-align overlay-background">
                     <div class="vertical-align-middle">
                       <a class="avatar avatar-100 float-left mr-20" href="javascript:void(0)">
-                        <img src="../global/portraits/5.jpg" alt="">
+                        <img src="../global/portraits/default.png" alt="">
                       </a>
                       <div class="float-left">
                         <div class="font-size-20">{{$data->surname.' '.$data->first_name}}</div>
@@ -145,5 +146,32 @@
         </div>
       </div>
     </body>
+    <div id="myModal" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Picture Upload</h5>
+          </div>
+          <div class="modal-body">
+            <p class="text-danger"><small>You need to upload your passport photo to continue.</small></p>
+            <form method="post">
+              <img class="avatar avatar-100" id="previewImg" src="../global/portraits/default.png" alt="Placeholder"><hr>
+              <p><input type="file" name="photo" accept="image/*" onchange='previewFile(this)' required></p>
+          </div>
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Upload</button>
+          </div>
+          </form>
+        </div>
+      </div>
+  </div>
+    <script>
+      $(document).ready(function(){
+          $("#myModal").modal({
+              backdrop: 'static',
+              keyboard: false
+          });
+      });
+    </script>
   @endsection
 
