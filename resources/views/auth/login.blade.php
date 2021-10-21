@@ -14,8 +14,8 @@
         <div class="page-content">
           <div class="page-brand-info">
             <div class="brand">
-              <img class="brand-img" src="{{ asset('assets/images/run_logo.png') }}" alt="..."> <span>DIRECTORATE OF EDUCATIONAL SERVICES AND TRAINING</span>
-              <!-- <p class="brand-text font-size-30" style="color:red">DIRECTORATE OF EDUCATIONAL SERVICES AND TRAINING</p> -->
+              <img class="brand-img" src="{{ asset('assets/images/run_logo.png') }}" alt="..."> <span>STUDENT PORTAL</span>
+              <h2 class="brand-text font-size-30">DIRECTORATE OF EDUCATIONAL SERVICES AND TRAINING</h2>
             </div>
           </div>
           <div class="page-login-main">
