@@ -24,8 +24,8 @@
             </div>
             <h3 class="font-size-24">Log In</h3>
             <p>Log in with your email and password</p>
-            @if(Session::get('success'))
-              <p>{{Session::get('success')}}</p>
+              @if(Session::get('success'))
+                <p>{{Session::get('success')}}</p>
               @endif
               @if(Session::get('fail'))
                 <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
@@ -34,7 +34,7 @@
                   </button>
                   <i class="icon md-close" aria-hidden="true"></i> {{Session::get('fail')}}
                 </div>
-            @endif
+              @endif
             <form action="{{route('auth.check')}}" method="post" autocomplete="off">
               @csrf
               <div class="form-group form-material floating" data-plugin="formMaterial">
