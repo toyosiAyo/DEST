@@ -14,14 +14,13 @@
         <div class="page-content">
           <div class="page-brand-info">
             <div class="brand">
-              <img class="brand-img" src="{{ asset('assets/images/run_logo.png') }}" alt="...">
-              <p class="brand-text font-size-40">RUN DEST</p>
+              <img class="brand-img" src="{{ asset('assets/images/run_logo.png') }}" alt="..."> <span>DIRECTORATE OF EDUCATIONAL SERVICES AND TRAINING</span>
+              <!-- <p class="brand-text font-size-30" style="color:red">DIRECTORATE OF EDUCATIONAL SERVICES AND TRAINING</p> -->
             </div>
           </div>
-
           <div class="page-login-main">
             <div class="brand hidden-md-up">
-              <img class="brand-img" src="{{ asset('assets/images/run_logo.png') }}" alt="..."><span class="brand-text font-size-40">RUN DEST</span>
+              <img class="brand-img" src="{{ asset('assets/images/run_logo.png') }}" alt="..."><span class="brand-text font-size-30">RUN DEST</span>
             </div>
             <h3 class="font-size-24">Log In</h3>
             <p>Log in with your email and password</p>

@@ -29,7 +29,7 @@
         <div class="page-register-main">
           <div class="brand hidden-md-up">
             <img class="brand-img" src="../assets/images/run_logo.png" alt="...">
-            <h3 class="brand-text font-size-40">RUN DEST</h3>
+            <h3 class="brand-text font-size-30">RUN DEST</h3>
           </div>
           <h3 class="font-size-24">Create your Profile</h3>
 
