@@ -41,8 +41,8 @@ class ApplicationController extends Controller
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             //if($this->checkForUsedPin($request,$this->pin)){
                 $o_level = DB::table('o_level_subjects')->select('id','subject')->get();
-                $sub_grade = array("Choose one...", "A1", "B2", "B3", "C4", "C5", "C6", "D7", "E8", "F9");
-                return view('/pages/form')->with('data',$data)->with('o_level',$o_level)->with('sub_grade',$sub_grade);
+                $sub_grade = array("A1", "B2", "B3", "C4", "C5", "C6", "D7", "E8", "F9");
+                return view('/pages/form',['o_level'=> $o_level],['sub_grade'=>$sub_grade])->with('data', $data);
             //}
             // else {
             //     return view('/pages/create_application')->with('data',$data);
