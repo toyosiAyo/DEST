@@ -83,7 +83,7 @@
                                                         <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class=" col-xl-12 col-md-9">
-                                                        <input type="text" class="form-control" value="Orieye Adamu" name="fullname" readonly>
+                                                        <input type="text" class="form-control" value="{{$data->surname.' '.$data->first_name}}" name="fullname" readonly>
                                                     </div>
                                                 </div>
 
@@ -96,7 +96,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="icon md-email" aria-hidden="true"></i>
                                                         </span>
-                                                        <input type="email" value="orieye@gmail.com" class="form-control" name="email" readonly >
+                                                        <input type="email" value="{{$data->email}}" class="form-control" name="email" readonly >
                                                         </div>
                                                     </div>
                                                 </div>
@@ -384,15 +384,17 @@
                                                           </td>
                                                           <td><select class="form-control" name="subject[]" required>
                                                             <option value="">Choose Subject</option>
-                                                            <option value="English">English</option>
-                                                            <option value="Mathematics">Further Mathematics</option>
+                                                            @foreach($o_level as $sub)
+                                                              <option value="{{ $sub->id }}">{{ $sub->subject }}</option>
+                                                            @endforeach 
                                                             </select>
                                                           </td>
                                                           <td>
                                                             <select class="form-control" name="grade[]" required>
                                                               <option value=""> Choose Grade</option>
-                                                              <option value="A1">A1</option>
-                                                              <option value="B2">B2</option>
+                                                              @foreach($sub_grade as $grade)
+                                                              <option value="{{ $grade }}">{{ $grade }}</option>
+                                                              @endforeach 
                                                             </select>
                                                           </td>
                                                           <td>
@@ -474,11 +476,12 @@
                                     </label>
                                   <div class="example col-xl-3 col-md-3">
                                   <input type="hidden" class="form-control" value="declaration" id="check_step" name="check_step">
+                                  <input type="hidden" value="{{$pin}}" id="pin" value="pin" class="form-control">
                                     <select class="form-control" data-plugin="selectpicker" required
                                       name="faculty" id="faculty" data-live-search="true" data-allow-clear="true">
-                                      <option>Select Faculty</option>
-                                      <option value="Science">Natural Science</option>
-                                      <option value="Humanities">Humanities</option>
+                                      <option value="">Select Faculty</option>
+                                      
+                                      
                                     </select>
                                   </div>
                                   <div class="example col-xl-3 col-md-3 ">

@@ -133,5 +133,6 @@
       <script src=" https://login.remita.net/payment/v1/remita-pay-inline.bundle.js"></script>
       <script src="{{ asset('assets/examples/js/pages/faq.minfd53.js?v4.0.1') }}"></script>
       <script src=" {{ asset('scripts/create_application.js') }}"></script>
+      <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
     </body>
   @endsection

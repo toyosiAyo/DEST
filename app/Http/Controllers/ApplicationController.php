@@ -38,19 +38,20 @@ class ApplicationController extends Controller
 
           
     public function get_app_form(Request $request){
-            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            //if($this->checkForUsedPin($request,$this->pin)){
-                $o_level = DB::table('o_level_subjects')->select('id','subject')->get();
-                $sub_grade = array("A1", "B2", "B3", "C4", "C5", "C6", "D7", "E8", "F9");
-                return view('/pages/form',['o_level'=> $o_level],['sub_grade'=>$sub_grade])->with('data', $data);
-            //}
-            // else {
-            //     return view('/pages/create_application')->with('data',$data);
-            // } 
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $pin = $_COOKIE['pin'];
+        if($pin){
+            $o_level = DB::table('o_level_subjects')->select('id','subject')->get();
+            $sub_grade = array("A1", "B2", "B3", "C4", "C5", "C6", "D7", "E8", "F9");
+            return view('/pages/form',['o_level'=> $o_level,'sub_grade'=>$sub_grade,'pin'=>$pin])->with('data', $data);
+        }
+        else {
+            return view('/pages/create_application')->with('data',$data);
+        } 
     }
 
 
-    public function checkForUsedPin($request,&$pin){
+    public function checkForUsedPin($request){
         try {
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             $used_pin = DB::table('application_payments')
@@ -62,10 +63,10 @@ class ApplicationController extends Controller
             if($unused_pin->count() !=0){
                 $pin = $unused_pin[0]->rrr;
                 $this->pin = $unused_pin[0]->rrr;
-                return true;
+                return $pin;
                 return ['status'=>'ok','msg'=>'success','pin'=>$pin];  
             }
-            return false;
+            return "false";
         } catch (\Throwable $th) {
             return response()->json(['status'=>'Nok','msg'=>'Failed, in checkForUsedPin() catch '], 401);
         }
@@ -168,6 +169,7 @@ class ApplicationController extends Controller
               
 
         }elseif($request->check_step == 'declaration'){
+            //unset pin cookie
            
             $validator = Validator::make($request->pin, [ 'pin' => 'required|string|min:10',]);
             if ($validator->fails()) {

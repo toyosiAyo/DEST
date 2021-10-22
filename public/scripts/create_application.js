@@ -214,7 +214,9 @@ $(document).ready(function() {
                 }, 5000);
             }
             else if(response.status === 'ok'){
-              window.location.href = 'app_form'
+              var pin = response.rsp
+              $.cookie("pin", pin);
+              window.location.href = 'app_form';
              }
             else{ return false }
         });
