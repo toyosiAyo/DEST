@@ -11,138 +11,76 @@ use Illuminate\Support\Facades\Validator;
 
 class ApplicationController extends Controller
 {
+        public function __construct()
+    {
+        $this->middleware('authcheck');
+       // $this->middleware('log')->only('index');
+       // $this->middleware('subscribed')->except('store');
+    }
 
     //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
-    public function get_app_formmm(Request $request){
 
-        if($request->session()->has('user')){
-           
-        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-        //return view('/pages/form')->with('data',$data);
+   
+  
+        protected $pin = "";
 
-        // DB::table('application_payments')->select('application_payments.rrr')
-        // ->join('applications','application_payments.rrr','=','applications.used_pin')
-        // ->where('application_payments.email',  $data->email)
-        // ->where('applications.submitted_by', $data->email)
-        // ->get()
-        // $all =  DB::table('application_payments')->select('application_payments.rrr')
-        // ->whereNotIn('application_payments.rrr',
-        //    ['260514910326']
-        // )->get();
-        // $all = DB::table('application_payments')->select('application_payments.rrr')
-        //     ->whereNOTIn('application_payments.rrr',function($query){
-        //        $query->select('applications.used_pin')->from('applications');
-        //     })->get();
-        // $all = DB::select(DB::raw("SELECT rrr FROM application_payments 
-        // WHERE email = :somevariable"), array( 'somevariable' => $data->email,));
-        $rrr =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-        JOIN applications ON application_payments.rrr = applications.used_pin 
-        WHERE email = '$data->email'"));
-        $array_rrr = [];
-       if(!empty($rrr)){
-            foreach($rrr as $key => $val){
-                $array_rrr =  $val->rrr;
-            }
-            $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-            WHERE rrr NOT IN ($array_rrr)"));
-             if(!empty($all)){
-                // $form_view  = view('/pages/form')->with('data',$data);
-                return true;
-            }
-            return false;
-        }
-        return false;
-       
-    
-           // dd($all);
-    //   $rrr = ApplicantPayment::where(['status_code'=>'00','email'=>$data->email])->select('rrr')->first();
-    //   if($rrr == Null){
-    //     return response()->json(['status'=>'Nok','msg'=>'Like no rrr or pend rr',]); 
-    //   }else{
-    //     if (Application::where('used_pin',ApplicantPayment::where(['status_code'=>'00','email'=>$data->email])
-    //     ->select('rrr')->first()->rrr)->exists()) {
-    //         return response()->json(['status'=>'Nok','msg'=>'pin used',],401); 
-    //      }else{
-            
-    //         return response()->json(['status'=>'ok','msg'=>'pin available',],200); 
-    //      }
-    //     }
+        public function image_upload(Request $request){
+            // dd($request->all());
+              if($request->hasFile('photo')){
+                  if ($request->file('photo')->isValid()) {
+                  $path = $request->file('photo')->storeAs(
+                      'teachers', 'teewhy'
+                  );
+                      echo "uploaded successfully $path";
+                  }
+              }
           }
-          else{
-              dd("No Session");  
-          }
-       
-    }
 
+          
     public function get_app_form(Request $request){
-        if($request->session()->has('user')){
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            if($this->checkForUsedPin()){
-                return view('/pages/form')->with('data',$data);
-            }
-            else {
-                return view('/pages/create_application')->with('data',$data);
-            }
-            
-        }
+            //if($this->checkForUsedPin($request,$this->pin)){
+                $o_level = DB::table('o_level_subjects')->select('id','subject')->get();
+                $sub_grade = array("Choose one...", "A1", "B2", "B3", "C4", "C5", "C6", "D7", "E8", "F9");
+                return view('/pages/form')->with('data',$data)->with('o_level',$o_level)->with('sub_grade',$sub_grade);
+            //}
+            // else {
+            //     return view('/pages/create_application')->with('data',$data);
+            // } 
     }
 
-    public function checkForUsedPin(){
-        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-        $rrr =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-                JOIN applications ON application_payments.rrr = applications.used_pin 
-                WHERE email = '$data->email'"));
-                $array_rrr = [];
-        if(!empty($rrr)){
-            foreach($rrr as $key => $val){
-                $array_rrr =  $val->rrr;
-            }
-            $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-            WHERE rrr NOT IN ($array_rrr)"));
-            if(!empty($all)){
+
+    public function checkForUsedPin($request,&$pin){
+        try {
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            $used_pin = DB::table('application_payments')
+            ->join('applications','application_payments.rrr','applications.used_pin')
+            ->where('application_payments.email',$data->email)->pluck('rrr'); 
+            $unused_pin = DB::table('application_payments')->select('rrr')
+            ->where('email',$data->email)
+            ->where('status_code','00')->where('pay_type', $request->payType) ->whereNotIn('rrr', $used_pin)->get();
+            if($unused_pin->count() !=0){
+                $pin = $unused_pin[0]->rrr;
+                $this->pin = $unused_pin[0]->rrr;
                 return true;
+                return ['status'=>'ok','msg'=>'success','pin'=>$pin];  
             }
             return false;
+        } catch (\Throwable $th) {
+            return response()->json(['status'=>'Nok','msg'=>'Failed, in checkForUsedPin() catch '], 401);
         }
     }
 
     public function create_application(Request $request){
-        if($request->session()->has('user')){
+
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-           
-    //      $rrr =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-    //     JOIN applications ON application_payments.rrr = applications.used_pin 
-    //     WHERE email = '$data->email'"));
-    //     $array_rrr = [];
-    //    if(!empty($rrr)){
-    //         foreach($rrr as $key => $val){
-    //             $array_rrr =  $val->rrr;
-    //         }
-    //    }
-    //    //dd($array_rrr);
-    //    $all =  DB::select(DB::raw("SELECT rrr FROM application_payments 
-    //     WHERE rrr NOT IN ($array_rrr)"));
-    //     if(!empty($all)){
-    //         return redirect('/get_app_form');
-    //     }
-    //     return "Not DOne";
-       
-           
             return view('/pages/create_application')->with('data', $data);
-          }
-          else{
-              dd("No Session");  
-          }
        
-      
-       
-    }
+         }
 
  
     public function save_app_form(Request $request){
-        //$settings = app('App\Http\Controllers\ConfigController')->settings($request)->semester_name;
-      
-        
+        //$settings = app('App\Http\Controllers\ConfigController')->settings($request)->semester_name;     
         if($request->check_step == 'basic'){
             $app =  Applicant::findOrFail('teewhy@gmail.com');
             if($request->disability_check == "yes") $app->disability = $request->disability;
@@ -231,6 +169,10 @@ class ApplicationController extends Controller
 
         }elseif($request->check_step == 'declaration'){
            
+            $validator = Validator::make($request->pin, [ 'pin' => 'required|string|min:10',]);
+            if ($validator->fails()) {
+                return response()->json(['error' => 'Pin is required, Minimum of ...'], 401);
+            }
             
             // "faculty" => "Science"
             // "department" => "CMP"
