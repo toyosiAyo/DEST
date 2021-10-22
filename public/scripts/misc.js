@@ -72,4 +72,10 @@ $(document).ready(function(){
     $(document).on('click', '#removeQualification', function () {
     $(this).closest('#qualification').remove();
     });
+
+    // function getYear(){
+    //     for (i = new Date().getFullYear(); i > 1900; i--){
+    //       $('#year').append($('<option />').val(i).html(i));
+    //     }
+    // }
 })

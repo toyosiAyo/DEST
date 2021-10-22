@@ -398,10 +398,16 @@
                                                             </select>
                                                           </td>
                                                           <td>
-                                                            <select class="form-control" name="year[]" required>
+                                                            @php 
+                                                             $currentYear=date('Y');
+                                                             $endYear=1960;
+                                                             $yearArray=range($currentYear,$endYear);
+                                                            @endphp
+                                                            <select class="form-control" name="year[]" id="year" required>
                                                               <option value="">Choose Year</option>
-                                                              <option value="2021">2021</option>
-                                                              <option value="2020">2020</option>
+                                                              @foreach($yearArray as $year)
+                                                              <option value="{{ $year }}">{{ $year }}</option>
+                                                              @endforeach
                                                             </select>
                                                           </td>
                                                         </tr>
