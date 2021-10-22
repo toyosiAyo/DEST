@@ -43,7 +43,7 @@ class ApplicationController extends Controller
         if($pin){
             $o_level = DB::table('o_level_subjects')->select('id','subject')->get();
             $sub_grade = array("A1", "B2", "B3", "C4", "C5", "C6", "D7", "E8", "F9");
-            return view('/pages/form',['o_level'=> $o_level,'sub_grade'=>$sub_grade,'pin'=>$pin])->with('data', $data);
+            return view('/pages/form',['o_level'=> $o_level,'sub_grade'=>$sub_grade,'pin'=>$pin,'data'=> $data]);
         }
         else {
             return view('/pages/create_application')->with('data',$data);
