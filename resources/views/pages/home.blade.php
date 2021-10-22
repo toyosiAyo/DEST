@@ -165,7 +165,7 @@
           </form>
         </div>
       </div>
-  </div>
+    </div>
     <script>
       $(document).ready(function(){
           $("#myModal").modal({
