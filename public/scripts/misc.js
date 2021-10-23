@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $(".disability").hide();
+
     $('input[type="checkbox"]').click(function(){
     if($("#disability_check").prop('checked') == true){
         $(".disability").show();
@@ -73,9 +74,59 @@ $(document).ready(function(){
     $(this).closest('#qualification').remove();
     });
 
-    // function getYear(){
-    //     for (i = new Date().getFullYear(); i > 1900; i--){
-    //       $('#year').append($('<option />').val(i).html(i));
-    //     }
-    // }
+    $("#faculty").change(function () {
+        $.ajax({
+            url: 'college_dept_prog',
+            data: {faculty:this.value},
+            type: 'get',
+            success: function(response){
+                $("#department").empty().append('<option>Select Department</option>')
+                $("#programme").empty()
+                $("#combination").empty()
+                response.dept.forEach(element => {
+                    $('#department').append($('<option>', {
+                        value: element.department_id,
+                        text: element.department
+                    }));
+                });
+            }
+        })
+    })
+
+    $("#department").change(function () {
+        $.ajax({
+            url: 'college_dept_prog',
+            data: {department:this.value},
+            type: 'get',
+            success: function(response){
+                $("#programme").empty().append('<option>Select Programme</option>')
+                $("#combination").empty()
+                response.prog.forEach(element => {
+                    $('#programme').append($('<option>', {
+                        value: element.programme_id,
+                        text: element.programme
+                    }));
+                });
+            }
+        })
+    })
+
+    $("#programme").change(function () {
+        $.ajax({
+            url: 'college_dept_prog',
+            data: {programme:this.value},
+            type: 'get',
+            success: function(response){
+                console.log(response)
+                $("#combination").empty().append('<option>Select JUPEB Combination</option>')
+                response.combinations.forEach(element => {
+                    $('#combination').append($('<option>', {
+                        value: element.id,
+                        text: element.subjects
+                    }));
+                });
+            }
+        })
+    })
+
 })
