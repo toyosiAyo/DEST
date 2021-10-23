@@ -129,4 +129,59 @@ $(document).ready(function(){
         })
     })
 
+    $("#faculty2").change(function () {
+        $.ajax({
+            url: 'college_dept_prog',
+            data: {faculty:this.value},
+            type: 'get',
+            success: function(response){
+                $("#department2").empty().append('<option>Select Department</option>')
+                $("#programme2").empty()
+                $("#combination2").empty()
+                response.dept.forEach(element => {
+                    $('#department2').append($('<option>', {
+                        value: element.department_id,
+                        text: element.department
+                    }));
+                });
+            }
+        })
+    })
+
+    $("#department2").change(function () {
+        $.ajax({
+            url: 'college_dept_prog',
+            data: {department:this.value},
+            type: 'get',
+            success: function(response){
+                $("#programme2").empty().append('<option>Select Programme</option>')
+                $("#combination2").empty()
+                response.prog.forEach(element => {
+                    $('#programme2').append($('<option>', {
+                        value: element.programme_id,
+                        text: element.programme
+                    }));
+                });
+            }
+        })
+    })
+
+    $("#programme2").change(function () {
+        $.ajax({
+            url: 'college_dept_prog',
+            data: {programme:this.value},
+            type: 'get',
+            success: function(response){
+                console.log(response)
+                $("#combination2").empty().append('<option>Select JUPEB Combination</option>')
+                response.combinations.forEach(element => {
+                    $('#combination2').append($('<option>', {
+                        value: element.id,
+                        text: element.subjects
+                    }));
+                });
+            }
+        })
+    })
+
 })
