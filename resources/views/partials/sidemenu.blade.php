@@ -20,33 +20,32 @@
       <div>
         <div>
           <ul class="site-menu" data-plugin="menu">
-
-            <li class="site-menu-item active">
+            <li class="site-menu-item @php echo Request::path()=='dashboard'? 'active':'' @endphp">
               <a href="{{route('applicant.dashboard')}}">
                 <i class="site-menu-icon md-home" aria-hidden="true"></i>
                 <span class="site-menu-title">Dashboard</span>
               </a>
             </li>
-            <li class="site-menu-item has-sub">
+            <li class="site-menu-item has-sub @php echo Request::path()=='create_application'? 'active open':'' @endphp">
               <a href="javascript:void(0)">
                 <i class="site-menu-icon md-file-text" aria-hidden="true"></i>
                 <span class="site-menu-title">Application</span>
                 <span class="site-menu-arrow"></span>
               </a>
               <ul class="site-menu-sub">
-                <li class="site-menu-item">
+                <li class="site-menu-item @php echo Request::path()=='create_application'? 'active':'' @endphp">
                   <a href="create_application">
                     <span class="site-menu-title">Create New</span>
                   </a>
                 </li>
-                <li class="site-menu-item">
+                <li class="site-menu-item @php echo Request::path()=='application'? 'active':'' @endphp">
                   <a href="application">
                     <span class="site-menu-title">View</span>
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="site-menu-item">
+            <li class="site-menu-item @php echo Request::path()=='payments'? 'active':'' @endphp">
               <a href="payments">
                 <i class="site-menu-icon md-card" aria-hidden="true"></i>
                 <span class="site-menu-title">Payment History</span>
