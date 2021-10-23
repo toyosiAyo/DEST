@@ -515,29 +515,24 @@
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" required name="faculty2" id="faculty2">
                                       <option>Select Faculty</option>
-                                      <option value="Science">Natural Science</option>
-                                      <option value="Humanities">Humanities</option>
+                                      @foreach($faculties as $faculty)
+                                        <option value="{{ $faculty->college_id }}">{{ $faculty->college }}</option>
+                                      @endforeach
                                     </select>
                                   </div>
                                   <div class="example col-xl-3 col-md-3 ">
                                     <select class="form-control" required name="department2" id="department2">
                                       <option>Select Department</option>
-                                      <option value="CMP">Computer Science</option>
-                                      <option value="LAW">LAW</option>
                                     </select>
                                   </div>
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" required name="programme2" id="programme2">
                                       <option>Select programme</option>
-                                      <option value="CMP">Computer Science</option>
-                                      <option value="LAW">LAW</option>
                                     </select>
                                   </div>
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" required name="combination2" id="combination2">
                                       <option>Select JUPEB Combination</option>
-                                      <option value="CMP">Mathematics-Physics-Chemistry</option>
-                                      <option value="LAW">Litrature-Government-CRS</option>
                                     </select>
                                   </div>
                                 </div>
