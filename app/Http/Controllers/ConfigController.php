@@ -23,28 +23,28 @@ class ConfigController extends Controller
             $dept=[];
             $prog=[];
             $combination=[];
-            if($request->has('facultyId') && !empty($request->input('facultyId'))) {
+            if($request->has('faculty') && !empty($request->input('faculty'))) {
                 //Getting all departments for this faculty
                 $dept = DB::table('departments')->select('department_id','department')
-                ->where('college_id_FK',$request->facultyId)->get();
+                ->where('college_id_FK',$request->faculty)->get();
                 
             } 
-            if($request->has('deptId') && !empty($request->input('deptId'))) {
+            if($request->has('department') && !empty($request->input('department'))) {
                 //Getting all programmes for this department
                 $prog = DB::table('programmes')->select('programme_id','programme')
-                ->where('department_id_FK',$request->deptId)->get();
+                ->where('department_id_FK',$request->department)->get();
                 
             } 
-            if($request->has('progId') && !empty($request->input('progId'))) {
+            if($request->has('programme') && !empty($request->input('programme'))) {
                 //Getting subject combination for this programme
                 $combination = DB::table('subject_combination')->select('id','subjects')
-                ->where('programme_id',$request->progId)->get();
+                ->where('programme_id',$request->programme)->get();
                 
             } 
 
            $faculties = DB::table('faculty')->select('college_id','college')->get();
-         return response()->json(['status'=>'ok','msg'=>'success','faculties'=>$faculties,'dept'=>$dept,'prog'=>$prog,'combinations'=>$combination], 200);
-           //return $faculties;
+           return ['faculties'=>$faculties,'dept'=>$dept,'prog'=>$prog,'combinations'=>$combination];
+         //return response()->json(['status'=>'ok','msg'=>'success','faculties'=>$faculties,'dept'=>$dept,'prog'=>$prog,'combinations'=>$combination], 200);
         } catch (\Throwable $th) {
         return response()->json(['status'=>'Nok','msg'=>'Error from catch... college_dept_prog()','rsp'=>''], 401);
 

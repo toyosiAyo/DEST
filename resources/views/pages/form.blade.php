@@ -58,7 +58,7 @@
                 <div class="panel-body">
                   <div class="tab-content">
                     <!-- Categroy 1 -->
-                    <div class="tab-pane active" id="category-1" role="tabpanel">
+                    <div class="tab-pane" id="category-1" role="tabpanel">
                       <div class="panel-group panel-group-simple panel-group-continuous" id="accordion2"
                         aria-multiselectable="true" role="tablist">
                         <div class="panel">
@@ -314,7 +314,7 @@
                     <!-- End Categroy 1 -->
 
                     <!-- Categroy 2 -->
-                    <div class="tab-pane" id="category-2" role="tabpanel">
+                    <div class="tab-pane active" id="category-2" role="tabpanel">
                       <div class="panel-group panel-group-simple panel-group-continuous" id="accordion"
                         aria-multiselectable="true" role="tablist">
                         <div class="panel">
@@ -486,32 +486,29 @@
                                     <select class="form-control" data-plugin="selectpicker" required
                                       name="faculty" id="faculty" data-live-search="true" data-allow-clear="true">
                                       <option value="">Select Faculty</option>
-                                      
+                                      @foreach($faculties as $faculty)
+                                        <option value="{{ $faculty->college_id }}">{{ $faculty->college }}</option>
+                                      @endforeach 
                                       
                                     </select>
                                   </div>
                                   <div class="example col-xl-3 col-md-3 ">
                                     <select class="form-control" data-plugin="selectpicker" required
                                       name="department" id="department" data-live-search="true" data-allow-clear="true">
-                                      <option>Select Department</option>
-                                      <option value="CMP">Computer Science</option>
-                                      <option value="LAW">LAW</option>
+                                      <option value="">Select Department</option>
+                                      
                                     </select>
                                   </div>
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" data-plugin="selectpicker" required
                                       name="programme" id="programme" data-live-search="true" data-allow-clear="true">
-                                      <option>Select programme</option>
-                                      <option value="CMP">Computer Science</option>
-                                      <option value="LAW">LAW</option>
+                                      <option value="">Select programme</option>
                                     </select>
                                   </div>
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" data-plugin="selectpicker" required
                                       name="combination" id="combination" data-live-search="true" data-allow-clear="true">
-                                      <option>Select JUPEB Combination</option>
-                                      <option value="CMP">Mathematics-Physics-Chemistry</option>
-                                      <option value="LAW">Litrature-Government-CRS</option>
+                                      <option value="">Select JUPEB Combination</option>
                                     </select>
                                   </div>
                                 </div>
