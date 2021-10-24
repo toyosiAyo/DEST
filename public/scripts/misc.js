@@ -121,7 +121,7 @@ $(document).ready(function(){
                 $("#combination").empty().append('<option>Select JUPEB Combination</option>')
                 response.combinations.forEach(element => {
                     $('#combination').append($('<option>', {
-                        value: element.id,
+                        value: element.subjects,
                         text: element.subjects
                     }));
                 });
@@ -176,7 +176,7 @@ $(document).ready(function(){
                 $("#combination2").empty().append('<option>Select JUPEB Combination</option>')
                 response.combinations.forEach(element => {
                     $('#combination2').append($('<option>', {
-                        value: element.id,
+                        value: element.subjects,
                         text: element.subjects
                     }));
                 });
