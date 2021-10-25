@@ -10,7 +10,6 @@ use App\Http\Controllers\ApplicantPaymentController;
 
 
 
-
 Route::get('forgot/password',[AuthController::class,'forgot_password'])->name('forgot.password');
 Route::post('forgot/password',[AuthController::class,'forgot_password_post'])->name('forgot.password');
 Route::post('auth/check',[AuthController::class,'auth_check'])->name('auth.check');
@@ -34,7 +33,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('college_dept_prog',[ConfigController::class,'college_dept_prog'])->name('college_dept_prog');
     Route::get('check_pend_rrr',[RemitaConfig::class,'check_pend_rrr'])->name('check_pend_rrr');
     Route::post('log_new_rrr',[RemitaConfig::class,'log_new_rrr'])->name('log_new_rrr');
-    Route::post('update_applicant_payment',[ApplicantPaymentController::class,'update_applicant_payment'])->name('update_applicant_payment');
+    // Route::post('update_applicant_payment',[ApplicantPaymentController::class,'update_applicant_payment'])->name('update_applicant_payment');
     Route::get('profile',[AuthController::class,'user_profile'])->name('profile');
     Route::get('application',[AuthController::class,'view_applications'])->name('application');
     Route::get('payments',[AuthController::class,'view_payments'])->name('payments');

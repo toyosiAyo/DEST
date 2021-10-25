@@ -30,13 +30,20 @@ class ApplicationController extends Controller
     
           
     public function get_app_form(Request $request){
+        $validator = Validator::make($request->pin, [ 'app_type' => 'required|string',]);
+        if ($validator->fails()) {
+            return back()->with('fail','app_type is required !');
+        }
+        
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
         $pin = $_COOKIE['pin'];
-        if($pin){
+        $app_type = $_COOKIE['app_type'];
+        $form_status = DB::table('applications')->where(['submitted_by'=> $data->email,'app_type'=>$app_type,'status'=>'pending'])->pluck('form_status');
+        if($pin && !is_null($form_status)){
             $o_level = DB::table('o_level_subjects')->select('id','subject')->get();
             $faculties = app('App\Http\Controllers\ConfigController')->college_dept_prog($request)['faculties'];
             $sub_grade = array("A1", "B2", "B3", "C4", "C5", "C6", "D7", "E8", "F9");
-            return view('/pages/form',['o_level'=> $o_level,'sub_grade'=>$sub_grade,'pin'=>$pin,'data'=> $data,'faculties'=> $faculties]);
+            return view('/pages/form',['o_level'=> $o_level,'sub_grade'=>$sub_grade,'pin'=>$pin,'data'=> $data,'faculties'=> $faculties,'form_status'=>$form_status ]);
         }
         else {
             return view('/pages/create_application')->with('data',$data);
@@ -74,9 +81,10 @@ class ApplicationController extends Controller
 
  
     public function save_app_form(Request $request){
-        //$settings = app('App\Http\Controllers\ConfigController')->settings($request)->semester_name;     
+        //$settings = app('App\Http\Controllers\ConfigController')->settings($request)->semester_name;    
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user')); 
         if($request->check_step == 'basic'){
-            $app =  Applicant::findOrFail('teewhy@gmail.com');
+            $app =  Applicant::findOrFail($data->id);
             if($request->disability_check == "yes") $app->disability = $request->disability;
             $app->address_resident = $request->address_resident;
             $app->dob = $request->dob;
@@ -149,7 +157,7 @@ class ApplicationController extends Controller
             }  
             
             $app2 = new Application();
-            $app2->submitted_by = "teewhy@gmail.com";
+            //$app2->submitted_by = $data->email;
             $app2->sec_sch = $sec_sch;
             $app2->o_level = $o_level;
             $app2->other_cert = $other_cert;
@@ -164,6 +172,7 @@ class ApplicationController extends Controller
         }elseif($request->check_step == 'declaration'){
             //unset pin cookie
            
+            dd($request->all());
             $validator = Validator::make($request->pin, [ 'pin' => 'required|string|min:10',]);
             if ($validator->fails()) {
                 return response()->json(['error' => 'Pin is required, Minimum of ...'], 401);

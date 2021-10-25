@@ -5,20 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ApplicantPayment;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Application;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 class ApplicantPaymentController extends Controller
 {
 
     public function update_applicant_payment(Request $request){
        
-        $validator = Validator::make($request->all(), [ 'email' => 'required|string',
+        $validator = Validator::make($request->all(), [ 'email' => 'required|email',
             'paymentReference' => 'required|string',
-            'desc' => 'required|string',]);
+            //'desc' => 'required|string',
+        ]);
         if ($validator->fails()) {
             return response()->json(['status'=>'Nok','msg'=>'Error: email/paymentReference required','rsp'=>''], 400);
         }
         try {
             if($request->has('transactionId') && !empty($request->input('transactionId'))) {
-                if($this->update_special_remita_payment_db($rrr=$request->paymentReference,$rem_transactionId=$request->transactionId,$rtMsg)){
+                if($this->update_applicant_payment_db($rrr=$request->paymentReference,$rem_transactionId=$request->transactionId,$rtMsg)){
                     return $rtMsg;
                 }
              
@@ -36,16 +41,25 @@ class ApplicantPaymentController extends Controller
     }
 
 
-    public function update_special_remita_payment_db($rrr,$rem_transactionId,&$rtMsg){
+    public function update_applicant_payment_db($rrr,$rem_transactionId,&$rtMsg){
         try{
-        $data = ApplicantPayment::where('rrr',$rrr)->first();
-        if(empty($data)){ $rtMsg = response()->json(['status'=>'Nok','msg'=>'No match RRR record from DB','rsp'=>''],400);return true;}
-        if(trim($data->status_code )== "025" && trim($data->status_msg) == "pending"){
-        $data->remita_transaction_id = $rem_transactionId;
-        $data->status_code = "00" ;
-        $data->status_msg = "success";
-        $save = $data->save();
-        if($save){$rtMsg = response()->json(['status'=>'ok','msg'=>'Payment successful','rsp'=>''], 200);
+        $payment_record = ApplicantPayment::where('rrr',$rrr)->first();
+        if(empty($payment_record)){ $rtMsg = response()->json(['status'=>'Nok','msg'=>'No match RRR record from DB','rsp'=>''],400);return true;}
+        if(trim($payment_record->status_code )== "025" && trim($payment_record->status_msg) == "pending"){
+        $payment_record->remita_transaction_id = $rem_transactionId;
+        $payment_record->status_code = "00" ;
+        $payment_record->status_msg = "success";
+        //$payment_record->save();
+        $save = $payment_record->save();
+        if($save){
+            $payment_record = ApplicantPayment::where('rrr',$rrr)->first();
+            $app_init = new Application();
+            $app_init->submitted_by = $payment_record->email;
+            $app_init->app_type = $payment_record->pay_type;
+            $app_init->save();
+            $payment_record->app_id = $app_init->id;
+            $payment_record->save();
+            $rtMsg = response()->json(['status'=>'ok','msg'=>'Payment successful','rsp'=>''], 200);
             return true;}else{
                 return response()->json(['status'=>'Nok','msg'=>'Error Updating Transaction... update_special_remita_payment()','rsp'=>''], 401);
             }
@@ -80,7 +94,7 @@ class ApplicantPaymentController extends Controller
             $response = $client->request('GET', 'https://login.remita.net/remita/ecomm/' . $merchantId . '/' . $rrr . "/" . $apiHash . '/status.reg', []);
             $data = json_decode($response->getBody());
            if(trim($data->message) == "Approved"){
-            if($this->update_special_remita_payment_db($rrr=$rrr,$rem_transactionId="REQUERY",$rtMsg)){
+            if($this->update_applicant_payment_db($rrr=$rrr,$rem_transactionId="REQUERY",$rtMsg)){
                 return $rtMsg;
             }else{
                 return response()->json(['status'=>'Nok','msg'=>'Error: cannot complete re-query process','rsp'=>''], 400);
@@ -124,7 +138,7 @@ class ApplicantPaymentController extends Controller
         //     'remitaResponse' => ['amount' => $amountValue,'transactiontime' => $tdvalue],
         // ]);
         $rem_transactionId = "REMITABANK@".$tdvalue;
-        if($this->update_special_remita_payment_db($rrr=$RRRvalue,$rem_transactionId= $rem_transactionId ,$rtMsg)){
+        if($this->update_applicant_payment_db($rrr=$RRRvalue,$rem_transactionId= $rem_transactionId ,$rtMsg)){
             return $rtMsg;
         }else{
             return response()->json(['status'=>'Nok','msg'=>'Error: cannot complete response from remita bank payment processing','rsp'=>''], 400);
@@ -165,7 +179,7 @@ class ApplicantPaymentController extends Controller
         //     'remitaResponse' => ['amount' => $amountValue,'transactiontime' => $tdvalue],
         // ]);
         $rem_transactionId = "REMITABANK@".$tdvalue;
-        if($this->update_special_remita_payment_db($rrr=$RRRvalue,$rem_transactionId= $rem_transactionId ,$rtMsg)){
+        if($this->update_applicant_payment_db($rrr=$RRRvalue,$rem_transactionId= $rem_transactionId ,$rtMsg)){
             return $rtMsg;
         }else{
             return response()->json(['status'=>'Nok','msg'=>'Error: cannot complete response from remita bank payment processing','rsp'=>''], 400);
