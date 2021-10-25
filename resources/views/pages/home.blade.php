@@ -170,6 +170,7 @@
               @csrf
               <img class="avatar avatar-100" id="previewImg" src="../global/portraits/default.png" alt="Placeholder"><hr>
               <p><input type="file" name="profileImage" accept="image/*" onchange='previewFile(this)' required></p>
+              <input type="hidden" value="{{$data->profile_pix}}" id="check_picture" />
           </div>
           <div class="modal-footer">
               <button type="submit" class="btn btn-primary">Upload</button>
@@ -180,10 +181,13 @@
     </div>
     <script>
       $(document).ready(function(){
+        var pic = $("#check_picture").val()
+        if(pic == ""){
           $("#myModal").modal({
               backdrop: 'static',
               keyboard: false
           });
+        }
       });
     </script>
   @endsection
