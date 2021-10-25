@@ -18,10 +18,14 @@
                         <div class="card card-shadow text-center">
                             <div class="card-block">
                                 <a class="avatar avatar-lg" href="javascript:void(0)">
-                                    <img src="../../global/portraits/default.png" alt="...">
+                                @if($data->profile_pix)
+                                    <img src="{{asset('storage/'. $data->profile_pix) }}" alt="">
+                               @else <img src="../global/portraits/default.png" alt="...">
+                                 @endif
+               
                                 </a>
                                 <h4 class="profile-user">{{$data->surname.' '.$data->first_name}}</h4>
-                                <input type="file" name="profile_image"> <hr>
+                                <input type="file" name="profileImage"> <hr>
                                 <button type="button" class="btn btn-primary">Update Profile Image</button>
                             </div>
                         </div>

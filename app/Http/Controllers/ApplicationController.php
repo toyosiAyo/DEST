@@ -8,6 +8,9 @@ use App\Models\Application;
 use App\Models\ApplicantPayment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
+
 
 class ApplicationController extends Controller
 {
@@ -24,18 +27,7 @@ class ApplicationController extends Controller
   
         protected $pin = "";
 
-        public function image_upload(Request $request){
-            // dd($request->all());
-              if($request->hasFile('photo')){
-                  if ($request->file('photo')->isValid()) {
-                  $path = $request->file('photo')->storeAs(
-                      'teachers', 'teewhy'
-                  );
-                      echo "uploaded successfully $path";
-                  }
-              }
-          }
-
+    
           
     public function get_app_form(Request $request){
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
@@ -199,5 +191,46 @@ class ApplicationController extends Controller
 
 
    
+    public function uploadProfileImage(Request $request)
+    {
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        if(!is_null($data->profile_pix)){
+            Storage::delete($data->profile_pix);
+        }
+
+        try {
+            $filename = $request->file('profileImage')->getClientOriginalName();
+           
+            $path = Storage::disk('public')->putFileAs('ProfileImage', $request->file('profileImage'), $data->surname ."_". $data->first_name ."_". $data->other_name ."_". $data->id ."_". date('YmdHis') ."_". $filename);
+            $applicant = Applicant::find($data->id);
+            $applicant->profile_pix = $path;
+            $applicant->save();
+            return back()->with('success','image uploaded successfully!');
+            //return response()->json(['info' => 'Profile Image Uploaded', 'msg' => 'success']);
+        } catch (\Throwable $th) {
+            return back()->with('fail','image upload failed!');
+            //return response()->json(['error' => 'image upload failed', 'th' => $th], 401);
+        }
+    }
+
+        public function get_stored_file($filename) {
+
+                $path = storage_path('app/public/ProfileImage/'. $filename);
+
+                if (!File::exists($path)) {
+                    abort(404);
+                }
+
+                $file = File::get($path);
+                $type = File::mimeType($path);
+
+                $response = Response::make($file, 200);
+
+                $response->header("Content-Type", $type);
+
+                return $response;
+
+            }
+
    
 }

@@ -10,8 +10,6 @@ use App\Http\Controllers\ApplicantPaymentController;
 
 
 
-Route::post('image_upload',[ConfigController::class,'image_upload'])->name('image_upload');
-
 
 Route::get('forgot/password',[AuthController::class,'forgot_password'])->name('forgot.password');
 Route::post('forgot/password',[AuthController::class,'forgot_password_post'])->name('forgot.password');
@@ -30,6 +28,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('app_form',[ApplicationController::class,'get_app_form'])->name('app.form');
     Route::get('create_application',[ApplicationController::class,'create_application'])->name('create.application');
 
+    Route::post('uploadProfileImage',[ApplicationController::class,'uploadProfileImage'])->name('uploadProfileImage');
 
     Route::get('get_remita_config',[RemitaConfig::class,'get_remita_config'])->name('get_remita_config');
     Route::get('college_dept_prog',[ConfigController::class,'college_dept_prog'])->name('college_dept_prog');

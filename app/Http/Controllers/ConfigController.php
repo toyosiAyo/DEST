@@ -9,13 +9,21 @@ use App\Models\Lga;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 
 
 class ConfigController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('authcheck');
+       // $this->middleware('log')->only('index');
+       // $this->middleware('subscribed')->except('store');
+    }
   
+
     public function college_dept_prog(Request $request){
         try {
             //dd($request->facultyId);

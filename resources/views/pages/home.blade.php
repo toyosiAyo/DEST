@@ -17,8 +17,16 @@
     <body class="animsition dashboard site-menubar-push site-menubar-open site-menubar-fixed">
       <div class="page">
         <div class="page-content container-fluid">
-          <div class="row" data-plugin="matchHeight" data-by-row="true">
+        @if(Session::get('success'))
+                <p>{{Session::get('success')}}</p>
+         @endif
 
+         @if(Session::get('fail'))
+                <p>{{Session::get('fail')}}</p>
+         @endif
+
+          <div class="row" data-plugin="matchHeight" data-by-row="true">
+              
             <div class="col-xl-4 col-md-6">
               <div class="card card-shadow" id="widgetLineareaOne">
                 <div class="card-block p-20 pt-10">
@@ -114,7 +122,10 @@
                   <div class="overlay-panel vertical-align overlay-background">
                     <div class="vertical-align-middle">
                       <a class="avatar avatar-100 float-left mr-20" href="javascript:void(0)">
-                        <img src="../global/portraits/default.png" alt="">
+                      @if($data->profile_pix)
+                         <img src="{{asset('storage/'. $data->profile_pix) }}" alt="">
+                     @else <img src="../global/portraits/default.png" alt="...">
+                     @endif
                       </a>
                       <div class="float-left">
                         <div class="font-size-20">{{$data->surname.' '.$data->first_name}}</div>
@@ -155,10 +166,10 @@
           <div class="modal-body">
             <p class="text-danger"><i class="icon md-alert-triangle red-600 font-size-24 vertical-align-bottom mr-5"></i>
               <small>You need to upload your passport photo to continue.</small></p>
-            <form method="post" action="/image_upload" enctype="multipart/form-data">
+            <form method="post" action="/uploadProfileImage" enctype="multipart/form-data">
               @csrf
               <img class="avatar avatar-100" id="previewImg" src="../global/portraits/default.png" alt="Placeholder"><hr>
-              <p><input type="file" name="photo" accept="image/*" onchange='previewFile(this)' required></p>
+              <p><input type="file" name="profileImage" accept="image/*" onchange='previewFile(this)' required></p>
           </div>
           <div class="modal-footer">
               <button type="submit" class="btn btn-primary">Upload</button>
