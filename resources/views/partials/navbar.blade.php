@@ -43,14 +43,10 @@
             <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
               data-animation="scale-up" role="button">
               <span class="avatar avatar-online">
-              
                 @if($data->profile_pix)
                 <img src="{{asset('storage/'. $data->profile_pix) }}" alt="">
                 @else <img src="../global/portraits/default.png" alt="...">
-                @endif
-               
-              
-               
+                @endif              
                 <i></i>
               </span>
             </a>

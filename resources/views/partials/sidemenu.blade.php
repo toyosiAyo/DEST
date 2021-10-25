@@ -5,7 +5,10 @@
             <div class="overlay-panel vertical-align overlay-background">
                 <div class="vertical-align-middle">
                     <a class="avatar avatar-lg" href="profile">
-                    <img src="../global/portraits/default.png" alt="">
+                    @if($data->profile_pix)
+                    <img src="{{asset('storage/'. $data->profile_pix) }}" alt="">
+                    @else <img src="../global/portraits/default.png" alt="...">
+                    @endif 
                     </a>
                     <div class="site-menubar-info">
                         <h5 class="site-menubar-user">{{$data->surname.' '.$data->first_name}}</h5>

@@ -216,6 +216,7 @@ $(document).ready(function() {
             else if(response.status === 'ok'){
               var pin = response.rsp
               $.cookie("pin", pin);
+              $.cookie("app_type", payType);
               window.location.href = 'app_form';
              }
             else{ return false }
