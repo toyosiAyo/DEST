@@ -546,7 +546,7 @@
                                         <span class="input-group-btn">
                                           <span class="btn btn-primary btn-file">
                                             <i class="icon md-upload" aria-hidden="true"></i>
-                                            <input type="file" id="signature" name="signature" required> 
+                                            <input type="file" id="signature" name="signature" accept="image/*" required> 
                                           </span>
                                         </span>
                                       </div>
