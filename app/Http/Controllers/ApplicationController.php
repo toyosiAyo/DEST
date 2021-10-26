@@ -183,7 +183,6 @@ class ApplicationController extends Controller
               
 
         }elseif($request->check_step == 'declaration'){
-            
             if($_COOKIE['pin'] == "" || empty($_COOKIE['pin'] )){
                 return back()->with('fail','pin is required for final submition!');
             }
@@ -218,6 +217,7 @@ class ApplicationController extends Controller
             $app_record3->used_pin =  $_COOKIE['pin'];
             $app_record3->form_status = $app_record3->form_status+1;
             $app =  Applicant::findOrFail($data->id);
+
             $app->signature =  $path1;
             $app->save();
             $app_save = $app_record3->save();
