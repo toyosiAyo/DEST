@@ -6,24 +6,21 @@ use App\Models\Applicant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 //use App\Http\Controllers\FreakMailer;
 
 class AuthController extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    //     $this->middleware('log')->only('index');
-    //     $this->middleware('subscribed')->except('store');
-    // }
-
+    public function __construct()
+    {
+        $this->middleware('authcheck',['only' => ['password_reset','applicant_dashboard']]);
+       // $this->middleware('log')->only('index');
+       // $this->middleware('subscribed')->except('store');
+    }
  
 
     public function auth_login(){
-       
-       // $data = array('yellow','red','red','blue','pupple');
-        //return count(array_unique($data));
         return view('auth.login');
     }
     public function register_form(){
@@ -40,7 +37,7 @@ class AuthController extends Controller
              'othername'=>'required|string',
              'phone'=>'required|string|min:8|max:15|unique:applicants,phone',
              'email'=>'required|email|unique:applicants,email',
-             'password'=>'required|confirmed|min:4',
+             'password'=>'required|confirmed|min:4|max:8',
              'gender'=>'required|size:1',
          ]) ;
          $app = new Applicant;
@@ -60,7 +57,6 @@ class AuthController extends Controller
     }
 
     public function auth_check(Request $request){
-       // dd($request->all());
         $request->validate([
             'email'=>'required|email',
             'password'=>'required|min:4|max:8',
@@ -79,51 +75,39 @@ class AuthController extends Controller
 
     public function applicant_dashboard(Request $request){
        
-        if($request->session()->has('user')){
-            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            $applications = DB::table('applications')->select('*','first_choice->prog as Programme')
+            try {
+                $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+                $applications = DB::table('applications')->select('*','first_choice->prog as Programme')
                 ->where('submitted_by', $data->email)->get();
-            $count = count($applications);
-            return view('pages.home',['apps'=>$applications,'count'=>$count])->with('data', $data);
-          }
-          else{
-              dd("No Session");  
-          }
-       
+                $count = count($applications);
+                return view('pages.home',['apps'=>$applications,'count'=>$count])->with('data', $data);
+            } catch (\Throwable $th) {
+                return back()->with('applicant_dashboard','applicant_dashboard');
+            }  
        
     }
 
 
-    public function user_profile(Request $request){
-        if($request->session()->has('user')){
-            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            return view('pages.profile')->with('data', $data);
-          }
-          else{
-              dd("No Session");  
-          }
-    }
 
-    public function view_applications(Request $request){
-        if($request->session()->has('user')){
-            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            $applications = DB::table('applications')->select('*','first_choice->prog as Programme')
-                ->where('submitted_by', $data->email)->get();
-            return view('pages.applications',['apps'=>$applications])->with('data', $data);
-        }
-        else{
-              dd("No Session");  
-        }
-    }
+    public function password_reset(Request $request){
+        // $validator = Validator::make($request->all(), ['password'=>'required|confirmed|min:4|max:8', 'current_pass'=>'required|min:4|max:8',]);
+        // if ($validator->fails()) {
+        //     return back()->with('fail','passwords are required !');
+        // }
+        $request->validate(['password'=>'required|confirmed|min:4|max:8', 'current_pass'=>'required|min:4|max:8',]) ;
 
-    public function view_payments(Request $request){
-        if($request->session()->has('user')){
-            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            $payments = DB::table('application_payments')->select('*')->where('email', $data->email)->get();
-            return view('pages.payment_history',['payments'=>$payments])->with('data', $data);
-        }
-        else{
-              dd("No Session");  
+        try {
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user')); 
+            $user_obj = Applicant::findOrFail($data->id);
+            if(Hash::check($request->current_pass,$user_obj->password)){
+                $user_obj->password = Hash::make($request->password);
+                $user_obj->save();
+                return response()->json(['status'=>'ok','msg'=>"Password reset successfully!"],201); 
+               }else{
+                return response()->json(['status'=>'Nok','msg'=>"Your old password isn't match!"],401); 
+                }
+        } catch (\Throwable $th) {
+            return response()->json(['status'=>'Nok','msg'=>'failed reseting password'],401); 
         }
     }
 
@@ -132,10 +116,13 @@ class AuthController extends Controller
 
         return view('auth.forgot-password');
     }
+
+
     public function forgot_password_post(){
 
         return redirect('forgot/password');
     }
+
 
     public function logout(){
         if(session()->has('user')){

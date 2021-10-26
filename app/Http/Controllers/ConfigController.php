@@ -174,6 +174,23 @@ public function get_lga_state_country(Request $request){
        
     }
     
+
+
+    
+    public function user_profile(Request $request){
+        
+        try {
+         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+         return view('pages.profile')->with('data', $data);
+        } catch (\Throwable $th) {
+         return back()->with('user_profile','user_profile');
+        }
+     
+ }
+
+
+
+
     public function load_data(){
 
          $state_list = array(  "Abia",
