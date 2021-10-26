@@ -184,4 +184,23 @@ $(document).ready(function(){
         })
     })
 
+    var form_stat = $("#form_status").val()
+    var sliced = form_stat.slice(1,-1)
+      console.log(sliced)
+      if(sliced == 0){
+        $("#category-1").addClass('active')
+        $("#academic_info").prop("disabled", true)
+        $("#declaration_info").prop("disabled", true)
+      }
+      else if(sliced == 1){
+        $("#category-2").addClass('active')
+        $("#basic_info").prop("disabled", true)
+        $("#declaration_info").prop("disabled", true)
+      }
+      else {
+        $("#category-3").addClass('active')
+        $("#basic_info").prop("disabled", true)
+        $("#academic_info").prop("disabled", true)
+      }
+
 })
