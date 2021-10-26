@@ -473,7 +473,7 @@
                             role="tabpanel">
                             <div class="panel-body">
                               <!-- Panel Full Example -->
-                              <form method="post" id="form_declaration" autocomplete="off">
+                              <form method="post" id="form_declaration" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-xl-12 form-horizontal">
                                   <div class="form-group row form-material">
@@ -565,20 +565,23 @@
                                 <div class="col-xl-12 form-horizontal">
                                   <div class="form-group row form-material">
                                     <div class="example col-xl-6 col-md-3">
-                                      <select class="form-control" data-plugin="selectpicker" required
-                                        name="file_name[]" id="file_name" data-live-search="true" data-allow-clear="true">
-                                        <option>Select Credential</option>
-                                        <option value="olevel">O' Level</option>
-                                        <option value="birth_cert">Birth Certificate</option>
-                                      </select>
+                                      <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                        <input type="text" class="form-control" placeholder="Upload O'Level Result" readonly="">
+                                        <span class="input-group-btn">
+                                          <span class="btn btn-info btn-file">
+                                            <i class="icon md-upload" aria-hidden="true"></i>
+                                            <input type="file" name="olevel" required> 
+                                          </span>
+                                        </span>
+                                      </div>
                                     </div>
                                     <div class="example col-xl-6 col-md-3">
                                       <div class="input-group input-group-file" data-plugin="inputGroupFile">
-                                        <input type="text" class="form-control" placeholder="Upload" readonly="">
+                                        <input type="text" class="form-control" placeholder="Upload Birth Certificate" readonly="">
                                         <span class="input-group-btn">
-                                          <span class="btn btn-primary btn-file">
+                                          <span class="btn btn-danger btn-file">
                                             <i class="icon md-upload" aria-hidden="true"></i>
-                                            <input type="file" id="credentials" name="credentials[]" required> 
+                                            <input type="file" name="birth_cert" required> 
                                           </span>
                                         </span>
                                       </div>
