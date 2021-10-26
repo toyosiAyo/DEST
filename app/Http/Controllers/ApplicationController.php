@@ -30,19 +30,19 @@ class ApplicationController extends Controller
     
           
     public function get_app_form(Request $request){
-        $validator = Validator::make($request->pin, [ 'app_type' => 'required|string',]);
-        if ($validator->fails()) {
+        
+        if ($request->has('app_type') && empty($request->input('app_type'))) {
             return back()->with('fail','app_type is required !');
         }
-        
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
         $pin = $_COOKIE['pin'];
         $app_type = $_COOKIE['app_type'];
         $form_status = DB::table('applications')->where(['submitted_by'=> $data->email,'app_type'=>$app_type,'status'=>'pending'])->pluck('form_status');
-        if($pin && !is_null($form_status)){
+        if(!empty($pin) && !$form_status->isEmpty()){
             $o_level = DB::table('o_level_subjects')->select('id','subject')->get();
             $faculties = app('App\Http\Controllers\ConfigController')->college_dept_prog($request)['faculties'];
             $sub_grade = array("A1", "B2", "B3", "C4", "C5", "C6", "D7", "E8", "F9");
+            $form_status = $form_status[0];
             return view('/pages/form',['o_level'=> $o_level,'sub_grade'=>$sub_grade,'pin'=>$pin,'data'=> $data,'faculties'=> $faculties,'form_status'=>$form_status ]);
         }
         else {
@@ -104,6 +104,9 @@ class ApplicationController extends Controller
             
             $save = $app->save();
             if($save){
+                $payment_record = Application::where('submitted_by',$app->email)->first();
+                $payment_record->form_status = $payment_record->form_status+1;
+                $payment_record->save();
                 return response()->json(['status'=>'ok','msg'=>'success, profile created',],201); 
             }else{
                 return response()->json(['status'=>'Nok','msg'=>'failed creating profile'],401); 
@@ -130,7 +133,7 @@ class ApplicationController extends Controller
                 if(count(array_unique($request->exam)) > 2 || count(array_unique($request->year )) >2){
             return response()->json(['status'=>'Nok','msg'=>'failed, Like you have more than two sittings for your O-leve'],401); 
             }else{
-            if(sizeof($request->exam) < 5 && sizeof($request->exam) == sizeof($request->subject) &&  sizeof($request->subject) == sizeof($request->grade ) && sizeof($request->grade) == sizeof($request->year ) 
+            if(!sizeof($request->exam) < 5 && sizeof($request->exam) == sizeof($request->subject) &&  sizeof($request->subject) == sizeof($request->grade ) && sizeof($request->grade) == sizeof($request->year ) 
                 ){
                 foreach($request->exam as $index => $value){
                     $sub = 'sub'.$index+1;
@@ -155,17 +158,16 @@ class ApplicationController extends Controller
             }
             }else{return response()->json(['status'=>'Nok','msg'=>'failed, Kindly complete fields for Other Qualifications'],401);   }
             }  
-            
-            $app2 = new Application();
-            //$app2->submitted_by = $data->email;
-            $app2->sec_sch = $sec_sch;
-            $app2->o_level = $o_level;
-            $app2->other_cert = $other_cert;
-            $save = $app2->save();
+            $payment_record2 = Application::where('submitted_by',$data->email)->first();
+            $payment_record2->form_status = $payment_record2->form_status+1;
+            $payment_record2->sec_sch = $sec_sch;
+            $payment_record2->o_level = $o_level;
+            $payment_record2->other_cert = $other_cert;
+            $save = $payment_record2->save();
             if($save){
-                return response()->json(['status'=>'ok','msg'=>'success, profile created',],201); 
+                return response()->json(['status'=>'ok','msg'=>'success, academic created',],201); 
             }else{
-                return response()->json(['status'=>'Nok','msg'=>'failed creating profile'],401); 
+                return response()->json(['status'=>'Nok','msg'=>'failed creating academic'],401); 
             }
               
 
