@@ -30,7 +30,7 @@ class ApplicationController extends Controller
     
           
     public function get_app_form(Request $request){
-        $validator = Validator::make($request->pin, [ 'app_type' => 'required|string',]);
+        $validator = Validator::make($_COOKIE, [ 'app_type' => 'required|string',]);
         if ($validator->fails()) {
             return back()->with('fail','app_type is required !');
         }

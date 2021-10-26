@@ -25,8 +25,11 @@
                
                                 </a>
                                 <h4 class="profile-user">{{$data->surname.' '.$data->first_name}}</h4>
-                                <input type="file" name="profileImage"> <hr>
-                                <button type="button" class="btn btn-primary">Update Profile Image</button>
+                                <form method="post" action="/uploadProfileImage" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="file" name="profileImage" required> <hr>
+                                    <button type="submit" class="btn btn-primary">Update Profile Image</button>
+                                </form>
                             </div>
                         </div>
                         <!-- End Page Widget -->
