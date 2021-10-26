@@ -332,6 +332,7 @@
                                     <div class="panel-body">
                                         <form method="post" id="form_academic" autocomplete="off">
                                             @csrf
+                                            
                                              <div class="row row-lg">
                                                <div class="col-xl-12 form-horizontal">
                                                  <div class="form-group row form-material">

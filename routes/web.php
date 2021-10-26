@@ -33,7 +33,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('college_dept_prog',[ConfigController::class,'college_dept_prog'])->name('college_dept_prog');
     Route::get('check_pend_rrr',[RemitaConfig::class,'check_pend_rrr'])->name('check_pend_rrr');
     Route::post('log_new_rrr',[RemitaConfig::class,'log_new_rrr'])->name('log_new_rrr');
-    // Route::post('update_applicant_payment',[ApplicantPaymentController::class,'update_applicant_payment'])->name('update_applicant_payment');
+    Route::post('update_applicant_payment',[ApplicantPaymentController::class,'update_applicant_payment'])->name('update_applicant_payment');
     Route::get('profile',[AuthController::class,'user_profile'])->name('profile');
     Route::get('application',[AuthController::class,'view_applications'])->name('application');
     Route::get('payments',[AuthController::class,'view_payments'])->name('payments');
