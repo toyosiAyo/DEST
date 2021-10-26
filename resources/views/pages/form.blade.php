@@ -43,7 +43,7 @@
                     <button id="basic_info" class="btn btn-primary list-group-item" data-target="#category-1" data-toggle="tab" aria-controls="category-1"
                       role="tab">Basic Information</button><br>
                     <button id="academic_info" class="btn btn-dark list-group-item" data-target="#category-2" data-toggle="tab" aria-controls="category-2"
-                      role="tab" >Academic Information</button><br>
+                      role="tab">Academic Information</button><br>
                     <button id="declaration_info" class="btn btn-info list-group-item" data-target="#category-3" data-toggle="tab" aria-controls="category-3"
                       role="tab" >Declaration</button>
                   </div>
@@ -459,7 +459,7 @@
                     <!-- End Categroy 2 -->
 
                     <!-- Categroy 3 -->
-                    <div class="tab-pane active" id="category-3" role="tabpanel">
+                    <div class="tab-pane" id="category-3" role="tabpanel">
                       <div class="panel-group panel-group-simple panel-group-continuous" id="accordion1"
                         aria-multiselectable="true" role="tablist">
                         <div class="panel">
@@ -482,7 +482,8 @@
                                     </label>
                                   <div class="example col-xl-3 col-md-3">
                                   <input type="hidden" class="form-control" value="declaration" id="check_step" name="check_step">
-                                  <input type="hidden" value="{{$pin}}" id="pin" value="pin" class="form-control">
+                                  <input type="hidden" value="{{$pin}}" id="pin" class="form-control">
+                                  <input type="hidden" value="{{$form_status}}" id="form_status" class="form-control">
                                     <select class="form-control" required name="faculty" id="faculty">
                                       <option value="">Select Faculty</option>
                                       @foreach($faculties as $faculty)
@@ -594,6 +595,4 @@
       </div>
       <!-- End Page -->
     </body>
-
-    
   @endsection
