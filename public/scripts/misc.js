@@ -85,7 +85,7 @@ $(document).ready(function(){
                 $("#combination").empty()
                 response.dept.forEach(element => {
                     $('#department').append($('<option>', {
-                        value: element.department_id,
+                        value: element.department,
                         text: element.department
                     }));
                 });
@@ -103,7 +103,7 @@ $(document).ready(function(){
                 $("#combination").empty()
                 response.prog.forEach(element => {
                     $('#programme').append($('<option>', {
-                        value: element.programme_id,
+                        value: element.programme,
                         text: element.programme
                     }));
                 });
@@ -140,7 +140,7 @@ $(document).ready(function(){
                 $("#combination2").empty()
                 response.dept.forEach(element => {
                     $('#department2').append($('<option>', {
-                        value: element.department_id,
+                        value: element.department,
                         text: element.department
                     }));
                 });
@@ -158,7 +158,7 @@ $(document).ready(function(){
                 $("#combination2").empty()
                 response.prog.forEach(element => {
                     $('#programme2').append($('<option>', {
-                        value: element.programme_id,
+                        value: element.programme,
                         text: element.programme
                     }));
                 });
