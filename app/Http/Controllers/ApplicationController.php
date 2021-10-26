@@ -30,8 +30,8 @@ class ApplicationController extends Controller
     
           
     public function get_app_form(Request $request){
-        
-        if ($request->has('app_type') && empty($request->input('app_type'))) {
+        $validator = Validator::make($_COOKIE, [ 'app_type' => 'required|string',]);
+        if ($validator->fails()) {
             return back()->with('fail','app_type is required !');
         }
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));

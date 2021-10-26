@@ -43,7 +43,7 @@
                     <button id="basic_info" class="btn btn-primary list-group-item" data-target="#category-1" data-toggle="tab" aria-controls="category-1"
                       role="tab">Basic Information</button><br>
                     <button id="academic_info" class="btn btn-dark list-group-item" data-target="#category-2" data-toggle="tab" aria-controls="category-2"
-                      role="tab" >Academic Information</button><br>
+                      role="tab">Academic Information</button><br>
                     <button id="declaration_info" class="btn btn-info list-group-item" data-target="#category-3" data-toggle="tab" aria-controls="category-3"
                       role="tab" >Declaration</button>
                   </div>
@@ -385,7 +385,7 @@
                                                           <td><select class="form-control" name="subject[]" required>
                                                             <option value="">Choose Subject</option>
                                                             @foreach($o_level as $sub)
-                                                              <option value="{{ $sub->id }}">{{ $sub->subject }}</option>
+                                                              <option value="{{ $sub->subject }}">{{ $sub->subject }}</option>
                                                             @endforeach 
                                                             </select>
                                                           </td>
@@ -459,7 +459,7 @@
                     <!-- End Categroy 2 -->
 
                     <!-- Categroy 3 -->
-                    <div class="tab-pane active" id="category-3" role="tabpanel">
+                    <div class="tab-pane" id="category-3" role="tabpanel">
                       <div class="panel-group panel-group-simple panel-group-continuous" id="accordion1"
                         aria-multiselectable="true" role="tablist">
                         <div class="panel">
@@ -473,7 +473,7 @@
                             role="tabpanel">
                             <div class="panel-body">
                               <!-- Panel Full Example -->
-                              <form method="post" id="form_declaration" autocomplete="off">
+                              <form method="post" id="form_declaration" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-xl-12 form-horizontal">
                                   <div class="form-group row form-material">
@@ -482,7 +482,8 @@
                                     </label>
                                   <div class="example col-xl-3 col-md-3">
                                   <input type="hidden" class="form-control" value="declaration" id="check_step" name="check_step">
-                                  <input type="hidden" value="{{$pin}}" id="pin" value="pin" class="form-control">
+                                  <input type="hidden" value="{{$pin}}" id="pin" class="form-control">
+                                  <input type="hidden" value="{{$form_status}}" id="form_status" class="form-control">
                                     <select class="form-control" required name="faculty" id="faculty">
                                       <option value="">Select Faculty</option>
                                       @foreach($faculties as $faculty)
@@ -545,7 +546,7 @@
                                         <span class="input-group-btn">
                                           <span class="btn btn-primary btn-file">
                                             <i class="icon md-upload" aria-hidden="true"></i>
-                                            <input type="file" id="signature" name="signature" required> 
+                                            <input type="file" id="signature" name="signature" accept="image/*" required> 
                                           </span>
                                         </span>
                                       </div>
@@ -560,6 +561,34 @@
                                     </div>
                                   </div>
                                 </div>
+
+                                <div class="col-xl-12 form-horizontal">
+                                  <div class="form-group row form-material">
+                                    <div class="example col-xl-6 col-md-3">
+                                      <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                        <input type="text" class="form-control" placeholder="Upload O'Level Result" readonly="">
+                                        <span class="input-group-btn">
+                                          <span class="btn btn-info btn-file">
+                                            <i class="icon md-upload" aria-hidden="true"></i>
+                                            <input type="file" name="olevel" required> 
+                                          </span>
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div class="example col-xl-6 col-md-3">
+                                      <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                        <input type="text" class="form-control" placeholder="Upload Birth Certificate" readonly="">
+                                        <span class="input-group-btn">
+                                          <span class="btn btn-danger btn-file">
+                                            <i class="icon md-upload" aria-hidden="true"></i>
+                                            <input type="file" name="birth_cert" required> 
+                                          </span>
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
                                 <div class="checkbox-custom checkbox-success">
                                   <input type="checkbox" id="accept_terms" name="accept_terms" required />
                                   <label for="accept_terms"><small>I declare that I wish to enter the Redeemer's University Foundation degree Programme in the 2021/2022 session.
@@ -594,6 +623,4 @@
       </div>
       <!-- End Page -->
     </body>
-
-    
   @endsection
