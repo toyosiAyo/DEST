@@ -385,7 +385,7 @@
                                                           <td><select class="form-control" name="subject[]" required>
                                                             <option value="">Choose Subject</option>
                                                             @foreach($o_level as $sub)
-                                                              <option value="{{ $sub->id }}">{{ $sub->subject }}</option>
+                                                              <option value="{{ $sub->subject }}">{{ $sub->subject }}</option>
                                                             @endforeach 
                                                             </select>
                                                           </td>
@@ -561,6 +561,31 @@
                                     </div>
                                   </div>
                                 </div>
+
+                                <div class="col-xl-12 form-horizontal">
+                                  <div class="form-group row form-material">
+                                    <div class="example col-xl-6 col-md-3">
+                                      <select class="form-control" data-plugin="selectpicker" required
+                                        name="file_name[]" id="file_name" data-live-search="true" data-allow-clear="true">
+                                        <option>Select Credential</option>
+                                        <option value="olevel">O' Level</option>
+                                        <option value="birth_cert">Birth Certificate</option>
+                                      </select>
+                                    </div>
+                                    <div class="example col-xl-6 col-md-3">
+                                      <div class="input-group input-group-file" data-plugin="inputGroupFile">
+                                        <input type="text" class="form-control" placeholder="Upload" readonly="">
+                                        <span class="input-group-btn">
+                                          <span class="btn btn-primary btn-file">
+                                            <i class="icon md-upload" aria-hidden="true"></i>
+                                            <input type="file" id="credentials" name="credentials[]" required> 
+                                          </span>
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
                                 <div class="checkbox-custom checkbox-success">
                                   <input type="checkbox" id="accept_terms" name="accept_terms" required />
                                   <label for="accept_terms"><small>I declare that I wish to enter the Redeemer's University Foundation degree Programme in the 2021/2022 session.
