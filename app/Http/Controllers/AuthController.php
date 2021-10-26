@@ -140,6 +140,11 @@ class AuthController extends Controller
     public function logout(){
         if(session()->has('user')){
             session()->pull('user');
+            if (isset($_COOKIE['pin']) && isset($_COOKIE['app_type'])) {
+                unset($_COOKIE['pin']);
+                unset($_COOKIE['app_type']);
+               // setcookie('key', '', time() - 3600, '/'); // empty value and old timestamp
+            }
             return redirect('/');
         }
     }

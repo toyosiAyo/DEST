@@ -69,14 +69,14 @@ class ConfigController extends Controller
     }
     public function get_dept_name_given_id($deptId){
         try {
-            //code...
+            return DB::table('departments')->where('department_id',$deptId)->pluck('department')[0];
         } catch (\Throwable $th) {
             return response()->json(['status'=>'Nok','msg'=>'Failed, in get_dept_name_given_id() catch '], 401);
         }
     }
     public function get_prog_name_given_id($progId){
         try {
-            //code...
+            return DB::table('programmes')->where('programme_id',$progId)->pluck('programme')[0];
         } catch (\Throwable $th) {
             return response()->json(['status'=>'Nok','msg'=>'Failed, in get_prog_name_given_id() catch '], 401);
         }

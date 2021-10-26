@@ -85,6 +85,12 @@ class ApplicationController extends Controller
  
     public function save_app_form(Request $request){
         //$settings = app('App\Http\Controllers\ConfigController')->settings($request)->semester_name;    
+        $validator = Validator::make($_COOKIE, [ 'pin' => 'required|string', 'app_type'=> 'required|string',]);
+        if ($validator->fails()) {
+            return back()->with('fail','pin/app_type are required !');
+        }
+       
+        try {
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user')); 
         if($request->check_step == 'basic'){
             $app =  Applicant::findOrFail($data->id);
@@ -107,9 +113,9 @@ class ApplicationController extends Controller
             
             $save = $app->save();
             if($save){
-                $payment_record = Application::where('submitted_by',$app->email)->first();
-                $payment_record->form_status = $payment_record->form_status+1;
-                $payment_record->save();
+                $app_record = Application::where(['submitted_by'=>$app->email,'status'=>'pending','app_type'=>$_COOKIE['app_type']])->first();
+                $app_record->form_status = $app_record->form_status+1;
+                $app_record->save();
                 return response()->json(['status'=>'ok','msg'=>'success, profile created',],201); 
             }else{
                 return response()->json(['status'=>'Nok','msg'=>'failed creating profile'],401); 
@@ -161,12 +167,12 @@ class ApplicationController extends Controller
             }
             }else{return response()->json(['status'=>'Nok','msg'=>'failed, Kindly complete fields for Other Qualifications'],401);   }
             }  
-            $payment_record2 = Application::where('submitted_by',$data->email)->first();
-            $payment_record2->form_status = $payment_record2->form_status+1;
-            $payment_record2->sec_sch = $sec_sch;
-            $payment_record2->o_level = $o_level;
-            $payment_record2->other_cert = $other_cert;
-            $save = $payment_record2->save();
+            $app_record2 = Application::where(['submitted_by'=>$data->email,'status'=>'pending','app_type'=>$_COOKIE['app_type']])->first();
+            $app_record2->form_status = $app_record2->form_status+1;
+            $app_record2->sec_sch = $sec_sch;
+            $app_record2->o_level = $o_level;
+            $app_record2->other_cert = $other_cert;
+            $save = $app_record2->save();
             if($save){
                 return response()->json(['status'=>'ok','msg'=>'success, academic created',],201); 
             }else{
@@ -175,31 +181,60 @@ class ApplicationController extends Controller
               
 
         }elseif($request->check_step == 'declaration'){
-            //unset pin cookie
+            
+            if($_COOKIE['pin'] == "" || empty($_COOKIE['pin'] )){
+                return back()->with('fail','pin is required for final submition!');
+            }
+         
+            $fac_name = app('App\Http\Controllers\ConfigController')->get_faculty_name_given_id($request->faculty);
+            $dept_name = app('App\Http\Controllers\ConfigController')->get_dept_name_given_id($request->department);
+            $prog_name = app('App\Http\Controllers\ConfigController')->get_prog_name_given_id($request->programme);
+
+            $fac_name2 = app('App\Http\Controllers\ConfigController')->get_faculty_name_given_id($request->faculty2);
+            $dept_name2 = app('App\Http\Controllers\ConfigController')->get_dept_name_given_id($request->department2);
+            $prog_name2 = app('App\Http\Controllers\ConfigController')->get_prog_name_given_id($request->programme2);
+          
+            $first_choice = [ "faculty"=>$fac_name, "dept"=>$dept_name,"prog"=>$prog_name,"subj"=>$request->combination];
+            $second_choice = [ "faculty"=>$fac_name2, "dept"=>$dept_name2,"prog"=>$prog_name2,"subj"=>$request->combination2];
+            
+            $app_record3 =  Application::where(['submitted_by'=>$data->email,'status'=>'pending','app_type'=>$_COOKIE['app_type']])->first();
            
-            //$fac_name = app('App\Http\Controllers\ConfigController')->get_faculty_name_given_id($request->);
-            dd($request->all());
-            $validator = Validator::make($request->pin, [ 'pin' => 'required|string|min:10',]);
-            if ($validator->fails()) {
-                return response()->json(['error' => 'Pin is required, Minimum of ...'], 401);
+            $app_record3->screen_date =  $request->screening_date;
+            $app_record3->accept_terms =  $request->accept_terms;
+            $app_record3->first_choice =  $first_choice ;
+            $app_record3->second_choice =  $second_choice ;
+      
+            $filename1 = $request->file('signature')->getClientOriginalName();
+            $path1 = Storage::disk('public')->putFileAs('credentials', $request->file('signature'), $data->surname ."_". $data->first_name ."_". $data->other_name ."_". $data->id ."_". date('YmdHis') ."_". $filename1); 
+            $filename2 = $request->file('olevel')->getClientOriginalName();
+            $path2 = Storage::disk('public')->putFileAs('credentials', $request->file('olevel'), $data->surname ."_". $data->first_name ."_". $data->other_name ."_". $data->id ."_". date('YmdHis') ."_". $filename2);
+            $filename3 = $request->file('birth_cert')->getClientOriginalName();
+            $path3 = Storage::disk('public')->putFileAs('credentials', $request->file('birth_cert'), $data->surname ."_". $data->first_name ."_". $data->other_name ."_". $data->id ."_". date('YmdHis') ."_". $filename3);
+           
+            $app_record3->olevel_file =  $path2;
+            $app_record3->birth_cert =  $path3;
+            $app_record3->used_pin =  $_COOKIE['pin'];
+            $app_record3->form_status = $app_record3->form_status+1;
+            $app =  Applicant::findOrFail($data->id);
+            $app->signature =  $path1;
+            $app->save();
+            $app_save = $app_record3->save();
+            if($app_save){ 
+                if (isset($_COOKIE['pin']) && isset($_COOKIE['app_type'])) {
+                    unset($_COOKIE['pin']);
+                    unset($_COOKIE['app_type']);
+                   // setcookie('key', '', time() - 3600, '/'); // empty value and old timestamp
+                } 
+                return redirect('application')->with('appSubmit','application successfully completed!');
             }
             
-            // "faculty" => "Science"
-            // "department" => "CMP"
-            // "programme" => "CMP"
-            // "combination" => "CMP"
-            // "faculty2" => "Humanities"
-            // "department2" => "LAW"
-            // "programme2" => "LAW"
-            // "combination2" => "LAW"
-            // "screening_date" => "17/10/2021"
-            // "accept_terms" => "on"
-
-            dd($request->all());
+           
         }else{
             return response()->json(['status'=>'Nok','msg'=>'failed, Error with check_step supplied: save_app_form(Request $request)  '],401); 
         }
-       
+    } catch (\Throwable $th) {
+        return back()->with('appError','Error submitting application!');
+    }
     }
 
 
@@ -215,16 +250,13 @@ class ApplicationController extends Controller
 
         try {
             $filename = $request->file('profileImage')->getClientOriginalName();
-           
             $path = Storage::disk('public')->putFileAs('ProfileImage', $request->file('profileImage'), $data->surname ."_". $data->first_name ."_". $data->other_name ."_". $data->id ."_". date('YmdHis') ."_". $filename);
             $applicant = Applicant::find($data->id);
             $applicant->profile_pix = $path;
             $applicant->save();
             return back()->with('success','image uploaded successfully!');
-            //return response()->json(['info' => 'Profile Image Uploaded', 'msg' => 'success']);
         } catch (\Throwable $th) {
             return back()->with('fail','image upload failed!');
-            //return response()->json(['error' => 'image upload failed', 'th' => $th], 401);
         }
     }
 

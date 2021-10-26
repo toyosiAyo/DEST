@@ -32,7 +32,6 @@
           <h1 class="page-title">Application Form (Foundation)</h1>
           <small>NOTE: Fill in all details correctly, also, fields marked <span class="required" style="color:red">*</span> are required </small>
         </div>
-
         <div class="page-content container-fluid">
           <div class="row">
             <div class="col-xl-3 col-md-4">
@@ -474,7 +473,7 @@
                             role="tabpanel">
                             <div class="panel-body">
                               <!-- Panel Full Example -->
-                              <form method="post" id="form_declaration" enctype="multipart/form-data">
+                              <form method="post" action="{{route('save.app.form')}}" id="form_declaration" enctype="multipart/form-data">
                                 @csrf
                                 <div class="col-xl-12 form-horizontal">
                                   <div class="form-group row form-material">

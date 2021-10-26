@@ -13,5 +13,7 @@ class Application extends Model
         'sec_sch' => 'array',
         'o_level' => 'array',
         'other_cert' => 'array',
+        'first_choice' => 'array',
+        'second_choice' => 'array',
     ];
 }

@@ -7,6 +7,9 @@
   @section("content")
     <body class="animsition site-menubar-push site-menubar-open site-menubar-fixed">
         <div class="page">
+        @if(Session::get('appSubmit'))
+                <p>{{Session::get('appSubmit')}}</p>
+         @endif
             <div class="page-content container-fluid">
                 <div class="row" data-plugin="masonry">
                     <div class="col-lg-12 masonry-item">
