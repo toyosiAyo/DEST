@@ -76,36 +76,36 @@ $(document).ready(function($){
         }
     })
 
-    $("#btn_declaration").click(function(){ 
-        $("#form_declaration").validate({
-            submitHandler: submitFormDeclaration,
-            errorClass: "invalid" 
-        });
+    // $("#btn_declaration").click(function(){ 
+    //     $("#form_declaration").validate({
+    //         submitHandler: submitFormDeclaration,
+    //         errorClass: "invalid" 
+    //     });
 
-        function submitFormDeclaration(e) { 
-            var formData = $("#form_declaration").serialize();
-            var type = "POST";
-            var ajaxurl = 'save/app/form';
+    //     function submitFormDeclaration(e) { 
+    //         var formData = $("#form_declaration").serialize();
+    //         var type = "POST";
+    //         var ajaxurl = 'save/app/form';
 
-            $.ajax({
-                type: type,
-                url: ajaxurl,
-                data: formData,
-                dataType: 'json',
-                beforeSend: function() { 
-                    $("#btn_declaration").html('<i class="fa fa-spinner fa-spin"></i> &nbsp; processing');
-                },
-                success: function (response) {
-                    console.log(response);
-                    $("#btn_declaration").html('Next')
-                    window.location.href ='application'
-                },
-                error: function (response) {
-                    console.log(response);
-                    $("#btn_declaration").html('Next');
-                }
-            });
+    //         $.ajax({
+    //             type: type,
+    //             url: ajaxurl,
+    //             data: formData,
+    //             dataType: 'json',
+    //             beforeSend: function() { 
+    //                 $("#btn_declaration").html('<i class="fa fa-spinner fa-spin"></i> &nbsp; processing');
+    //             },
+    //             success: function (response) {
+    //                 console.log(response);
+    //                 $("#btn_declaration").html('Next')
+    //                 window.location.href ='application'
+    //             },
+    //             error: function (response) {
+    //                 console.log(response);
+    //                 $("#btn_declaration").html('Next');
+    //             }
+    //         });
 
-        }
-    })
+    //     }
+    // })
 })
