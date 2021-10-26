@@ -19,8 +19,8 @@
       <div class="page-content">
         <div class="page-brand-info">
           <div class="brand">
-            <img class="brand-img" src="../assets/images/run_logo.png" alt="..."><span>STUDENT PORTAL</span>
-            <h2 class="brand-text font-size-30" style="color:yellow">DIRECTORATE OF EDUCATIONAL SERVICES AND TRAINING</h2>
+            <img class="brand-img" src="../assets/images/DEST_logo.png" alt="...">
+            <h1 style="color:white; background-color:darkblue; font-weight: bold; font-style: italic; font-size: 40px;">Welcome to DEST Student Portal</h1>
           </div>
           <!-- <p class="font-size-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua.</p> -->
