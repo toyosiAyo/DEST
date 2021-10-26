@@ -6,8 +6,6 @@
 
   @push('head')
     <link rel="stylesheet" href="../assets/examples/css/pages/profile.minfd53.css?v4.0.1">
-    <script src="{{ asset('scripts/profile_update.js') }}"></script>
-    <script src="{{ asset('scripts/validation.min.js') }}"></script>
   @endpush
 
   @section("content")
@@ -116,5 +114,7 @@
         </div>
     </body>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('scripts/profile_update.js') }}"></script>
+    <script src="{{ asset('scripts/validation.min.js') }}"></script>
   @endsection
