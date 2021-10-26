@@ -59,6 +59,29 @@ class ConfigController extends Controller
         }
     }
     
+
+    public function get_faculty_name_given_id($facultyId){
+        try {
+            return DB::table('faculty')->where('college_id',$facultyId)->pluck('college')[0];
+        } catch (\Throwable $th) {
+            return response()->json(['status'=>'Nok','msg'=>'Failed, in get_faculty_name_given_id() catch '], 401);
+        }
+    }
+    public function get_dept_name_given_id($deptId){
+        try {
+            //code...
+        } catch (\Throwable $th) {
+            return response()->json(['status'=>'Nok','msg'=>'Failed, in get_dept_name_given_id() catch '], 401);
+        }
+    }
+    public function get_prog_name_given_id($progId){
+        try {
+            //code...
+        } catch (\Throwable $th) {
+            return response()->json(['status'=>'Nok','msg'=>'Failed, in get_prog_name_given_id() catch '], 401);
+        }
+    }
+
     public  function settings($request){
         if ($request->has('settingId') && $request->filled('settingId') ){
             $settings = Setting::where('id', $request->settingId)->first();
