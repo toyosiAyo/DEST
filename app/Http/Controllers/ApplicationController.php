@@ -279,5 +279,20 @@ class ApplicationController extends Controller
 
             }
 
+
+
+            public function view_applications(Request $request){
+       
+                try {
+                    $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+                    $applications = DB::table('applications')->select('*','first_choice->prog as Programme')
+                        ->where('submitted_by', $data->email)->get();
+                    return view('pages.applications',['apps'=>$applications])->with('data', $data);
+                } catch (\Throwable $th) {
+                    return back()->with('view_applications','view_applications');
+                }
+            
+        }
+
    
 }
