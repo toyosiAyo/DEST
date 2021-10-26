@@ -21,7 +21,7 @@ $(document).ready(function($){
         "hideEasing": "linear",
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
-      }
+    }
 
     $("#btn_pass").click(function(){ 
         $("#update_password_form").validate({
@@ -46,13 +46,13 @@ $(document).ready(function($){
                     console.log(response);
                     $("#btn_pass").html('Update Password')
                     toastr.options;
-                    toastr['success'](response);
+                    toastr['success'](response.msg);
                 },
                 error: function (response) {
                     console.log(response);
                     $("#btn_pass").html('Update Password');
                     toastr.options;
-                    toastr['error'](response);
+                    toastr['error'](response.msg);
                 }
             });
 
