@@ -122,7 +122,6 @@ class ApplicationController extends Controller
             }
 
         }elseif($request->check_step == 'academic'){
-            
             $sec_sch = []; 
             $o_level = []; 
             $other_cert  = []; 
@@ -132,10 +131,11 @@ class ApplicationController extends Controller
             }
             elseif(sizeof($request->sec_school) > 0 && sizeof($request->sec_school) == sizeof($request->school_start )
              && sizeof($request->sec_school) == sizeof($request->school_end )  ){
-                foreach($request->sec_school as $index => $value){
-                    $sch = 'sch'.$index+1;
+                foreach($request->sec_school as $index => $value){ 
+                    $x = $index + 1;
+                    $sch = 'sch'.$x;
                     //NOTE: Use find and replace ~ to avoid future error here
-                    $sec_sch[$sch] = $request->sec_school[$index]."~".$request->school_start[$index]."~".$request->school_end[$index];
+                    $sec_sch[$sch] = $request->sec_school[$index]."~".$request->school_start[$index]."~".$request->school_end[$index];    
                 }
                 }else{return response()->json(['status'=>'Nok','msg'=>'failed, Your secondary school fields are required'],401);   }
            //O-LEVEL;
@@ -145,7 +145,8 @@ class ApplicationController extends Controller
             if(!sizeof($request->exam) < 5 && sizeof($request->exam) == sizeof($request->subject) &&  sizeof($request->subject) == sizeof($request->grade ) && sizeof($request->grade) == sizeof($request->year ) 
                 ){
                 foreach($request->exam as $index => $value){
-                    $sub = 'sub'.$index+1;
+                    $x = $index + 1;
+                    $sub = 'sub'.$x;
                     $o_level[$sub] = $request->exam[$index]."~".$request->subject[$index]."~".$request->grade[$index]."~".$request->year[$index];
                 }
                 
@@ -161,7 +162,8 @@ class ApplicationController extends Controller
             sizeof($request->inst_end) == sizeof($request->degree )  
             ){
             foreach($request->institution_name as $index => $value){
-                $inst = 'inst'.$index+1;
+                $x = $index + 1;
+                $inst = 'inst'.$x;
                 $other_cert[$inst] = $request->institution_name[$index]."~".$request->institution_address[$index]."~".$request->degree[$index]."~".$request->inst_start[$index]."~".$request->inst_end[$index];
 
             }
@@ -181,7 +183,6 @@ class ApplicationController extends Controller
               
 
         }elseif($request->check_step == 'declaration'){
-            
             if($_COOKIE['pin'] == "" || empty($_COOKIE['pin'] )){
                 return back()->with('fail','pin is required for final submition!');
             }
@@ -216,6 +217,7 @@ class ApplicationController extends Controller
             $app_record3->used_pin =  $_COOKIE['pin'];
             $app_record3->form_status = $app_record3->form_status+1;
             $app =  Applicant::findOrFail($data->id);
+
             $app->signature =  $path1;
             $app->save();
             $app_save = $app_record3->save();

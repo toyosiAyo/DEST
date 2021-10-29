@@ -20,11 +20,6 @@
   @endpush
 
   @section("content")
-    <style>
-      .invalid {
-        color:#ff0000;
-      }
-    </style>
     <body class="animsition page-faq site-menubar-push site-menubar-open site-menubar-fixed">
       <!-- Page -->
       <div class="page">

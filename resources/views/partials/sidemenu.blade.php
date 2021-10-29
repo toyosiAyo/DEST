@@ -54,12 +54,12 @@
                 <span class="site-menu-title">Payment History</span>
               </a>
             </li>
-            <li class="site-menu-item">
+            <!-- <li class="site-menu-item">
               <a href="#">
                 <i class="site-menu-icon md-settings" aria-hidden="true"></i>
                 <span class="site-menu-title">Settings</span>
               </a>
-            </li>
+            </li> -->
             <li class="site-menu-item">
               <a href="{{route('logout')}}">
                 <i class="site-menu-icon md-power" aria-hidden="true"></i>

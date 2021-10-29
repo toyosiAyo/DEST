@@ -51,6 +51,11 @@
   </script>
   @stack('head')
 </head>
+    <style>
+      .invalid {
+        color:#ff0000;
+      }
+    </style>
   <!-- Page -->
     @include("partials.navbar")
 

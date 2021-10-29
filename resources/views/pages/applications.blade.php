@@ -8,7 +8,12 @@
     <body class="animsition site-menubar-push site-menubar-open site-menubar-fixed">
         <div class="page">
         @if(Session::get('appSubmit'))
-                <p>{{Session::get('appSubmit')}}</p>
+        <div class="alert dark alert-icon alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <i class="icon md-close" aria-hidden="true"></i> {{Session::get('appSubmit')}}
+        </div>
          @endif
             <div class="page-content container-fluid">
                 <div class="row" data-plugin="masonry">
