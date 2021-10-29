@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Application;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use GuzzleHttp\Client;
 use Carbon\Carbon;
 class ApplicantPaymentController extends Controller
 {
