@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ApplicantPaymentController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ConfigController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,5 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //Route::post('update_applicant_payment',[ApplicantPaymentController::class,'update_applicant_payment'])->name('update_applicant_payment');
 //Route::post('password_reset',[AuthController::class,'password_reset'])->name('password_reset');
+// Route::get('college_dept_prog',[ConfigController::class,'college_dept_prog'])->name('college_dept_prog');
 
 

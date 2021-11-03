@@ -26,7 +26,7 @@ class ConfigController extends Controller
 
     public function college_dept_prog(Request $request){
         try {
-            //dd($request->facultyId);
+            //return $request->params;
             $faculties=[];
             $dept=[];
             $prog=[];
