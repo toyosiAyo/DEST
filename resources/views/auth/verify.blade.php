@@ -14,7 +14,7 @@
         font-size: 30px;
         text-align: center;
         letter-spacing: 15px;
-        margin-left: 15px;
+        
         }
   </style>
     <body class="animsition page-forgot-password layout-full">
