@@ -21,6 +21,22 @@
       <div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
         <div class="page-content vertical-align-middle">
           <h2>Verify your Email Address</h2>
+            @if(Session::get('success'))
+                <div class="alert dark alert-icon alert-success alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <i class="icon md-close" aria-hidden="true"></i> {{Session::get('success')}}
+                </div>
+            @endif
+            @if(Session::get('fail'))
+                <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <i class="icon md-close" aria-hidden="true"></i> {{Session::get('fail')}}
+                </div>
+            @endif
           <p>Input the OTP sent to your registered email</p>
 
           <form action ="#" method="post" role="form" autocomplete="off">
