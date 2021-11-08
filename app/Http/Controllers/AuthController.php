@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Http;
 //use App\Http\Controllers\FreakMailer;
 
 class AuthController extends Controller
@@ -40,6 +41,7 @@ class AuthController extends Controller
              'password'=>'required|confirmed|min:4|max:8',
              'gender'=>'required|size:1',
          ]) ;
+         $num_str = sprintf("%06d", mt_rand(1, 999999));
          $app = new Applicant;
          $app->surname = $request->surname;
          $app->first_name = $request->firstname;
@@ -48,12 +50,28 @@ class AuthController extends Controller
          $app->email = $request->email;
          $app->gender = $request->gender;
          $app->password = Hash::make($request->password);
+         $app->otp = $num_str;
          $save = $app->save();
          if($save){
+            $From = "ict@run.edu.ng";
+            $FromName = "DEST@REDEEMER's UNIVERSITY";
+            $Msg = app('App\Http\Controllers\ConfigController')->email_msg($code=$num_str);
+            $Subject = "Email Verification";
+            $HTML_type = true;
+           // $res = Http::asForm()->post('http://adms.run.edu.ng/codebehind/destEmail.php',["From"=>$From,"FromName"=>$FromName,"To"=>$request->email,"Recipient_names"=>$request->surname,"Msg"=>$Msg, "Subject"=>$Subject,"HTML_type"=>$HTML_type,]);
+            Http::asForm()->post('http://adms.run.edu.ng/codebehind/destEmail.php',["From"=>$From,"FromName"=>$FromName,"To"=>$request->email,"Recipient_names"=>$request->surname,"Msg"=>$Msg, "Subject"=>$Subject,"HTML_type"=>$HTML_type,]);
             return back()->with('success','Account created successfully');
          }else{
              return back()->with('fail','Issue creating account');
          }
+    }
+
+    public function testNull(){
+      if(empty(Applicant::where('email','reganalyst@yahoo.com')->first()->email_verified_at)){
+          return "Null";
+      }
+      return "Filled";
+       
     }
 
     public function auth_check(Request $request){
@@ -64,10 +82,9 @@ class AuthController extends Controller
        $app = Applicant::where('email',$request->email)->first();
        if(!$app){return back()->with('fail','We do not recognize the supplied email');}
        else{
+            if(empty($app->email_verified_at)){return back()->with('fail','Kindly check your email for verification!');}
            if(Hash::check($request->password,$app->password)){
-              
             $request->session()->put('user',$app->email);
-
             return redirect('dashboard');
            }else{return back()->with('fail','incorrect email/password!'); }
        }

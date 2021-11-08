@@ -10,6 +10,8 @@ use App\Http\Controllers\ApplicantPaymentController;
 use Illuminate\Support\Facades\Http;
 
 
+Route::get('testNull',[AuthController::class,'testNull'])->name('testNull');
+
 Route::get('/http', function () {
     //$response->body() : string;
     // $response->json() : array|mixed;
@@ -31,7 +33,9 @@ $x="hamendment@gmail.com";
 $y="oluwatusint@run.edu.ng";
 $To = " $x, $y ";
 $Recipient_names = "Hamed David";
-$Msg = '<!DOCTYPE html>
+$code = sprintf("%06d", mt_rand(1, 999999));
+//$Msg =
+return '<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -205,6 +209,12 @@ $Msg = '<!DOCTYPE html>
                 </table>
             </div>
         </header>
+
+        <center> 
+        <p>Here is your OTP : '. $code. '</p>
+        </center>
+        
+
         <div id="footer_border"></div>
         <div class="result_container">
             
