@@ -280,24 +280,6 @@ Route::group(['middleware'=>['authcheck']], function() {
    
 });
 
-
-
-// Route::get('/create_application', function () {
-//     return view('/pages/create_application');
-// });
-
-
-// Route::get('/form', function () {
-//     return view('/pages/form');
-// });
-
-// Route::get('loaddata',[ConfigController::class,'load_data'])->name('load.data');
-
-// Route::any('get_lga_state_country',[ConfigController::class,'get_lga_state_country'])->name('get_lga_state_country');
-// Route::any('get_state_given_country',[ConfigController::class,'get_state_given_country'])->name('get_state_given_country');
-
-
-
-// Route::post('save/app/form',[ApplicationController::class,'save_app_form'])->name('save.app.form');
-// Route::get('get_app_form',[ApplicationController::class,'get_app_form'])->name('get.app.form');
-// Route::get('create_application',[ApplicationController::class,'create_application'])->name('create.application');
+Route::get('verify',function(){
+    return view('auth/verify');
+});
