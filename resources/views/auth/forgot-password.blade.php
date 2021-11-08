@@ -13,9 +13,18 @@
       <div class="page vertical-align text-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
         <div class="page-content vertical-align-middle">
           <h2>Forgot Your Password ?</h2>
+      
+            @if(Session::get('fail'))
+                <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <i class="icon md-close" aria-hidden="true"></i> {{Session::get('fail')}}
+                </div>
+            @endif
           <p>Input your registered email to reset your password</p>
 
-          <form action ="#" method="post" role="form" autocomplete="off">
+          <form action ="{{route('forgot.password')}}" method="post" role="form" autocomplete="off">
           @csrf
           <div class="form-group form-material floating" data-plugin="formMaterial">
               <input type="email" class="form-control empty" id="inputEmail" name="email">

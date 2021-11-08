@@ -53,6 +53,8 @@ class AuthController extends Controller
          $app->otp = $num_str;
          $save = $app->save();
          if($save){
+             //setcookie(name, value, expire, path, domain, secure, httponly);
+            setcookie('email',$request->email,time()+(84000*30),'/');
             $From = "ict@run.edu.ng";
             $FromName = "DEST@REDEEMER's UNIVERSITY";
             $Msg = app('App\Http\Controllers\ConfigController')->email_msg($code=$num_str);
@@ -61,7 +63,8 @@ class AuthController extends Controller
            // $res = Http::asForm()->post('http://adms.run.edu.ng/codebehind/destEmail.php',["From"=>$From,"FromName"=>$FromName,"To"=>$request->email,"Recipient_names"=>$request->surname,"Msg"=>$Msg, "Subject"=>$Subject,"HTML_type"=>$HTML_type,]);
             Http::asForm()->post('http://adms.run.edu.ng/codebehind/destEmail.php',["From"=>$From,"FromName"=>$FromName,"To"=>$request->email,"Recipient_names"=>$request->surname,"Msg"=>$Msg, "Subject"=>$Subject,"HTML_type"=>$HTML_type,]);
             return redirect('account_activate_view')->with('account_created','Account created successfully, Kindly get OTP sent to your email for account activation!');
-         }else{
+         
+        }else{
              return back()->with('fail','Issue creating account');
          }
     }
@@ -126,9 +129,29 @@ class AuthController extends Controller
     }
 
 
-    public function forgot_password_post(){
+    public function forgot_password_post(Request $request){
+        $request->validate(['email'=>'required|email',]) ;
+        try {
+          $app = Applicant::where('email',$request->email)->first();
+          if(!empty($app)){
+              $app->password = Hash::make(app('App\Http\Controllers\ConfigController')->generateRandomString(6));
+              $save = $app->save();
+              if($save){
+                $From = "ict@run.edu.ng";
+                $FromName = "DEST@REDEEMER's UNIVERSITY";
+                $Msg = app('App\Http\Controllers\ConfigController')->generateRandomString(6);//app('App\Http\Controllers\ConfigController')->email_msg($code=$num_str);
+                $Subject = "Password Reset!";
+                $HTML_type = true;
+                Http::asForm()->post('http://adms.run.edu.ng/codebehind/destEmail.php',["From"=>$From,"FromName"=>$FromName,"To"=>$app->email,"Recipient_names"=>$app->surname,"Msg"=>$Msg, "Subject"=>$Subject,"HTML_type"=>$HTML_type,]);
+                return redirect('/')->with('pass_reset','Password reset successfully, Kindly check your email for the new password!');
+             
+              }
+          }
+          return back()->with('fail','Wrong email supplied!');
+        } catch (\Throwable $th) {
+            return back()->with('fail','Email issue with forgot password!');
+        }
 
-        return redirect('forgot/password');
     }
 
     public function account_activate_view(){
@@ -137,16 +160,18 @@ class AuthController extends Controller
     }
 
     public function account_activate(Request $request){
-        // $validator = Validator::make($_COOKIE, [ 'email' => 'required|string',]);
-        // if ($validator->fails()) {
-        //     return back()->with('fail','Email issue!');
-        // }
-        // $request->validate(['otp'=>'required|min:6|max:6',]) ;
+        //dd($_COOKIE);
+        $validator = Validator::make($_COOKIE, [ 'email' => 'required|string',]);
+        if ($validator->fails()) {
+            return back()->with('fail','Email issue!');
+        }
+        $request->validate(['otp'=>'required|min:6|max:6',]) ;
         try {
-            $app = Applicant::where('email','teewhy10@gmail.com')->first();
+            $app = Applicant::where('email',$_COOKIE['email'])->first();
             if($app->otp == $request->otp){
                 $app->email_verified_at = Carbon::now();
                 $app->save();
+                if (isset($_COOKIE['email'])) { unset($_COOKIE['email']); setcookie('email', '', time() - 3600, '/');}
                 return redirect('/')->with('verified','Account verified successfully, Kindly login now'); 
             }
             return back()->with('fail','Error verifying account, supply correct OTP!');
@@ -157,14 +182,13 @@ class AuthController extends Controller
         
     }
     public function resend_otp(Request $request){
-        // $validator = Validator::make($_COOKIE, [ 'email' => 'required|string',]);
-        // if ($validator->fails()) {
-        //     return back()->with('fail','Email issue!');
-        // }
-        // $request->validate(['otp'=>'required|min:6|max:6',]) ;
+        $validator = Validator::make($_COOKIE, [ 'email' => 'required|string',]);
+        if ($validator->fails()) {
+            return back()->with('fail','Email issue!');
+        }
         try {
           
-            $app = Applicant::where('email','reganalyst@yahoo.com')->first();
+            $app = Applicant::where('email',$_COOKIE['email'])->first();
             if(!empty($app)){
                 $From = "ict@run.edu.ng";
                 $FromName = "DEST@REDEEMER's UNIVERSITY";
@@ -188,8 +212,8 @@ class AuthController extends Controller
         if(session()->has('user')){
             session()->pull('user');
             if (isset($_COOKIE['pin']) && isset($_COOKIE['app_type'])) {
-                unset($_COOKIE['pin']);
-                unset($_COOKIE['app_type']);
+                unset($_COOKIE['pin']); setcookie('pin', '', time() - 3600, '/');
+                unset($_COOKIE['app_type']); setcookie('app_type', '', time() - 3600, '/');
                // setcookie('key', '', time() - 3600, '/'); // empty value and old timestamp
             }
             return redirect('/');

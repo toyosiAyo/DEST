@@ -223,8 +223,8 @@ class ApplicationController extends Controller
             $app_save = $app_record3->save();
             if($app_save){ 
                 if (isset($_COOKIE['pin']) && isset($_COOKIE['app_type'])) {
-                    unset($_COOKIE['pin']);
-                    unset($_COOKIE['app_type']);
+                    unset($_COOKIE['pin']); setcookie('pin', '', time() - 3600, '/');
+                    unset($_COOKIE['app_type']); setcookie('app_type', '', time() - 3600, '/');
                    // setcookie('key', '', time() - 3600, '/'); // empty value and old timestamp
                 } 
                 return redirect('application')->with('appSubmit','application successfully completed!');

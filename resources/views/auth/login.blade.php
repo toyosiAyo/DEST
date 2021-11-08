@@ -26,6 +26,15 @@
             <h3 class="font-size-24">Log In</h3>
             <p>Log in with your email and password</p>
              
+            @if(Session::get('pass_reset'))
+                <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <i class="icon md-close" aria-hidden="true"></i> {{Session::get('pass_reset')}}
+                </div>
+            @endif
+            
             @if(Session::get('verified'))
                 <div class="alert dark alert-icon alert-success alert-dismissible" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
