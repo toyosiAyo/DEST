@@ -10,8 +10,6 @@ use App\Http\Controllers\ApplicantPaymentController;
 use Illuminate\Support\Facades\Http;
 
 
-Route::get('testNull',[AuthController::class,'testNull'])->name('testNull');
-
 Route::get('/http', function () {
     //$response->body() : string;
     // $response->json() : array|mixed;
@@ -252,6 +250,9 @@ Route::post('forgot/password',[AuthController::class,'forgot_password_post'])->n
 Route::post('auth/check',[AuthController::class,'auth_check'])->name('auth.check');
 Route::get('logout',[AuthController::class,'logout'])->name('logout');
 Route::post('save/account/form',[AuthController::class,'save_new_account'])->name('save.account.form');
+Route::get('account_activate_view',[AuthController::class,'account_activate_view'])->name('account_activate_view');
+Route::post('account_activate',[AuthController::class,'account_activate'])->name('account_activate');
+Route::get('resend_otp',[AuthController::class,'resend_otp'])->name('resend_otp');
 
 
 Route::group(['middleware'=>['authcheck']], function() {
@@ -277,9 +278,10 @@ Route::group(['middleware'=>['authcheck']], function() {
 
     Route::post('password_reset',[AuthController::class,'password_reset'])->name('password_reset');
 
+
    
 });
 
-Route::get('verify',function(){
-    return view('auth/verify');
-});
+// Route::get('verify',function(){
+//     return view('auth/verify');
+// });

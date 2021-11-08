@@ -25,6 +25,16 @@
             </div>
             <h3 class="font-size-24">Log In</h3>
             <p>Log in with your email and password</p>
+             
+            @if(Session::get('verified'))
+                <div class="alert dark alert-icon alert-success alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <i class="icon md-close" aria-hidden="true"></i> {{Session::get('verified')}}
+                </div>
+            @endif
+         
               @if(Session::get('success'))
                 <p>{{Session::get('success')}}</p>
               @endif
