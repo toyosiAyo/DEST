@@ -138,11 +138,23 @@ class RemitaConfig extends Controller
         try {
             $payType = trim(strtoupper($request->payType));
             $orderID = $this->remita_generate_trans_ID();
-            $pin = app('App\Http\Controllers\ApplicationController')->checkForUsedPin($request);
-           if($pin != "false"){
+            $pin = app('App\Http\Controllers\ApplicationController')->checkForUsedPin($request)['pin'];
+            $status = app('App\Http\Controllers\ApplicationController')->checkForUsedPin($request)['msg'];
+           //if($pin != "false"){
+           if($status == "success"){
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            return response()->json(['status'=>'ok','msg'=>'success','rsp'=> $pin], 200);
+            return response()->json(['status'=>'ok','msg'=>$status,'rsp'=> $pin], 200);
            }
+           elseif($status == "pending"){
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            return response()->json(['status'=>'ok','msg'=>$status,'rsp'=> $pin], 200);
+           }
+           else{
+                  // Remove when payment gateway is ready
+           return response()->json(['status'=>'Nok','msg'=>'No pin','rsp'=> ''], 200);
+           }
+         
+
             if($this->getRemitaPaymentConfig2($serviceTypeID,$merchantId, $apiKey ,$payType)){
                 return response()->json(['status'=>'NoPayment','msg'=>'success',
                'data'=>[app('App\Http\Controllers\ConfigController')->auth_user(session('user'))],

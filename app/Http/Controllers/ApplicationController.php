@@ -60,13 +60,24 @@ class ApplicationController extends Controller
             $used_pin = DB::table('application_payments')
             ->join('applications','application_payments.rrr','applications.used_pin')
             ->where('application_payments.email',$data->email)->pluck('rrr'); 
-            $unused_pin = DB::table('application_payments')->select('rrr')
+            $success_pin = DB::table('application_payments')->select('rrr')
             ->where('email',$data->email)
-            ->where('status_code','00')->where('pay_type', $request->payType) ->whereNotIn('rrr', $used_pin)->get();
-            if($unused_pin->count() !=0){
-                $pin = $unused_pin[0]->rrr;
-                $this->pin = $unused_pin[0]->rrr;
-                return $pin;
+            ->where('status_code','00')->where('pay_type', $request->payType)->whereNotIn('rrr', $used_pin)->get();
+            // Remove when payment gateway is ready
+            $pending_pin = DB::table('application_payments')->select('rrr')
+            ->where('email',$data->email)
+            ->where('status_msg','pending')->where('pay_type', $request->payType)->whereNotIn('rrr', $used_pin)->get();
+           // Remove when payment gateway is ready
+            if($pending_pin->count() !=0){
+                $pin = $pending_pin[0]->rrr;
+                $this->pin = $pending_pin[0]->rrr;
+               // return $pin;
+                return ['status'=>'ok','msg'=>'pending','pin'=>$pin];  
+            }
+            if($success_pin->count() !=0){
+                $pin = $success_pin[0]->rrr;
+                $this->pin = $success_pin[0]->rrr;
+               // return $pin;
                 return ['status'=>'ok','msg'=>'success','pin'=>$pin];  
             }
             return "false";

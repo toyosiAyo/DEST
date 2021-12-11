@@ -21,6 +21,7 @@ class ConfigController extends Controller
         $this->middleware('authcheck');
        // $this->middleware('log')->only('index');
        // $this->middleware('subscribed')->except('store');
+       //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
     }
   
 
