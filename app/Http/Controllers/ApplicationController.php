@@ -80,7 +80,8 @@ class ApplicationController extends Controller
                // return $pin;
                 return ['status'=>'ok','msg'=>'success','pin'=>$pin];  
             }
-            return "false";
+            return ['status'=>'Nok','msg'=>'No Pin','pin'=>''];  
+
         } catch (\Throwable $th) {
             return response()->json(['status'=>'Nok','msg'=>'Failed, in checkForUsedPin() catch '], 401);
         }
