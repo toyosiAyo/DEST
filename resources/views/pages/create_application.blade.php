@@ -133,20 +133,26 @@
           aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
           <div class="modal-dialog modal-simple">
               <div class="modal-content">
-              <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                  </button>
-                  <h4 class="modal-title">Teller ID</h4>
-              </div>
-              <div class="modal-body">
-                  <!-- <p>My applicatioon details</p> -->
-                  <span id="details"></span>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Close</button>
-                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-              </div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Payment Confirmation</h4>
+                </div>
+                <form method="post" id="form_teller">
+                  @csrf
+                  <div class="modal-body">
+                    <p>Pay the sum of N7500 to 0128755816 and enter Teller number here</p>
+                    <div class="form-group form-material floating" data-plugin="formMaterial">
+                      <input type="tel" class="form-control" id="teller_number" name="teller_number" required>
+                      <label class="floating-label" for="inputEmail">Enter Teller Number</label>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                  </div>
+              </form>
               </div>
           </div>
       </div>
