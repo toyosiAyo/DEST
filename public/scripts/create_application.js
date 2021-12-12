@@ -213,6 +213,7 @@ $(document).ready(function () {
 
         getRemitaConfig(function (response) {
             if (response.msg === "No pin") {
+                $("#btn_foundation").html("Create Application");
                 $("#modal_teller").modal("show");
                 // merchantId = response.merchantId;
                 // serviceTypeId = response.serviceTypeID;
@@ -232,9 +233,10 @@ $(document).ready(function () {
                 window.location.href = "app_form";
             } else if (response.msg === "pending") {
                 var pin = response.rsp;
+                $("#btn_foundation").html("Create Application");
                 toastr.options;
                 toastr["error"](
-                    `Payment with teller ${pin} is still pending approval`
+                    `Payment with teller number ${pin} is still pending approval`
                 );
                 return false;
             } else {
