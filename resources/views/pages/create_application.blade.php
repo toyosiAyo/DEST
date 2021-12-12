@@ -128,6 +128,35 @@
       </div>
       <!-- End Page -->
 
+      <!-- Modal -->
+      <div class="modal fade modal-newspaper" id="modal_teller" aria-hidden="true"
+          aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+          <div class="modal-dialog modal-simple">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Payment Confirmation</h4>
+                </div>
+                <form method="post" id="form_teller">
+                  @csrf
+                  <div class="modal-body">
+                    <p>Pay the sum of N7500 to 0128755816 and enter Teller number here</p>
+                    <div class="form-group form-material floating" data-plugin="formMaterial">
+                      <input type="tel" class="form-control" id="teller_number" name="teller_number" required>
+                      <label class="floating-label" for="inputEmail">Enter Teller Number</label>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                  </div>
+              </form>
+              </div>
+          </div>
+      </div>
+
       <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha512/0.8.0/sha512.min.js"></script>
       <script src=" https://login.remita.net/payment/v1/remita-pay-inline.bundle.js"></script>
