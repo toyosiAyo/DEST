@@ -242,7 +242,7 @@ $(document).ready(function () {
             } else {
                 $("#btn_foundation").html("Create Application");
                 toastr.options;
-                toastr["error"](response.responseJSON.msg);
+                toastr["error"](response.msg);
                 return false;
             }
         });
