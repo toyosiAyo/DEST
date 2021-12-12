@@ -240,6 +240,9 @@ $(document).ready(function () {
                 );
                 return false;
             } else {
+                $("#btn_foundation").html("Create Application");
+                toastr.options;
+                toastr["error"](response.responseJSON.msg);
                 return false;
             }
         });
