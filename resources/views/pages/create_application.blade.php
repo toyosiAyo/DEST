@@ -128,6 +128,29 @@
       </div>
       <!-- End Page -->
 
+      <!-- Modal -->
+      <div class="modal fade modal-newspaper" id="modal_teller" aria-hidden="true"
+          aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+          <div class="modal-dialog modal-simple">
+              <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 class="modal-title">Teller ID</h4>
+              </div>
+              <div class="modal-body">
+                  <!-- <p>My applicatioon details</p> -->
+                  <span id="details"></span>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Close</button>
+                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+              </div>
+              </div>
+          </div>
+      </div>
+
       <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha512/0.8.0/sha512.min.js"></script>
       <script src=" https://login.remita.net/payment/v1/remita-pay-inline.bundle.js"></script>
