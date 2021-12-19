@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ApplicantPayment;
+use App\Models\Applicant;
 
 class RemitaConfig extends Controller
 {
@@ -93,6 +94,49 @@ class RemitaConfig extends Controller
         catch (\Throwable $th) {
             $rtMsg = "";
             return response()->json(['status'=>'Nok','msg'=>'Error loging new RRR, record exist maybe','rsp'=>''], 401);
+
+        }
+
+    }
+
+    public function log_new_teller(Request $request){
+       
+        $validator = Validator::make($request->all(), [ 
+            'payType' => 'required|string',
+            'email' => 'required|string',
+            'rrr' => 'required|string',
+            'amount' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['status'=>'Nok','msg'=>'Error with supplied parama while loging new RRR','rsp'=>''], 400);
+        }
+        
+        try {  
+            $data = ApplicantPayment::where(['rrr'=>$request->rrr])->first();
+            if(!empty($data)){ return response()->json(['status'=>'ok','msg'=>'Teller already exist, wait while your payment is verified!','rsp'=>''], 400); }
+            
+            $data = Applicant::where(['email'=>$request->email])->first();
+            if(empty($data)){ return response()->json(['status'=>'Nok','msg'=>'Invalid Email Supplied!','rsp'=>''], 400); }
+            
+            $timesammp = DATE("dmyHis"); 
+            $session =   app('App\Http\Controllers\ConfigController')->settings($request)->id;
+            $payment = new ApplicantPayment();
+            $payment->email = $data->email;
+            $payment->names = $data->surname ." ". $data->first_name;
+            $payment->amount = $request->amount;
+            $payment->rrr = $request->rrr;
+            $payment->trans_ref = $this->remita_generate_trans_ID();
+            $payment->pay_type = $request->payType;
+            $payment->session = $session;
+            $payment->status_code = '025';
+            $payment->status_msg = 'pending';
+            $payment->time_stamp = $timesammp;
+            $payment->save();
+            return response()->json(['status'=>'ok','msg'=>'New teller logged successfully','rsp'=>''], 201);
+        }
+        catch (\Throwable $th) {
+            $rtMsg = "";
+            return response()->json(['status'=>'Nok','msg'=>'Error loging new teller!','rsp'=>''], 401);
 
         }
 

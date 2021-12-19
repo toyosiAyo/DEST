@@ -10,6 +10,7 @@ use App\Http\Controllers\ApplicantPaymentController;
 use Illuminate\Support\Facades\Http;
 
 
+
 Route::get('/http', function () {
     //$response->body() : string;
     // $response->json() : array|mixed;
@@ -245,6 +246,7 @@ $HTML_type = true;
 
 
 
+
 Route::get('forgot/password',[AuthController::class,'forgot_password'])->name('forgot.password');
 Route::post('forgot/password',[AuthController::class,'forgot_password_post'])->name('forgot.password');
 Route::post('auth/check',[AuthController::class,'auth_check'])->name('auth.check');
@@ -277,10 +279,11 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('payments',[ApplicantPaymentController::class,'view_payments'])->name('payments');
 
     Route::post('password_reset',[AuthController::class,'password_reset'])->name('password_reset');
-
-
+    Route::post('log_new_teller',[RemitaConfig::class,'log_new_teller'])->name('log_new_teller');
+    
    
 });
+
 
 // Route::get('verify',function(){
 //     return view('auth/verify');
