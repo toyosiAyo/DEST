@@ -247,4 +247,32 @@ $(document).ready(function () {
             }
         });
     });
+
+    $("#form_teller").on("submit", function (e) {
+        e.preventDefault();
+        var formData = $("#form_teller").serialize();
+        $.ajax({
+            type: "POST",
+            url: "log_new_teller",
+            data: formData,
+            dataType: "json",
+            beforeSend: function () {
+                $("#btnSendteller").html(
+                    '<i class="fa fa-spinner fa-spin"></i>'
+                );
+            },
+            success: function (response) {
+                $("#btnSendteller").html("Send");
+                $("#modal_teller").modal("hide");
+                toastr["success"](response.msg);
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response);
+                $("#btnSendteller").html("Send");
+                toastr.options;
+                toastr["error"](response.responseJSON.msg);
+            },
+        });
+    });
 });
