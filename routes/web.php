@@ -6,6 +6,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\RemitaConfig;
 use App\Http\Controllers\ApplicantPaymentController;
+use App\Http\Controllers\AdminController;
 
 use Illuminate\Support\Facades\Http;
 
@@ -289,3 +290,5 @@ Route::group(['middleware'=>['authcheck']], function() {
 Route::get('admin',function(){
     return view('admin/auth/auth-login');
 });
+Route::post('admin_login_auth',[AdminController::class,'login']);
+
