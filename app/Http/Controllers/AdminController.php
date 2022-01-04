@@ -29,4 +29,9 @@ class AdminController extends Controller
             }
        }
     }
+
+    public function adminDashboard(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        return view('admin.pages.dashboard',['data'=>$data]);
+    }
 }

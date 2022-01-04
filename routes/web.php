@@ -281,14 +281,18 @@ Route::group(['middleware'=>['authcheck']], function() {
 
     Route::post('password_reset',[AuthController::class,'password_reset'])->name('password_reset');
     Route::post('log_new_teller',[RemitaConfig::class,'log_new_teller'])->name('log_new_teller');
-    
-   
-});
 
 
 
-Route::get('admin',function(){
-    return view('admin/auth/auth-login');
-});
-Route::post('admin_login_auth',[AdminController::class,'login']);
+        //********************************************Admin Authenticated Route************************************************
+    Route::get('admin/dashboard',[AdminController::class,'adminDashboard']);
+    });
+
+
+        //******************************************************Admin Normal Route******************************************************
+
+    Route::get('admin',function(){
+        return view('admin/auth/auth-login');
+    });
+    Route::post('admin_login_auth',[AdminController::class,'login']);
 
