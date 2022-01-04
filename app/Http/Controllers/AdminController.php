@@ -15,7 +15,7 @@ class AdminController extends Controller
             'email'=>'required|email',
             'password'=>'required|min:4|max:8',
         ]);
-       $app = Applicant::where(['email',$request->email],['status','admin'])->first();
+       $app = Applicant::where([['email',$request->email],['status','admin']])->first();
         if(!$app){
             return response()->json(['status'=>'Nok','message'=>'You dont have the permission to access this resource'], 401);
         }
