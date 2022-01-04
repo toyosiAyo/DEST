@@ -210,7 +210,7 @@
         <script src="assets_admin/libs/pace-js/pace.min.js"></script>
         <!-- password addon init -->
         <script src="assets_admin/js/pages/pass-addon.init.js"></script>
-        <script src="assets/scripts/validation.min.js"></script>
+        <script src="scripts/validation.min.js"></script>
         <script src="assets_admin/scripts/auth.js"></script>    
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </body>
