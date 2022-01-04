@@ -37,7 +37,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="payments" data-key="t-login">All Payments</a></li>
-                        <li><a href="pending_payments" data-key="t-register">Pending</a></li>
+                        <li><a href="{{route('pending_payments')}}" data-key="t-register">Pending</a></li>
                     </ul>
                 </li>
             </ul>

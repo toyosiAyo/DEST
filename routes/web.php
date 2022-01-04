@@ -284,15 +284,16 @@ Route::group(['middleware'=>['authcheck']], function() {
 
 
 
-        //********************************************Admin Authenticated Route************************************************
+    //********************************************Admin Authenticated Route************************************************
+
     Route::get('admin/dashboard',[AdminController::class,'adminDashboard']);
-    });
+    Route::get('admin/pending_payments',[AdminController::class,'pendingPayments'])->name('pending_payments');
+});
 
+//******************************************************Admin Normal Route******************************************************
 
-        //******************************************************Admin Normal Route******************************************************
-
-    Route::get('admin',function(){
-        return view('admin/auth/auth-login');
-    });
-    Route::post('admin_login_auth',[AdminController::class,'login']);
+Route::get('admin',function(){
+    return view('admin/auth/auth-login');
+});
+Route::post('admin_login_auth',[AdminController::class,'login']);
 
