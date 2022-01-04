@@ -15,26 +15,30 @@
                     </a>
                 </li>
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow">
+                    <a href="applicants">
                         <i data-feather="users"></i>
-                        <span data-key="t-authentication">Members</span>
+                        <span data-key="t-pages">Applicants</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i data-feather="file-text"></i>
+                        <span data-key="t-authentication">Applications</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="members" data-key="t-login">All members</a></li>
-                        <li><a href="pending_members" data-key="t-register">Pending</a></li>
+                        <li><a href="applications" data-key="t-login">All Applications</a></li>
+                        <li><a href="pending_applications" data-key="t-register">Pending Applications</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="events">
-                        <i data-feather="file-text"></i>
-                        <span data-key="t-pages">Events</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="payments">
+                    <a href="javascript: void(0);" class="has-arrow">
                         <i class="fas fa-hand-holding-usd"></i>
-                        <span data-key="t-pages">Payments</span>
+                        <span data-key="t-authentication">Payments</span>
                     </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="payments" data-key="t-login">All Payments</a></li>
+                        <li><a href="pending_payments" data-key="t-register">Pending</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>

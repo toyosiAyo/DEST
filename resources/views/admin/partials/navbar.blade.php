@@ -8,7 +8,7 @@
                         <img src="../assets/img/logos/logo/ICOBA_logo.png" alt="" height="24">
                     </span>
                     <span class="logo-lg">
-                        <img src="../assets/img/logos/logo/ICOBA_logo.png" alt="" height="24"> <span class="logo-txt">ICOBA ADMIN</span>
+                        <img src="../assets/img/logos/logo/ICOBA_logo.png" alt="" height="24"> <span class="logo-txt">DEST ADMIN</span>
                     </span>
                 </a>
 
@@ -17,7 +17,7 @@
                         <img src="../assets/img/logos/logo/ICOBA_logo.png" alt="" height="24">
                     </span>
                     <span class="logo-lg">
-                        <img src="../assets/img/logos/logo/ICOBA_logo.png" alt="" height="24"> <span class="logo-txt">ICOBA ADMIN</span>
+                        <img src="../assets/img/logos/logo/ICOBA_logo.png" alt="" height="24"> <span class="logo-txt">DEST ADMIN</span>
                     </span>
                 </a>
             </div>
