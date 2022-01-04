@@ -75,6 +75,7 @@
               <button type="submit" class="btn btn-primary btn-block">Log in</button>
             </form>
             <p>No account? <a href="{{route('get.account.form')}}">Create Profile here</a></p>
+            <p>Admin Login <a href="admin">here</a></p>
             @include("partials.auth_footer")
           </div>
         

@@ -285,6 +285,7 @@ Route::group(['middleware'=>['authcheck']], function() {
 });
 
 
-// Route::get('verify',function(){
-//     return view('auth/verify');
-// });
+
+Route::get('admin',function(){
+    return view('admin/auth/auth-login');
+});
