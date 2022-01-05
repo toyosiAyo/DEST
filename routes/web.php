@@ -288,6 +288,7 @@ Route::group(['middleware'=>['authcheck']], function() {
 
     Route::get('admin/dashboard',[AdminController::class,'adminDashboard']);
     Route::get('admin/pending_payments',[AdminController::class,'pendingPayments'])->name('pending_payments');
+    Route::get('admin/payments',[AdminController::class,'allPayments'])->name('allpayments');
     Route::get('admin/applicants',[AdminController::class,'viewApplicants'])->name('viewApplicants');
 });
 

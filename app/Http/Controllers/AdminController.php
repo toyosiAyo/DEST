@@ -42,6 +42,13 @@ class AdminController extends Controller
         return view('admin.pages.pending_payments',['data'=>$data,'payments'=>$payments,'count'=>$count]);
     }
 
+    public function allPayments(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $payments = DB::table('application_payments')->select('*')->orderby('created_at','desc')->get();
+        $count = count($payments);
+        return view('admin.pages.payments',['data'=>$data,'payments'=>$payments,'count'=>$count]);
+    }
+
     public function viewApplicants(Request $request){
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
         $applicants = DB::table('applicants')->select('*')->where('status','applicant')->get();

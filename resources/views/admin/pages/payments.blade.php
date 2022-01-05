@@ -1,7 +1,7 @@
 @extends("admin.layouts.master") 
 
     @section("title")
-      Payments
+       Payments
     @endsection
 
     @section("content")
@@ -39,6 +39,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Amount</th>
                                 <th scope="col">Transaction ref</th>
+                                <th scope="col">Payment Type</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Status</th>
                                 <th style="width: 80px; min-width: 80px;">Action</th>
@@ -49,13 +50,18 @@
                                 @foreach($payments as $payment)
                                 <tr>
                                     <td>{{ $i }} @php $i++ @endphp</td>
-                                    <td>{{ $payment->fullName }}</td>
+                                    <td>{{ $payment->names }}</td>
                                     <td>{{ $payment->amount }}</td>
-                                    <td>{{ $payment->txRef }}</td>
-                                    <td>{{ date("d M Y", strtotime($payment->date)) }}</td>
+                                    <td>{{ $payment->rrr }}</td>
+                                    <td>{{ $payment->pay_type }}</td>
+                                    <td>{{ date("d M Y", strtotime($payment->created_at)) }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
-                                            <a href="#" class="badge badge-soft-primary">{{ $payment->status }}</a>
+                                            @if($payment->status_msg == 'pending')
+                                            <a href="#" class="badge badge-soft-danger">{{ $payment->status_msg }}</a>
+                                            @else
+                                            <a href="#" class="badge badge-soft-success">{{ $payment->status_msg }}</a>
+                                            @endif
                                         </div>
                                     </td>
                                     <td>
@@ -64,7 +70,7 @@
                                                 <i class="bx bx-dots-horizontal-rounded"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                                <li><a class="dropdown-item" href="#">View</a></li>
                                             </ul>
                                         </div>
                                     </td>
