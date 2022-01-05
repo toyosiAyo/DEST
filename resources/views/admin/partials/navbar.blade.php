@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="dashboard" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="../assets/img/logos/logo/ICOBA_logo.png" alt="" height="24">
+                        <img src="../assets/images/run_logo.png" alt="" height="24">
                     </span>
                     <span class="logo-lg">
-                        <img src="../assets/img/logos/logo/ICOBA_logo.png" alt="" height="24"> <span class="logo-txt">DEST ADMIN</span>
+                        <img src="../assets/images/run_logo.png" alt="" height="24"> <span class="logo-txt">DEST ADMIN</span>
                     </span>
                 </a>
 
                 <a href="dashboard" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="../assets/img/logos/logo/ICOBA_logo.png" alt="" height="24">
+                        <img src="../assets/images/run_logo.png" alt="" height="24">
                     </span>
                     <span class="logo-lg">
-                        <img src="../assets/img/logos/logo/ICOBA_logo.png" alt="" height="24"> <span class="logo-txt">DEST ADMIN</span>
+                        <img src="../assets/images/run_logo.png" alt="" height="24"> <span class="logo-txt">DEST ADMIN</span>
                     </span>
                 </a>
             </div>
@@ -89,7 +89,7 @@
                     <a class="dropdown-item" href="#"><i class="mdi mdi-face-profile font-size-16 align-middle me-1"></i> Profile</a>
                     <a class="dropdown-item" href="#"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i> Lock Screen</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="signout"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
+                    <a class="dropdown-item" href="{{route('adminlogout')}}"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
                 </div>
             </div>
 

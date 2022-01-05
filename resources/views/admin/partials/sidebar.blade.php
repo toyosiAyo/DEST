@@ -15,7 +15,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="applicants">
+                    <a href="{{route('viewApplicants')}}">
                         <i data-feather="users"></i>
                         <span data-key="t-pages">Applicants</span>
                     </a>

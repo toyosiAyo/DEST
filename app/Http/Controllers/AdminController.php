@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
-{
+{    
     public function login(Request $request){
         $request->validate([
             'email'=>'required|email',
@@ -40,6 +40,13 @@ class AdminController extends Controller
         $payments = DB::table('application_payments')->select('*')->where('status_msg','pending')->orderby('created_at','desc')->get();
         $count = count($payments);
         return view('admin.pages.pending_payments',['data'=>$data,'payments'=>$payments,'count'=>$count]);
+    }
+
+    public function viewApplicants(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $applicants = DB::table('applicants')->select('*')->where('status','applicant')->get();
+        $count = count($applicants);
+        return view('admin.pages.applicants',['data'=>$data,'applicants'=>$applicants,'count'=>$count]);
     }
 
     public function logout(){

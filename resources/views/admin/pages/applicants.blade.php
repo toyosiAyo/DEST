@@ -1,7 +1,7 @@
 @extends("admin.layouts.master") 
 
     @section("title")
-      Members
+      Applicants
     @endsection
 
     @section("content")
@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0 font-size-18">Members</h4>
+                                <h4 class="mb-sm-0 font-size-18">Applicants</h4>
                             </div>
                         </div>
                     </div>
@@ -25,17 +25,8 @@
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <h5 class="card-title">Member List <span class="text-muted fw-normal ms-2">({{$count}})</span></h5>
+                                <h5 class="card-title">Applicant List <span class="text-muted fw-normal ms-2">({{$count}})</span></h5>
                             </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-                                <div>
-                                    <a href="#" class="btn btn-light"><i class="bx bx-plus me-1"></i> Add New</a>
-                                </div>                              
-                            </div>
-
                         </div>
                     </div>
                     <!-- end row -->
@@ -48,24 +39,24 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Phone number</th>
-                                <th scope="col">Set</th>
+                                <th scope="col">Gender</th>
                                 <th style="width: 80px; min-width: 80px;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php $i = 1; @endphp
-                                @foreach($members as $member)
+                                @foreach($applicants as $applicant)
                                 <tr>
                                     <td>{{ $i }} @php $i++ @endphp</td>
                                     <td>
-                                        <img src="{{ url('storage/app/' .$member->profile_image) }}" alt="" class="avatar-sm rounded-circle me-2">
-                                        <a href="#" class="text-body">{{ $member->surname.' '.$member->other_names }}</a>
+                                        <img src="{{asset('storage/'. $applicant->profile_pix) }}" alt="" class="avatar-sm rounded-circle me-2">
+                                        <a href="#" class="text-body">{{ $applicant->surname.' '.$applicant->first_name }}</a>
                                     </td>
-                                    <td>{{ $member->email }}</td>
-                                    <td>{{ $member->phone }}</td>
+                                    <td>{{ $applicant->email }}</td>
+                                    <td>{{ $applicant->phone }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
-                                            <a href="#" class="badge badge-soft-primary">{{ $member->class_left }}</a>
+                                            <a href="#" class="badge badge-soft-primary">{{ $applicant->gender }}</a>
                                         </div>
                                     </td>
                                     <td>
@@ -75,8 +66,6 @@
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
                                                 <li><a class="dropdown-item" href="#">Action</a></li>
-                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
                                             </ul>
                                         </div>
                                     </td>
