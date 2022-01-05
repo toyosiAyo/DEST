@@ -296,4 +296,6 @@ Route::get('admin',function(){
     return view('admin/auth/auth-login');
 });
 Route::post('admin_login_auth',[AdminController::class,'login']);
+Route::get('logout',[AdminController::class,'logout'])->name('logout');
+
 

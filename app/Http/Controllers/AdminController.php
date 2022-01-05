@@ -41,4 +41,11 @@ class AdminController extends Controller
         $count = count($payments);
         return view('admin.pages.pending_payments',['data'=>$data,'payments'=>$payments,'count'=>$count]);
     }
+
+    public function logout(){
+        if(session()->has('user')){
+            session()->pull('user');
+            return redirect('/admin');
+        }
+    }
 }

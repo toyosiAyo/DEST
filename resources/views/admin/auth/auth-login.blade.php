@@ -11,7 +11,7 @@
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="assets_admin/images/favicon.ico">
+        <link rel="shortcut icon" href="../assets/images/run_logo.png">
 
         <!-- preloader css -->
         <link rel="stylesheet" href="assets_admin/css/preloader.min.css" type="text/css" />
@@ -43,7 +43,7 @@
                                 <div class="d-flex flex-column h-100">
                                     <div class="mb-4 mb-md-5 text-center">
                                         <a href="admin" class="d-block auth-logo">
-                                            <img src="assets/img/logos/logo/ICOBA_logo.png" alt="" height="28"> <span class="logo-txt">DEST ADMIN</span>
+                                            <img src="{{ asset('assets/images/run_logo.png') }}" alt="" height="28"> <span class="logo-txt">DEST ADMIN</span>
                                         </a>
                                     </div>
                                     <div class="auth-content my-auto">

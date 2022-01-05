@@ -8,7 +8,7 @@
         <meta content="ICOBA WORLD" name="description" />
         <meta content="ICOBA" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="../assets/img/logos/logo/ICOBA_logo.png">
+        <link rel="shortcut icon" href="../assets/images/run_logo.png">
 
         <!-- preloader css -->
         <link rel="stylesheet" href="../assets_admin/css/preloader.min.css" type="text/css" />
