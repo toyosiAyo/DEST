@@ -232,13 +232,13 @@ $(document).ready(function () {
                 $.cookie("app_type", payType);
                 window.location.href = "app_form";
             } else if (response.msg === "pending") {
+                $("#modal_teller").modal("show");
                 var pin = response.rsp;
                 $("#btn_foundation").html("Create Application");
                 toastr.options;
                 toastr["error"](
                     `Payment with teller number ${pin} is still pending approval`
                 );
-                return false;
             } else {
                 $("#btn_foundation").html("Create Application");
                 toastr.options;
