@@ -112,7 +112,7 @@ class RemitaConfig extends Controller
         }
         
         try {  
-            $data = ApplicantPayment::where(['rrr'=>$request->rrr])->first();
+            $data = ApplicantPayment::where(['rrr'=>$request->rrr,'status_code'=>'025'])->first();
             if(!empty($data)){ return response()->json(['status'=>'ok','msg'=>'Teller already exist, wait while your payment is verified!','rsp'=>''], 400); }
             
             $data = Applicant::where(['email'=>$request->email])->first();
