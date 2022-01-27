@@ -34,8 +34,7 @@ $y="oluwatusint@run.edu.ng";
 $To = " $x, $y ";
 $Recipient_names = "Hamed David";
 $code = sprintf("%06d", mt_rand(1, 999999));
-//$Msg =
-return '<!DOCTYPE html>
+$Msg ='<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -240,6 +239,7 @@ $HTML_type = true;
         "From"=>$From,"FromName"=>$FromName,"To"=>$To,"Recipient_names"=>$Recipient_names,
         "Msg"=>$Msg, "Subject"=>$Subject,"HTML_type"=>$HTML_type,
     ]);
+    //return "testing";
     dd($res->body());
 });
 
