@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ApplicantPayment;
+use Illuminate\Support\Facades\Http;
 use App\Models\Applicant;
 
 class RemitaConfig extends Controller
@@ -131,8 +132,19 @@ class RemitaConfig extends Controller
             $payment->status_code = '025';
             $payment->status_msg = 'pending';
             $payment->time_stamp = $timesammp;
-            $payment->save();
-            return response()->json(['status'=>'ok','msg'=>'New teller logged successfully','rsp'=>''], 201);
+            $save = $payment->save();
+            if($save){
+                 $From = "ict@run.edu.ng";
+                 $FromName = "DEST@REDEEMER's UNIVERSITY";
+                 $Msg = app('App\Http\Controllers\ConfigController')->email_msg_to_notify_teller_logging($email=$request->email,$teller=$request->rrr);
+                 $Subject = "New Teller Logged";
+                 $HTML_type = true;
+                 Http::asForm()->post('http://adms.run.edu.ng/codebehind/destEmail.php',["From"=>$From,"FromName"=>$FromName,"To"=>'hamendment@mail.com',"Recipient_names"=>"DEST ADMIN","Msg"=>$Msg, "Subject"=>$Subject,"HTML_type"=>$HTML_type,]);
+                 return response()->json(['status'=>'ok','msg'=>'New teller logged successfully','rsp'=>''], 201);
+         
+             }else{
+                  return back()->with('fail','Issue creating account');
+              }
         }
         catch (\Throwable $th) {
             $rtMsg = "";
