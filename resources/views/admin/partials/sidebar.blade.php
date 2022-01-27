@@ -40,6 +40,16 @@
                         <li><a href="{{route('pending_payments')}}" data-key="t-register">Pending</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="fab fa-whmcs"></i>
+                        <span data-key="t-authentication">Config</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="#" data-key="t-login">Create Course</a></li>
+                        <li><a href="#" data-key="t-register">Create Curriculum</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->
