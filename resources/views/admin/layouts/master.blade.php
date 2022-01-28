@@ -9,6 +9,8 @@
         <meta content="ICOBA" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="../assets/images/run_logo.png">
+        <!-- choices css -->
+        <link href="../assets_admin/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" type="text/css" />
 
         <!-- preloader css -->
         <link rel="stylesheet" href="../assets_admin/css/preloader.min.css" type="text/css" />
@@ -20,7 +22,6 @@
         <!-- App Css-->
         <link href="../assets_admin/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link href="../assets_admin/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" type="text/css" />
 
 
         <!-- JAVASCRIPT -->
@@ -31,6 +32,10 @@
         <script src="../assets_admin/libs/node-waves/waves.min.js"></script>
         <script src="../assets_admin/libs/feather-icons/feather.min.js"></script>
         <script src="../assets_admin/libs/pace-js/pace.min.js"></script>
+        <!-- choices js -->
+        <script src="../assets_admin/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+        <!-- init js -->
+        <script src="../assets_admin/js/pages/form-advanced.init.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 

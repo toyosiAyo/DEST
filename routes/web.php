@@ -291,6 +291,10 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('admin/payments',[AdminController::class,'allPayments'])->name('allpayments');
     Route::get('admin/applicants',[AdminController::class,'viewApplicants'])->name('viewApplicants');
     Route::get('admin/curriculum',[AdminController::class,'curriculum'])->name('curriculum');
+
+    Route::get('admin/advance',function(){
+        return view('admin/pages/form-advanced');
+    });
 });
 
 //******************************************************Admin Normal Route******************************************************

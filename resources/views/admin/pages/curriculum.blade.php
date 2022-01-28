@@ -33,10 +33,10 @@
                                         <div class="col-lg-6">
                                             <h3 class="font-size-14 mb-3">Create Curriculum</h3>
                                             <div class="mb-3">
-                                                <label for="course" class="form-label font-size-13 text-muted">Select course(s)</label>
-                                                <select class="form-control" name="course[]"
-                                                    id="course"
-                                                    placeholder="Search for courses" multiple>
+                                                <label for="choices-multiple-default" class="form-label font-size-13 text-muted">Select Courses</label>
+                                                <select class="form-control" data-trigger
+                                                    name="course[]" id="choices-multiple-default"
+                                                    placeholder="This is a placeholder" multiple>
                                                     @foreach($courses as $course)
                                                     <option value="{{ $course->course_code }}">{{ $course->course_code }}</option>
                                                     @endforeach  
@@ -95,6 +95,4 @@
             @include("admin.partials.footer")            
         </div>
 
-        <script src="../assets_admin/libs/choices.js/public/assets/scripts/choices.min.js"></script>        
-        <script src="../assets_admin/js/pages/form-advanced.init.js"></script>        
     @endsection
