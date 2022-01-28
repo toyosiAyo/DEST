@@ -47,7 +47,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="#" data-key="t-login">Create Course</a></li>
-                        <li><a href="#" data-key="t-register">Create Curriculum</a></li>
+                        <li><a href="{{route('curriculum')}}" data-key="t-register">Create Curriculum</a></li>
                     </ul>
                 </li>
             </ul>

@@ -56,6 +56,13 @@ class AdminController extends Controller
         return view('admin.pages.applicants',['data'=>$data,'applicants'=>$applicants,'count'=>$count]);
     }
 
+    public function curriculum(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $courses = DB::table('courses')->select('*')->get();
+        $programmes = DB::table('programmes')->select('*')->get();
+        return view('admin.pages.curriculum',['data'=>$data,'courses'=>$courses,'programmes'=>$programmes]);
+    }
+
     public function logout(){
         if(session()->has('user')){
             session()->pull('user');
