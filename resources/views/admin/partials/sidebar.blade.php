@@ -26,8 +26,8 @@
                         <span data-key="t-authentication">Applications</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="applications" data-key="t-login">All Applications</a></li>
-                        <li><a href="pending_applications" data-key="t-register">Pending Applications</a></li>
+                        <li><a href="{{route('viewApplications')}}" data-key="t-login">All Applications</a></li>
+                        <li><a href="{{route('viewPendingApplications')}}" data-key="t-register">Pending Applications</a></li>
                     </ul>
                 </li>
                 <li>

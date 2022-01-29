@@ -30,7 +30,7 @@
                                 <!-- end card header -->
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-4">
                                             <h3 class="font-size-14 mb-3">Create Curriculum</h3>
                                             <div class="mb-3">
                                                 <label for="choices-multiple-default" class="form-label font-size-13 text-muted">Select Courses</label>
@@ -66,11 +66,32 @@
                                         </div>
                                         <!-- end col -->
 
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-8">
                                             <div class="mt-4 mt-lg-0">
                                                 <h3 class="font-size-14 mb-3">View Curriculum</h3>
                                                 <div class="d-flex flex-wrap gap-2">
-                                                    
+                                                    <select class="form-control" data-trigger name="degree"
+                                                        id="degree"
+                                                        placeholder="Search for degree">
+                                                        <option value="pre-degree">Pre-degree</option>
+                                                        <option value="foundation">Foundation</option>
+                                                        <option value="conversion">HND Conversion</option>
+                                                    </select>
+                                                    <select class="form-control" data-trigger name="programme"
+                                                        id="programme"
+                                                        placeholder="Search for programmes">
+                                                        @foreach($programmes as $program)
+                                                        <option value="{{ $program->programme_id }}">{{ $program->programme }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <select class="form-control" data-trigger name="level"
+                                                        id="level"
+                                                        placeholder="Search for programmes">
+                                                        <option value="100">100</option>
+                                                        <option value="200">200</option>
+                                                        <option value="300">300</option>
+                                                    </select>
+                                                    <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light">View</button>
                                                 </div>
                                             </div>
                                         </div>
