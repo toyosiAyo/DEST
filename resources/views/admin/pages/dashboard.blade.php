@@ -40,12 +40,8 @@
                                         <div class="col-6">
                                             <span class="text-muted mb-3 lh-1 d-block text-truncate">Students</span>
                                             <h4 class="mb-3">
-                                                <span class="counter-value" data-target="2">0</span>
+                                                <span class="counter-value" data-target="{{$students}}">0</span>
                                             </h4>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <div id="mini-chart1" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
                                         </div>
                                     </div>
                                 </div><!-- end card body -->
@@ -61,11 +57,8 @@
                                         <div class="col-6">
                                             <span class="text-muted mb-3 lh-1 d-block text-truncate">Applicants</span>
                                             <h4 class="mb-3">
-                                                <span class="counter-value" data-target="3">0</span>
+                                                <span class="counter-value" data-target="{{$applicants}}">0</span>
                                             </h4>
-                                        </div>
-                                        <div class="col-6">
-                                            <div id="mini-chart2" data-colors='["#5156be"]' class="apex-charts mb-2"></div>
                                         </div>
                                     </div>
                                 </div><!-- end card body -->
@@ -81,7 +74,7 @@
                                         <div class="col-6">
                                             <span class="text-muted mb-3 lh-1 d-block text-truncate">Applications</span>
                                             <h4 class="mb-3">
-                                                <span class="counter-value" data-target="3">0</span>
+                                                <span class="counter-value" data-target="{{$applications}}">0</span>
                                             </h4>
                                         </div>
                                         <div class="col-6">
@@ -101,7 +94,7 @@
                                         <div class="col-6">
                                             <span class="text-muted mb-3 lh-1 d-block text-truncate">Pending Payments</span>
                                             <h4 class="mb-3">
-                                                <span class="counter-value" data-target="1">0</span>
+                                                <span class="counter-value" data-target="{{$payments}}">0</span>
                                             </h4>
                                         </div>
                                     </div>
