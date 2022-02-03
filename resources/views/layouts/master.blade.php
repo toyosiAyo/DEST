@@ -12,7 +12,7 @@
   <title>@yield('title')</title>
 
   <link rel="apple-touch-icon" href="{{ asset('assets/images/apple-touch-icon.png') }}">
-  <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+  <link rel="shortcut icon" href="{{ asset('assets/images/run_logo.png') }}">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="{{ asset('global/css/bootstrap.minfd53.css?v4.0.1') }}">
