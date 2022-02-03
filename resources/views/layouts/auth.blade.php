@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="{{ asset('global/css/bootstrap.minfd53.css?v4.0.1') }}">
   <link rel="stylesheet" href="{{ asset('global/css/bootstrap-extend.minfd53.css?v4.0.1') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/site.minfd53.css?v4.0.1') }}">
+  <link rel="stylesheet" href="{{ asset('assets/examples/css/pages/login-v4.minfd53.css') }}">
 
   <!-- Skin tools (demo site only) -->
   <link rel="stylesheet" href="{{ asset('global/css/skintools.minfd53.css?v4.0.1') }}">
