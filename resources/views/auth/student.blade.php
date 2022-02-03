@@ -5,7 +5,7 @@
   @endsection
     
   @push('head')
-  <link rel="stylesheet" href="{{ asset('assets/examples/css/pages/login-v4.minfd53.css?v4.0.1') }}">
+  <link rel="stylesheet" href="{{ asset('assets/examples/css/pages/login-v4.minfd53.css') }}">
   @endpush
 
   @section("content")
