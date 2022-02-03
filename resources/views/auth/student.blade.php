@@ -16,7 +16,7 @@
             <div class="brand">
               <img class="brand-img" src="{{ asset('assets/images/DEST_logo.png') }}" alt="..."> 
               <hr>
-              <h1 style="color:white; background-color:darkblue; font-weight: bold; font-style: italic; font-size: 40px;">Welcome to DEST Admission Portal</h1>
+              <h1 style="color:white; background-color:darkblue; font-weight: bold; font-style: italic; font-size: 40px;">Welcome to DEST Student Portal</h1>
             </div>
           </div>
           <div class="page-login-main">
@@ -75,7 +75,7 @@
               <button type="submit" class="btn btn-primary btn-block">Log in</button>
             </form>
             <p>No account? <a href="{{route('get.account.form')}}">Create Profile here</a></p>
-            <p>Student Login <a href="student">here</a></p>
+            <p>Applicant Login <a href="/">here</a></p>
             <p>Admin Login <a href="admin">here</a></p>
             @include("partials.auth_footer")
           </div>
