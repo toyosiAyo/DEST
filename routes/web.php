@@ -257,6 +257,10 @@ Route::get('account_activate_view',[AuthController::class,'account_activate_view
 Route::post('account_activate',[AuthController::class,'account_activate'])->name('account_activate');
 Route::get('resend_otp',[AuthController::class,'resend_otp'])->name('resend_otp');
 
+Route::get('student',function(){
+    return view('auth/student');
+});
+
 
 Route::group(['middleware'=>['authcheck']], function() {
     Route::get('register',[AuthController::class,'register_form'])->name('get.account.form');
@@ -290,6 +294,12 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('admin/pending_payments',[AdminController::class,'pendingPayments'])->name('pending_payments');
     Route::get('admin/payments',[AdminController::class,'allPayments'])->name('allpayments');
     Route::get('admin/applicants',[AdminController::class,'viewApplicants'])->name('viewApplicants');
+    Route::get('admin/applications',[AdminController::class,'viewApplications'])->name('viewApplications');
+    Route::get('admin/pending_applications',[AdminController::class,'viewPendingApplications'])->name('viewPendingApplications');
+    Route::get('admin/curriculum',[AdminController::class,'curriculum'])->name('curriculum');
+    Route::get('admin/advance',function(){
+        return view('admin/pages/form-advanced');
+    });
 });
 
 //******************************************************Admin Normal Route******************************************************

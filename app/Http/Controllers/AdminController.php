@@ -32,7 +32,11 @@ class AdminController extends Controller
 
     public function adminDashboard(Request $request){
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-        return view('admin.pages.dashboard',['data'=>$data]);
+        $applicants = DB::table('applicants')->where('status','applicant')->count();
+        $students = DB::table('applicants')->where('status','student')->count();
+        $applications = DB::table('applications')->count();
+        $payments = DB::table('application_payments')->where('status_msg','pending')->count();
+        return view('admin.pages.dashboard',['data'=>$data,'applicants'=>$applicants,'students'=>$students,'applications'=>$applications,'payments'=>$payments]);
     }
 
     public function pendingPayments(Request $request){
@@ -54,6 +58,30 @@ class AdminController extends Controller
         $applicants = DB::table('applicants')->select('*')->where('status','applicant')->get();
         $count = count($applicants);
         return view('admin.pages.applicants',['data'=>$data,'applicants'=>$applicants,'count'=>$count]);
+    }
+
+    public function viewApplications(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $applications = DB::table('applications')->join('applicants', 'applications.submitted_by', '=', 'applicants.email')
+        ->select('applications.*','first_choice->prog as Programme','applicants.surname','applicants.first_name','applicants.other_name')->get();
+        $count = count($applications);
+        return view('admin.pages.applications',['data'=>$data,'applications'=>$applications,'count'=>$count]);
+    }
+
+    public function viewPendingApplications(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $applications = DB::table('applications')->join('applicants', 'applications.submitted_by', '=', 'applicants.email')
+        ->select('applications.*','first_choice->prog as Programme','applicants.surname','applicants.first_name','applicants.other_name')
+        ->where('applications.status', 'pending')->get();
+        $count = count($applications);
+        return view('admin.pages.pending_applications',['data'=>$data,'applications'=>$applications,'count'=>$count]);
+    }
+
+    public function curriculum(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $courses = DB::table('courses')->select('*')->get();
+        $programmes = DB::table('programmes')->select('*')->get();
+        return view('admin.pages.curriculum',['data'=>$data,'courses'=>$courses,'programmes'=>$programmes]);
     }
 
     public function logout(){

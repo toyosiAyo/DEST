@@ -5,18 +5,18 @@
   @endsection
     
   @push('head')
-  <link rel="stylesheet" href="{{ asset('assets/examples/css/pages/login-v2.minfd53.css?v4.0.1') }}">
+  <link rel="stylesheet" href="{{ asset('assets/examples/css/pages/login-v4.minfd53.css?v4.0.1') }}">
   @endpush
 
   @section("content")
-    <body class="animsition page-login-v2 layout-full page-dark">
+    <body class="animsition page-login-v4 layout-full page-dark">
       <div class="page" data-animsition-in="fade-in" data-animsition-out="fade-out">
         <div class="page-content">
           <div class="page-brand-info">
             <div class="brand">
               <img class="brand-img" src="{{ asset('assets/images/DEST_logo.png') }}" alt="..."> 
               <hr>
-              <h1 style="color:white; background-color:darkblue; font-weight: bold; font-style: italic; font-size: 40px;">Welcome to DEST Admission Portal</h1>
+              <h1 style="color:white; background-color:darkblue; font-weight: bold; font-style: italic; font-size: 40px;">Welcome to DEST Student Portal</h1>
             </div>
           </div>
           <div class="page-login-main">
@@ -75,7 +75,7 @@
               <button type="submit" class="btn btn-primary btn-block">Log in</button>
             </form>
             <p>No account? <a href="{{route('get.account.form')}}">Create Profile here</a></p>
-            <p>Student Login <a href="student">here</a></p>
+            <p>Applicant Login <a href="/">here</a></p>
             <p>Admin Login <a href="admin">here</a></p>
             @include("partials.auth_footer")
           </div>
