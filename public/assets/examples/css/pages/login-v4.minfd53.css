@@ -4,12 +4,12 @@
  * Licensed under the Themeforest Standard Licenses
  */
 
- .page-login-v4 {
+.page-login-v4 {
     height: 100%;
     overflow-x: hidden;
 }
 .page-login-v4:before {
-    background-image: url(../../images/bg5.png);
+    background-image: url(../../images/bg5.jpg);
 }
 .page-login-v4.page-dark.layout-full:after {
     background-color: rgba(33, 33, 33, 0.6);
