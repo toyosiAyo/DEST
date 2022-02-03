@@ -6,10 +6,11 @@
     
   @push('head')
   <link rel="stylesheet" href="{{ asset('assets/examples/css/pages/login-v4.minfd53.css?v4.0.1') }}">
+  <link rel="stylesheet" href="{{ asset('assets/examples/css/pages/login-v2.minfd53.css?v4.0.1') }}">
   @endpush
 
   @section("content")
-    <body class="animsition page-login-v4 layout-full page-dark">
+    <body class="animsition page-login-v2 layout-full page-dark">
       <div class="page" data-animsition-in="fade-in" data-animsition-out="fade-out">
         <div class="page-content">
           <div class="page-brand-info">
