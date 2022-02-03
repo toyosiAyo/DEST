@@ -257,6 +257,10 @@ Route::get('account_activate_view',[AuthController::class,'account_activate_view
 Route::post('account_activate',[AuthController::class,'account_activate'])->name('account_activate');
 Route::get('resend_otp',[AuthController::class,'resend_otp'])->name('resend_otp');
 
+Route::get('student',function(){
+    return view('auth/student');
+});
+
 
 Route::group(['middleware'=>['authcheck']], function() {
     Route::get('register',[AuthController::class,'register_form'])->name('get.account.form');
