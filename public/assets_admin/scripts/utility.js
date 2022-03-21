@@ -24,6 +24,7 @@ $(document).ready(function ($) {
     };
 
     $("#btnCurr").click(function () {
+        alert("hey");
         $("#formCurr").validate({
             submitHandler: submitEventForm,
             errorClass: "invalid",
