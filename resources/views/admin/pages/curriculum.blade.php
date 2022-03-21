@@ -118,5 +118,6 @@
 
             @include("admin.partials.footer")            
         </div>
+        <script src="scripts/validation.min.js"></script>
         <script src="../assets_admin/scripts/utility.js"></script>
     @endsection
