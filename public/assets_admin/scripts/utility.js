@@ -23,16 +23,16 @@ $(document).ready(function ($) {
         hideMethod: "fadeOut",
     };
 
-    $("#btnEventForm").click(function () {
-        $("#eventForm").validate({
+    $("#btnCurr").click(function () {
+        $("#formCurr").validate({
             submitHandler: submitEventForm,
             errorClass: "invalid",
         });
 
         function submitEventForm(e) {
-            var formData = $("#eventForm").serialize();
+            var formData = $("#formCurr").serialize();
             var type = "POST";
-            var ajaxurl = "/create_event";
+            var ajaxurl = "/create_curriculum";
 
             $.ajax({
                 type: type,
@@ -40,23 +40,19 @@ $(document).ready(function ($) {
                 data: formData,
                 dataType: "json",
                 beforeSend: function () {
-                    $("#btnEventForm").html(
-                        '<i class="fa fa-spinner fa-spin"></i>'
-                    );
+                    $("#btnCurr").html('<i class="fa fa-spinner fa-spin"></i>');
                 },
                 success: function (response) {
                     console.log(response);
-                    $("#btnEventForm").html("Create");
-                    toastr.options;
+                    $("#btnCurr").html("Create");
                     toastr["success"](response.message);
-                    setTimeout(function () {
-                        window.location.href = "/events";
-                    }, 2800);
+                    // setTimeout(function () {
+                    //     window.location.href = "/events";
+                    // }, 2800);
                 },
                 error: function (response) {
                     console.log(response);
-                    $("#btnEventForm").html("Create");
-                    toastr.options;
+                    $("#btnCurr").html("Create");
                     toastr["error"](response.responseJSON.message);
                 },
             });
