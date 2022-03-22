@@ -81,7 +81,7 @@ class AdminController extends Controller
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
         $courses = DB::table('courses')->select('*')->get();
         $programmes = DB::table('programmes')->select('*')->get();
-        return view('admin.pages.curriculum',['data'=>$data,'courses'=>$courses,'programmes'=>$programmes]);
+        return view('admin.pages.curriculum2',['data'=>$data,'courses'=>$courses,'programmes'=>$programmes]);
     }
 
     public function logout(){
