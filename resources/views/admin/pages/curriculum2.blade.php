@@ -42,8 +42,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="degree" class="form-label font-size-13 text-muted">Select Degree</label>
-                                                <select class="form-control" data-trigger name="degree"
-                                                    id="degree">
+                                                <select class="form-control" id="degree" required>
                                                     <option value="pre-degree">Pre-degree</option>
                                                     <option value="foundation">Foundation</option>
                                                     <option value="conversion">HND Conversion</option>
@@ -58,7 +57,7 @@
                                                     <option value="3">Third Year</option>
                                                     <option value="4">Fourth Year</option>
                                                 </select>
-                                                <input type="hidden" name="user" value="Prof Toyosi">
+                                                <input type="hidden" name="user" value="{{$data->email}}">
                                             </div>
                                         </div>
                                     </div>
