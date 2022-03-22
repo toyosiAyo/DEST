@@ -25,7 +25,7 @@ $(document).ready(function ($) {
         });
     };
 
-    $("#form_curr").on("submit", function (e) {
+    $("#btnCurr").on("submit", function (e) {
         e.preventDefault();
         if ($("#programme").val() == "") {
             alert("Enter Programme");
