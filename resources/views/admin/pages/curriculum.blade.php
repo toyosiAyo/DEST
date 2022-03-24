@@ -30,6 +30,8 @@
                                 <!-- end card header -->
                                 <div class="card-body">
                                     <div class="row">
+                                        <form method="POST" id="formCurr">
+                                            @csrf
                                         <div class="col-lg-4">
                                             <h3 class="font-size-14 mb-3">Create Curriculum</h3>
                                             <div class="mb-3">
@@ -62,8 +64,9 @@
                                                     <option value="conversion">HND Conversion</option>
                                                 </select>
                                             </div>
-                                            <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light">Save</button>
+                                            <button id="btnCurr" type="submit" class="btn btn-primary btn-rounded waves-effect waves-light">Save</button>
                                         </div>
+                                        </form>
                                         <!-- end col -->
 
                                         <div class="col-lg-8">
@@ -115,5 +118,6 @@
 
             @include("admin.partials.footer")            
         </div>
-
+        <script src="../scripts/validation.min.js"></script>
+        <script src="../assets_admin/scripts/utility.js"></script>
     @endsection
