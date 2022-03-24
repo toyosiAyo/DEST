@@ -262,16 +262,16 @@ class ApplicationController extends Controller
             Storage::delete($data->profile_pix);
         }
 
-        try {
+        //try {
             $filename = $request->file('profileImage')->getClientOriginalName();
             $path = Storage::disk('public')->putFileAs('ProfileImage', $request->file('profileImage'), $data->surname ."_". $data->first_name ."_". $data->other_name ."_". $data->id ."_". date('YmdHis') ."_". $filename);
             $applicant = Applicant::find($data->id);
             $applicant->profile_pix = $path;
             $applicant->save();
             return back()->with('success','image uploaded successfully!');
-        } catch (\Throwable $th) {
-            return back()->with('fail','image upload failed!');
-        }
+        //} catch (\Throwable $th) {
+           // return back()->with('fail','image upload failed!');
+       // }
     }
 
         public function get_stored_file($filename) {
