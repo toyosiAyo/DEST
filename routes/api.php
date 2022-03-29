@@ -6,7 +6,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ApplicantPaymentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConfigController;
-use App\Http\Controllers\Users\AdminController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
