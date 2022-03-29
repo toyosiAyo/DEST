@@ -1,5 +1,4 @@
 $(document).ready(function ($) {
-<<<<<<< HEAD
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -24,48 +23,12 @@ $(document).ready(function ($) {
         hideMethod: "fadeOut",
     };
 
-    $("#btnCurr").click(function () {
-        alert("hey");
-        $("#formCurr").validate({
-            submitHandler: submitEventForm,
-            errorClass: "invalid",
-        });
-
-        function submitEventForm(e) {
-            var formData = $("#formCurr").serialize();
-            var type = "POST";
-            var ajaxurl = "/create_curriculum";
-
-            $.ajax({
-                type: type,
-                url: ajaxurl,
-                data: formData,
-                dataType: "json",
-                beforeSend: function () {
-                    $("#btnCurr").html('<i class="fa fa-spinner fa-spin"></i>');
-                },
-                success: function (response) {
-                    console.log(response);
-                    $("#btnCurr").html("Create");
-                    toastr["success"](response.message);
-                    // setTimeout(function () {
-                    //     window.location.href = "/events";
-                    // }, 2800);
-                },
-                error: function (response) {
-                    console.log(response);
-                    $("#btnCurr").html("Create");
-                    toastr["error"](response.responseJSON.message);
-                },
-            });
-        }
-=======
     $("#tblCurr").hide();
 
     const createCurriculum = (formData) => {
         $.ajax({
             type: "POST",
-            url: "",
+            url: "create_curriculum",
             data: formData,
             dataType: "json",
             contentType: false,
@@ -99,6 +62,5 @@ $(document).ready(function ($) {
 
     $("#programme").change(function () {
         this.value !== "" ? $("#tblCurr").show() : $("#tblCurr").hide();
->>>>>>> 932f2b1a38ff5c59a62366bd0f4347325d71be87
     });
 });
