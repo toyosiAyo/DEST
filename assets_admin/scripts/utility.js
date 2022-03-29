@@ -28,7 +28,7 @@ $(document).ready(function ($) {
     const createCurriculum = (formData) => {
         $.ajax({
             type: "POST",
-            url: "create_curriculum",
+            url: "/api/create_curriculum",
             data: formData,
             dataType: "json",
             contentType: false,
@@ -49,7 +49,7 @@ $(document).ready(function ($) {
         });
     };
 
-    $("#btnCurr").on("submit", function (e) {
+    $("#formCurr").on("submit", function (e) {
         e.preventDefault();
         if ($("#programme").val() == "") {
             alert("Enter Programme");
