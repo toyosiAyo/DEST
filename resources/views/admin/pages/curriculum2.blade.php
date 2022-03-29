@@ -42,7 +42,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="degree" class="form-label font-size-13 text-muted">Select Degree</label>
-                                                <select class="form-control" id="degree" required>
+                                                <select class="form-control" id="degree" name="degree" required>
                                                     <option value="pre-degree">Pre-degree</option>
                                                     <option value="foundation">Foundation</option>
                                                     <option value="conversion">HND Conversion</option>
