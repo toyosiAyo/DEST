@@ -36,7 +36,7 @@
                                                     id="programme" placeholder="Search for programmes">
                                                     <option value="" selected>Select Programme</option>
                                                     @foreach($programmes as $program)
-                                                    <option value="{{ $program->id }}">{{ $program->programme }}</option>
+                                                    <option value="{{ $program->programme_id }}">{{ $program->programme }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -79,7 +79,7 @@
                                                         name="row{{$i}}[]">
                                                         <option value="" selected>Select Course</option>
                                                         @foreach($courses as $course)
-                                                        <option value="{{ $course->id }}">{{ $course->code }}</option>
+                                                        <option value="{{ $course->course_code }}">{{ $course->course_code }}</option>
                                                         @endforeach  
                                                     </select>
                                                 </td>
