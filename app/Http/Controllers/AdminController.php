@@ -87,9 +87,10 @@ class AdminController extends Controller
 
     public function create_curriculum(Request $request){
 
-        $validator = Validator::make($request->all(), ['programme'=>'required','user'=>'required','year'=>'required'] );
+        $validator = Validator::make($request->all(), ['programme'=>'required',
+        'user'=>'required','year'=>'required', 'degree'=>'required'] );
         if ($validator->fails()) {
-            return response()->json(['error' => 'programme, user, and year are required' ], 401);
+            return response()->json(['error' => 'programme, degree, user, and year are required' ], 401);
         }
        try {
         $data = [];
@@ -98,7 +99,7 @@ class AdminController extends Controller
             if((!is_null($request->$index[0]) && $request->$index[0] !== '' ) &&
             (!is_null($request->$index[1]) && $request->$index[1] !== '' ) &&
             (!is_null($request->$index[2]) && $request->$index[2] !== '' )){
-              array_push($data,["course_id"=>$request->$index[0], "programme_id"=>$request->programme,"course_status"=>$request->$index[1], "semester"=>$request->$index[2], "year"=>$request->year, "created_by"=>$request->user]);
+              array_push($data,["course_id"=>$request->$index[0], "programme_id"=>$request->programme,"course_status"=>$request->$index[1], "semester"=>$request->$index[2], "year"=>$request->year, "degree"=>$request->degree, "created_by"=>$request->user]);
             }
            
         }
