@@ -49,7 +49,7 @@ $(document).ready(function ($) {
         });
     };
 
-    $("#btnCurr").on("submit", function (e) {
+    $("#formCurr").on("submit", function (e) {
         e.preventDefault();
         if ($("#programme").val() == "") {
             alert("Enter Programme");
