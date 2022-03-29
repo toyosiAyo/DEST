@@ -99,7 +99,7 @@ class AdminController extends Controller
             if((!is_null($request->$index[0]) && $request->$index[0] !== '' ) &&
             (!is_null($request->$index[1]) && $request->$index[1] !== '' ) &&
             (!is_null($request->$index[2]) && $request->$index[2] !== '' )){
-              array_push($data,["course_id"=>$request->$index[0], "programme_id"=>$request->programme,"course_status"=>$request->$index[1], "semester"=>$request->$index[2], "year"=>$request->year, "degree"=>$request->degree, "created_by"=>$request->user]);
+              array_push($data,["course_code"=>$request->$index[0], "programme_id"=>$request->programme,"course_status"=>$request->$index[1], "semester"=>$request->$index[2], "year"=>$request->year, "degree"=>$request->degree, "created_by"=>$request->user]);
             }
            
         }
