@@ -84,6 +84,35 @@ class AdminController extends Controller
         return view('admin.pages.curriculum2',['data'=>$data,'courses'=>$courses,'programmes'=>$programmes]);
     }
 
+
+    public function create_curriculum(Request $request){
+
+        $validator = Validator::make($request->all(), ['programme'=>'required','user'=>'required','year'=>'required'] );
+        if ($validator->fails()) {
+            return response()->json(['error' => 'programme, user, and year are required' ], 401);
+        }
+       try {
+        $data = [];
+        for($x=1; $x<=10; $x++){
+            $index = 'row'.$x;
+            if((!is_null($request->$index[0]) && $request->$index[0] !== '' ) &&
+            (!is_null($request->$index[1]) && $request->$index[1] !== '' ) &&
+            (!is_null($request->$index[2]) && $request->$index[2] !== '' )){
+              array_push($data,["course_id"=>$request->$index[0], "programme_id"=>$request->programme,"course_status"=>$request->$index[1], "semester"=>$request->$index[2], "year"=>$request->year, "created_by"=>$request->user]);
+            }
+           
+        }
+        $res =  DB::table('curriculum')->insertOrIgnore($data);
+        return response()->json(['success' => $res.' Rocords created by '.$request->user], 201);
+       } catch (\Throwable $th) {
+        return response()->json(['error' => 'Error creating curriculum', 'th' => $th], 401);
+
+       }
+        
+       
+    }
+
+
     public function logout(){
         if(session()->has('user')){
             session()->pull('user');
