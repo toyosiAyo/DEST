@@ -99,6 +99,7 @@ $(document).ready(function ($) {
     });
 
     $("#eventForm").on("submit", function (e) {
+        e.preventDefault();
         formData = new FormData(this);
         submitEventForm(formData);
     });
