@@ -50,6 +50,39 @@ $(document).ready(function ($) {
         });
     };
 
+    const submitEventForm = (formData) => {
+        var type = "POST";
+        var ajaxurl = "/create_event";
+
+        $.ajax({
+            type: type,
+            url: ajaxurl,
+            data: formData,
+            dataType: "json",
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function () {
+                $("#btnEventForm").html(
+                    '<i class="fa fa-spinner fa-spin"></i>'
+                );
+            },
+            success: function (response) {
+                console.log(response);
+                $("#btnEventForm").html("Create");
+                toastr["success"](response.message);
+                setTimeout(function () {
+                    window.location.href = "/admin/events";
+                }, 2800);
+            },
+            error: function (response) {
+                console.log(response);
+                $("#btnEventForm").html("Create");
+                toastr["error"](response.responseJSON.message);
+            },
+        });
+    };
+
     $("#formCurr").on("submit", function (e) {
         e.preventDefault();
         if ($("#programme").val() == "") {
@@ -63,5 +96,10 @@ $(document).ready(function ($) {
 
     $("#programme").change(function () {
         this.value !== "" ? $("#tblCurr").show() : $("#tblCurr").hide();
+    });
+
+    $("#eventForm").on("submit", function (e) {
+        formData = new FormData(this);
+        submitEventForm(formData);
     });
 });

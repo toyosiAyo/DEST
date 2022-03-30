@@ -102,22 +102,26 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="event_name" class="col-form-label">Event name:</label>
-                                <input type="text" class="form-control" name="event_name" id="event_name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="col-form-label">Description:</label>
-                                <textarea class="form-control" name="description" id="description" required></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="amount" class="col-form-label">Amount:</label>
-                                <input type="tel" class="form-control" name="amount" id="amount" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="date" class="col-form-label">Date:</label>
-                                <input type="date" class="form-control" name="date" id="date" required>
-                            </div>
+                        <div class="mb-3">
+                            <label for="title" class="col-form-label">Event title:</label>
+                            <input type="text" class="form-control" name="title" id="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="body" class="col-form-label">Body:</label>
+                            <textarea class="form-control" name="body" id="body" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="col-form-label">Location:</label>
+                            <input type="text" class="form-control" name="location" id="location" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="col-form-label">Date:</label>
+                            <input type="date" class="form-control" name="date" id="date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="col-form-label">Image:</label>
+                            <input type="file" class="form-control" name="image" id="image" required>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -139,6 +143,8 @@
         <!-- init js -->
         <script src="../assets_admin/js/pages/datatable-pages.init.js"></script>
         <script src="../assets_admin/js/pages/modal.init.js"></script>
+        <script src="../assets/scripts/validation.min.js"></script>
+        <script src="../assets_admin/scripts/utility.js"></script>
 
         
     @endsection
