@@ -119,7 +119,7 @@ class AdminController extends Controller
     }
 
     public function postEvents(Request $request){
-        //try{
+        try{
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             $user = $data->email;
             $filename = $request->file('image')->getClientOriginalName();
@@ -129,10 +129,10 @@ class AdminController extends Controller
                 'image' => $path,'created_by' => $user
             ]);
             return response()->json(['status'=>'ok','message'=>'Event created!'], 200);
-        // }
-        // catch (\Throwable $th) {
-        //     return response()->json(['status'=>'Nok','message'=>'Error creating event'], 500);
-        // } 
+        }
+        catch (\Throwable $th) {
+            return response()->json(['status'=>'Nok','message'=>'Error creating event'], 500);
+        } 
     }
 
     public function logout(){

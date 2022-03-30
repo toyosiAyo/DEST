@@ -64,7 +64,7 @@
                                     <td>{{ date("d M Y", strtotime($event->date)) }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
-                                            <a href="#" class="badge badge-soft-primary">{{ $event->status }}</a>
+                                            <a href="#" class="badge badge-soft-success">{{ $event->status }}</a>
                                         </div>
                                     </td>
                                     <td>
