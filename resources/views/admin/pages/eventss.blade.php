@@ -1,7 +1,7 @@
 @extends("admin.layouts.master") 
 
     @section("title")
-    News/Events
+      Events
     @endsection
 
     @section("content")
@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0 font-size-18">News/Events</h4>
+                                <h4 class="mb-sm-0 font-size-18">Events</h4>
                             </div>
                         </div>
                     </div>
@@ -28,12 +28,14 @@
                                 <h5 class="card-title">Event List <span class="text-muted fw-normal ms-2">({{$count}})</span></h5>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
                                 <div>
                                     <a href="#" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bx bx-plus me-1"></i> Add New</a>
                                 </div>                              
                             </div>
+
                         </div>
                     </div>
                     <!-- end row -->
@@ -43,9 +45,10 @@
                             <thead>
                                 <tr>
                                 <th scope="col">S/N</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Body</th>
-                                <th scope="col">Location</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Tickets Sold</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Status</th>
                                 <th style="width: 80px; min-width: 80px;">Action</th>
@@ -56,11 +59,10 @@
                                 @foreach($events as $event)
                                 <tr>
                                     <td>{{ $i }} @php $i++ @endphp</td>
-                                    <td>
-                                        {{ $event->title }}
-                                    </td>
-                                    <td>{{ $event->body }}</td>
-                                    <td>{{ $event->location }}</td>
+                                    <td>{{ $event->name }}</td>
+                                    <td>{{ $event->description }}</td>
+                                    <td>{{ $event->amount }}</td>
+                                    <td>{{ $event->tickets_sold }}</td>
                                     <td>{{ date("d M Y", strtotime($event->date)) }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
@@ -139,6 +141,8 @@
         <!-- init js -->
         <script src="../assets_admin/js/pages/datatable-pages.init.js"></script>
         <script src="../assets_admin/js/pages/modal.init.js"></script>
+        <script src="../assets/scripts/validation.min.js"></script>
+        <script src="../assets_admin/scripts/utility.js"></script>
 
         
     @endsection
