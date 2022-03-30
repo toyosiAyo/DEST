@@ -116,7 +116,7 @@ class AdminController extends Controller
         }      
     }
 
-    public function postEvents(Response $request){
+    public function postEvents(Request $request){
         try{
             $filename = $request->file('image')->getClientOriginalName();
             $path = Storage::putFileAs('EventImage', $request->file('image'), $request->title ."_". date('YmdHis') ."_". $filename);
