@@ -120,11 +120,13 @@ class AdminController extends Controller
 
     public function postEvents(Request $request){
         //try{
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            $user = $data->email;
             $filename = $request->file('image')->getClientOriginalName();
             $path = Storage::putFileAs('EventImage', $request->file('image'), $request->title ."_". date('YmdHis') ."_". $filename);
             DB::table('events')->insert([
                 'title' => $request->title,'body' => $request->body,'date' => $request->date,'location' => $request->location,
-                'image' => $path,'created_by' => Auth::user()->email
+                'image' => $path,'created_by' => $user
             ]);
             return response()->json(['status'=>'ok','message'=>'Event created!'], 200);
         // }
