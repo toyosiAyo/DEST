@@ -117,7 +117,7 @@ class AdminController extends Controller
     }
 
     public function postEvents(Request $request){
-        try{
+        //try{
             $filename = $request->file('image')->getClientOriginalName();
             $path = Storage::putFileAs('EventImage', $request->file('image'), $request->title ."_". date('YmdHis') ."_". $filename);
             DB::table('events')->insert([
@@ -125,10 +125,10 @@ class AdminController extends Controller
                 'image' => $path,'created_by' => Auth::user()->email
             ]);
             return response()->json(['status'=>'ok','message'=>'Event created!'], 200);
-        }
-        catch (\Throwable $th) {
-            return response()->json(['status'=>'Nok','message'=>'Error creating event'], 500);
-        } 
+        // }
+        // catch (\Throwable $th) {
+        //     return response()->json(['status'=>'Nok','message'=>'Error creating event'], 500);
+        // } 
     }
 
     public function logout(){
