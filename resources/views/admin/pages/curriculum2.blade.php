@@ -31,7 +31,7 @@
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="programme" class="form-label font-size-13 text-muted">Select Program</label>
+                                                <label for="programme" class="form-label font-size-13 text-muted">Select Programme</label>
                                                 <select class="form-control" data-trigger name="programme"
                                                     id="programme" placeholder="Search for programmes">
                                                     <option value="" selected>Select Programme</option>

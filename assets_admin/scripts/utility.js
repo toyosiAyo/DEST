@@ -35,16 +35,17 @@ $(document).ready(function ($) {
             cache: false,
             processData: false,
             beforeSend: function () {
-                $("#btn_curr").html('<i class="fa fa-spinner fa-spin"></i>');
+                $("#btnCurr").html('<i class="fa fa-spinner fa-spin"></i>');
             },
             success: function (response) {
                 console.log(response);
-                $("#btn_curr").html("Submit");
-                alert(response.success);
+                $("#btnCurr").html("Submit");
+                toastr["success"](response.success);
             },
             error: function (response) {
                 console.log(response);
-                $("#btn_curr").html("Submit");
+                $("#btnCurr").html("Submit");
+                toastr["error"](response.responseJSON.error);
             },
         });
     };
