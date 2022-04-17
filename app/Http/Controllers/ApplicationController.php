@@ -60,6 +60,7 @@ class ApplicationController extends Controller
             $used_pin = DB::table('application_payments')
             ->join('applications','application_payments.rrr','applications.used_pin')
             ->where('application_payments.email',$data->email)->pluck('rrr'); 
+
             $success_pin = DB::table('application_payments')->select('rrr')
             ->where('email',$data->email)
             ->where('status_code','00')->where('pay_type', $request->payType)->whereNotIn('rrr', $used_pin)->get();
@@ -262,16 +263,16 @@ class ApplicationController extends Controller
             Storage::delete($data->profile_pix);
         }
 
-        //try {
+        try {
             $filename = $request->file('profileImage')->getClientOriginalName();
             $path = Storage::disk('public')->putFileAs('ProfileImage', $request->file('profileImage'), $data->surname ."_". $data->first_name ."_". $data->other_name ."_". $data->id ."_". date('YmdHis') ."_". $filename);
             $applicant = Applicant::find($data->id);
             $applicant->profile_pix = $path;
             $applicant->save();
             return back()->with('success','image uploaded successfully!');
-        //} catch (\Throwable $th) {
-           // return back()->with('fail','image upload failed!');
-       // }
+        } catch (\Throwable $th) {
+           return back()->with('fail','image upload failed!');
+       }
     }
 
         public function get_stored_file($filename) {
