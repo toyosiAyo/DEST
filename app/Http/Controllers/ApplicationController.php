@@ -265,7 +265,7 @@ class ApplicationController extends Controller
 
         try {
             $filename = $request->file('profileImage')->getClientOriginalName();
-            $path = Storage::disk('public')->putFileAs('ProfileImage', $request->file('profileImage'), $data->surname ."_". $data->first_name ."_". $data->other_name ."_". $data->id ."_". date('YmdHis') ."_". $filename);
+            $path = Storage::disk('public')->putFileAs('profileImage', $request->file('profileImage'), $data->surname ."_". $data->first_name ."_". $data->other_name ."_". $data->id ."_". date('YmdHis') ."_". $filename);
             $applicant = Applicant::find($data->id);
             $applicant->profile_pix = $path;
             $applicant->save();
@@ -277,7 +277,7 @@ class ApplicationController extends Controller
 
         public function get_stored_file($filename) {
 
-                $path = storage_path('app/public/ProfileImage/'. $filename);
+                $path = storage_path('app/public/profileImage/'. $filename);
 
                 if (!File::exists($path)) {
                     abort(404);

@@ -12,6 +12,13 @@
     <body class="animsition page-profile site-menubar-push site-menubar-open site-menubar-fixed">
         <div class="page">
             <div class="page-content container-fluid">
+            @if(Session::get('success'))
+                <p>{{Session::get('success')}}</p>
+         @endif
+
+         @if(Session::get('fail'))
+                <p>{{Session::get('fail')}}</p>
+         @endif
                 <div class="row">
                     <div class="col-lg-3">
                         <!-- Page Widget -->
