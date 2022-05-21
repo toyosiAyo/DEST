@@ -309,5 +309,32 @@ class ApplicationController extends Controller
             
         }
 
+
+
+
+
+        // Testing document upload START
+        public function getFile(){
+            return view('getFile');
+        }
+        public function saveFile(Request $request){
+           //getClientOriginalName()
+           //extension()
+           $data =  $request->file('cert')->extension();
+           dd($data);
+            return back()->with('view_applications','view_applications');
+            Storage::disk('public')->putFileAs();
+
+        }
+        // Testing document upload END
+
+
+
+
+
+
+
+
+
    
 }

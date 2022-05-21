@@ -11,6 +11,8 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Http;
 
 
+Route::get('getFile',[ApplicationController::class,'getFile'])->name('getFile');
+Route::post('saveFile',[ApplicationController::class,'saveFile'])->name('saveFile');
 
 Route::get('/http', function () {
     //$response->body() : string;
