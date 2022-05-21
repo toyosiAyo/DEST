@@ -6,6 +6,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ApplicantPaymentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,6 +21,8 @@ use App\Http\Controllers\ConfigController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::any('create_curriculum', [AdminController::class, 'create_curriculum']);
 
 //Route::post('update_applicant_payment',[ApplicantPaymentController::class,'update_applicant_payment'])->name('update_applicant_payment');
 //Route::post('password_reset',[AuthController::class,'password_reset'])->name('password_reset');

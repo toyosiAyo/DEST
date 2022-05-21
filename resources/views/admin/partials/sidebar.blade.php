@@ -6,48 +6,49 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title" data-key="t-menu">Menu</li>
+                <li class="menu-title">Menu</li>
 
                 <li>
                     <a href="dashboard">
                         <i data-feather="home"></i>
-                        <span data-key="t-dashboard">Dashboard</span>
+                        <span>Dashboard</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('viewApplicants')}}">
                         <i data-feather="users"></i>
-                        <span data-key="t-pages">Applicants</span>
+                        <span>Applicants</span>
                     </a>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i data-feather="file-text"></i>
-                        <span data-key="t-authentication">Applications</span>
+                        <span>Applications</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('viewApplications')}}" data-key="t-login">All Applications</a></li>
-                        <li><a href="{{route('viewPendingApplications')}}" data-key="t-register">Pending Applications</a></li>
+                        <li><a href="{{route('viewApplications')}}">All Applications</a></li>
+                        <li><a href="{{route('viewPendingApplications')}}">Pending Applications</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i class="fas fa-hand-holding-usd"></i>
-                        <span data-key="t-authentication">Payments</span>
+                        <span>Payments</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('allpayments')}}" data-key="t-login">All Payments</a></li>
-                        <li><a href="{{route('pending_payments')}}" data-key="t-register">Pending</a></li>
+                        <li><a href="{{route('allpayments')}}">All Payments</a></li>
+                        <li><a href="{{route('pending_payments')}}">Pending</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i class="fab fa-whmcs"></i>
-                        <span data-key="t-authentication">Config</span>
+                        <span>Config</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="#" data-key="t-login">Create Course</a></li>
-                        <li><a href="{{route('curriculum')}}" data-key="t-register">Create Curriculum</a></li>
+                        <li><a href="#">Create Course</a></li>
+                        <li><a href="{{route('curriculum')}}">Create Curriculum</a></li>
+                        <li><a href="{{route('events')}}">Post News/Events</a></li>
                     </ul>
                 </li>
             </ul>

@@ -1,7 +1,7 @@
 @extends("admin.layouts.master") 
 
     @section("title")
-      Events
+    News/Events
     @endsection
 
     @section("content")
@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0 font-size-18">Events</h4>
+                                <h4 class="mb-sm-0 font-size-18">News/Events</h4>
                             </div>
                         </div>
                     </div>
@@ -28,14 +28,12 @@
                                 <h5 class="card-title">Event List <span class="text-muted fw-normal ms-2">({{$count}})</span></h5>
                             </div>
                         </div>
-
                         <div class="col-md-6">
                             <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
                                 <div>
                                     <a href="#" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bx bx-plus me-1"></i> Add New</a>
                                 </div>                              
                             </div>
-
                         </div>
                     </div>
                     <!-- end row -->
@@ -45,10 +43,9 @@
                             <thead>
                                 <tr>
                                 <th scope="col">S/N</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Tickets Sold</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Body</th>
+                                <th scope="col">Location</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Status</th>
                                 <th style="width: 80px; min-width: 80px;">Action</th>
@@ -59,14 +56,15 @@
                                 @foreach($events as $event)
                                 <tr>
                                     <td>{{ $i }} @php $i++ @endphp</td>
-                                    <td>{{ $event->name }}</td>
-                                    <td>{{ $event->description }}</td>
-                                    <td>{{ $event->amount }}</td>
-                                    <td>{{ $event->tickets_sold }}</td>
+                                    <td>
+                                        {{ $event->title }}
+                                    </td>
+                                    <td>{{ $event->body }}</td>
+                                    <td>{{ $event->location }}</td>
                                     <td>{{ date("d M Y", strtotime($event->date)) }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
-                                            <a href="#" class="badge badge-soft-primary">{{ $event->status }}</a>
+                                            <a href="#" class="badge badge-soft-success">{{ $event->status }}</a>
                                         </div>
                                     </td>
                                     <td>
@@ -104,22 +102,26 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="event_name" class="col-form-label">Event name:</label>
-                                <input type="text" class="form-control" name="event_name" id="event_name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="col-form-label">Description:</label>
-                                <textarea class="form-control" name="description" id="description" required></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="amount" class="col-form-label">Amount:</label>
-                                <input type="tel" class="form-control" name="amount" id="amount" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="date" class="col-form-label">Date:</label>
-                                <input type="date" class="form-control" name="date" id="date" required>
-                            </div>
+                        <div class="mb-3">
+                            <label for="title" class="col-form-label">Event title:</label>
+                            <input type="text" class="form-control" name="title" id="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="body" class="col-form-label">Body:</label>
+                            <textarea class="form-control" name="body" id="body" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="col-form-label">Location:</label>
+                            <input type="text" class="form-control" name="location" id="location" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="col-form-label">Date:</label>
+                            <input type="date" class="form-control" name="date" id="date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="col-form-label">Image:</label>
+                            <input type="file" class="form-control" name="image" id="image" required>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

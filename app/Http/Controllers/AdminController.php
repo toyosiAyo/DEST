@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Applicant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {    
@@ -81,7 +83,56 @@ class AdminController extends Controller
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
         $courses = DB::table('courses')->select('*')->get();
         $programmes = DB::table('programmes')->select('*')->get();
-        return view('admin.pages.curriculum',['data'=>$data,'courses'=>$courses,'programmes'=>$programmes]);
+        return view('admin.pages.curriculum2',['data'=>$data,'courses'=>$courses,'programmes'=>$programmes]);
+    }
+
+    public function viewEventsPage(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $events = DB::table('events')->select('*')->get();
+        $count = count($events);
+        return view('admin.pages.events',['data'=>$data,'events'=>$events,'count'=>$count]);
+    }
+
+
+    public function create_curriculum(Request $request){
+        $validator = Validator::make($request->all(), ['programme'=>'required',
+        'user'=>'required','year'=>'required', 'degree'=>'required'] );
+        if ($validator->fails()) {
+            return response()->json(['error' => 'programme, degree, user, and year are required' ], 401);
+        }
+        try {
+            $data = [];
+            for($x=1; $x<=10; $x++){
+                $index = 'row'.$x;
+                if((!is_null($request->$index[0]) && $request->$index[0] !== '' ) &&
+                (!is_null($request->$index[1]) && $request->$index[1] !== '' ) &&
+                (!is_null($request->$index[2]) && $request->$index[2] !== '' )){
+                array_push($data,["course_code"=>$request->$index[0], "programme_id"=>$request->programme,"course_status"=>$request->$index[1], "semester"=>$request->$index[2], "year"=>$request->year, "degree"=>$request->degree, "created_by"=>$request->user]);
+                }
+            }
+            $res =  DB::table('curriculum')->insertOrIgnore($data);
+            return response()->json(['success' => $res.' Rocords created by '.$request->user], 201);
+       } 
+        catch (\Throwable $th) {
+            return response()->json(['error' => 'Error creating curriculum', 'th' => $th], 401);
+        }      
+    }
+
+    public function postEvents(Request $request){
+        try{
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            $user = $data->email;
+            $filename = $request->file('image')->getClientOriginalName();
+            $path = Storage::putFileAs('EventImage', $request->file('image'), $request->title ."_". date('YmdHis') ."_". $filename);
+            DB::table('events')->insert([
+                'title' => $request->title,'body' => $request->body,'date' => $request->date,'location' => $request->location,
+                'image' => $path,'created_by' => $user
+            ]);
+            return response()->json(['status'=>'ok','message'=>'Event created!'], 200);
+        }
+        catch (\Throwable $th) {
+            return response()->json(['status'=>'Nok','message'=>'Error creating event'], 500);
+        } 
     }
 
     public function logout(){
