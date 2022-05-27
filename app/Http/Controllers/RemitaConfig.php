@@ -132,15 +132,14 @@ class RemitaConfig extends Controller
             $payment->status_code = '025';
             $payment->status_msg = 'pending';
             $payment->time_stamp = $timesammp;
-            $save = $payment->save();
-            if($save){
-                 $From = "ict@run.edu.ng";
-                 $FromName = "DEST@REDEEMER's UNIVERSITY";
-                 $Msg = app('App\Http\Controllers\ConfigController')->email_msg_to_notify_teller_logging($email=$request->email,$teller=$request->rrr);
-                 $Subject = "New Teller Logged";
-                 $HTML_type = true;
-                 Http::asForm()->post('http://adms.run.edu.ng/codebehind/destEmail.php',["From"=>$From,"FromName"=>$FromName,"To"=>'hamendment@mail.com',"Recipient_names"=>"DEST ADMIN","Msg"=>$Msg, "Subject"=>$Subject,"HTML_type"=>$HTML_type,]);
-                 return response()->json(['status'=>'ok','msg'=>'New teller logged successfully','rsp'=>''], 201);
+            if($payment->save()){
+                $admin_users = Applicant::where(['status'=>'admin'])->pluck('email');
+                $request->request->add(['emails'=>$admin_users]);
+                 $Msg = 'The applicant, '.$data->surname .' '. $data->first_name .', with email '.$data->email .' have successfully logged the teller: '. $request->rrr.' , </br> Kindly login to admin dashboard for payment verification and approval.' ;
+                 $Subject = " DEST@REDEEMER's UNIVERSITY, New Teller Logged";
+                 if(app('App\Http\Controllers\ConfigController')->admin_mail($request,$Subject,$Msg)['status'] == 'ok'){ 
+                return response()->json(['status'=>'ok','msg'=>'New teller logged successfully','rsp'=>''], 201);
+                } return back()->with('fail','Error sending email for teller logged!');
          
              }else{
                   return back()->with('fail','Issue creating account');

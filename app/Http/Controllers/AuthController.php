@@ -51,19 +51,15 @@ class AuthController extends Controller
          $app->gender = $request->gender;
          $app->password = Hash::make($request->password);
          $app->otp = $num_str;
-         $save = $app->save();
-         if($save){
+         if($app->save()){
              //setcookie(name, value, expire, path, domain, secure, httponly);
             setcookie('email',$request->email,time()+(84000*30),'/');
-            $From = "ict@run.edu.ng";
-            $FromName = "DEST@REDEEMER's UNIVERSITY";
             $Msg = app('App\Http\Controllers\ConfigController')->email_msg($code=$num_str);
-            $Subject = "Email Verification";
-            $HTML_type = true;
-           // $res = Http::asForm()->post('http://adms.run.edu.ng/codebehind/destEmail.php',["From"=>$From,"FromName"=>$FromName,"To"=>$request->email,"Recipient_names"=>$request->surname,"Msg"=>$Msg, "Subject"=>$Subject,"HTML_type"=>$HTML_type,]);
-            Http::asForm()->post('http://adms.run.edu.ng/codebehind/destEmail.php',["From"=>$From,"FromName"=>$FromName,"To"=>$request->email,"Recipient_names"=>$request->surname,"Msg"=>$Msg, "Subject"=>$Subject,"HTML_type"=>$HTML_type,]);
-            return redirect('account_activate_view')->with('account_created','Account created successfully, Kindly get OTP sent to your email for account activation!');
-         
+            $Subject = " DEST@REDEEMER's UNIVERSITY, Email Verification";
+            if(app('App\Http\Controllers\ConfigController')->applicant_mail($request,$Subject,$Msg)['status'] == 'ok'){
+                return redirect('account_activate_view')->with('account_created','Account created successfully, Kindly get OTP sent to your email for account activation!');
+            }
+            return back()->with('fail','Issue sending mail for account activation!');         
         }else{
              return back()->with('fail','Issue creating account');
          }
@@ -134,17 +130,15 @@ class AuthController extends Controller
         try {
           $app = Applicant::where('email',$request->email)->first();
           if(!empty($app)){
-              $app->password = Hash::make(app('App\Http\Controllers\ConfigController')->generateRandomString(6));
-              $save = $app->save();
-              if($save){
-                $From = "ict@run.edu.ng";
-                $FromName = "DEST@REDEEMER's UNIVERSITY";
-                $Msg = app('App\Http\Controllers\ConfigController')->generateRandomString(6);//app('App\Http\Controllers\ConfigController')->email_msg($code=$num_str);
-                $Subject = "Password Reset!";
-                $HTML_type = true;
-                Http::asForm()->post('http://adms.run.edu.ng/codebehind/destEmail.php',["From"=>$From,"FromName"=>$FromName,"To"=>$app->email,"Recipient_names"=>$app->surname,"Msg"=>$Msg, "Subject"=>$Subject,"HTML_type"=>$HTML_type,]);
-                return redirect('/')->with('pass_reset','Password reset successfully, Kindly check your email for the new password!');
-             
+              $auto_pass = app('App\Http\Controllers\ConfigController')->generateRandomString(6);
+              $app->password = Hash::make($auto_pass);
+              if($app->save()){
+                $Msg = 'Kindly use this auto-generated password '.$auto_pass.'to login into your portal </br></br>
+                Note: Remeber to change this password!';
+                $Subject = "DEST@REDEEMER's UNIVERSITY Password Reset!";
+                if(app('App\Http\Controllers\ConfigController')->applicant_mail($app,$Subject,$Msg)['status'] == 'ok'){
+                    return redirect('/')->with('pass_reset','Password reset successfully, Kindly check your email for the new password!');
+                } return back()->with('fail','Error sending email for password reset!');          
               }
           }
           return back()->with('fail','Wrong email supplied!');
@@ -190,14 +184,11 @@ class AuthController extends Controller
           
             $app = Applicant::where('email',$_COOKIE['email'])->first();
             if(!empty($app)){
-                $From = "ict@run.edu.ng";
-                $FromName = "DEST@REDEEMER's UNIVERSITY";
                 $Msg = app('App\Http\Controllers\ConfigController')->email_msg($code=$app->otp);
-                $Subject = "Email Verification";
-                $HTML_type = true;
-                Http::asForm()->post('http://adms.run.edu.ng/codebehind/destEmail.php',["From"=>$From,"FromName"=>$FromName,"To"=>$app->email,"Recipient_names"=>$app->surname,"Msg"=>$Msg, "Subject"=>$Subject,"HTML_type"=>$HTML_type,]);
-                return back()->with('resend','OTP is successfully resent to  '.$app->email.' !');
-               
+                $Subject = " DEST@REDEEMER's UNIVERSITY, Email Verification";
+                if(app('App\Http\Controllers\ConfigController')->applicant_mail($app,$Subject,$Msg)['status'] == 'ok'){
+                    return back()->with('resend','OTP is successfully resent to  '.$app->email.' !');
+                }               
             }
             return back()->with('fail','Error resending OTP 1 !');
 

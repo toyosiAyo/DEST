@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Http;
 
 
 // some comments here
+Route::get('test_mail',[ApplicationController::class,'test_mail'])->name('test_mail');
 Route::get('getFile',[ApplicationController::class,'getFile'])->name('getFile');
 Route::post('saveFile',[ApplicationController::class,'saveFile'])->name('saveFile');
 

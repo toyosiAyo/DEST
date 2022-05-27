@@ -21,7 +21,20 @@ class ApplicationController extends Controller
        // $this->middleware('subscribed')->except('store');
     }
 
-    //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
+    
+    public function test_mail(){
+        $data = (object)[];
+        $data->email = 'reganalyst@yahoo.com';
+        $data->surname = 'Teewhy';
+        $data->firstname = 'baba';
+        $subject = "Email Testing";
+        $msg = "From dest ............... Just to test if mail service it working fine";
+        if(app('App\Http\Controllers\ConfigController')->applicant_mail($data,$subject,$msg)['status'] == 'ok'){
+            dd('working');
+        }
+        dd('Not working');
+        // 
+    }
 
    
   

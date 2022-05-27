@@ -185,7 +185,7 @@
                 </td>
                 <td>
                     &copy; Redeemer\'s University ' . date("Y") . '. All rights reserved<br>
-                    This should not be considered official
+                    <!-- This should not be considered official -->
                 </td>
             </tr>
         </table>
