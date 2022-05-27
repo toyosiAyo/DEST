@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applicant;
+use App\Models\ApplicantPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,13 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {    
+    public function __construct()
+    {
+        $this->middleware('authcheck',['except' => ['login',]]);
+       // $this->middleware('log')->only('index');
+       // $this->middleware('subscribed')->except('store');
+    }
+
     public function login(Request $request){
         $request->validate([
             'email'=>'required|email',
@@ -41,6 +49,29 @@ class AdminController extends Controller
         return view('admin.pages.dashboard',['data'=>$data,'applicants'=>$applicants,'students'=>$students,'applications'=>$applications,'payments'=>$payments]);
     }
 
+    public function approvePayments(Request $request){
+        $request->validate([ "pay_id" => "required","email"=>"required",'rrr'=>'required' ,]);
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $payment = ApplicantPayment::join('applicants','application_payments.email','applicants.email')
+        ->where(['application_payments.id'=>$request->pay_id,'application_payments.email'=>$request->email,
+        'rrr'=>$request->rrr,'status_code'=>'025'])->select('application_payments.*','applicants.surname','applicants.first_name AS firstname')->first();
+        if(!empty( $payment)){
+            $payment->status_code = '00';
+            $payment->status_msg = 'success';
+            $payment->approved_by = $data->email;
+            $payment->approved_at = date("F j, Y, g:i a");
+            if($payment->save()){
+                $Msg = 'Payment with Teller ID: '.$request->rrr.' has been successfully approved. <br> Kindly login to the portal and proceed with your application' ;
+                $Subject = " DEST@REDEEMER's UNIVERSITY, PAYMENT APPROVAL NOTIFICATION";
+                if(app('App\Http\Controllers\ConfigController')->applicant_mail($payment,$Subject,$Msg)['status'] == 'ok'){
+                    return response()->json(['status'=>'ok','msg'=>'Payment approved successfully!'], 200);
+                }
+                else{ return response()->json(['status'=>'nok','msg'=>'Error sending payment approval!'], 401);  }
+            }
+        }else{
+            return response()->json(['status'=>'Nok','msg'=>'Error, maybe Invalid Teller number supplied'], 401);
+        }
+    }
     public function pendingPayments(Request $request){
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
         $payments = DB::table('application_payments')->select('*')->where('status_msg','pending')->orderby('created_at','desc')->get();

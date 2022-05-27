@@ -12,6 +12,13 @@ use GuzzleHttp\Client;
 use Carbon\Carbon;
 class ApplicantPaymentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('authcheck');
+       // $this->middleware('log')->only('index');
+       // $this->middleware('subscribed')->except('store');
+    }
+
 
     public function update_applicant_payment(Request $request){
        
