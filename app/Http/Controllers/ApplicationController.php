@@ -49,9 +49,9 @@ class ApplicationController extends Controller
         try {
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             $pin = $_COOKIE['pin'];
-            dd($pin);
             $app_type = $_COOKIE['app_type'];
             $form_status = DB::table('applications')->where(['submitted_by'=> $data->email,'app_type'=>$app_type,'status'=>'pending'])->pluck('form_status');
+            dd($form_status);
             if(!empty($pin) && !$form_status->isEmpty()){
                 $o_level = DB::table('o_level_subjects')->select('id','subject')->get();
                 $faculties = app('App\Http\Controllers\ConfigController')->college_dept_prog($request)['faculties'];
