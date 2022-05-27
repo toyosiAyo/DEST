@@ -66,7 +66,7 @@
                                                 <i class="bx bx-dots-horizontal-rounded"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><a class="dropdown-item" href="#">Approve</a></li>
+                                                <li><button data-pay_type="{{$payment->pay_type}}" data-id="{{$payment->id}}" data-rrr="{{$payment->rrr}}" data-email="{{$payment->email}}" class="dropdown-item approve" href="#">Approve</button></li>
                                             </ul>
                                         </div>
                                     </td>
@@ -96,9 +96,8 @@
         <script src="../assets_admin/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
         <!-- init js -->
-        <script src="../assets_admin/js/pages/datatable-pages.init.js"></script>
-        <script src="../assets_admin/js/pages/modal.init.js"></script>
-        
+        <script src="../assets_admin/js/pages/datatable-pages.init.js"></script>  
+        <script src="../assets_admin/scripts/utility.js"></script>      
     @endsection
         
 

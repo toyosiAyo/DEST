@@ -77,7 +77,7 @@ class AdminController extends Controller
                }
             }
         }else{
-            return response()->json(['status'=>'Nok','msg'=>'Error, maybe Invalid Teller number supplied'], 401);
+            return response()->json(['status'=>'Nok','message'=>'Error, maybe Invalid Teller number supplied'], 401);
         }
     }
     public function pendingPayments(Request $request){

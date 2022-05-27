@@ -1,6 +1,5 @@
 /node_modules
 /public/hot
-/public
 /public/storage
 /storage/*.key
 /vendor
@@ -11,10 +10,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-assets
-assets_admin
 global
-scripts
 .htaccess
 favicon.ico
 index.php
