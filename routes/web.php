@@ -79,7 +79,7 @@ Route::group(['middleware'=>['authcheck']], function() {
 
     //********************************************Admin Authenticated Route************************************************
 
-    Route::get('admin/approve_payments',[AdminController::class,'approve_payments']);
+    Route::get('approve_payments',[AdminController::class,'approve_payments']);
     Route::get('admin/dashboard',[AdminController::class,'adminDashboard']);
     Route::get('admin/pending_payments',[AdminController::class,'pendingPayments'])->name('pending_payments');
     Route::get('admin/payments',[AdminController::class,'allPayments'])->name('allpayments');
