@@ -70,7 +70,7 @@ $(document).ready(function ($) {
         approvePayment(id, rrr, email);
     });
 
-    const approvePayment = (id, email, rrr) => {
+    const approvePayment = (id, rrr, email) => {
         $.ajax({
             type: "POST",
             url: "/approve_payments",

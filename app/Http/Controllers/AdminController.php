@@ -64,12 +64,12 @@ class AdminController extends Controller
                 $Msg = 'Payment with Teller ID: '.$request->rrr.' has been successfully approved. <br> Kindly login to the portal and proceed with your application' ;
                 $Subject = " DEST@REDEEMER's UNIVERSITY, PAYMENT APPROVAL NOTIFICATION";
                 if(app('App\Http\Controllers\ConfigController')->applicant_mail($payment,$Subject,$Msg)['status'] == 'ok'){
-                    return response()->json(['status'=>'ok','msg'=>'Payment approved successfully!'], 200);
+                    return response()->json(['status'=>'ok','message'=>'Payment approved successfully!'], 200);
                 }
-                else{ return response()->json(['status'=>'nok','msg'=>'Error sending payment approval!'], 401);  }
+                else{ return response()->json(['status'=>'nok','message'=>'Error sending payment approval!'], 401);  }
             }
         }else{
-            return response()->json(['status'=>'Nok','msg'=>'Error, maybe Invalid Teller number supplied'], 401);
+            return response()->json(['status'=>'Nok','message'=>'Error, maybe Invalid Teller number supplied'], 401);
         }
     }
     public function pendingPayments(Request $request){
