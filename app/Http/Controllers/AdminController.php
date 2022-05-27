@@ -49,7 +49,7 @@ class AdminController extends Controller
         return view('admin.pages.dashboard',['data'=>$data,'applicants'=>$applicants,'students'=>$students,'applications'=>$applications,'payments'=>$payments]);
     }
 
-    public function approvePayments(Request $request){
+    public function approve_payments(Request $request){
         $request->validate([ "pay_id" => "required","email"=>"required",'rrr'=>'required' ,]);
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
         $payment = ApplicantPayment::join('applicants','application_payments.email','applicants.email')
