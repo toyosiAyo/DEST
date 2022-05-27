@@ -67,14 +67,15 @@ $(document).ready(function ($) {
         var id = $(this).data("id");
         var rrr = $(this).data("rrr");
         var email = $(this).data("email");
-        approvePayment(id, rrr, email);
+        var pay_type = $(this).data("pay_type");
+        approvePayment(id, rrr, email, pay_type);
     });
 
-    const approvePayment = (id, rrr, email) => {
+    const approvePayment = (id, rrr, email, pay_type) => {
         $.ajax({
             type: "POST",
             url: "/approve_payments",
-            data: { pay_id: id, email: email, rrr: rrr },
+            data: { pay_id: id, email: email, rrr: rrr, pay_type: pay_type },
             dataType: "json",
             beforeSend: function () {
                 if (confirm("Approve Payment?") == false) return false;
