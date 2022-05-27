@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applicant;
+use App\Models\Application;
 use App\Models\ApplicantPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +51,7 @@ class AdminController extends Controller
     }
 
     public function approve_payments(Request $request){
-        $request->validate([ "pay_id" => "required","email"=>"required",'rrr'=>'required' ,]);
+        $request->validate([ "pay_id" => "required","email"=>"required",'rrr'=>'required' ,'pay_type'=>'required',]);
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
         $payment = ApplicantPayment::join('applicants','application_payments.email','applicants.email')
         ->where(['application_payments.id'=>$request->pay_id,'application_payments.email'=>$request->email,
@@ -61,12 +62,19 @@ class AdminController extends Controller
             $payment->approved_by = $data->email;
             $payment->approved_at = date("F j, Y, g:i a");
             if($payment->save()){
-                $Msg = 'Payment with Teller ID: '.$request->rrr.' has been successfully approved. <br> Kindly login to the portal and proceed with your application' ;
-                $Subject = " DEST@REDEEMER's UNIVERSITY, PAYMENT APPROVAL NOTIFICATION";
-                if(app('App\Http\Controllers\ConfigController')->applicant_mail($payment,$Subject,$Msg)['status'] == 'ok'){
-                    return response()->json(['status'=>'ok','msg'=>'Payment approved successfully!'], 200);
-                }
-                else{ return response()->json(['status'=>'nok','msg'=>'Error sending payment approval!'], 401);  }
+               $init_app = new Application();
+               $init_app->submitted_by = $request->email;
+               $init_app->app_type = $request->pay_type;
+               $init_app->status = "pending";
+               $init_app->form_status = '0';
+               if($init_app->save()){
+                   $Msg = 'Payment with Teller ID: '.$request->rrr.' has been successfully approved. <br> Kindly login to the portal and proceed with your application' ;
+                    $Subject = " DEST@REDEEMER's UNIVERSITY, PAYMENT APPROVAL NOTIFICATION";
+                    if(app('App\Http\Controllers\ConfigController')->applicant_mail($payment,$Subject,$Msg)['status'] == 'ok'){
+                        return response()->json(['status'=>'ok','msg'=>'Payment approved successfully!'], 200);
+                    }
+                    else{ return response()->json(['status'=>'nok','msg'=>'Error sending payment approval!'], 401);  }
+               }
             }
         }else{
             return response()->json(['status'=>'Nok','msg'=>'Error, maybe Invalid Teller number supplied'], 401);
