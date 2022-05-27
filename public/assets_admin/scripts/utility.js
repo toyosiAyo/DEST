@@ -73,7 +73,7 @@ $(document).ready(function ($) {
     const approvePayment = (id, email, rrr) => {
         $.ajax({
             type: "POST",
-            url: ajaxurl,
+            url: "admin/approve_payments",
             data: { pay_id: id, email: email, rrr: rrr },
             dataType: "json",
             beforeSend: function () {
