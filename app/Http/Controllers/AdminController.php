@@ -62,7 +62,7 @@ class AdminController extends Controller
             $payment->approved_by = $data->email;
             $payment->approved_at = date("F j, Y, g:i a");
             if($payment->save()){
-               $init_app = new Application();
+               $init_app = new Application;
                $init_app->submitted_by = $request->email;
                $init_app->app_type = $request->pay_type;
                $init_app->status = "pending";
