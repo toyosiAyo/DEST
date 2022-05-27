@@ -96,7 +96,8 @@
         <script src="../assets_admin/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
         <!-- init js -->
-        <script src="../assets_admin/js/pages/datatable-pages.init.js"></script>        
+        <script src="../assets_admin/js/pages/datatable-pages.init.js"></script>  
+        <script src="../assets_admin/scripts/utility.js"></script>      
     @endsection
         
 
