@@ -49,6 +49,8 @@ Route::get('resend_otp',[AuthController::class,'resend_otp'])->name('resend_otp'
 Route::get('student',function(){
     return view('auth/student');
 });
+Route::get('/applicant',[AuthController::class,'auth_login']);
+
 
 
 Route::group(['middleware'=>['authcheck']], function() {
