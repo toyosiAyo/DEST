@@ -184,14 +184,14 @@ $(document).ready(function () {
         });
     };
 
-    $("#foundation_payment").on("submit", function (e) {
+    $(".pay").on("click", function (e) {
         e.preventDefault();
-        $("#btn_foundation").html('<i class="fa fa-spinner fa-spin"></i>');
-        payType = $("#payType").val();
+        $(this).html('<i class="fa fa-spinner fa-spin"></i>');
+        payType = $(this).data("payType");
         console.log(payType);
         desc = "Application Payment";
-        email = $("#email").val();
-        amount = $("#amount").val();
+        email = $(this).data("email");
+        amount = $(this).data("amount");
 
         toastr.options = {
             closeButton: true,
@@ -213,7 +213,7 @@ $(document).ready(function () {
 
         getRemitaConfig(function (response) {
             if (response.msg === "No pin") {
-                $("#btn_foundation").html("Create Application");
+                $(this).html("Create Application");
                 $("#modal_teller").modal("show");
                 // merchantId = response.merchantId;
                 // serviceTypeId = response.serviceTypeID;
@@ -234,14 +234,12 @@ $(document).ready(function () {
             } else if (response.msg === "pending") {
                 $("#modal_teller").modal("show");
                 var pin = response.rsp;
-                $("#btn_foundation").html("Create Application");
-                toastr.options;
+                $(this).html("Create Application");
                 toastr["error"](
                     `Payment with teller number ${pin} is still pending approval`
                 );
             } else {
-                $("#btn_foundation").html("Create Application");
-                toastr.options;
+                $(this).html("Create Application");
                 toastr["error"](response.msg);
                 return false;
             }

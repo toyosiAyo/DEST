@@ -109,7 +109,7 @@ class RemitaConfig extends Controller
             'amount' => 'required|string',
         ]);
         if ($validator->fails()) {
-            return response()->json(['status'=>'Nok','msg'=>'Error with supplied parama while loging new RRR','rsp'=>''], 400);
+            return response()->json(['status'=>'Nok','msg'=>'Error with supplied parameters while loging new RRR','rsp'=>''], 400);
         }
         
         try {  

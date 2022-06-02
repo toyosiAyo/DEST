@@ -53,15 +53,9 @@
                             role="tabpanel">
                             <div class="panel-body">
                               Foundation Programme description here
-                              <form method="post" id="foundation_payment">
-                                @csrf
-                                <input type="hidden" value="{{$data->email}}" name="email" id="email" />
-                                <input type="hidden" value="foundation" name="payType" id="payType" />
-                                <input type="hidden" value="10000" name="amount" id="amount" />
                                 <div class="animation-example animation-hover hover">
-                                  <button type="submit" id="btn_foundation" class="btn btn-dark animation-scale-up">Create Application </button>
+                                  <button type="submit" data-email="{{$data->email}}" data-amount="7500" data-payType="foundation" id="btn_foundation" class="btn btn-dark animation-scale-up pay">Create Application </button>
                                 </div>
-                              </form>
                             </div>
                           </div>
                         </div>
@@ -84,6 +78,15 @@
                             role="tabpanel">
                             <div class="panel-body">
                             Pre-degree Programme description Here
+                              <form method="post" id="predegree_payment">
+                                @csrf
+                                <input type="hidden" value="{{$data->email}}" name="email" id="email" />
+                                <input type="hidden" value="predegree" name="payType" id="payType" />
+                                <input type="hidden" value="10000" name="amount" id="amount" />
+                                <div class="animation-example animation-hover hover">
+                                  <button type="submit" id="btn_predegree" class="btn btn-dark animation-scale pay">Create Application </button>
+                                </div>
+                              </form>
                               <div class="animation-example animation-hover hover">
                                 <button type="button" class="btn btn-dark animation-scale">Create Application</button>
                               </div>
@@ -110,7 +113,7 @@
                             <div class="panel-body">
                             HND Conversion Programme description Here
                               <div class="animation-example animation-hover hover">
-                                <button type="button" class="btn btn-dark animation-shake">Create Application</button>
+                                <button type="button" class="btn btn-dark animation-shake pay">Create Application</button>
                               </div>
                             </div>
                           </div>
@@ -143,12 +146,12 @@
                   @csrf
                   <input type="hidden" value="{{$data->email}}" name="email" id="email" />
                   <input type="hidden" value="foundation" name="payType" id="payType" />
-                  <input type="hidden" value="10000" name="amount" id="amount" />
+                  <input type="hidden" value="7500" name="amount" id="amount" />
                   <div class="modal-body">
-                    <p>Pay the sum of N7500 to 0128755816 and enter Teller number here</p>
+                    <p>Pay the sum of N7500 to /// and enter Teller number here</p>
                     <div class="form-group form-material floating" data-plugin="formMaterial">
                       <input type="tel" class="form-control" id="rrr" name="rrr" required>
-                      <label class="floating-label" for="inputEmail">Enter Teller Number</label>
+                      <label class="floating-label" for="rrr">Enter Teller Number</label>
                     </div>
                   </div>
                   <div class="modal-footer">
