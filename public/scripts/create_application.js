@@ -215,6 +215,10 @@ $(document).ready(function () {
             if (response.msg === "No pin") {
                 $(".pay").html("Create Application");
                 $("#modal_teller").modal("show");
+                $("#form_teller").trigger("reset");
+                $("#show_amount").html(amount);
+                $("#email").val($("#email").val() + email);
+                $("#payType").val($("#payType").val() + payType);
                 // merchantId = response.merchantId;
                 // serviceTypeId = response.serviceTypeID;
                 // apiKey = response.apiKey;

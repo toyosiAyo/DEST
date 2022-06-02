@@ -136,10 +136,10 @@
                 <form method="post" id="form_teller">
                   @csrf
                   <input type="hidden" value="{{$data->email}}" name="email" id="email" />
-                  <input type="hidden" value="foundation" name="payType" id="payType" />
-                  <input type="hidden" value="7500" name="amount" id="amount" />
+                  <input type="text" value="" name="payType" id="payType" />
+                  <input type="text" value="" name="amount" id="amount" />
                   <div class="modal-body">
-                    <p>Pay the sum of N7500 to /// and enter Teller number here</p>
+                    <p>Pay the sum of <span id="show_amount"></span> to /// and enter Teller number here</p>
                     <div class="form-group form-material floating" data-plugin="formMaterial">
                       <input type="tel" class="form-control" id="rrr" name="rrr" required>
                       <label class="floating-label" for="rrr">Enter Teller Number</label>
