@@ -137,8 +137,6 @@
                                                     <div class="col-xl-12 col-md-9">
                                                         <select class="form-control" id="country" name="country" required="">
                                                             <option value="">Choose Country</option>
-                                                            <option value="apple">Nigeria</option>
-                                                            <option value="google">USA</option>
                                                         </select>
                                                     </div>
                                                 </div>
