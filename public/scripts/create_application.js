@@ -184,7 +184,7 @@ $(document).ready(function () {
         });
     };
 
-    $(".pay").on("click", function (e) {
+    $(".pay").click(function (e) {
         e.preventDefault();
         $(this).html('<i class="fa fa-spinner fa-spin"></i>');
         payType = $(this).data("payType");
