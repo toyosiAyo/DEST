@@ -217,7 +217,7 @@ $(document).ready(function () {
                 $("#modal_teller").modal("show");
                 $("#form_teller").trigger("reset");
                 $("#show_amount").html(amount);
-                $("#email").val($("#email").val() + email);
+                $("#amount").val($("#amount").val() + amount);
                 $("#payType").val($("#payType").val() + payType);
                 // merchantId = response.merchantId;
                 // serviceTypeId = response.serviceTypeID;
