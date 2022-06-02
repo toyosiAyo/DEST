@@ -26,7 +26,7 @@
                     <a class="list-group-item" data-toggle="tab" href="#category-2" aria-controls="category-2"
                       role="tab">Pre-degree</a>
                     <a class="list-group-item" data-toggle="tab" href="#category-3" aria-controls="category-3"
-                      role="tab">Per Time</a>
+                      role="tab">Part-Time</a>
                   </div>
                 </div>
               </div>
