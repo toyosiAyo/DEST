@@ -54,7 +54,7 @@
                             <div class="panel-body">
                               Foundation Programme description here
                                 <div class="animation-example animation-hover hover">
-                                  <button type="submit" data-email="{{$data->email}}" data-amount="7500" data-payType="foundation" id="btn_foundation" class="btn btn-dark animation-scale-up pay">Create Application </button>
+                                  <button type="submit" data-email="{{$data->email}}" data-amount="7500" data-payType="foundation" class="btn btn-dark animation-scale-up pay">Create Application </button>
                                 </div>
                             </div>
                           </div>
@@ -78,18 +78,9 @@
                             role="tabpanel">
                             <div class="panel-body">
                             Pre-degree Programme description Here
-                              <form method="post" id="predegree_payment">
-                                @csrf
-                                <input type="hidden" value="{{$data->email}}" name="email" id="email" />
-                                <input type="hidden" value="predegree" name="payType" id="payType" />
-                                <input type="hidden" value="10000" name="amount" id="amount" />
                                 <div class="animation-example animation-hover hover">
-                                  <button type="submit" id="btn_predegree" class="btn btn-dark animation-scale pay">Create Application </button>
+                                  <button type="submit" data-email="{{$data->email}}" data-amount="7500" data-payType="predegree" class="btn btn-dark animation-scale pay">Create Application </button>
                                 </div>
-                              </form>
-                              <div class="animation-example animation-hover hover">
-                                <button type="button" class="btn btn-dark animation-scale">Create Application</button>
-                              </div>
                             </div>
                           </div>
                         </div>
