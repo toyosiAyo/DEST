@@ -1,6 +1,5 @@
 $(document).ready(function () {
     $(".disability").hide();
-    getCountryLists();
 
     $('input[type="checkbox"]').click(function () {
         if ($("#disability_check").prop("checked") == true) {
@@ -250,4 +249,6 @@ $(document).ready(function () {
             },
         });
     };
+
+    getCountryLists();
 });
