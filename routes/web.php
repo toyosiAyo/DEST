@@ -66,6 +66,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('get_remita_config',[RemitaConfig::class,'get_remita_config'])->name('get_remita_config');
     Route::get('college_dept_prog',[ConfigController::class,'college_dept_prog'])->name('college_dept_prog');
     Route::get('check_pend_rrr',[RemitaConfig::class,'check_pend_rrr'])->name('check_pend_rrr');
+    Route::get('get_country',[ConfigController::class,'get_country'])->name('get_country');
     Route::post('log_new_rrr',[RemitaConfig::class,'log_new_rrr'])->name('log_new_rrr');
     Route::post('update_applicant_payment',[ApplicantPaymentController::class,'update_applicant_payment'])->name('update_applicant_payment');
     Route::get('profile',[ConfigController::class,'user_profile'])->name('profile');
