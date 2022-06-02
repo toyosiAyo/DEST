@@ -187,7 +187,7 @@ $(document).ready(function () {
     $(".pay").click(function (e) {
         e.preventDefault();
         $(this).html('<i class="fa fa-spinner fa-spin"></i>');
-        payType = $(this).data("payType");
+        payType = $(this).data("paytype");
         console.log(payType);
         desc = "Application Payment";
         email = $(this).data("email");
