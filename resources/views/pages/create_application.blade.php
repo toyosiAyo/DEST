@@ -104,7 +104,7 @@
                             <div class="panel-body">
                             HND Conversion Programme description Here
                               <div class="animation-example animation-hover hover">
-                                <button type="button" class="btn btn-dark animation-shake pay">Create Application</button>
+                                <button type="button" data-email="{{$data->email}}" data-amount="10000" data-paytype="part_time" class="btn btn-dark animation-shake pay">Create Application</button>
                               </div>
                             </div>
                           </div>
