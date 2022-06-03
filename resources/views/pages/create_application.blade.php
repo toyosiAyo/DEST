@@ -139,7 +139,7 @@
                   <input type="hidden" value="" name="payType" id="payType" />
                   <input type="hidden" value="" name="amount" id="amount" />
                   <div class="modal-body">
-                    <p>Pay the sum of ₦<span id="show_amount"></span> to (...) and enter Teller number here</p>
+                    <p>Pay the sum of ₦<span id="show_amount"></span> to (<span id="show_account"></span>) and enter Teller number here</p>
                     <div class="form-group form-material floating" data-plugin="formMaterial">
                       <input type="tel" class="form-control" id="rrr" name="rrr" required>
                       <label class="floating-label" for="rrr">Enter Teller Number</label>

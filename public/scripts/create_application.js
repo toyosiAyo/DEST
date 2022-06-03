@@ -192,6 +192,9 @@ $(document).ready(function () {
         desc = "Application Payment";
         email = $(this).data("email");
         amount = $(this).data("amount");
+        payType === "part_time"
+            ? (account = "1015057289 Zenith Bank Account name: RUN DEPOSIT")
+            : (account = "1015020904 Zenith Bank Account name: RUNDEST");
 
         toastr.options = {
             closeButton: true,
@@ -217,6 +220,7 @@ $(document).ready(function () {
                 $("#modal_teller").modal("show");
                 $("#form_teller").trigger("reset");
                 $("#show_amount").html(amount);
+                $("#show_account").html(account);
                 $("#amount").val($("#amount").val() + amount);
                 $("#payType").val($("#payType").val() + payType);
                 // merchantId = response.merchantId;
