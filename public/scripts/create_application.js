@@ -184,14 +184,17 @@ $(document).ready(function () {
         });
     };
 
-    $("#foundation_payment").on("submit", function (e) {
+    $(".pay").click(function (e) {
         e.preventDefault();
-        $("#btn_foundation").html('<i class="fa fa-spinner fa-spin"></i>');
-        payType = $("#payType").val();
+        $(this).html('<i class="fa fa-spinner fa-spin"></i>');
+        payType = $(this).data("paytype");
         console.log(payType);
         desc = "Application Payment";
-        email = $("#email").val();
-        amount = $("#amount").val();
+        email = $(this).data("email");
+        amount = $(this).data("amount");
+        payType === "part_time"
+            ? (account = "1015057289 Zenith Bank Account name: RUN DEPOSIT")
+            : (account = "1015020904 Zenith Bank Account name: RUNDEST");
 
         toastr.options = {
             closeButton: true,
@@ -213,8 +216,13 @@ $(document).ready(function () {
 
         getRemitaConfig(function (response) {
             if (response.msg === "No pin") {
-                $("#btn_foundation").html("Create Application");
+                $(".pay").html("Create Application");
                 $("#modal_teller").modal("show");
+                $("#form_teller").trigger("reset");
+                $("#show_amount").html(amount);
+                $("#show_account").html(account);
+                $("#amount").val($("#amount").val() + amount);
+                $("#payType").val($("#payType").val() + payType);
                 // merchantId = response.merchantId;
                 // serviceTypeId = response.serviceTypeID;
                 // apiKey = response.apiKey;
@@ -234,14 +242,12 @@ $(document).ready(function () {
             } else if (response.msg === "pending") {
                 $("#modal_teller").modal("show");
                 var pin = response.rsp;
-                $("#btn_foundation").html("Create Application");
-                toastr.options;
+                $(".pay").html("Create Application");
                 toastr["error"](
                     `Payment with teller number ${pin} is still pending approval`
                 );
             } else {
-                $("#btn_foundation").html("Create Application");
-                toastr.options;
+                $(".pay").html("Create Application");
                 toastr["error"](response.msg);
                 return false;
             }

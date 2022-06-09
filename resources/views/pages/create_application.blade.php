@@ -26,7 +26,7 @@
                     <a class="list-group-item" data-toggle="tab" href="#category-2" aria-controls="category-2"
                       role="tab">Pre-degree</a>
                     <a class="list-group-item" data-toggle="tab" href="#category-3" aria-controls="category-3"
-                      role="tab">Per Time</a>
+                      role="tab">Part-Time</a>
                   </div>
                 </div>
               </div>
@@ -52,16 +52,10 @@
                           <div class="panel-collapse collapse show" id="answer-1" aria-labelledby="question-1"
                             role="tabpanel">
                             <div class="panel-body">
-                              Foundation Programme description here
-                              <form method="post" id="foundation_payment">
-                                @csrf
-                                <input type="hidden" value="{{$data->email}}" name="email" id="email" />
-                                <input type="hidden" value="foundation" name="payType" id="payType" />
-                                <input type="hidden" value="10000" name="amount" id="amount" />
+                              Application fee (₦7,500)
                                 <div class="animation-example animation-hover hover">
-                                  <button type="submit" id="btn_foundation" class="btn btn-dark animation-scale-up">Create Application </button>
+                                  <button type="submit" data-email="{{$data->email}}" data-amount="7500" data-paytype="foundation" class="btn btn-dark animation-scale-up pay">Create Application </button>
                                 </div>
-                              </form>
                             </div>
                           </div>
                         </div>
@@ -83,10 +77,10 @@
                           <div class="panel-collapse collapse show" id="answer-5" aria-labelledby="question-5"
                             role="tabpanel">
                             <div class="panel-body">
-                            Pre-degree Programme description Here
-                              <div class="animation-example animation-hover hover">
-                                <button type="button" class="btn btn-dark animation-scale">Create Application</button>
-                              </div>
+                            Application fee (₦7,500)
+                                <div class="animation-example animation-hover hover">
+                                  <button type="submit" data-email="{{$data->email}}" data-amount="7500" data-paytype="predegree" class="btn btn-dark animation-scale pay">Create Application </button>
+                                </div>
                             </div>
                           </div>
                         </div>
@@ -108,9 +102,9 @@
                           <div class="panel-collapse collapse show" id="answer-8" aria-labelledby="question-8"
                             role="tabpanel">
                             <div class="panel-body">
-                            HND Conversion Programme description Here
+                            Application fee (₦10,000)
                               <div class="animation-example animation-hover hover">
-                                <button type="button" class="btn btn-dark animation-shake">Create Application</button>
+                                <button type="button" data-email="{{$data->email}}" data-amount="10000" data-paytype="part_time" class="btn btn-dark animation-shake pay">Create Application</button>
                               </div>
                             </div>
                           </div>
@@ -142,13 +136,13 @@
                 <form method="post" id="form_teller">
                   @csrf
                   <input type="hidden" value="{{$data->email}}" name="email" id="email" />
-                  <input type="hidden" value="foundation" name="payType" id="payType" />
-                  <input type="hidden" value="10000" name="amount" id="amount" />
+                  <input type="hidden" value="" name="payType" id="payType" />
+                  <input type="hidden" value="" name="amount" id="amount" />
                   <div class="modal-body">
-                    <p>Pay the sum of N7500 to 0128755816 and enter Teller number here</p>
+                    <p>Pay the sum of ₦<span id="show_amount"></span> to (<span id="show_account"></span>) and enter Teller number here</p>
                     <div class="form-group form-material floating" data-plugin="formMaterial">
                       <input type="tel" class="form-control" id="rrr" name="rrr" required>
-                      <label class="floating-label" for="inputEmail">Enter Teller Number</label>
+                      <label class="floating-label" for="rrr">Enter Teller Number</label>
                     </div>
                   </div>
                   <div class="modal-footer">
