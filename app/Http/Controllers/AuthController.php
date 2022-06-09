@@ -133,7 +133,7 @@ class AuthController extends Controller
               $auto_pass = app('App\Http\Controllers\ConfigController')->generateRandomString(6);
               $app->password = Hash::make($auto_pass);
               if($app->save()){
-                $Msg = 'Kindly use this auto-generated password '.$auto_pass.'to login into your portal </br></br>
+                $Msg = 'Kindly use this auto-generated password '.$auto_pass.' to login into your portal </br></br>
                 Note: Remeber to change this password!';
                 $Subject = "DEST@REDEEMER's UNIVERSITY Password Reset!";
                 if(app('App\Http\Controllers\ConfigController')->applicant_mail($app,$Subject,$Msg)['status'] == 'ok'){
