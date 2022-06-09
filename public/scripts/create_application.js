@@ -242,6 +242,11 @@ $(document).ready(function () {
                 window.location.href = "app_form";
             } else if (response.msg === "pending") {
                 $("#modal_teller").modal("show");
+                $("#form_teller").trigger("reset");
+                $("#show_amount").html(amount);
+                $("#show_account").html(account);
+                $("#amount").val($("#amount").val() + amount);
+                $("#payType").val($("#payType").val() + payType);
                 var pin = response.rsp;
                 $(".pay").html("Create Application");
                 toastr["error"](
