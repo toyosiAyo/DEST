@@ -70,7 +70,7 @@
                 <span class="badge badge-round badge-danger">New 5</span>
               </div>
 
-              <div class="list-group">
+              <!-- <div class="list-group">
                 <div data-role="container">
                   <div data-role="content">
                     <a class="list-group-item dropdown-item" href="javascript:void(0)" role="menuitem">
@@ -86,7 +86,7 @@
                     </a>                   
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="dropdown-menu-footer">
                 <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
                     <i class="icon md-settings" aria-hidden="true"></i>
