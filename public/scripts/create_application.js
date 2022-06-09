@@ -192,6 +192,7 @@ $(document).ready(function () {
         desc = "Application Payment";
         email = $(this).data("email");
         amount = $(this).data("amount");
+        console.log(amount);
         payType === "part_time"
             ? (account = "1015057289 Zenith Bank Account name: RUN DEPOSIT")
             : (account = "1015020904 Zenith Bank Account name: RUNDEST");
