@@ -62,12 +62,12 @@
             <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" title="Notifications"
               aria-expanded="false" data-animation="scale-up" role="button">
                 <i class="icon md-notifications" aria-hidden="true"></i>
-                <span class="badge badge-pill badge-danger up">5</span>
+                <span class="badge badge-pill badge-danger up">0</span>
               </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
               <div class="dropdown-menu-header">
                 <h5>NOTIFICATIONS</h5>
-                <span class="badge badge-round badge-danger">New 5</span>
+                <span class="badge badge-round badge-danger">0</span>
               </div>
 
               <!-- <div class="list-group">
