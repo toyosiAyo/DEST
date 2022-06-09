@@ -137,7 +137,7 @@ class AuthController extends Controller
                 Note: Remeber to change this password!';
                 $Subject = "DEST@REDEEMER's UNIVERSITY Password Reset!";
                 if(app('App\Http\Controllers\ConfigController')->applicant_mail($app,$Subject,$Msg)['status'] == 'ok'){
-                    return redirect('/')->with('pass_reset','Password reset successfully, Kindly check your email for the new password!');
+                    return redirect('/')->with('pass_reset','Success, Check your email for the new password!');
                 } return back()->with('fail','Error sending email for password reset!');          
               }
           }
