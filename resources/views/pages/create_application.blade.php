@@ -136,8 +136,8 @@
                 <form method="post" id="form_teller">
                   @csrf
                   <input type="hidden" value="{{$data->email}}" name="email" id="email" />
-                  <input type="text" value="" name="payType" id="payType" />
-                  <input type="text" value="" name="amount" id="amount" />
+                  <input type="hidden" value="" name="payType" id="payType" />
+                  <input type="hidden" value="" name="amount" id="amount" />
                   <div class="modal-body">
                     <p>Pay the sum of ₦<span id="show_amount"></span> to (<span id="show_account"></span>) and enter Teller number here</p>
                     <div class="form-group form-material floating" data-plugin="formMaterial">
