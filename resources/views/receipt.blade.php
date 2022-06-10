@@ -19,7 +19,7 @@
                 <td>
                     <table width="800" border="0" align="center" cellpadding="0" cellspacing="0">
                         <tr>
-                            <td colspan="3" align="left" bgcolor="#003d62"><img src="assets/images/runny.png" width="500" height="150" /></td>
+                            <td colspan="3" align="left" bgcolor="#003d62"><img src="{{ asset('assets/images/runny.png') }}" width="500" height="150" /></td>
                         </tr>
                         <tr>
                             <td colspan="3" align="center"><table width="100%" cellspacing="0" cellpadding="5" class="course_reg" border="0">
