@@ -56,7 +56,7 @@
                                                     </td>
                                                     <td width="20%" valign="top"><table width="150" height="143" border="0" align="center" cellpadding="0" cellspacing="0">
                                                             <tr>
-                                                                <td height="143" align="center" valign="top"><img src="https://destadms.run.edu.ng/{{$payment_data->profile_pix}}" width="118" height="139" border="2" /></td>
+                                                                <td height="143" align="center" valign="top"><img src="{{asset('storage/'. $payment_data->profile_pix) }}" width="118" height="139" border="2" /></td>
                                                             </tr>
                                                         </table>
                                                     </td>
