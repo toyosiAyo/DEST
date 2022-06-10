@@ -45,9 +45,9 @@
                                                         '<button type="button" class="btn btn-danger">
                                                             <i class="icon md-refresh" aria-hidden="true"></i> Requery
                                                         </button>' :
-                                                        '<button type="button" class="btn btn-success">
+                                                        '<a href="receipt/{{$payment->trans_ref}}" target="_blank" type="button" class="btn btn-success">
                                                             <i class="icon md-print" aria-hidden="true"></i> Print Receipt
-                                                        </button>' @endphp
+                                                        </a>' @endphp
                                                     </td>
                                                 </tr>
                                                 @endforeach
