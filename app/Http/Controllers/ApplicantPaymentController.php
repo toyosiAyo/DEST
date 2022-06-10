@@ -217,10 +217,12 @@ class ApplicantPaymentController extends Controller
 
     public function viewReceipt(Request $request, $ref){
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-        $payment_data = DB::table('application_payments')->where([
+        $payment_data = DB::table('application_payments')->join('applicants', 'application_payments.email', '=', 'applicants.email')
+        ->join('settings', 'application_payments.session', '=', 'settings.id')
+        ->where([
                 ['email',$data->email],
                 ['trans_ref', $ref],['status_code', '00']
-            ])->select('*')->first();
+            ])->select('application_payments.*','applicants.profile_pix','settings.session')->first();
         return view('receipt',['payment_data'=>$payment_data]);
     }
 

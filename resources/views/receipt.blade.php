@@ -37,26 +37,26 @@
                                                     <td width="80%" valign="top"><table width="67%" cellspacing="0" cellpadding="5" class="course_reg" border="0">
                                                             <tr>
                                                                 <td align="left" nowrap="nowrap"><strong>Student Name</strong></td>
-                                                                <td align="left"><?php echo strtoupper($name); ?></td>
+                                                                <td align="left">{{$payment_data->names}}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td width="49%" align="left" nowrap="nowrap"><strong>Payment Id</strong></td>
-                                                                <td width="51%" align="left"><?php echo $order_id  ; ?></td>
+                                                                <td width="51%" align="left">{{$payment_data->trans_ref}}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td align="left" nowrap="nowrap"><strong> Date of Deposit</strong></td>
-                                                                <td align="left"><?php echo $date; ?></td>
+                                                                <td align="left">{{ date("d M Y", strtotime($payment_data->updated_at)) }}</td>
                                                             </tr>
                                                             
                                                              <tr>
                                                                 <td align="left" nowrap="nowrap"><strong>Session</strong></td>
-                                                                <td align="left"><?php echo $session; ?></td>
+                                                                <td align="left">{{$payment_data->session}}</td>
                                                             </tr>
                                                       </table>
                                                     </td>
                                                     <td width="20%" valign="top"><table width="150" height="143" border="0" align="center" cellpadding="0" cellspacing="0">
                                                             <tr>
-                                                                <td height="143" align="center" valign="top"><img src="http://adms.run.edu.ng/<?php echo $applicant_picture; ?>?xxx=<?php echo date("Y-m-d H-mm-s");?>" width="118" height="139" border="2" /></td>
+                                                                <td height="143" align="center" valign="top"><img src="https://destadms.run.edu.ng/{{$payment_data->profile_pix}}" width="118" height="139" border="2" /></td>
                                                             </tr>
                                                         </table>
                                                     </td>
@@ -74,8 +74,8 @@
                                                 </tr>
                                                 <tr class="tn">
                                                     <td align="center" valign="top">1</td>
-                                                    <td valign="top"><?php echo strtoupper($pay_type); ?> FEE</td>
-                                                    <td valign="top">N <?php echo $amount; ?></td>
+                                                    <td valign="top">{{$payment_data->pay_type}} Application Fee</td>
+                                                    <td valign="top">N {{$payment_data->amount}}</td>
                                                 </tr>
                                             </table>
                                             <table width="95%" border="0" align="center" cellpadding="10" cellspacing="0">
