@@ -222,8 +222,12 @@ $(document).ready(function () {
                 $("#form_teller").trigger("reset");
                 $("#show_amount").html(amount);
                 $("#show_account").html(account);
-                $("#amount").val($("#amount").val() + amount);
-                $("#payType").val($("#payType").val() + payType);
+                if ($("#amount").val() == "") {
+                    $("#amount").val($("#amount").val() + amount);
+                }
+                if ($("#payType").val() == "") {
+                    $("#payType").val($("#payType").val() + payType);
+                }
                 // merchantId = response.merchantId;
                 // serviceTypeId = response.serviceTypeID;
                 // apiKey = response.apiKey;
