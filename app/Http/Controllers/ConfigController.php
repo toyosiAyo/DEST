@@ -181,12 +181,12 @@ public function get_lga_state_country(Request $request){
         return $country;
     }
     public function get_state(){
-        $country = State::select('id','name')->get();
-        return $country;
+        $states = State::select('id','name')->get();
+        return $states;
     }
     public function get_lga(){
-        $country = Lga::select('id','name')->get();
-        return $country;
+        $lga = Lga::select('id','name')->get();
+        return $lga;
     }
 
     public function get_state_given_country(Request $request){
@@ -211,9 +211,8 @@ public function get_lga_state_country(Request $request){
         try {
             $states = '';
             $lgas = '';
-            if($request->has('countryId') && !empty($request->input('countryId'))) {
-                $states = State::where('country_id', $request->countryId)->select('id','name')->get();
-                $lgas = Lga::where('country_id', $request->countryId)->select('id','name')->get();
+            if($request->has('state_origin') && !empty($request->input('state_origin'))) {
+                $lgas = Lga::where('state_id', $request->state_origin)->select('id','name')->get();
             } 
         } catch (\Throwable $th) {
             return response()->json(['status'=>'Nok','msg'=>'Error from catch... get_lga_given_state()','rsp'=>''], 401);

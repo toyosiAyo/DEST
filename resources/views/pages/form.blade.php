@@ -148,8 +148,6 @@
                                                     <div class="col-xl-12 col-md-9">
                                                         <select class="form-control" id="state_origin" name="state_origin" required="">
                                                             <option value="">Choose a State</option>
-                                                            <option value="Abia">Abia</option>
-                                                            <option value="Adamawa">Adamawa</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -161,8 +159,6 @@
                                                     <div class="col-xl-12 col-md-9">
                                                         <select class="form-control" id="lga_origin" name="lga_origin" required="">
                                                             <option value="">Choose LGA</option>
-                                                            <option value="Alimosho">Alimosho</option>
-                                                            <option value="Somolu">Somolu</option>
                                                         </select>
                                                     </div>
                                                 </div>

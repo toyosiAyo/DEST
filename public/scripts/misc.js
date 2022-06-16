@@ -250,5 +250,43 @@ $(document).ready(function () {
         });
     };
 
+    const getStates = () => {
+        $.ajax({
+            url: "/get_state",
+            method: "GET",
+            success: function (response) {
+                console.log(response);
+                $.each(response, function (i, item) {
+                    $("#state_origin").append(
+                        $("<option>", {
+                            value: item.id,
+                            text: item.name,
+                        })
+                    );
+                });
+            },
+        });
+    };
+
+    $("#state_origin").change(function () {
+        $.ajax({
+            url: "get_lga_via_state",
+            data: { state_origin: this.value },
+            type: "get",
+            success: function (response) {
+                $("#lga_origin").empty().append("<option>Choose LGA</option>");
+                response.forEach((element) => {
+                    $("#lga_origin").append(
+                        $("<option>", {
+                            value: element.name,
+                            text: element.name,
+                        })
+                    );
+                });
+            },
+        });
+    });
+
     getCountryLists();
+    getStates();
 });
