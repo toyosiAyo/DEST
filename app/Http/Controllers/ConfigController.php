@@ -209,10 +209,9 @@ public function get_lga_state_country(Request $request){
     public function get_lga_given_state(Request $request){
         
         try {
-            $states = '';
-            $lgas = '';
             if($request->has('state_origin') && !empty($request->input('state_origin'))) {
                 $lgas = Lga::where('state_id', $request->state_origin)->select('id','name')->get();
+                return $lgas;
             } 
         } catch (\Throwable $th) {
             return response()->json(['status'=>'Nok','msg'=>'Error from catch... get_lga_given_state()','rsp'=>''], 401);
