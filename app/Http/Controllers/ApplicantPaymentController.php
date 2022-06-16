@@ -206,7 +206,7 @@ class ApplicantPaymentController extends Controller
         
         try {
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            $payments = DB::table('application_payments')->select('*')->where('email', $data->email)->get();
+            $payments = DB::table('application_payments')->select('*')->where('email', $data->email)->latest()->get();
             return view('pages.payment_history',['payments'=>$payments])->with('data', $data);
         
         } catch (\Throwable $th) {
