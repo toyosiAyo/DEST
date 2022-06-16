@@ -70,7 +70,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('check_pend_rrr',[RemitaConfig::class,'check_pend_rrr'])->name('check_pend_rrr');
     Route::get('get_country',[ConfigController::class,'get_country'])->name('get_country');
     Route::get('get_state',[ConfigController::class,'get_state'])->name('get_state');
-    Route::get('get_lga_via_state',[ConfigController::class,'get_lga_given_state'])->name('get_lga_via_state');
+    Route::post('get_lga_via_state',[ConfigController::class,'get_lga_given_state'])->name('get_lga_via_state');
     Route::post('log_new_rrr',[RemitaConfig::class,'log_new_rrr'])->name('log_new_rrr');
     Route::post('update_applicant_payment',[ApplicantPaymentController::class,'update_applicant_payment'])->name('update_applicant_payment');
     Route::get('profile',[ConfigController::class,'user_profile'])->name('profile');

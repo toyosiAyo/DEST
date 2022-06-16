@@ -270,7 +270,7 @@ $(document).ready(function () {
         $.ajax({
             url: "get_lga_via_state",
             data: { state_origin: this.value },
-            type: "get",
+            type: "POST",
             success: function (response) {
                 $("#lga_origin").empty().append("<option>Choose LGA</option>");
                 response.forEach((element) => {
