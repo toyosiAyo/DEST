@@ -237,7 +237,6 @@ $(document).ready(function () {
             url: "/get_country",
             method: "GET",
             success: function (response) {
-                console.log(response);
                 $.each(response, function (i, item) {
                     $("#country").append(
                         $("<option>", {
@@ -255,7 +254,6 @@ $(document).ready(function () {
             url: "/get_state",
             method: "GET",
             success: function (response) {
-                console.log(response);
                 $.each(response, function (i, item) {
                     $("#state_origin").append(
                         $("<option>", {
