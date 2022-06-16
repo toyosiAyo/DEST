@@ -103,7 +103,7 @@
                         <td>{{ $i }} @php $i++ @endphp</td>
                         <td>{{ $app->Programme }}</td>
                         <td>
-                          <span class="badge badge-warning">Pending</span>
+                          <span class="badge badge-info">{{ $app->status }}</span>
                         </td>
                         <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
                       </tr>  
