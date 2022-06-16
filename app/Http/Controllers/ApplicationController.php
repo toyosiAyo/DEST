@@ -316,7 +316,7 @@ class ApplicationController extends Controller
                 try {
                     $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
                     $applications = DB::table('applications')->select('*','first_choice->prog as Programme')
-                        ->where('submitted_by', $data->email)->get();
+                        ->where('submitted_by', $data->email)->latest()->get();
                     return view('pages.applications',['apps'=>$applications])->with('data', $data);
                 } catch (\Throwable $th) {
                     return back()->with('view_applications','view_applications');
