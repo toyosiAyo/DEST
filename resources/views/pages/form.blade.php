@@ -368,6 +368,7 @@
                                                                 <option value="" >Select Exam</option>
                                                                 <option value="WAEC">WAEC</option>
                                                                 <option value="NECO">NECO</option>
+                                                                <option value="GCE">GCE</option>
                                                             </select>
                                                           </td>
                                                           <td><select class="form-control" name="subject[]" required>
@@ -543,8 +544,8 @@
                                       <select class="form-control" data-plugin="selectpicker" required
                                         name="screening_date" id="screening_date" data-live-search="true" data-allow-clear="true">
                                         <option>Select Screening Date</option>
-                                        <option value="17/10/2021">17/10/2021</option>
-                                        <option value="20/10/2021">20/10/2021</option>
+                                        <option value="20/06/2022">20/06/2022</option>
+                                        <option value="20/07/2022">20/07/2022</option>
                                       </select>
                                     </div>
                                   </div>
