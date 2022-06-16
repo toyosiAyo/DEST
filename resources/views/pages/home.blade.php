@@ -106,7 +106,8 @@
                           <span class="badge badge-info">{{ $app->status }}</span>
                         </td>
                         <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
-                      </tr>  
+                      </tr> 
+                      @if($i > 5) break; @endif 
                       @endforeach   
                     </tbody>
                   </table>

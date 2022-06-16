@@ -89,7 +89,7 @@ class AuthController extends Controller
             try {
                 $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
                 $applications = DB::table('applications')->select('*','first_choice->prog as Programme')
-                ->where('submitted_by', $data->email)->get();
+                ->where('submitted_by', $data->email)->latest()->get();
                 $count = count($applications);
                 $success = DB::table('applications')->where([
                     ['submitted_by', $data->email],
