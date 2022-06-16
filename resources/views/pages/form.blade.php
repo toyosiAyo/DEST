@@ -244,7 +244,13 @@
                                                         <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class=" col-xl-12 col-md-9">
-                                                        <input type="text" class="form-control" id="nok_relationship" name="nok_relationship" required>
+                                                        <select class="form-control" name="nok_relationship" id="nok_relationship" required>
+                                                          <option value="Father">Father</option>
+                                                          <option value="Mother">Mother</option>
+                                                          <option value="Spouse">Spouse</option>
+                                                          <option value="Sibling">Sibling</option>
+                                                          <option value="Others">Others</option>
+                                                        </select>
                                                     </div>
                                                 </div>
 
