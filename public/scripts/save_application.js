@@ -64,7 +64,6 @@ $(document).ready(function ($) {
                 },
                 success: function (response) {
                     console.log(response);
-                    alert(response.responseJSON.msg);
                     $("#btn_academic").html("Next");
                     $("#academic_info").prop("disabled", true);
                     $("#declaration_info").prop("disabled", false);
@@ -72,6 +71,7 @@ $(document).ready(function ($) {
                 },
                 error: function (response) {
                     console.log(response);
+                    alert(response.responseJSON.msg);
                     $("#btn_academic").html("Next");
                 },
             });
