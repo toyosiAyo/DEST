@@ -24,7 +24,7 @@
       <!-- Page -->
       <div class="page">
         <div class="page-header">
-          <h1 class="page-title">Application Form ({{ Cookie::get('app_type') }})</h1>
+          <h1 class="page-title">Application Form ({{ cookie('app_type') }})</h1>
           <small>NOTE: Fill in all details correctly, also, fields marked <span class="required" style="color:red">*</span> are required </small>
         </div>
         <div class="page-content container-fluid">
