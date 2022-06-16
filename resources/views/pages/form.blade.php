@@ -158,7 +158,6 @@
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
                                                         <select class="form-control" id="lga_origin" name="lga_origin" required="">
-                                                            <option value="">Choose LGA</option>
                                                         </select>
                                                     </div>
                                                 </div>
