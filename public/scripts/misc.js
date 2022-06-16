@@ -272,7 +272,9 @@ $(document).ready(function () {
             data: { state_origin: this.value },
             type: "POST",
             success: function (response) {
-                $("#lga_origin").empty().append("<option>Choose LGA</option>");
+                $("#lga_origin")
+                    .empty()
+                    .append("<option value=''>Choose LGA</option>");
                 response.forEach((element) => {
                     $("#lga_origin").append(
                         $("<option>", {
