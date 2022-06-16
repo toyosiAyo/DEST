@@ -168,7 +168,7 @@ class ApplicationController extends Controller
                 }else{return response()->json(['status'=>'Nok','msg'=>'failed, Your secondary school fields are required'],401);   }
            //O-LEVEL;
                 if(count(array_unique($request->exam)) > 2 || count(array_unique($request->year )) >2){
-            return response()->json(['status'=>'Nok','msg'=>'failed, Like you have more than two sittings for your O-leve'],401); 
+            return response()->json(['status'=>'Nok','msg'=>'Oops, you have more than two sittings for your O-level'],401); 
             }else{
             if(!sizeof($request->exam) < 5 && sizeof($request->exam) == sizeof($request->subject) &&  sizeof($request->subject) == sizeof($request->grade ) && sizeof($request->grade) == sizeof($request->year ) 
                 ){
