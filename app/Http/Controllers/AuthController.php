@@ -91,7 +91,15 @@ class AuthController extends Controller
                 $applications = DB::table('applications')->select('*','first_choice->prog as Programme')
                 ->where('submitted_by', $data->email)->get();
                 $count = count($applications);
-                return view('pages.home',['apps'=>$applications,'count'=>$count])->with('data', $data);
+                $success = DB::table('applications')->where([
+                    ['submitted_by', $data->email],
+                    ['status', 'success'],
+                ])->count();
+                $pending = DB::table('applications')->where([
+                    ['submitted_by', $data->email],
+                    ['status', 'pending'],
+                ])->count();
+                return view('pages.home',['apps'=>$applications,'count'=>$count,'success'=>$success,'pending'=>$pending])->with('data', $data);
             } catch (\Throwable $th) {
                 return back()->with('applicant_dashboard','applicant_dashboard');
             }  
