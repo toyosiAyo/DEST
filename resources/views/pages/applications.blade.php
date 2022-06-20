@@ -31,6 +31,7 @@
                                                 <tr>
                                                     <th>S/N</th>
                                                     <th>Programme</th>
+                                                    <th>Type</th>
                                                     <th>Date</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
@@ -42,6 +43,7 @@
                                                 <tr>
                                                     <td>{{ $i }} @php $i++ @endphp</td>
                                                     <td>{{ $app->Programme }}</td>
+                                                    <td>{{ $app->app_type }}</td>
                                                     <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
                                                     <td>@php echo $app->status == 'pending' ? 
                                                         '<span class="badge badge-warning">'.$app->status.'</span>' :
