@@ -104,7 +104,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="icon md-pin" aria-hidden="true"></i>
                                                         </span>
-                                                        <input type="text" class="form-control" id="address_resident" name="address_resident" 
+                                                        <input type="text" value="{{$data->address_resident}}" class="form-control" id="address_resident" name="address_resident" 
                                                             required="">
                                                           <input type="hidden" class="form-control" value="basic" id="check_step" name="check_step">
                                                         </div>
@@ -116,7 +116,7 @@
                                                         <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
-                                                        <input type="date" data-plugin="datepicker" class="form-control" id="dob" name="dob" 
+                                                        <input type="date" value="{{$data->dob}}" data-plugin="datepicker" class="form-control" id="dob" name="dob" 
                                                         required="" />
                                                     </div>
                                                 </div>
@@ -126,7 +126,7 @@
                                                         <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class=" col-xl-12 col-md-9">
-                                                        <input type="text" class="form-control" id="city_resident" name="city_resident" required>
+                                                        <input type="text" class="form-control" value="{{$data->city_resident}}" id="city_resident" name="city_resident" required>
                                                     </div>
                                                 </div>
 
@@ -136,7 +136,11 @@
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
                                                         <select class="form-control" id="country" name="country" required="">
+                                                            @if($data->country_resident == NULL) 
                                                             <option value="">Choose Country</option>
+                                                            @else
+                                                            <option value="{{$data->country_resident}}" selected>{{$data->country_resident}}</option>
+                                                            @endif
                                                         </select>
                                                     </div>
                                                 </div>
@@ -496,11 +500,13 @@
                                       <option value="">Select Programme</option>
                                     </select>
                                   </div>
+                                  @if($_COOKIE['app_type'] == 'foundation')
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" required name="combination" id="combination">
                                       <option value="">Select JUPEB Combination</option>
                                     </select>
                                   </div>
+                                  @endif
                                 </div>
 
                                 <div class="col-xl-12 form-horizontal">
@@ -526,11 +532,13 @@
                                       <option>Select programme</option>
                                     </select>
                                   </div>
+                                  @if($_COOKIE['app_type'] == 'foundation')
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" required name="combination2" id="combination2">
                                       <option>Select JUPEB Combination</option>
                                     </select>
                                   </div>
+                                  @endif
                                 </div>
                                   
                                 <div class="col-xl-12 form-horizontal">
@@ -586,7 +594,7 @@
 
                                 <div class="checkbox-custom checkbox-success">
                                   <input type="checkbox" id="accept_terms" name="accept_terms" required />
-                                  <label for="accept_terms"><small>I declare that I wish to enter the Redeemer's University Foundation degree Programme in the 2021/2022 session.
+                                  <label for="accept_terms"><small>I declare that I wish to enter the Redeemer's University Foundation degree Programme in this current session.
                                     The credentials given in this form are correct to the best of my knowledge. If admitted to the University,
                                     I shall regard myself bound by the ordinance, code of conduct, statuses and regulations of the University as
                                     far as they affect me.

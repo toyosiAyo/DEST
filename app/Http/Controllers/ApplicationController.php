@@ -50,17 +50,16 @@ class ApplicationController extends Controller
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             $pin = $_COOKIE['pin'];
             $app_type = $_COOKIE['app_type'];
-            $form_status = DB::table('applications')->where(['submitted_by'=> $data->email,'app_type'=>$app_type,'status'=>'pending'])
-            ->where('form_status','<','3')->pluck('form_status');
+            // $form_status = DB::table('applications')->where(['submitted_by'=> $data->email,'app_type'=>$app_type,'status'=>'pending'])
+            // ->where('form_status','<','3')->pluck('form_status');
             $application = DB::table('applications')->where(['submitted_by'=> $data->email,'app_type'=>$app_type,'status'=>'pending'])
             ->where('form_status','<','3')->first();
             $form_status = $application->form_status;
-            dd($form_status);
             if(!empty($pin) && !$form_status->isEmpty()){
                 $o_level = DB::table('o_level_subjects')->select('id','subject')->get();
                 $faculties = app('App\Http\Controllers\ConfigController')->college_dept_prog($request)['faculties'];
                 $sub_grade = array("A1", "B2", "B3", "C4", "C5", "C6", "D7", "E8", "F9");
-                return view('/pages/form',['o_level'=> $o_level,'sub_grade'=>$sub_grade,'pin'=>$pin,'data'=> $data,'faculties'=> $faculties,'form_status'=>$form_status ]);
+                return view('/pages/form',['o_level'=> $o_level,'sub_grade'=>$sub_grade,'pin'=>$pin,'data'=> $data,'faculties'=> $faculties,'form_status'=>$form_status,'application'=>$application ]);
             }
             else {
                 return view('/pages/create_application')->with('data',$data);
