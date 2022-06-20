@@ -55,8 +55,8 @@ class ApplicationController extends Controller
             $application = DB::table('applications')->where(['submitted_by'=> $data->email,'app_type'=>$app_type,'status'=>'pending'])
             ->where('form_status','<','3')->first();
             $form_status = $application->form_status;
-            dd($pin);
             if(!empty($pin) && !$form_status->isEmpty()){
+                dd($pin);
                 $o_level = DB::table('o_level_subjects')->select('id','subject')->get();
                 $faculties = app('App\Http\Controllers\ConfigController')->college_dept_prog($request)['faculties'];
                 $sub_grade = array("A1", "B2", "B3", "C4", "C5", "C6", "D7", "E8", "F9");
