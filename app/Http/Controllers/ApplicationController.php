@@ -142,7 +142,7 @@ class ApplicationController extends Controller
             $app->sponsor_email = $request->sponsor_email;
             $app->sponsor_phone = $request->sponsor_phone;
             if($app->save()){
-                $app_record = Application::where(['form_status' =>'0','submitted_by'=>$app->email,'status'=>'pending','app_type'=>$_COOKIE['app_type']])->first();
+                $app_record = Application::where(['submitted_by'=>$app->email,'status'=>'pending','app_type'=>$_COOKIE['app_type']])->first();
                 $app_record->form_status = $app_record->form_status+1;
                 dd($app_record);
                 if($app_record->save()){return response()->json(['status'=>'ok','msg'=>'success, profile created',],201); }
