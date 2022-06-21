@@ -109,7 +109,7 @@
                         </td>
                         <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
                       </tr> 
-                      @if($i > 5) break; @endif 
+                      @if($i > 5) @break @endif 
                       @endforeach   
                     </tbody>
                   </table>
