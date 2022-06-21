@@ -217,15 +217,14 @@ $(document).ready(function () {
     });
 
     var form_stat = $("#form_status").val();
-    console.log('unsliced'+form_stat)
-    var sliced = form_stat.slice(1, -1);
-    console.log('sliced'+sliced)
+    // var sliced = form_stat.slice(1, -1);
+    // console.log('sliced'+sliced)
 
-    if (sliced == 0) {
+    if (form_stat == 0) {
         $("#category-1").addClass("active");
         $("#academic_info").prop("disabled", true);
         $("#declaration_info").prop("disabled", true);
-    } else if (sliced == 1) {
+    } else if (form_stat == 1) {
         $("#category-2").addClass("active");
         $("#basic_info").prop("disabled", true);
         $("#declaration_info").prop("disabled", true);
