@@ -240,7 +240,6 @@
                                                     </label>
                                                     <div class=" col-xl-12 col-md-9">
                                                         <input type="tel" class="form-control" id="nok_phone" name="nok_phone" required>
-                                                        <input type="text" value="{{$form_status}}" id="form_status" class="form-control">
                                                     </div>
                                                 </div>
 
