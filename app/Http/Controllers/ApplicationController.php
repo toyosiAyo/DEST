@@ -144,7 +144,6 @@ class ApplicationController extends Controller
             if($app->save()){
                 $app_record = Application::where(['submitted_by'=>$app->email,'status'=>'pending','app_type'=>$_COOKIE['app_type']])->first();
                 $app_record->form_status = $app_record->form_status+1;
-                dd($app_record);
                 if($app_record->save()){return response()->json(['status'=>'ok','msg'=>'success, profile created',],201); }
                 else{return response()->json(['status'=>'Nok','msg'=>'failed creating profile',],401);}
             }else{
