@@ -192,6 +192,7 @@ $(document).ready(function () {
         desc = "Application Payment";
         email = $(this).data("email");
         amount = $(this).data("amount");
+        console.log(amount);
         payType === "part_time"
             ? (account = "1015057289 Zenith Bank Account name: RUN DEPOSIT")
             : (account = "1015020904 Zenith Bank Account name: RUNDEST");
@@ -221,8 +222,12 @@ $(document).ready(function () {
                 $("#form_teller").trigger("reset");
                 $("#show_amount").html(amount);
                 $("#show_account").html(account);
-                $("#amount").val($("#amount").val() + amount);
-                $("#payType").val($("#payType").val() + payType);
+                if ($("#amount").val() == "") {
+                    $("#amount").val($("#amount").val() + amount);
+                }
+                if ($("#payType").val() == "") {
+                    $("#payType").val($("#payType").val() + payType);
+                }
                 // merchantId = response.merchantId;
                 // serviceTypeId = response.serviceTypeID;
                 // apiKey = response.apiKey;
@@ -241,6 +246,11 @@ $(document).ready(function () {
                 window.location.href = "app_form";
             } else if (response.msg === "pending") {
                 $("#modal_teller").modal("show");
+                $("#form_teller").trigger("reset");
+                $("#show_amount").html(amount);
+                $("#show_account").html(account);
+                $("#amount").val($("#amount").val() + amount);
+                $("#payType").val($("#payType").val() + payType);
                 var pin = response.rsp;
                 $(".pay").html("Create Application");
                 toastr["error"](

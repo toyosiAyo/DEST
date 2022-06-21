@@ -39,7 +39,7 @@
                 <button type="button" class="btn header-item noti-icon position-relative" id="page-header-notifications-dropdown"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i data-feather="bell" class="icon-lg"></i>
-                    <span class="badge bg-danger rounded-pill">5</span>
+                    <span class="badge bg-danger rounded-pill">0</span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
                     aria-labelledby="page-header-notifications-dropdown">
@@ -49,11 +49,11 @@
                                 <h6 class="m-0"> Notifications </h6>
                             </div>
                             <div class="col-auto">
-                                <a href="#!" class="small text-reset text-decoration-underline"> Unread (3)</a>
+                                <a href="#!" class="small text-reset text-decoration-underline"> Unread (0)</a>
                             </div>
                         </div>
                     </div>
-                    <div data-simplebar style="max-height: 230px;">
+                    <!-- <div data-simplebar style="max-height: 230px;">
                         <a href="#!" class="text-reset notification-item">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                         </a>
-                    </div>
+                    </div> -->
                     <div class="p-2 border-top d-grid">
                         <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
                             <i class="mdi mdi-arrow-right-circle me-1"></i> <span>View More..</span> 

@@ -69,11 +69,14 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('college_dept_prog',[ConfigController::class,'college_dept_prog'])->name('college_dept_prog');
     Route::get('check_pend_rrr',[RemitaConfig::class,'check_pend_rrr'])->name('check_pend_rrr');
     Route::get('get_country',[ConfigController::class,'get_country'])->name('get_country');
+    Route::get('get_state',[ConfigController::class,'get_state'])->name('get_state');
+    Route::post('get_lga_via_state',[ConfigController::class,'get_lga_given_state'])->name('get_lga_via_state');
     Route::post('log_new_rrr',[RemitaConfig::class,'log_new_rrr'])->name('log_new_rrr');
     Route::post('update_applicant_payment',[ApplicantPaymentController::class,'update_applicant_payment'])->name('update_applicant_payment');
     Route::get('profile',[ConfigController::class,'user_profile'])->name('profile');
     Route::get('application',[ApplicationController::class,'view_applications'])->name('application');
     Route::get('payments',[ApplicantPaymentController::class,'view_payments'])->name('payments');
+    Route::get('/receipt/{id}',[ApplicantPaymentController::class,'viewReceipt']);
 
     Route::post('password_reset',[AuthController::class,'password_reset'])->name('password_reset');
     Route::post('log_new_teller',[RemitaConfig::class,'log_new_teller'])->name('log_new_teller');

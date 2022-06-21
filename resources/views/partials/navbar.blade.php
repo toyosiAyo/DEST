@@ -11,8 +11,8 @@
         <i class="icon md-more" aria-hidden="true"></i>
       </button>
       <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
-        <img class="navbar-brand-logo" src="{{ asset('assets/images/run_logo.png') }}" title="RUN DEST">
-        <span class="navbar-brand-text hidden-xs-down"> RUN DEST</span>
+        <a href="dashboard"><img class="navbar-brand-logo" src="{{ asset('assets/images/run_logo.png') }}" title="RUN DEST">
+        <span class="navbar-brand-text hidden-xs-down"> RUN DEST</span></a>
       </div>
     </div>
 
@@ -53,7 +53,7 @@
             <div class="dropdown-menu" role="menu">
               <a class="dropdown-item" href="profile" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> Profile</a>
               <a class="dropdown-item" href="payments" role="menuitem"><i class="icon md-card" aria-hidden="true"></i> Payments</a>
-              <!-- <a class="dropdown-item" href="javascript:void(0)" role="menuitem"><i class="icon md-settings" aria-hidden="true"></i> Settings</a> -->
+              <a class="dropdown-item" href="profile" role="menuitem"><i class="icon md-settings" aria-hidden="true"></i> Settings</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{{route('logout')}}" role="menuitem"><i class="icon md-power" aria-hidden="true"></i> Logout</a>
             </div>
@@ -62,15 +62,15 @@
             <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" title="Notifications"
               aria-expanded="false" data-animation="scale-up" role="button">
                 <i class="icon md-notifications" aria-hidden="true"></i>
-                <span class="badge badge-pill badge-danger up">5</span>
+                <span class="badge badge-pill badge-danger up">0</span>
               </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
               <div class="dropdown-menu-header">
                 <h5>NOTIFICATIONS</h5>
-                <span class="badge badge-round badge-danger">New 5</span>
+                <span class="badge badge-round badge-danger">0</span>
               </div>
 
-              <div class="list-group">
+              <!-- <div class="list-group">
                 <div data-role="container">
                   <div data-role="content">
                     <a class="list-group-item dropdown-item" href="javascript:void(0)" role="menuitem">
@@ -86,7 +86,7 @@
                     </a>                   
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="dropdown-menu-footer">
                 <a class="dropdown-menu-footer-btn" href="javascript:void(0)" role="button">
                     <i class="icon md-settings" aria-hidden="true"></i>
@@ -101,7 +101,7 @@
         <!-- End Navbar Toolbar Right -->
 
         <div class="navbar-brand navbar-brand-center">
-          <a href="#">
+          <a href="dashboard">
             <img class="navbar-brand-logo navbar-brand-logo-normal" style="height:65px; width:113%" src="assets/images/run_logo.png"
               title="RUN DEST">
             <img class="navbar-brand-logo navbar-brand-logo-special" src="assets/images/run_logo.png"

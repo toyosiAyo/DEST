@@ -51,7 +51,7 @@
                     <div class="grey-800 float-left py-10">
                       <i class="icon md-hourglass-alt grey-600 font-size-24 vertical-align-bottom mr-5"></i>Pending Applications
                     </div>
-                    <span class="float-right grey-700 font-size-30">0</span>
+                    <span class="float-right grey-700 font-size-30">{{$pending}}</span>
                   </div>
                   <div class="mb-20 grey-500">
                     <a href="application">View</a>
@@ -66,9 +66,9 @@
                 <div class="card-block p-20 pt-10">
                   <div class="clearfix">
                     <div class="grey-800 float-left py-10">
-                      <i class="icon md-assignment-check grey-600 font-size-24 vertical-align-bottom mr-5"></i>Approved Applications
+                      <i class="icon md-assignment-check grey-600 font-size-24 vertical-align-bottom mr-5"></i>Submitted Applications
                     </div>
-                    <span class="float-right grey-700 font-size-30">0</span>
+                    <span class="float-right grey-700 font-size-30">{{$success}}</span>
                   </div>
                   <div class="mb-20 grey-500">
                     View
@@ -92,6 +92,7 @@
                       <tr>
                         <td><strong>S/N</strong></td>
                         <td><strong>Programme</strong></td>
+                        <td><strong>Type</strong></td>
                         <td><strong>Status</strong></td>
                         <td class="text-left"><strong>Date</strong></td>
                       </tr>
@@ -102,11 +103,13 @@
                       <tr>
                         <td>{{ $i }} @php $i++ @endphp</td>
                         <td>{{ $app->Programme }}</td>
+                        <td>{{ $app->app_type }}</td>
                         <td>
-                          <span class="badge badge-warning">Pending</span>
+                          <span class="badge badge-info">{{ $app->status }}</span>
                         </td>
                         <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
-                      </tr>  
+                      </tr> 
+                      @if($i > 5) break; @endif 
                       @endforeach   
                     </tbody>
                   </table>

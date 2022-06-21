@@ -206,13 +206,24 @@ class ApplicantPaymentController extends Controller
         
         try {
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            $payments = DB::table('application_payments')->select('*')->where('email', $data->email)->get();
+            $payments = DB::table('application_payments')->select('*')->where('email', $data->email)->latest()->get();
             return view('pages.payment_history',['payments'=>$payments])->with('data', $data);
         
         } catch (\Throwable $th) {
             return back()->with('view_payments','view_payments');
         }    
        
+    }
+
+    public function viewReceipt(Request $request, $ref){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $payment_data = DB::table('application_payments')->join('applicants', 'application_payments.email', '=', 'applicants.email')
+        ->join('settings', 'application_payments.session', '=', 'settings.id')
+        ->where([
+                ['application_payments.email',$data->email],
+                ['application_payments.trans_ref', $ref],['application_payments.status_code', '00']
+            ])->select('application_payments.*','applicants.profile_pix','settings.session')->first();
+        return view('receipt',['payment_data'=>$payment_data]);
     }
 
 

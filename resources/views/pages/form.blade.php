@@ -24,7 +24,7 @@
       <!-- Page -->
       <div class="page">
         <div class="page-header">
-          <h1 class="page-title">Application Form (Foundation)</h1>
+          <h1 class="page-title">Application Form ({{ $_COOKIE['app_type'] }})</h1>
           <small>NOTE: Fill in all details correctly, also, fields marked <span class="required" style="color:red">*</span> are required </small>
         </div>
         <div class="page-content container-fluid">
@@ -104,7 +104,7 @@
                                                         <span class="input-group-addon">
                                                             <i class="icon md-pin" aria-hidden="true"></i>
                                                         </span>
-                                                        <input type="text" class="form-control" id="address_resident" name="address_resident" 
+                                                        <input type="text" value="{{$data->address_resident}}" class="form-control" id="address_resident" name="address_resident" 
                                                             required="">
                                                           <input type="hidden" class="form-control" value="basic" id="check_step" name="check_step">
                                                         </div>
@@ -116,7 +116,7 @@
                                                         <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
-                                                        <input type="date" data-plugin="datepicker" class="form-control" id="dob" name="dob" 
+                                                        <input type="date" value="{{$data->dob}}" data-plugin="datepicker" class="form-control" id="dob" name="dob" 
                                                         required="" />
                                                     </div>
                                                 </div>
@@ -126,7 +126,7 @@
                                                         <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class=" col-xl-12 col-md-9">
-                                                        <input type="text" class="form-control" id="city_resident" name="city_resident" required>
+                                                        <input type="text" class="form-control" value="{{$data->city_resident}}" id="city_resident" name="city_resident" required>
                                                     </div>
                                                 </div>
 
@@ -136,7 +136,11 @@
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
                                                         <select class="form-control" id="country" name="country" required="">
+                                                            @if($data->country_resident == NULL) 
                                                             <option value="">Choose Country</option>
+                                                            @else
+                                                            <option value="{{$data->country_resident}}" selected>{{$data->country_resident}}</option>
+                                                            @endif
                                                         </select>
                                                     </div>
                                                 </div>
@@ -148,8 +152,6 @@
                                                     <div class="col-xl-12 col-md-9">
                                                         <select class="form-control" id="state_origin" name="state_origin" required="">
                                                             <option value="">Choose a State</option>
-                                                            <option value="Abia">Abia</option>
-                                                            <option value="Adamawa">Adamawa</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -160,9 +162,6 @@
                                                     </label>
                                                     <div class="col-xl-12 col-md-9">
                                                         <select class="form-control" id="lga_origin" name="lga_origin" required="">
-                                                            <option value="">Choose LGA</option>
-                                                            <option value="Alimosho">Alimosho</option>
-                                                            <option value="Somolu">Somolu</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -249,7 +248,13 @@
                                                         <span class="required" style="color:red">*</span>
                                                     </label>
                                                     <div class=" col-xl-12 col-md-9">
-                                                        <input type="text" class="form-control" id="nok_relationship" name="nok_relationship" required>
+                                                        <select class="form-control" name="nok_relationship" id="nok_relationship" required>
+                                                          <option value="Father">Father</option>
+                                                          <option value="Mother">Mother</option>
+                                                          <option value="Spouse">Spouse</option>
+                                                          <option value="Sibling">Sibling</option>
+                                                          <option value="Others">Others</option>
+                                                        </select>
                                                     </div>
                                                 </div>
 
@@ -373,6 +378,7 @@
                                                                 <option value="" >Select Exam</option>
                                                                 <option value="WAEC">WAEC</option>
                                                                 <option value="NECO">NECO</option>
+                                                                <option value="GCE">GCE</option>
                                                             </select>
                                                           </td>
                                                           <td><select class="form-control" name="subject[]" required>
@@ -494,11 +500,13 @@
                                       <option value="">Select Programme</option>
                                     </select>
                                   </div>
+                                  @if($_COOKIE['app_type'] == 'foundation')
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" required name="combination" id="combination">
                                       <option value="">Select JUPEB Combination</option>
                                     </select>
                                   </div>
+                                  @endif
                                 </div>
 
                                 <div class="col-xl-12 form-horizontal">
@@ -524,11 +532,13 @@
                                       <option>Select programme</option>
                                     </select>
                                   </div>
+                                  @if($_COOKIE['app_type'] == 'foundation')
                                   <div class="example col-xl-3 col-md-3">
                                     <select class="form-control" required name="combination2" id="combination2">
                                       <option>Select JUPEB Combination</option>
                                     </select>
                                   </div>
+                                  @endif
                                 </div>
                                   
                                 <div class="col-xl-12 form-horizontal">
@@ -548,8 +558,8 @@
                                       <select class="form-control" data-plugin="selectpicker" required
                                         name="screening_date" id="screening_date" data-live-search="true" data-allow-clear="true">
                                         <option>Select Screening Date</option>
-                                        <option value="17/10/2021">17/10/2021</option>
-                                        <option value="20/10/2021">20/10/2021</option>
+                                        <option value="20/06/2022">20/06/2022</option>
+                                        <option value="20/07/2022">20/07/2022</option>
                                       </select>
                                     </div>
                                   </div>
@@ -584,7 +594,7 @@
 
                                 <div class="checkbox-custom checkbox-success">
                                   <input type="checkbox" id="accept_terms" name="accept_terms" required />
-                                  <label for="accept_terms"><small>I declare that I wish to enter the Redeemer's University Foundation degree Programme in the 2021/2022 session.
+                                  <label for="accept_terms"><small>I declare that I wish to enter the Redeemer's University Foundation degree Programme in this current session.
                                     The credentials given in this form are correct to the best of my knowledge. If admitted to the University,
                                     I shall regard myself bound by the ordinance, code of conduct, statuses and regulations of the University as
                                     far as they affect me.

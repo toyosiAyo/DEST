@@ -31,7 +31,7 @@
                                  @endif
                
                                 </a>
-                                <h4 class="profile-user">{{$data->surname.' '.$data->first_name}}</h4>
+                                <h4 class="profile-user">{{$data->surname.' '.$data->first_name.' '.$data->other_name}}</h4>
                                 <form method="post" action="/uploadProfileImage" enctype="multipart/form-data">
                                     @csrf
                                     <input type="file" name="profileImage" required> <hr>
