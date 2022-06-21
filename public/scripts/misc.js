@@ -217,9 +217,9 @@ $(document).ready(function () {
     });
 
     var form_stat = $("#form_status").val();
-    console.log(form_stat)
+    console.log('unsliced'+form_stat)
     var sliced = form_stat.slice(1, -1);
-    console.log(sliced)
+    console.log('sliced'+sliced)
 
     if (sliced == 0) {
         $("#category-1").addClass("active");
