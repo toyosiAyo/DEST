@@ -121,7 +121,7 @@ class ApplicationController extends Controller
         if ($validator->fails()) { return response()->json(['status'=>'Nok','msg'=>'pin/app_type are required !',],401); }
        
         try {
-            dd($request);
+            dd($request->all());
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user')); 
         if($request->check_step == 'basic'){
             $app =  Applicant::findOrFail($data->id);
