@@ -594,7 +594,7 @@
 
                                 <div class="checkbox-custom checkbox-success">
                                   <input type="checkbox" id="accept_terms" name="accept_terms" required />
-                                  <label for="accept_terms"><small>I declare that I wish to enter the Redeemer's University Foundation degree Programme in this current session.
+                                  <label for="accept_terms"><small>I declare that I wish to enter the Redeemer's University @if($_COOKIE['app_type'] == 'foundation') Foundation @else Part-Time @endif degree Programme in this current session.
                                     The credentials given in this form are correct to the best of my knowledge. If admitted to the University,
                                     I shall regard myself bound by the ordinance, code of conduct, statuses and regulations of the University as
                                     far as they affect me.
