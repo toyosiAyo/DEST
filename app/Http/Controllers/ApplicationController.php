@@ -116,10 +116,9 @@ class ApplicationController extends Controller
  
     public function save_app_form(Request $request){
         //$settings = app('App\Http\Controllers\ConfigController')->settings($request)->semester_name;    
+       
         $validator = Validator::make($_COOKIE, [ 'pin' => 'required|string', 'app_type'=> 'required|string',]);
-        if ($validator->fails()) {
-            return back()->with('fail','pin/app_type are required !');
-        }
+        if ($validator->fails()) { return response()->json(['status'=>'Nok','msg'=>'pin/app_type are required !',],401); }
        
         try {
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user')); 
