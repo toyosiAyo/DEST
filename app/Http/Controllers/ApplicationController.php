@@ -198,7 +198,7 @@ class ApplicationController extends Controller
             }
             }else{return response()->json(['status'=>'Nok','msg'=>'failed, Kindly complete fields for Other Qualifications'],401);   }
             }  
-            $app_record2 = Application::where(['form_status' =>'1','submitted_by'=>$data->email,'status'=>'pending','app_type'=>$_COOKIE['app_type']])->first();
+            $app_record2 = Application::where(['submitted_by'=>$data->email,'status'=>'pending','app_type'=>$_COOKIE['app_type']])->first();
             $app_record2->form_status = $app_record2->form_status+1;
             $app_record2->sec_sch = $sec_sch;
             $app_record2->o_level = $o_level;
@@ -227,7 +227,7 @@ class ApplicationController extends Controller
             $first_choice = [ "faculty"=>$fac_name, "dept"=>$dept_name,"prog"=>$prog_name,"subj"=>$request->combination];
             $second_choice = [ "faculty"=>$fac_name2, "dept"=>$dept_name2,"prog"=>$prog_name2,"subj"=>$request->combination2];
             
-            $app_record3 =  Application::where(['form_status' =>'2','submitted_by'=>$data->email,'status'=>'pending','app_type'=>$_COOKIE['app_type']])->first();
+            $app_record3 =  Application::where(['submitted_by'=>$data->email,'status'=>'pending','app_type'=>$_COOKIE['app_type']])->first();
            
             $app_record3->screen_date =  $request->screening_date;
             $app_record3->accept_terms =  $request->accept_terms;
