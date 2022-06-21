@@ -121,7 +121,7 @@ class ApplicationController extends Controller
         if ($validator->fails()) { return response()->json(['status'=>'Nok','msg'=>'pin/app_type are required !',],401); }
        
         try {
-            dd($request->all());
+            
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user')); 
         if($request->check_step == 'basic'){
             $app =  Applicant::findOrFail($data->id);
@@ -141,7 +141,7 @@ class ApplicationController extends Controller
             $app->sponsor_name = $request->sponsor_name;
             $app->sponsor_email = $request->sponsor_email;
             $app->sponsor_phone = $request->sponsor_phone;
-            
+            dd($_COOKIE);
             $save = $app->save();
             if($save){
                 $app_record = Application::where(['form_status' =>'0','submitted_by'=>$app->email,'status'=>'pending','app_type'=>$_COOKIE['app_type']])->first();
