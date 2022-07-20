@@ -14,7 +14,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                @if($data->role !== accountant)
+                @if($data->role !== 'accountant')
                 <li>
                     <a href="{{route('viewApplicants')}}">
                         <i data-feather="users"></i>
@@ -42,7 +42,7 @@
                         <li><a href="{{route('pending_payments')}}">Pending</a></li>
                     </ul>
                 </li>
-                @if($data->role !== accountant)
+                @if($data->role !== 'accountant')
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i class="fab fa-whmcs"></i>
