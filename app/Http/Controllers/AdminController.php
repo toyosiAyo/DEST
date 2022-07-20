@@ -42,7 +42,7 @@ class AdminController extends Controller
     }
 
     public function adminDashboard(Request $request){
-        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $applicants = DB::table('applicants')->where('status','applicant')->count();
         $students = DB::table('applicants')->where('status','student')->count();
         $applications = DB::table('applications')->count();
@@ -52,7 +52,7 @@ class AdminController extends Controller
 
     public function approve_payments(Request $request){
         $request->validate([ "pay_id" => "required","email"=>"required",'rrr'=>'required' ,'pay_type'=>'required',]);
-        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $payment = ApplicantPayment::join('applicants','application_payments.email','applicants.email')
         ->where(['application_payments.id'=>$request->pay_id,'application_payments.email'=>$request->email,
         'rrr'=>$request->rrr,'status_code'=>'025'])->select('application_payments.*','applicants.surname','applicants.first_name AS firstname')->first();
@@ -81,28 +81,28 @@ class AdminController extends Controller
         }
     }
     public function pendingPayments(Request $request){
-        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $payments = DB::table('application_payments')->select('*')->where('status_msg','pending')->orderby('created_at','desc')->get();
         $count = count($payments);
         return view('admin.pages.pending_payments',['data'=>$data,'payments'=>$payments,'count'=>$count]);
     }
 
     public function allPayments(Request $request){
-        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $payments = DB::table('application_payments')->select('*')->orderby('created_at','desc')->get();
         $count = count($payments);
         return view('admin.pages.payments',['data'=>$data,'payments'=>$payments,'count'=>$count]);
     }
 
     public function viewApplicants(Request $request){
-        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $applicants = DB::table('applicants')->select('*')->where('status','applicant')->get();
         $count = count($applicants);
         return view('admin.pages.applicants',['data'=>$data,'applicants'=>$applicants,'count'=>$count]);
     }
 
     public function viewApplications(Request $request){
-        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $applications = DB::table('applications')->join('applicants', 'applications.submitted_by', '=', 'applicants.email')
         ->select('applications.*','first_choice->prog as Programme','applicants.surname','applicants.first_name','applicants.other_name')->get();
         $count = count($applications);
@@ -110,7 +110,7 @@ class AdminController extends Controller
     }
 
     public function viewPendingApplications(Request $request){
-        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $applications = DB::table('applications')->join('applicants', 'applications.submitted_by', '=', 'applicants.email')
         ->select('applications.*','first_choice->prog as Programme','applicants.surname','applicants.first_name','applicants.other_name')
         ->where('applications.status', 'pending')->get();
@@ -119,14 +119,14 @@ class AdminController extends Controller
     }
 
     public function curriculum(Request $request){
-        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $courses = DB::table('courses')->select('*')->get();
         $programmes = DB::table('programmes')->select('*')->get();
         return view('admin.pages.curriculum2',['data'=>$data,'courses'=>$courses,'programmes'=>$programmes]);
     }
 
     public function viewEventsPage(Request $request){
-        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $events = DB::table('events')->select('*')->get();
         $count = count($events);
         return view('admin.pages.events',['data'=>$data,'events'=>$events,'count'=>$count]);
@@ -159,7 +159,7 @@ class AdminController extends Controller
 
     public function postEvents(Request $request){
         try{
-            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
             $user = $data->email;
             $filename = $request->file('image')->getClientOriginalName();
             $path = Storage::putFileAs('EventImage', $request->file('image'), $request->title ."_". date('YmdHis') ."_". $filename);

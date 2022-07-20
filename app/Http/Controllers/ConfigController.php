@@ -162,6 +162,17 @@ public function auth_user($email){
 
  }
 }
+
+public function adminUser($email){
+    try {
+        $data =  DB::table('admin')->select('*')->where('email',$email)->first();
+        return $data;
+    }
+    catch (\Throwable $th) {
+        return response()->json(['status'=>'Nok','msg'=>'Error from catch... adminUser()','rsp'=>''], 401);
+    }
+}
+
 public function get_lga_state_country(Request $request){
         
     try {
