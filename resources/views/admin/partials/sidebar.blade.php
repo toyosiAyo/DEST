@@ -14,6 +14,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                @if($data->role !== accountant)
                 <li>
                     <a href="{{route('viewApplicants')}}">
                         <i data-feather="users"></i>
@@ -30,6 +31,7 @@
                         <li><a href="{{route('viewPendingApplications')}}">Pending Applications</a></li>
                     </ul>
                 </li>
+                @endif
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i class="fas fa-hand-holding-usd"></i>
@@ -40,6 +42,7 @@
                         <li><a href="{{route('pending_payments')}}">Pending</a></li>
                     </ul>
                 </li>
+                @if($data->role !== accountant)
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i class="fab fa-whmcs"></i>
@@ -51,6 +54,7 @@
                         <li><a href="{{route('events')}}">Post News/Events</a></li>
                     </ul>
                 </li>
+                @endif
             </ul>
         </div>
         <!-- Sidebar -->
