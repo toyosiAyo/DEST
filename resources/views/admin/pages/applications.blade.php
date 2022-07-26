@@ -74,7 +74,7 @@
                                                 <i class="bx bx-dots-horizontal-rounded"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                            @if($application->status == 'success')<li><a class="dropdown-item" href="#">Download</a></li>@endif
                                             </ul>
                                         </div>
                                     </td>
