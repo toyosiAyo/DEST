@@ -59,7 +59,7 @@
                                     <td>{{ date("d M Y", strtotime($application->updated_at)) }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
-                                            <a href="#" class="badge badge-soft-primary">{{ $application->status }}</a>
+                                            <a href="#" class="badge badge-soft-warning">Pending Submission</a>
                                         </div>
                                     </td>
                                     <td>
