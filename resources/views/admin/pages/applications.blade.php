@@ -58,9 +58,15 @@
                                     <td>{{ $application->app_type }}</td>
                                     <td>{{ date("d M Y", strtotime($application->updated_at)) }}</td>
                                     <td>
+                                        @if($application->status == 'pending')
+                                        <div class="d-flex gap-2">
+                                            <a href="#" class="badge badge-soft-danger">{{ $application->status }}</a>
+                                        </div>
+                                        @else
                                         <div class="d-flex gap-2">
                                             <a href="#" class="badge badge-soft-primary">{{ $application->status }}</a>
                                         </div>
+                                        @endif
                                     </td>
                                     <td>
                                         <div class="dropdown">
