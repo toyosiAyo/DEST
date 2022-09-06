@@ -75,6 +75,7 @@
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
                                             @if($application->status == 'success')
+                                                <li><a class="dropdown-item" href="#">View</a></li>
                                                 <li><a class="dropdown-item" href="#">Download</a></li>
                                                 <li><a class="dropdown-item" href="#">Approve</a></li>
                                             @endif
@@ -94,6 +95,28 @@
             <!-- End Page-content -->
 
             @include("admin.partials.footer")            
+        </div>
+
+        <div class="modal fade" id="viewApplication" tabindex="-1" aria-labelledby="viewApplicationLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header border-primary">
+                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Send Matric Number</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="card border border-primary">
+                            <div class="card-body">
+                                <label for="name" class="col-form-label">Fullname: <span id="name"></span></label><hr>
+                                <label for="email" class="col-form-label">Email: <span id="email"></span></label><hr>
+                                <label for="phone" class="col-form-label">Phone number: <span id="phone"></span></label><hr>
+                                <label for="program" class="col-form-label">Programme: <span id="program"></span></label><hr>
+                                <label for="graduation" class="col-form-label">Year of Graduation: <span id="graduation"></span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Required datatable js -->
