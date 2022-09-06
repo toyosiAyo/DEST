@@ -153,7 +153,7 @@
 	</div> 
 	<br>
 	<div style="font-size: 14px; color: #2AAE74;">
-	Transcripts Officer,<br>
+	Admin,<br>
 	Redeemer's University,<br>
 	PMB 230, Ede-Osun state.
 	</div> 
