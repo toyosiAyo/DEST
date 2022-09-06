@@ -47,7 +47,6 @@ $(document).ready(function ($) {
                 success: function (response) {
                     console.log(response);
                     $("#btnEventForm").html("Create");
-                    toastr.options;
                     toastr["success"](response.message);
                     setTimeout(function () {
                         window.location.href = "/events";
@@ -56,7 +55,6 @@ $(document).ready(function ($) {
                 error: function (response) {
                     console.log(response);
                     $("#btnEventForm").html("Create");
-                    toastr.options;
                     toastr["error"](response.responseJSON.message);
                 },
             });
@@ -94,4 +92,25 @@ $(document).ready(function ($) {
             },
         });
     };
+
+    $(".viewForgotMatric").click(function () {
+        $("#forgotMatric").modal("show");
+        $("#sendMatricForm").trigger("reset");
+        $("#matric_number")
+            .empty()
+            .append("<option value=''>Select Matric Number</option>");
+        email = $(this).data("email");
+        suggestions = $(this).data("suggestions");
+        $("#name").html(
+            $(this).data("surname") +
+                " " +
+                $(this).data("firstname") +
+                " " +
+                $(this).data("othername")
+        );
+        $("#email").html($(this).data("email"));
+        $("#phone").html($(this).data("phone"));
+        $("#program").html($(this).data("program"));
+        $("#graduation").html($(this).data("date_left"));
+    });
 });
