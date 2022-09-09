@@ -29,93 +29,49 @@
 
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="programme" class="form-label font-size-13 text-muted">Select Programme</label>
-                                                <select class="form-control" data-trigger name="programme"
-                                                    id="programme" placeholder="Search for programmes">
-                                                    <option value="" selected>Select Programme</option>
-                                                    <option value="{{ $program->programme_id }}">{{ $program->programme }}</option>
-                                                </select>
+                                                <label for="programme" class="form-label font-size-13 text-muted">Email</label>
+                                                <input type="text" class="form-control">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="degree" class="form-label font-size-13 text-muted">Select Degree</label>
-                                                <select class="form-control" id="degree" name="degree" required>
-                                                    <option value="pre-degree">Pre-degree</option>
-                                                    <option value="foundation">Foundation</option>
-                                                    <option value="conversion">HND Conversion</option>
-                                                </select>
+                                                <label for="degree" class="form-label font-size-13 text-muted">Address</label>
+                                                <input type="text" class="form-control">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="year" class="form-label font-size-13 text-muted">Select Session</label>
-                                                <select class="form-control" id="year" name="year" required>
-                                                    <option value="" selected disabled>Select Session</option>
-                                                    <option value="1">First Year</option>
-                                                    <option value="2">Second Year</option>
-                                                    <option value="3">Third Year</option>
-                                                    <option value="4">Fourth Year</option>
-                                                </select>
-                                                <input type="hidden" name="user" value="{{$data->email}}">
+                                                <label for="year" class="form-label font-size-13 text-muted">Date of Birth</label>
+                                                <input type="text" class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="programme" class="form-label font-size-13 text-muted">Select Programme</label>
-                                                <select class="form-control" data-trigger name="programme"
-                                                    id="programme" placeholder="Search for programmes">
-                                                    <option value="" selected>Select Programme</option>
-                                                    <option value="{{ $program->programme_id }}">{{ $program->programme }}</option>
-                                                </select>
+                                                <label for="programme" class="form-label font-size-13 text-muted">City of Residence</label>
+                                                <input type="text" class="form-control">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="degree" class="form-label font-size-13 text-muted">Select Degree</label>
-                                                <select class="form-control" id="degree" name="degree" required>
-                                                    <option value="pre-degree">Pre-degree</option>
-                                                    <option value="foundation">Foundation</option>
-                                                    <option value="conversion">HND Conversion</option>
-                                                </select>
+                                                <label for="degree" class="form-label font-size-13 text-muted">Nationality</label>
+                                                <input type="text" class="form-control">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="year" class="form-label font-size-13 text-muted">Select Session</label>
-                                                <select class="form-control" id="year" name="year" required>
-                                                    <option value="" selected disabled>Select Session</option>
-                                                    <option value="1">First Year</option>
-                                                    <option value="2">Second Year</option>
-                                                    <option value="3">Third Year</option>
-                                                    <option value="4">Fourth Year</option>
-                                                </select>
-                                                <input type="hidden" name="user" value="{{$data->email}}">
+                                                <label for="year" class="form-label font-size-13 text-muted">State of Origin</label>
+                                                <input type="text" class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="programme" class="form-label font-size-13 text-muted">Select Programme</label>
-                                                <select class="form-control" data-trigger name="programme"
-                                                    id="programme" placeholder="Search for programmes">
-                                                    <option value="" selected>Select Programme</option>
-                                                </select>
+                                                <label for="programme" class="form-label font-size-13 text-muted">LGA</label>
+                                                <input type="text" class="form-control">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="degree" class="form-label font-size-13 text-muted">Select Degree</label>
-                                                <select class="form-control" id="degree" name="degree" required>
-                                                    <option value="pre-degree">Pre-degree</option>
-                                                    <option value="foundation">Foundation</option>
-                                                    <option value="conversion">HND Conversion</option>
-                                                </select>
+                                                <label for="degree" class="form-label font-size-13 text-muted">Religion</label>
+                                                <input type="text" class="form-control">
                                             </div>
                                             <div class="mb-3">
-                                                <label for="year" class="form-label font-size-13 text-muted">Select Session</label>
-                                                <select class="form-control" id="year" name="year" required>
-                                                    <option value="" selected disabled>Select Session</option>
-                                                    <option value="1">First Year</option>
-                                                    <option value="2">Second Year</option>
-                                                    <option value="3">Third Year</option>
-                                                    <option value="4">Fourth Year</option>
-                                                </select>
-                                                <input type="hidden" name="user" value="{{$data->email}}">
+                                                <label for="year" class="form-label font-size-13 text-muted">Marital Status</label>
+                                                <input type="text" class="form-control">
                                             </div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
