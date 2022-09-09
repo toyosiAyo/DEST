@@ -142,6 +142,11 @@ class AdminController extends Controller
         return view('admin.pages.curriculum2',['data'=>$data,'courses'=>$courses,'programmes'=>$programmes]);
     }
 
+    public function viewTemplate(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
+        return view('template',['data'=>$data]);
+    }
+
     public function viewEventsPage(Request $request){
         $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $events = DB::table('events')->select('*')->get();

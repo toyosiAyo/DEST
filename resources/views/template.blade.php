@@ -89,5 +89,4 @@
 
             @include("admin.partials.footer")            
         </div>
-        <script src="../assets_admin/scripts/utility.js"></script>
     @endsection
