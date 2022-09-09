@@ -26,11 +26,14 @@ class AdminController extends Controller
         // view / approve / download ...
       
         $validator = Validator::make($request->all(), ['email'=>'required|email','app_id'=>'required',]);
-        if ($validator->fails()) { return response()->json(['status'=>'Nok','msg'=>'Email/app_id are required','rsp'=>''], 400);        } 
+        if ($validator->fails()) { return response()->json(['status'=>'Nok','msg'=>'Email/app_id are required','rsp'=>''], 401);        } 
     
         // $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
 
-
+        $get_application = Application::where(['id'=>$request->app_id,'submitted_by'=>$request->email])->first();
+        if($get_application){
+            return $get_application;
+        }else{return response()->json(['status'=>'Nok','msg'=>'Application not found...','rsp'=>''], 404);   }
 
     }
 
