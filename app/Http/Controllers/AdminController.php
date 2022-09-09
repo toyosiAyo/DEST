@@ -120,7 +120,8 @@ class AdminController extends Controller
     public function viewApplications(Request $request){
         $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $applications = DB::table('applications')->join('applicants', 'applications.submitted_by', '=', 'applicants.email')
-        ->select('applications.*','first_choice->prog as Programme','applicants.surname','applicants.first_name','applicants.other_name')->get();
+        ->select('applications.*','first_choice->prog as Programme','applicants.surname','applicants.first_name','applicants.other_name')->latest()
+        ->get();
         $count = count($applications);
         return view('admin.pages.applications',['data'=>$data,'applications'=>$applications,'count'=>$count]);
     }
