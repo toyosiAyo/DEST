@@ -11,14 +11,27 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class AdminController extends Controller
 {    
     public function __construct()
     {
-        $this->middleware('authcheck',['except' => ['login',]]);
+       // $this->middleware('authcheck',['except' => ['login',]]);
        // $this->middleware('log')->only('index');
        // $this->middleware('subscribed')->except('store');
+    }
+
+    public function app_actions(Request $request){
+        // view / approve / download ...
+      
+        $validator = Validator::make($request->all(), ['email'=>'required|email','app_id'=>'required',]);
+        if ($validator->fails()) { return response()->json(['status'=>'Nok','msg'=>'Email/app_id are required','rsp'=>''], 400);        } 
+    
+        // $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
+
+
+
     }
 
     public function login(Request $request){

@@ -27,5 +27,6 @@ Route::any('create_curriculum', [AdminController::class, 'create_curriculum']);
 //Route::post('update_applicant_payment',[ApplicantPaymentController::class,'update_applicant_payment'])->name('update_applicant_payment');
 //Route::post('password_reset',[AuthController::class,'password_reset'])->name('password_reset');
 // Route::get('college_dept_prog',[ConfigController::class,'college_dept_prog'])->name('college_dept_prog');
+Route::post('app_actions',[AdminController::class,'app_actions']);
 
 
