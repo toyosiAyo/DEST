@@ -11,30 +11,76 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
-// use PDF;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\File;
+use PDF;
 
 class AdminController extends Controller
 {    
     public function __construct()
     {
-       // $this->middleware('authcheck',['except' => ['login',]]);
+       $this->middleware('authcheck',['except' => ['login',]]);
        // $this->middleware('log')->only('index');
        // $this->middleware('subscribed')->except('store');
     }
 
-    public function app_actions(Request $request){
-        // view / approve / download ...
-      
-        $validator = Validator::make($request->all(), ['email'=>'required|email','app_id'=>'required',]);
-        if ($validator->fails()) { return response()->json(['status'=>'Nok','msg'=>'Email/app_id are required','rsp'=>''], 401);        } 
-    
-        // $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
 
-        $get_application = Application::where(['id'=>$request->app_id,'submitted_by'=>$request->email])->first();
-        if($get_application){
-            return $get_application;
+
+    public function view_adms_letter($path){
+        $s_path = public_path('ADMS_LETTERS/'.$path);  
+        if (File::exists($path.'.pdf')){
+              return Response::make(file_get_contents($s_path.'.pdf'), 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="'.$path.'"'
+            ]);
+           
+        } else{ return back();}
+    }
+
+    public function app_actions(Request $request){
+        // view / approve / download ... 
+        $validator = Validator::make($request->all(), ['email'=>'required|email','app_id'=>'required','action'=>'required',]);
+        if ($validator->fails()) { return response()->json(['status'=>'Nok','msg'=>'Email/app_id/action are required','rsp'=>''], 401);        } 
+       
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
+
+        $get_app = Application::join('applicants','applications.submitted_by','applicants.email') ->where(['applications.id'=>$request->app_id,'applications.submitted_by'=>$request->email]) ->select('applicants.*','applications.*')->first();
+        
+        if($get_app){
+            // unset($get_app->password); //unset();
+    
+        if(strtoupper($request->action) == 'APPROVE'){
+            if($get_app->adms_y_n == "N"){
+            $pdf = PDF::loadView('adms_letter',['data'=> $get_app]);
+            File::put('ADMS_LETTERS/'.$get_app->surname."_".$get_app->app_type."_".$get_app->id.'.pdf', $pdf->output()); 
+            if (File::exists($get_app->surname."_".$get_app->app_type."_".$get_app->id.'.pdf')) {
+                if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
+                    $get_app->adms_y_n = "Y";
+                    $get_app->approved_by = $data->email;
+                    $get_app->approved_at = date("F j, Y, g:i a");
+                    if($get_app->save()){
+                        //  File::delete($app_stud->address.'.pdf');
+                         return response(["status"=>"success","message"=>"Admission Letter successfully delivered"],200);  }
+                    else{return response(["status"=>"failed","message"=>"Error updating recod for application"],401); }    
+                }else{return response(["status"=>"failed","message"=>"Error sending admission letter email "],401);}
+                }else{return response(["status"=>"failed","message"=>"No Letter File in the directory"],401);  }     
+        
+            } }elseif(strtoupper($request->action) == 'DOWNLOAD'){
+
+                $headers = [ 'Content-Description' => 'File Transfer', 'Content-Type' => 'application/octet-stream',];                
+                return Response::download(storage_path('app/'.$get_app->olevel_file),
+                strtoupper($get_app->surname).'_O_LEVEL.jpg',$headers);
+
+            }else{
+                // foreach ($get_app->other_cert as $index => $val){
+                //      explode('~',$val);
+                // }
+                return response()->json(['status'=>'Nok','msg'=>'No category of request found...','rsp'=>''], 404);  
+            }
         }else{return response()->json(['status'=>'Nok','msg'=>'Application not found...','rsp'=>''], 404);   }
 
+    
+    
     }
 
     public function login(Request $request){
@@ -196,4 +242,35 @@ class AdminController extends Controller
             return redirect('/admin');
         }
     }
+
+
+
+    public function get_delivery_msg($data){
+        try {
+            return "Kindly find attached, Admission letter for
+             ". $data->surname . " ".$data->firstname ." with email ". $data->submitted_by;
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

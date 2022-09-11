@@ -43,11 +43,11 @@ class ConfigController extends Controller
     }
     
     
-     public function applicant_mail_attachment($applicant,$Subject,$Msg){
+     public function applicant_mail_attachment($get_app,$Subject,$Msg){
         $data = [
-            'to' => [$applicant->email],
-            'docs'=> [ ['path'=> public_path($applicant->file_path.'.pdf'), 'as' => strtoupper($applicant->surname)."_TRANSCRIPT.pdf",'mime' => 'application/pdf'], ],
-            'name' => $applicant->surname ." ". $applicant->firstname,
+            'to' => [$get_app->email],
+            'docs'=> [ ['path'=> public_path($get_app->surname."_".$get_app->app_type."_".$get_app->id.'.pdf'), 'as' => strtoupper($get_app->surname."_".$get_app->app_type."_".$get_app->id)."_ADMISSION_LETTER.pdf",'mime' => 'application/pdf'], ],
+            'name' => $get_app->surname ." ". $get_app->firstname,
             'sub' => $Subject,
             'message' => $Msg
              ];
