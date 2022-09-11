@@ -109,3 +109,7 @@ Route::post('admin_login_auth',[AdminController::class,'login']);
 Route::get('admin/logout',[AdminController::class,'logout'])->name('adminlogout');
 
 
+Route::get('template',[AdminController::class,'viewTemplate']);
+
+
+
