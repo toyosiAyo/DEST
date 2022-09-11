@@ -70,6 +70,10 @@
                                                 <label for="year" class="form-label font-size-13 text-muted">Marital Status</label>
                                                 <input type="text" class="form-control">
                                             </div>
+                                            <div class="mb-3">
+                                                <label for="year" class="form-label font-size-13 text-muted">Name of Next of Kin</label>
+                                                <input type="text" class="form-control">
+                                            </div>
                                         </div>
 
                                     </div>
