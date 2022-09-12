@@ -45,7 +45,6 @@ class AdminController extends Controller
         $get_app = Application::join('applicants','applications.submitted_by','applicants.email')
          ->where(['applications.id'=>$request->app_id,'applications.submitted_by'=>$request->email]) 
          ->select('applications.first_choice->prog as Programme1','applications.second_choice->prog as Programme2','applicants.*','applications.*')->first();
-          return $get_app;
         if($get_app){
             // unset($get_app->password); //unset();
         if(strtoupper($request->action) == 'APPROVE'){
