@@ -83,7 +83,8 @@ $(document).ready(function ($) {
         var action = $(this).data("action");
         var email = $(this).data("email");
         var duration = $("#duration").val();
-        $("#btn_approve").click(function () {
+        $("#btn_approve").click(function (e) {
+            e.preventDefault();
             //if (duration === "") return false;
             handleApplication(id, action, email, duration);
         });
