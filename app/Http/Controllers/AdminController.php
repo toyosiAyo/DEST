@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\File;
-use PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class AdminController extends Controller
 {    
@@ -41,14 +41,10 @@ class AdminController extends Controller
         // view / approve / download ... 
         $validator = Validator::make($request->all(), ['email'=>'required|email','app_id'=>'required','action'=>'required',]);
         if ($validator->fails()) { return response()->json(['status'=>'Nok','msg'=>'Email/app_id/action are required','rsp'=>''], 401);        } 
-       
         $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
-
         $get_app = Application::join('applicants','applications.submitted_by','applicants.email') ->where(['applications.id'=>$request->app_id,'applications.submitted_by'=>$request->email]) ->select('applicants.*','applications.*')->first();
-        
         if($get_app){
             // unset($get_app->password); //unset();
-    
         if(strtoupper($request->action) == 'APPROVE'){
             if($get_app->adms_y_n == "N"){
             $pdf = PDF::loadView('adms_letter',['data'=> $get_app]);
