@@ -32,7 +32,7 @@
                     <!-- end row -->
 
                     <div class="table-responsive mb-4">
-                        <table class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+                        <table id="tblapplications" class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
                             <thead>
                                 <tr>
                                 <th scope="col">S/N</th>
