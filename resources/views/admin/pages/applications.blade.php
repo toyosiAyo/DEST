@@ -129,8 +129,8 @@
                     <div class="col-lg-12">
                         <div class="card border border-primary">
                             <div class="card-body">
-                                <label for="name" class="col-form-label">Duration</label><hr>
-                                <input type="num" class="form-control" id="duration" name="duration" placeholder="Enter Programme Duration" required><br>
+                                <label for="duration" class="col-form-label">Duration</label>
+                                <input type="number" class="form-control" id="duration" name="duration" placeholder="Enter Programme Duration" required><br>
                                 <button type="submit" class="btn btn-primary" id="btn_approve">Submit</button>
                             </div>
                         </div>
