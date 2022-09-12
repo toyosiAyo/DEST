@@ -42,12 +42,17 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), ['email'=>'required|email','app_id'=>'required','action'=>'required',]);
         if ($validator->fails()) { return response()->json(['status'=>'Nok','msg'=>'Email/app_id/action are required','rsp'=>''], 401);        } 
         $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
-        $get_app = Application::join('applicants','applications.submitted_by','applicants.email') ->where(['applications.id'=>$request->app_id,'applications.submitted_by'=>$request->email]) ->select('applicants.*','applications.*')->first();
+        $get_app = Application::join('applicants','applications.submitted_by','applicants.email')
+         ->where(['applications.id'=>$request->app_id,'applications.submitted_by'=>$request->email]) 
+         ->select('applicants.*','applications.*')->first();
+        //  return $get_app;
         if($get_app){
             // unset($get_app->password); //unset();
         if(strtoupper($request->action) == 'APPROVE'){
             if($get_app->adms_y_n == "N"){
-            $pdf = PDF::loadView('adms_letter',['data'=> $get_app]);
+                $app_type = '';
+                if($get_app->app_type == 'foundation'){$pdf = PDF::loadView('foundation_admission',['data'=> $get_app]); }
+                elseif($get_app->app_type == 'part_time'){$pdf = PDF::loadView('part-time_admission',['data'=> $get_app]);  }
             File::put($get_app->surname."_".$get_app->app_type."_".$get_app->id.'.pdf', $pdf->output()); 
             if (File::exists($get_app->surname."_".$get_app->app_type."_".$get_app->id.'.pdf')) {
                 if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
