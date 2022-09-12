@@ -48,8 +48,8 @@ class AdminController extends Controller
         if(strtoupper($request->action) == 'APPROVE'){
             if($get_app->adms_y_n == "N"){
             $pdf = PDF::loadView('adms_letter',['data'=> $get_app]);
-            File::put('ADMS_LETTERS/'.$get_app->surname."_".$get_app->app_type."_".$get_app->id.'.pdf', $pdf->output()); 
-            if (File::exists('ADMS_LETTERS/'.$get_app->surname."_".$get_app->app_type."_".$get_app->id.'.pdf')) {
+            File::put($get_app->surname."_".$get_app->app_type."_".$get_app->id.'.pdf', $pdf->output()); 
+            if (File::exists($get_app->surname."_".$get_app->app_type."_".$get_app->id.'.pdf')) {
                 if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
                     $get_app->adms_y_n = "Y";
                     $get_app->approved_by = $data->email;
