@@ -130,7 +130,7 @@
                         <div class="card border border-primary">
                             <div class="card-body">
                                 <label for="name" class="col-form-label">Duration</label><hr>
-                                <input type="text" class="form-control" id="duration" name="duration" placeholder="Enter Programme Duration" required><br>
+                                <input type="num" class="form-control" id="duration" name="duration" placeholder="Enter Programme Duration" required><br>
                                 <button type="submit" class="btn btn-primary" id="btn_approve">Submit</button>
                             </div>
                         </div>
