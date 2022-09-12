@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Application;
 use App\Models\ApplicantPayment;
 use Illuminate\Http\Request;
+use Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;

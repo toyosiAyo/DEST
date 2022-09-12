@@ -32,7 +32,7 @@
                     <!-- end row -->
 
                     <div class="table-responsive mb-4">
-                        <table class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+                        <table id="tblapplications" class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
                             <thead>
                                 <tr>
                                 <th scope="col">S/N</th>
@@ -76,8 +76,8 @@
                                             <ul class="dropdown-menu dropdown-menu-end">
                                             @if($application->status == 'success')
                                                 <li><a class="dropdown-item" href="#">View</a></li>
-                                                <li><a class="dropdown-item" href="#">Download</a></li>
-                                                <li><a class="dropdown-item" href="#">Approve</a></li>
+                                                <li><button data-email="{{$application->submitted_by}}" data-action="download" data-app_id="{{$application->id}}" class="dropdown-item downloadApp">Download</button></li>
+                                                <li><button data-email="{{$application->submitted_by}}" data-action="approve" data-app_id="{{$application->id}}" class="dropdown-item approveApp">Approve</button></li>
                                             @endif
                                             </ul>
                                         </div>
@@ -129,6 +129,7 @@
 
         <!-- init js -->
         <script src="../assets_admin/js/pages/datatable-pages.init.js"></script>
+        <script src="../assets_admin/scripts/utility.js"></script>      
         
     @endsection
         

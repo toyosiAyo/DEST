@@ -69,6 +69,20 @@ $(document).ready(function ($) {
         approvePayment(id, rrr, email, pay_type);
     });
 
+    $("#tblapplications").on("click", ".downloadApp", function () {
+        var id = $(this).data("app_id");
+        var action = $(this).data("action");
+        var email = $(this).data("email");
+        handleApplication(id, action, email);
+    });
+
+    $("#tblapplications").on("click", ".approveApp", function () {
+        var id = $(this).data("app_id");
+        var action = $(this).data("action");
+        var email = $(this).data("email");
+        handleApplication(id, action, email);
+    });
+
     const approvePayment = (id, rrr, email, pay_type) => {
         $.ajax({
             type: "POST",
@@ -113,4 +127,28 @@ $(document).ready(function ($) {
         $("#program").html($(this).data("program"));
         $("#graduation").html($(this).data("date_left"));
     });
+
+    const handleApplication = (id, action, email) => {
+        $.ajax({
+            type: "POST",
+            url: "/app_actions",
+            data: { email: email, action: action, app_id: id },
+            dataType: "json",
+            beforeSend: function () {
+                if (confirm(`${action} application?`) == false) return false;
+                $.blockUI();
+            },
+            success: function (response) {
+                console.log(response);
+                toastr["success"](response.message);
+                setTimeout(function () {
+                    location.reload();
+                }, 2800);
+            },
+            error: function (response) {
+                $.unblockUI();
+                toastr["error"](response.responseJSON.message);
+            },
+        });
+    };
 });
