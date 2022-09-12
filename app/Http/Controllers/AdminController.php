@@ -6,7 +6,6 @@ use App\Models\Admin;
 use App\Models\Application;
 use App\Models\ApplicantPayment;
 use Illuminate\Http\Request;
-use Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\File;
-use Barryvdh\DomPDF\Facade as PDF;
+use PDF;
 
 class AdminController extends Controller
 {    
