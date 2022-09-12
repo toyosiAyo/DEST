@@ -84,7 +84,7 @@ $(document).ready(function ($) {
         var email = $(this).data("email");
         var duration = $("#duration").val();
         $("#btn_approve").click(function () {
-            if (duration === "") return false;
+            //if (duration === "") return false;
             handleApplication(id, action, email, duration);
         });
     });
