@@ -58,12 +58,17 @@
 RUN/DEST/REG/ADM/FUND/21-22    
                                                                                             
 {{$data->address}}  
-</pre>
+</pre> 
         </div>
 
         <div class="divContents" align="justify">
             <p>
-                Dear. Mr. Ajayi,
+            Dear.
+                @if(strtoupper($data->sex) == 'M') {{'Mr.'}}
+                    @elseif(strtoupper($data->sex) == 'F') {{'Miss'}}
+                    @else <b>{{''}}</b>
+                    @endif
+                    {{$data->surname}} 
             </p>
             <h5>
                 <u>
@@ -82,7 +87,7 @@ RUN/DEST/REG/ADM/FUND/21-22
                 <p>The duration of the programme is one academic session. You are required to write JUPEB (Joint
                     Universities Preliminary Examinations Board) examinations and, upon successful completion and
                     satisfactory performance, you will be eligible for admission into {{3}}-years degree programme
-                    {{Computer Science}} of the Redeemer’s University, Ede, Osun-State via JAMB Direct Entry option.
+                    {{$data->Programme1}} of the Redeemer’s University, Ede, Osun-State via JAMB Direct Entry option.
                 </p>
 
                 <p>Please note that this offer is provisional and can be revoked, if you fail to produce the necessary
