@@ -69,14 +69,14 @@ $(document).ready(function ($) {
         approvePayment(id, rrr, email, pay_type);
     });
 
-    $(".downloadApp").click(function () {
+    $("#tblapplications").on("click", ".downloadApp", function () {
         var id = $(this).data("app_id");
         var action = $(this).data("action");
         var email = $(this).data("email");
         handleApplication(id, action, email);
     });
 
-    $(".approveApp").click(function () {
+    $("#tblapplications").on("click", ".approveApp", function () {
         var id = $(this).data("app_id");
         var action = $(this).data("action");
         var email = $(this).data("email");
