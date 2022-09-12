@@ -76,8 +76,8 @@
                                             <ul class="dropdown-menu dropdown-menu-end">
                                             @if($application->status == 'success')
                                                 <li><a class="dropdown-item" href="#">View</a></li>
-                                                <li><a class="dropdown-item" href="#">Download</a></li>
-                                                <li><a class="dropdown-item" href="#">Approve</a></li>
+                                                <li><button data-email="{{$application->submitted_by}}" data-action="download" data-app_id="{{$application->id}}" class="dropdown-item downloadApp">Download</button></li>
+                                                <li><button data-email="{{$application->submitted_by}}" data-action="approve" data-app_id="{{$application->id}}" class="dropdown-item approveApp">Approve</button></li>
                                             @endif
                                             </ul>
                                         </div>
