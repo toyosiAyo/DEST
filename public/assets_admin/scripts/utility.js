@@ -76,7 +76,16 @@ $(document).ready(function ($) {
         var duration = "";
         var resumption = "";
         var degree = "";
-        handleApplication(id, action, email, duration, resumption, degree);
+        var session = "";
+        handleApplication(
+            id,
+            action,
+            email,
+            duration,
+            resumption,
+            degree,
+            session
+        );
     });
 
     $("#tblapplications").on("click", ".approveApp", function () {
@@ -89,8 +98,17 @@ $(document).ready(function ($) {
             var duration = $("#duration").val();
             var resumption = $("#resumption").val();
             var degree = $("#degree").val();
+            var session = $("#session").val();
             if (duration === "") return false;
-            handleApplication(id, action, email, duration, resumption, degree);
+            handleApplication(
+                id,
+                action,
+                email,
+                duration,
+                resumption,
+                degree,
+                session
+            );
         });
     });
 
@@ -145,7 +163,8 @@ $(document).ready(function ($) {
         email,
         duration,
         resumption,
-        degree
+        degree,
+        session
     ) => {
         $.ajax({
             type: "POST",
@@ -155,8 +174,9 @@ $(document).ready(function ($) {
                 action: action,
                 app_id: id,
                 duration: duration,
-                resumption: resumption,
+                resumption_date: resumption,
                 degree: degree,
+                session: session,
             },
             dataType: "json",
             beforeSend: function () {
