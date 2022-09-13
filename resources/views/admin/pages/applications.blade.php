@@ -132,6 +132,8 @@
                                 <form method="post">
                                     <label for="duration" class="col-form-label">Duration</label>
                                     <input type="number" class="form-control" id="duration" name="duration" placeholder="Enter Programme Duration" required><br>
+                                    <input type="date" class="form-control" id="resumption" name="resumption" placeholder="Select resumption date" required><br>
+                                    <input type="text" class="form-control" id="degree" name="degree" placeholder="Enter degree" required><br>
                                     <button type="submit" class="btn btn-primary" id="btn_approve">Submit</button>  
                                 </form>
                             </div>
