@@ -55,9 +55,9 @@
             <div class="divSubject">
 <pre>
 {{date("F j, Y")}}  
-RUN/DEST/REG/ADM/FUND/21-22    
+RUN/DEST/REG/ADM/FUND/{{$data->session}} 
                                                                                             
-{{$data->address}}  
+{{$data->address_resident}}  
 </pre> 
         </div>
 
@@ -86,7 +86,7 @@ RUN/DEST/REG/ADM/FUND/21-22
                     
                 <p>The duration of the programme is one academic session. You are required to write JUPEB (Joint
                     Universities Preliminary Examinations Board) examinations and, upon successful completion and
-                    satisfactory performance, you will be eligible for admission into {{3}}-years degree programme
+                    satisfactory performance, you will be eligible for admission into {{$data->duration}}-years degree programme
                     {{$data->Programme1}} of the Redeemer’s University, Ede, Osun-State via JAMB Direct Entry option.
                 </p>
 
@@ -96,17 +96,18 @@ RUN/DEST/REG/ADM/FUND/21-22
 
                 <p>If you accept the offer, please complete the <u>Acceptance Form</u> and return same with evidence of
                     payment of the Acceptance/Processing Fee (non-refundable deposit) of <u>Ninety Thousand, Six
-                    Hundred Naira (₦90,600.00) and Twenty-Seven Thousand Naira (₦27,000) for JUPEB
-                    Examinations</u> not later than October 15 th , 2021. The procedure for payment of fees is herewith
+                    Hundred Naira (₦92,500.00) and Twenty-Seven Thousand Naira (₦35,000) for JUPEB
+                    Examinations</u> not later than $data->accept_date. The procedure for payment of fees is herewith
                     attached.
                 </p>
 
                 <p>Please note also that the offer may be withdrawn if, within the above stipulated time, you have not
-                    completed and returned the Acceptance Form.
+                    completed and returned the Acceptance Form. it mandatory for the fees to be paid before JUPEB examination commences,
+                    otherwise you will not be allowed into the examination hall.
                 </p>
 
                 <p>
-                    Your programme commences on 18 th October, 2021 with registration, which lasts till Friday 22nd October, 2021
+                    Your programme commences on 17th October, 2022 with registration, which lasts till Friday 21st October, 2022
                 </p>
 
                 <p>
@@ -123,6 +124,7 @@ RUN/DEST/REG/ADM/FUND/21-22
             Samuel Ajayi<br>
             Administrative Officer, Directorate of Educational Services and Training (DEST)<br>
             E-mail: info.dest@run.edu.ng.
+            <img alt="" src="https://destadms.run.edu.ng/images/sd.png" style=" height: auto; max-width: 100%;" title="DEST" />
         </div>
     </body>
 </html>
