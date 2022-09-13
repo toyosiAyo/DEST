@@ -43,13 +43,35 @@ class ConfigController extends Controller
     }
     
     
-     public function applicant_mail_attachment($get_app,$Subject,$Msg){
+     public function applicant_mail_attachment_foundation($get_app,$Subject,$Msg){
         $data = [
             'to' => [$get_app->email],
-            'docs'=> [ ['path'=> public_path($get_app->surname."_".$get_app->app_type."_".$get_app->id.'.pdf'), 'as' => strtoupper($get_app->surname."_".$get_app->app_type."_".$get_app->id)."_ADMISSION_LETTER.pdf",'mime' => 'application/pdf'], ],
+            'docs'=> [ 
+                ['path'=> public_path('FOUNDATION_ACCEPTANCE_FORM.pdf'), 'as' => "FOUNDATION_ACCEPTANCE_FORM.pdf",'mime' => 'application/pdf'], 
+                ['path'=> public_path('FOUNDATION_FEES.pdf'), 'as' => "FOUNDATION_FEES.pdf",'mime' => 'application/pdf'], 
+            ],
             'name' => $get_app->surname ." ". $get_app->firstname,
             'sub' => $Subject,
-            'message' => $Msg
+            'message' => $Msg,
+            'dataset'=>$get_app,
+            'app_type'=>$get_app->app_type
+             ];
+        Mail::to($data['to'])->send(new MailingApplicant($data));
+        if (Mail::failures()) {return ['status'=>'nok'];
+        }else{  return ['status'=>'ok']; }
+    }
+
+     public function applicant_mail_attachment_pt($get_app,$Subject,$Msg){
+        $data = [
+            'to' => [$get_app->email],
+            'docs'=> [ 
+                ['path'=> public_path('PART_TIME_ACCEPTANCE_FORM.pdf'), 'as' => "PART_TIME_ACCEPTANCE_FORM.pdf",'mime' => 'application/pdf'], 
+            ],
+            'name' => $get_app->surname ." ". $get_app->firstname,
+            'sub' => $Subject,
+            'message' => $Msg,
+            'dataset'=>$get_app,
+            'app_type'=>$get_app->app_type
              ];
         Mail::to($data['to'])->send(new MailingApplicant($data));
         if (Mail::failures()) {return ['status'=>'nok'];
