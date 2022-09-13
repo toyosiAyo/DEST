@@ -19,7 +19,7 @@ class AdminController extends Controller
 {    
     public function __construct()
     {
-    //    $this->middleware('authcheck',['except' => ['login',]]);
+       $this->middleware('authcheck',['except' => ['login',]]);
        // $this->middleware('log')->only('index');
        // $this->middleware('subscribed')->except('store');
     }
@@ -40,13 +40,12 @@ class AdminController extends Controller
     public function app_actions(Request $request){
         // view / approve / download ... 
         $validator = Validator::make($request->all(), ['email'=>'required|email','app_id'=>'required','action'=>'required','duration'=>'required']);
-        if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'Email/app_id/action are required','rsp'=>''], 401);        } 
-        // $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
+        if ($validator->fails()) { return response()->json(['status'=>'Nok','msg'=>'Email/app_id/action are required','rsp'=>''], 401);        } 
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $get_app = Application::join('applicants','applications.submitted_by','applicants.email')
          ->where(['applications.id'=>$request->app_id,'applications.submitted_by'=>$request->email,'adms_y_n'=>'N']) 
          ->select('applications.first_choice->prog as Programme1','applications.second_choice->prog as Programme2','applicants.*','applications.*')->first(); 
-         if($get_app){
-            
+         if($get_app){    
         if(strtoupper($request->action) == 'APPROVE'){
             $validator = Validator::make($request->all(), ['session'=>'required|min:8','duration'=>'required','resumption_date'=>'required',]);
             if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'session/duration/resumption_date are required','rsp'=>''], 401);        } 
@@ -60,7 +59,7 @@ class AdminController extends Controller
                     if (File::exists('FOUNDATION_ACCEPTANCE_FORM.pdf') && File::exists('FOUNDATION_FEES.pdf')) {  
                         if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment_foundation($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
                             $get_app->adms_y_n = "Y";
-                            $get_app->approved_by = '';//$data->email;
+                            $get_app->approved_by = $data->email;
                             $get_app->approved_at = date("F j, Y, g:i a");
                             $get_app->duration = $request->duration;
                             $get_app->accept_date = Date("F j, Y", strtotime('+14 days'));
@@ -81,7 +80,7 @@ class AdminController extends Controller
                     if (File::exists('PART_TIME_ACCEPTANCE_FORM.pdf')) {
                     if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment_pt($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
                         $get_app->adms_y_n = "Y";
-                        $get_app->approved_by = '';//$data->email;
+                        $get_app->approved_by = $data->email;
                         $get_app->approved_at = date("F j, Y, g:i a");
                         $get_app->duration = $request->duration;
                         $get_app->accept_date = Date("F j, Y", strtotime('+14 days'));
