@@ -65,6 +65,7 @@ class AdminController extends Controller
                             $get_app->accept_date = Date("F j, Y", strtotime('+14 days'));
                             $get_app->session_admitted = $request->session;
                             $get_app->resumption_date = $request->resumption_date ;
+                            $get_app->status ="admitted";
                             unset($get_app->session);
                             if($get_app->save()){
                                 //  File::delete($app_stud->address.'.pdf');
@@ -88,6 +89,7 @@ class AdminController extends Controller
                         $get_app->session_admitted = $request->session;
                         $get_app->resumption_date = $request->resumption_date ;
                         $get_app->degree_4_pt =$request->degree ;
+                        $get_app->status ="admitted";
                         unset($get_app->session);
                         if($get_app->save()){
                             //  File::delete($app_stud->address.'.pdf');
