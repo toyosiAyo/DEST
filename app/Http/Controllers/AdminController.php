@@ -40,7 +40,7 @@ class AdminController extends Controller
     public function app_actions(Request $request){
         // view / approve / download ... 
         $validator = Validator::make($request->all(), ['email'=>'required|email','app_id'=>'required','action'=>'required','duration'=>'required']);
-        if ($validator->fails()) { return response()->json(['status'=>'Nok','msg'=>'Email/app_id/action are required','rsp'=>''], 401);        } 
+        if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'Email/app_id/action are required','rsp'=>''], 401);        } 
         // $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $get_app = Application::join('applicants','applications.submitted_by','applicants.email')
          ->where(['applications.id'=>$request->app_id,'applications.submitted_by'=>$request->email,'adms_y_n'=>'N']) 
@@ -49,7 +49,7 @@ class AdminController extends Controller
             
         if(strtoupper($request->action) == 'APPROVE'){
             $validator = Validator::make($request->all(), ['session'=>'required|min:8','duration'=>'required','resumption_date'=>'required',]);
-            if ($validator->fails()) { return response()->json(['status'=>'Nok','msg'=>'session/duration/resumption_date are required','rsp'=>''], 401);        } 
+            if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'session/duration/resumption_date are required','rsp'=>''], 401);        } 
             $get_app['duration'] = $request->duration;
             $get_app['accept_date'] = Date("F j, Y", strtotime('+14 days'));
             $get_app['session'] = substr(explode('/',$request->session)[0],-2). '-'.substr(explode('/',$request->session)[1],-2);
@@ -76,7 +76,7 @@ class AdminController extends Controller
                 }elseif($get_app->app_type == 'part_time'){
                 //  $pdf = PDF::loadView('part-time_admission',['data'=> $get_app]); 
                 $validator = Validator::make($request->all(), ['degree'=>'required',]);
-                if ($validator->fails()) { return response()->json(['status'=>'Nok','msg'=>'degree is required','rsp'=>''], 401); } 
+                if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'degree is required','rsp'=>''], 401); } 
                     $get_app['degree'] = $request->degree;
                     if (File::exists('PART_TIME_ACCEPTANCE_FORM.pdf')) {
                     if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment_pt($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
@@ -108,9 +108,9 @@ class AdminController extends Controller
                 // foreach ($get_app->other_cert as $index => $val){
                 //      explode('~',$val);
                 // }
-                return response()->json(['status'=>'Nok','msg'=>'No category of request found...','rsp'=>''], 404);  
+                return response()->json(['status'=>'Nok','message'=>'No category of request found...','rsp'=>''], 404);  
             }
- }else{return response()->json(['status'=>'Nok','msg'=>'Application not found...','rsp'=>''], 404);   }
+ }else{return response()->json(['status'=>'Nok','message'=>'Application not found...','rsp'=>''], 404);   }
 
     
     
