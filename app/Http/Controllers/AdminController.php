@@ -91,6 +91,7 @@ class AdminController extends Controller
                         $get_app->degree_4_pt =$request->degree ;
                         $get_app->status ="admitted";
                         unset($get_app->session);
+                        unset($get_app->degree);
                         if($get_app->save()){
                             //  File::delete($app_stud->address.'.pdf');
                              return response(["status"=>"success","message"=>"Admission Letter successfully delivered"],200);  }
