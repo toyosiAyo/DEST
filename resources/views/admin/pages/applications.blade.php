@@ -119,6 +119,28 @@
             </div>
         </div>
 
+        <div class="modal fade" id="approveApplication" tabindex="-1" aria-labelledby="approveApplicationLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header border-primary">
+                        <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Approve Application</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="card border border-primary">
+                            <div class="card-body">
+                                <form method="post">
+                                    <label for="duration" class="col-form-label">Duration</label>
+                                    <input type="number" class="form-control" id="duration" name="duration" placeholder="Enter Programme Duration" required><br>
+                                    <button type="submit" class="btn btn-primary" id="btn_approve">Submit</button>  
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Required datatable js -->
         <script src="../assets_admin/libs/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="../assets_admin/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>

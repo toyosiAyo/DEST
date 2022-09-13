@@ -73,14 +73,21 @@ $(document).ready(function ($) {
         var id = $(this).data("app_id");
         var action = $(this).data("action");
         var email = $(this).data("email");
-        handleApplication(id, action, email);
+        var duration = "";
+        handleApplication(id, action, email, duration);
     });
 
     $("#tblapplications").on("click", ".approveApp", function () {
+        $("#approveApplication").modal("show");
         var id = $(this).data("app_id");
         var action = $(this).data("action");
         var email = $(this).data("email");
-        handleApplication(id, action, email);
+        $("#btn_approve").click(function (e) {
+            e.preventDefault();
+            var duration = $("#duration").val();
+            if (duration === "") return false;
+            handleApplication(id, action, email, duration);
+        });
     });
 
     const approvePayment = (id, rrr, email, pay_type) => {
@@ -128,11 +135,16 @@ $(document).ready(function ($) {
         $("#graduation").html($(this).data("date_left"));
     });
 
-    const handleApplication = (id, action, email) => {
+    const handleApplication = (id, action, email, duration) => {
         $.ajax({
             type: "POST",
             url: "/app_actions",
-            data: { email: email, action: action, app_id: id },
+            data: {
+                email: email,
+                action: action,
+                app_id: id,
+                duration: duration,
+            },
             dataType: "json",
             beforeSend: function () {
                 if (confirm(`${action} application?`) == false) return false;
