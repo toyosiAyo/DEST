@@ -74,7 +74,18 @@ $(document).ready(function ($) {
         var action = $(this).data("action");
         var email = $(this).data("email");
         var duration = "";
-        handleApplication(id, action, email, duration);
+        var resumption = "";
+        var degree = "";
+        var session = "";
+        handleApplication(
+            id,
+            action,
+            email,
+            duration,
+            resumption,
+            degree,
+            session
+        );
     });
 
     $("#tblapplications").on("click", ".approveApp", function () {
@@ -85,8 +96,19 @@ $(document).ready(function ($) {
         $("#btn_approve").click(function (e) {
             e.preventDefault();
             var duration = $("#duration").val();
+            var resumption = $("#resumption").val();
+            var degree = $("#degree").val();
+            var session = $("#session").val();
             if (duration === "") return false;
-            handleApplication(id, action, email, duration);
+            handleApplication(
+                id,
+                action,
+                email,
+                duration,
+                resumption,
+                degree,
+                session
+            );
         });
     });
 
@@ -135,7 +157,15 @@ $(document).ready(function ($) {
         $("#graduation").html($(this).data("date_left"));
     });
 
-    const handleApplication = (id, action, email, duration) => {
+    const handleApplication = (
+        id,
+        action,
+        email,
+        duration,
+        resumption,
+        degree,
+        session
+    ) => {
         $.ajax({
             type: "POST",
             url: "/app_actions",
@@ -144,6 +174,9 @@ $(document).ready(function ($) {
                 action: action,
                 app_id: id,
                 duration: duration,
+                resumption_date: resumption,
+                degree: degree,
+                session: session,
             },
             dataType: "json",
             beforeSend: function () {
