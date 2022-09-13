@@ -134,6 +134,8 @@
                                     <input type="number" class="form-control" id="duration" name="duration" placeholder="Enter Programme Duration" required><br>
                                     <label for="resumption" class="col-form-label">Resumption Date</label>
                                     <input type="date" class="form-control" id="resumption" name="resumption" placeholder="Select resumption date" required><br>
+                                    <label for="session" class="col-form-label">Session</label>
+                                    <input type="text" class="form-control" id="session" name="session" placeholder="Enter session e.g (2022/2023)" required><br>
                                     <input type="text" class="form-control" id="degree" name="degree" placeholder="Enter degree" required><br>
                                     <button type="submit" class="btn btn-primary" id="btn_approve">Submit</button>  
                                 </form>
