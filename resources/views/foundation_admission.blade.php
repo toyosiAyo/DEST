@@ -122,7 +122,7 @@ RUN/DEST/REG/ADM/FUND/{{$data->session_formulated}}
                 </p>
 
                 <p>
-                    Your programme commences on {{$data->resumption_date}} with registration, which lasts till Friday 21st October, 2022
+                    Your programme commences on {{$data->resumption_date}} with registration, which lasts till {{$data->registration_closing}}.
                 </p>
 
                 <p>
