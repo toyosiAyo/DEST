@@ -62,6 +62,10 @@
                                         <div class="d-flex gap-2">
                                             <a href="#" class="badge badge-soft-danger">{{ $application->status }}</a>
                                         </div>
+                                        @elseif($application->status == 'admitted')
+                                        <div class="d-flex gap-2">
+                                            <a href="#" class="badge badge-soft-success">{{ $application->status }}</a>
+                                        </div>
                                         @else
                                         <div class="d-flex gap-2">
                                             <a href="#" class="badge badge-soft-primary">{{ $application->status }}</a>
