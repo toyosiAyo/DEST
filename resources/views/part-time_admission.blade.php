@@ -58,11 +58,11 @@
         </style>
     </head>
     <body class="bodyBody">
-        <header>
-            <img src="https://dest.run.edu.ng/img/Runny.png" class="center"/>
-        </header>
             <div class="main"> 
             <div class="divSubject">
+                <header>
+                    <img src="https://dest.run.edu.ng/img/Runny.png" class="center"/>
+                </header>
 <pre>
 {{date("F j, Y")}}  
 RUN/DEST/REG/ADM/PT/{{$data->session_formulated}}
