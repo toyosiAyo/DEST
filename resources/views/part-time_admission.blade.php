@@ -39,7 +39,7 @@
             }
             .divAdios {
                 float: left;
-                padding-top: 50px;
+                padding-top: 40px;
             }
             .main{
                 margin: 20% auto;
@@ -116,9 +116,7 @@ RUN/DEST/REG/ADM/PT/{{$data->session_formulated}}
                 </p>
 
                 Yours sincerely,
-
             </p>
-            
         </div>
 
         <div class="divAdios">
