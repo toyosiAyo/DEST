@@ -52,7 +52,7 @@
     </head>
     <body class="bodyBody">
         <header>
-            <img src="https://dest.run.edu.ng/img/Runny.png"/>
+            <img src="https://dest.run.edu.ng/img/Runny.png" style=" height: auto; width: auto;"/>
             <div class="dp_container">
                 <table>
                     <tr>
