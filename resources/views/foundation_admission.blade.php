@@ -52,7 +52,7 @@
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
-                width: 250px;
+                width: 400px;
                 height: auto;
             }
         </style>
@@ -60,13 +60,6 @@
     <body class="bodyBody">
         <header>
             <img src="https://dest.run.edu.ng/img/Runny.png" class="center"/>
-            <div class="dp_container">
-                <table>
-                    <tr>
-                        <td><img id="dp" src="" /></td>
-                    </tr>
-                </table>
-            </div>
         </header>
             <div class="main"> 
             <div class="divSubject">
