@@ -47,13 +47,14 @@ class AdminController extends Controller
          ->select('applications.first_choice->prog as Programme1','applications.second_choice->prog as Programme2','applicants.*','applications.*')->first(); 
          if($get_app){    
         if(strtoupper($request->action) == 'APPROVE'){
-            $validator = Validator::make($request->all(), ['session'=>'required|min:8','duration'=>'required','resumption_date'=>'required',]);
-            if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'session/duration/resumption_date are required','rsp'=>''], 401);        } 
+            $validator = Validator::make($request->all(), ['session'=>'required|min:8','duration'=>'required','resumption_date'=>'required', 'registration_closing'=>'required',]);
+            if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'session/duration/resumption_date/registration_closing are required','rsp'=>''], 401);        } 
             $get_app['duration'] = $request->duration;
             $get_app['accept_date'] = Date("F j, Y", strtotime('+14 days'));
             $get_app['session'] = $request->session;
             $get_app['session_formulated'] = substr(explode('/',$request->session)[0],-2). '-'.substr(explode('/',$request->session)[1],-2);
             $get_app['resumption_date'] = $request->resumption_date ; 
+            $get_app['registration_closing'] = $request->registration_closing ; 
             // if($get_app->adms_y_n == "N"){
                 if($get_app->app_type == 'foundation'){
                     // $pdf = PDF::loadView('foundation_admission',['data'=> $get_app]); 
@@ -66,6 +67,7 @@ class AdminController extends Controller
                             $get_app->accept_date = Date("F j, Y", strtotime('+14 days'));
                             $get_app->session_admitted = $request->session;
                             $get_app->resumption_date = $request->resumption_date ;
+                            $get_app->registration_closing = $request->registration_closing ;
                             $get_app->status ="admitted";
                             unset($get_app->session);
                             unset($get_app->session_formulated);
@@ -90,6 +92,7 @@ class AdminController extends Controller
                         $get_app->accept_date = Date("F j, Y", strtotime('+14 days'));
                         $get_app->session_admitted = $request->session;
                         $get_app->resumption_date = $request->resumption_date ;
+                        $get_app->registration_closing = $request->registration_closing ;
                         $get_app->degree_4_pt =$request->degree ;
                         $get_app->status ="admitted";
                         unset($get_app->session);
