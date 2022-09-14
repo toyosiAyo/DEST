@@ -51,6 +51,21 @@
         </style>
     </head>
     <body class="bodyBody">
+        <header>
+            <img src="https://records.run.edu.ng/images/LOGO.png"/>
+            <div class="dp_container">
+                <table>
+                    <tr>
+                        <td><img id="dp" src="" /></td>
+                        <td>
+                            <a></a><br>
+                            <a></a><br>
+                            <a></a><br>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </header>
             <div class="main"> 
             <div class="divSubject">
 <pre>
