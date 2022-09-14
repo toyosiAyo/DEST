@@ -52,7 +52,7 @@
     </head>
     <body class="bodyBody">
         <header>
-            <img src="https://records.run.edu.ng/images/LOGO.png"/>
+            <img src="https://dest.run.edu.ng/img/Runny.png"/>
             <div class="dp_container">
                 <table>
                     <tr>
@@ -136,10 +136,10 @@ RUN/DEST/REG/ADM/FUND/{{$data->session_formulated}}
         </div>
 
         <div class="divAdios">
+            <img alt="" src="https://destadms.run.edu.ng/images/sd.png" style=" height: auto; width: 100px;" title="DEST" />
             Samuel Ajayi<br>
             Administrative Officer, Directorate of Educational Services and Training (DEST)<br>
             E-mail: info.dest@run.edu.ng.
-            <img alt="" src="https://destadms.run.edu.ng/images/sd.png" style=" height: auto; max-width: 100%;" title="DEST" />
         </div>
     </body>
 </html>
