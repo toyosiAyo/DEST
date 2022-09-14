@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="author" content="Murewa Ayodele">
-        <title>RUNResult|</title>
+        <title>DEST</title>
         <link rel="shortcut icon" href="http://results.run.edu.ng/images/run_logo.png" type="image/png">
         <style>
             @font-face{
