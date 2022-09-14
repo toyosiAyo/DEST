@@ -51,8 +51,9 @@ class AdminController extends Controller
             if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'session/duration/resumption_date are required','rsp'=>''], 401);        } 
             $get_app['duration'] = $request->duration;
             $get_app['accept_date'] = Date("F j, Y", strtotime('+14 days'));
-            $get_app['session'] = substr(explode('/',$request->session)[0],-2). '-'.substr(explode('/',$request->session)[1],-2);
-            $get_app['resumption_date'] = $request->resumption_date ;
+            $get_app['session'] = $request->session;
+            $get_app['session_formulated'] = substr(explode('/',$request->session)[0],-2). '-'.substr(explode('/',$request->session)[1],-2);
+            $get_app['resumption_date'] = $request->resumption_date ; 
             // if($get_app->adms_y_n == "N"){
                 if($get_app->app_type == 'foundation'){
                     // $pdf = PDF::loadView('foundation_admission',['data'=> $get_app]); 
@@ -67,6 +68,7 @@ class AdminController extends Controller
                             $get_app->resumption_date = $request->resumption_date ;
                             $get_app->status ="admitted";
                             unset($get_app->session);
+                            unset($get_app->session_formulated);
                             if($get_app->save()){
                                 //  File::delete($app_stud->address.'.pdf');
                                  return response(["status"=>"success","message"=>"Admission Letter successfully delivered"],200);  }
@@ -91,6 +93,7 @@ class AdminController extends Controller
                         $get_app->degree_4_pt =$request->degree ;
                         $get_app->status ="admitted";
                         unset($get_app->session);
+                        unset($get_app->session_formulated);
                         unset($get_app->degree);
                         if($get_app->save()){
                             //  File::delete($app_stud->address.'.pdf');

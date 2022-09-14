@@ -70,7 +70,7 @@
             <div class="divSubject">
 <pre>
 {{date("F j, Y")}}  
-RUN/DEST/REG/ADM/FUND/{{$data->session}} 
+RUN/DEST/REG/ADM/FUND/{{$data->session_formulated}} 
                                                                                             
 {{$data->address_resident}}  
 </pre> 
@@ -101,7 +101,7 @@ RUN/DEST/REG/ADM/FUND/{{$data->session}}
                     
                 <p>The duration of the programme is one academic session. You are required to write JUPEB (Joint
                     Universities Preliminary Examinations Board) examinations and, upon successful completion and
-                    satisfactory performance, you will be eligible for admission into {{$data->duration}}-years degree programme
+                    satisfactory performance, you will be eligible for admission into {{$data->duration}}-year degree programme
                     {{$data->Programme1}} of the Redeemer’s University, Ede, Osun-State via JAMB Direct Entry option.
                 </p>
 
@@ -117,12 +117,12 @@ RUN/DEST/REG/ADM/FUND/{{$data->session}}
                 </p>
 
                 <p>Please note also that the offer may be withdrawn if, within the above stipulated time, you have not
-                    completed and returned the Acceptance Form. it mandatory for the fees to be paid before JUPEB examination commences,
+                    completed and returned the Acceptance Form, moreover it is mandatory for the fees to be paid before JUPEB examination commences,
                     otherwise you will not be allowed into the examination hall.
                 </p>
 
                 <p>
-                    Your programme commences on 17th October, 2022 with registration, which lasts till Friday 21st October, 2022
+                    Your programme commences on {{$data->resumption_date}} with registration, which lasts till Friday 21st October, 2022
                 </p>
 
                 <p>

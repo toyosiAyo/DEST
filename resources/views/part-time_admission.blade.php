@@ -70,7 +70,7 @@
             <div class="divSubject">
 <pre>
 {{date("F j, Y")}}  
-RUN/DEST/REG/ADM/PT/{{$data->address_resident}}
+RUN/DEST/REG/ADM/PT/{{$data->session_formulated}}
                                                                                             
 {{$data->address_resident}}  
 </pre>
@@ -95,10 +95,10 @@ RUN/DEST/REG/ADM/PT/{{$data->address_resident}}
 
                 <p>With reference to your application for admission to a Part-Time degree programme in Redeemer’s
                     University, I have the pleasure to inform you that you have been offered provisional admission to
-                    study for a degree course leading to the award of {{$data->degree}}
+                    study for a degree programme leading to the award of {{$data->degree}}
                 </p>
                     
-                <p>The duration of the programme is {{ $data->duration }} semesters. Please note that this offer is provisional and can
+                <p>The duration of the programme is {{ $data->duration }} sessions. Please note that this offer is provisional and can
                     be revoked if you fail to produce the original copies of your credentials.
                 </p>
 
@@ -111,9 +111,9 @@ RUN/DEST/REG/ADM/PT/{{$data->address_resident}}
                     completed and returned the Acceptance form.
                 </p>
 
-                <p>The University part time programme resumes for the {{$data->session}} academic session on {{$data->accept_date}}
+                <p>The University part time programme resumes for the {{$data->session}} academic session on {{$data->resumption_date}}.
                     Please come along with the completed acceptance form, originals and photocopies of your
-                    credentials and two passport photograph to the Directorate of Educational Services and Training (DEST).
+                    credentials and two passport photographs to the Directorate of Educational Services and Training (DEST).
                 </p>                
 
                 <p>
