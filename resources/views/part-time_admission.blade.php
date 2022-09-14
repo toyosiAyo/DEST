@@ -48,20 +48,22 @@
                 padding-bottom: 15px; 
                 padding-left: 30px; 
             }
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 250px;
+                height: auto;
+            }
         </style>
     </head>
     <body class="bodyBody">
         <header>
-            <img src="https://dest.run.edu.ng/img/Runny.png" style=" height: auto; width: auto;"/>
+            <img src="https://dest.run.edu.ng/img/Runny.png" class="center"/>
             <div class="dp_container">
                 <table>
                     <tr>
                         <td><img id="dp" src="" /></td>
-                        <td>
-                            <a></a><br>
-                            <a></a><br>
-                            <a></a><br>
-                        </td>
                     </tr>
                 </table>
             </div>
@@ -127,7 +129,7 @@ RUN/DEST/REG/ADM/PT/{{$data->session_formulated}}
         </div>
 
         <div class="divAdios">
-            <img alt="" src="https://destadms.run.edu.ng/images/sd.png" style=" height: auto; width: 100px;" title="DEST" />
+            <img alt="" src="https://destadms.run.edu.ng/images/sd.png" style=" height: auto; width: 100px;" title="DEST" /><br>
             Samuel Ajayi<br>
             Administrative Officer, Directorate of Educational Services and Training (DEST)<br>
             E-mail: info.dest@run.edu.ng.
