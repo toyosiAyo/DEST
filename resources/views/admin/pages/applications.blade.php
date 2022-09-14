@@ -133,7 +133,9 @@
                                     <label for="duration" class="col-form-label">Duration</label>
                                     <input type="number" class="form-control" id="duration" name="duration" placeholder="Enter Programme Duration" required><br>
                                     <label for="resumption" class="col-form-label">Resumption Date</label>
-                                    <input type="date" class="form-control" id="resumption" name="resumption" placeholder="Select resumption date" required><br>
+                                    <input type="text" class="form-control" id="resumption" name="resumption" placeholder="e.g. 17th October, 1925" required><br>
+                                    <label for="registration_closing" class="col-form-label">Reg Closing Date</label>
+                                    <input type="text" class="form-control" id="registration_closing" name="registration_closing" placeholder="e.g. 17th October, 1926" required><br>
                                     <label for="session" class="col-form-label">Session</label>
                                     <input type="text" class="form-control" id="session" name="session" placeholder="Enter session e.g (2022/2023)" required><br>
                                     <input type="text" class="form-control" id="degree" name="degree" placeholder="Enter degree" required><br>

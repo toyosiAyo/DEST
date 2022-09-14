@@ -75,6 +75,7 @@ $(document).ready(function ($) {
         var email = $(this).data("email");
         var duration = "";
         var resumption = "";
+        var closing = "";
         var degree = "";
         var session = "";
         handleApplication(
@@ -84,7 +85,8 @@ $(document).ready(function ($) {
             duration,
             resumption,
             degree,
-            session
+            session,
+            closing
         );
     });
 
@@ -97,6 +99,7 @@ $(document).ready(function ($) {
             e.preventDefault();
             var duration = $("#duration").val();
             var resumption = $("#resumption").val();
+            var closing = $("#registration_closing").val();
             var degree = $("#degree").val();
             var session = $("#session").val();
             if (duration === "") return false;
@@ -107,7 +110,8 @@ $(document).ready(function ($) {
                 duration,
                 resumption,
                 degree,
-                session
+                session,
+                closing
             );
         });
     });
@@ -164,7 +168,8 @@ $(document).ready(function ($) {
         duration,
         resumption,
         degree,
-        session
+        session,
+        closing
     ) => {
         $.ajax({
             type: "POST",
@@ -177,6 +182,7 @@ $(document).ready(function ($) {
                 resumption_date: resumption,
                 degree: degree,
                 session: session,
+                registration_closing: closing,
             },
             dataType: "json",
             beforeSend: function () {
