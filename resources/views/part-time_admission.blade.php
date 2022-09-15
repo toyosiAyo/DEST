@@ -35,7 +35,6 @@
             .divSubject {
                 clear: both;
                 font-weight: bold;
-                padding-top: 10px;
             }
             .divAdios {
                 float: left;
