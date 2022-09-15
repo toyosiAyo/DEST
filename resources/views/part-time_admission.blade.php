@@ -35,7 +35,7 @@
             .divSubject {
                 clear: both;
                 font-weight: bold;
-                padding-top: 80px;
+                padding-top: 10px;
             }
             .divAdios {
                 float: left;
@@ -115,11 +115,11 @@ RUN/DEST/REG/ADM/PT/{{$data->session_formulated}}
                     Accept my congratulations.
                 </p>
 
-                Yours sincerely,
             </p>
         </div>
 
         <div class="divAdios">
+            Yours sincerely,<br>
             <img alt="" src="https://destadms.run.edu.ng/images/sd.png" style=" height: auto; width: 100px;" title="DEST" /><br>
             Samuel Ajayi<br>
             Administrative Officer, Directorate of Educational Services and Training (DEST)<br>
