@@ -95,6 +95,7 @@
                         <td><strong>Type</strong></td>
                         <td><strong>Status</strong></td>
                         <td class="text-left"><strong>Date</strong></td>
+                        <td><strong>Action</strong></td>
                       </tr>
                     </thead>
                     <tbody>
@@ -108,6 +109,10 @@
                           <span class="badge badge-info">{{ $app->status }}</span>
                         </td>
                         <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
+                        <td>@if($app->status == 'pending')
+                            <button type="submit" data-email="{{$app->submitted_by}}" data-amount="7500" data-paytype="{{$app->app_type}}" class="btn btn-dark animation-scale-up pay">Continue Application</button>
+                            @endif
+                        </td>
                       </tr> 
                       @if($i > 5) @break @endif 
                       @endforeach   
