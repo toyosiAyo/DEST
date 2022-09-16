@@ -198,5 +198,6 @@
         }
       });
     </script>
+      <script src=" {{ asset('scripts/create_application.js') }}"></script>
   @endsection
 
