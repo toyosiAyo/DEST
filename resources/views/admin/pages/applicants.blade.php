@@ -40,6 +40,7 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Phone number</th>
                                 <th scope="col">Gender</th>
+                                <th scope="col">OTP</th>
                                 <th style="width: 80px; min-width: 80px;">Action</th>
                                 </tr>
                             </thead>
@@ -58,6 +59,9 @@
                                         <div class="d-flex gap-2">
                                             <a href="#" class="badge badge-soft-primary">{{ $applicant->gender }}</a>
                                         </div>
+                                    </td>
+                                    <td>
+                                        {{$applicant->otp}}
                                     </td>
                                     <td>
                                         <div class="dropdown">
