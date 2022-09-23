@@ -189,7 +189,7 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return back()->with('fail','Email issue!');
         }
-        try {
+        //try {
           
             $app = Applicant::where('email',$_COOKIE['email'])->first();
             if(!empty($app)){
@@ -201,9 +201,9 @@ class AuthController extends Controller
             }
             return back()->with('fail','Error resending OTP 1 !');
 
-        } catch (\Throwable $th) { 
-            return back()->with('fail','Error resending OTP 2 ! ');
-        }
+        // } catch (\Throwable $th) { 
+        //     return back()->with('fail','Error resending OTP 2 ! ');
+        // }
         
     }
 
