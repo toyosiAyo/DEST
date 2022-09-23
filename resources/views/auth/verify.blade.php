@@ -71,7 +71,8 @@
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block">Verify</button>
-              <small>Didn't get a code? <a href="{{route('resend_otp')}}">Resend</a></small>
+              <small>Didn't get a code? <a href="{{route('resend_otp')}}">Resend</a></small><br>
+              <small>Login<a href="{{route('auth.login')}}">Return to Login</a></small>
             </div>
           </form>
           @include("partials.auth_footer")
