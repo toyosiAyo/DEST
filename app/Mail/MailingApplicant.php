@@ -41,7 +41,7 @@ class MailingApplicant extends Mailable
             }
             return $mail;
 
-    }else{
+    }elseif($this->data["app_type"] == 'part_time'){
         $mail = $this->from('dest@run.edu.ng')->view('part-time_admission')->subject($this->data["sub"])->with('data', $this->data['dataset']);
         if(!empty($this->data["docs"])){
             foreach($this->data["docs"] as $k => $v){
@@ -51,6 +51,18 @@ class MailingApplicant extends Mailable
                 ]);
             }
             }
+            return $mail;
+    }
+    elseif($this->data["app_type"] == 'otp'){
+        $mail = $this->from('dest@run.edu.ng')->view('notify_student')->subject($this->data["sub"])->with('data', $this->data);
+        // if(!empty($this->data["docs"])){
+        //     foreach($this->data["docs"] as $k => $v){
+        //         $mail = $mail->attach($v["path"],[
+        //         "as" => $v['as'],
+        //         'mime' => $v['mime'],
+        //         ]);
+        //     }
+        //     }
             return $mail;
     }
         
