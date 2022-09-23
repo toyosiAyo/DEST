@@ -35,7 +35,8 @@ class ConfigController extends Controller
             'docs'=> [ ],
             'name' => $applicant->surname ." ". $applicant->firstname,
             'sub' => $Subject,
-            'message' => $Msg
+            'message' => $Msg,
+            'app_type'=>'otp'
              ];
         Mail::to($data['to'])->send(new MailingApplicant($data));
         if (Mail::failures()) {return ['status'=>'nok'];
