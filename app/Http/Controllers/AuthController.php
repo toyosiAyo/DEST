@@ -72,6 +72,7 @@ class AuthController extends Controller
             'email'=>'required|email',
             'password'=>'required|min:4|max:8',
         ]);
+        $email_cookie = setcookie('email',$request->email.time() + (86400 * 30), "/");
        $app = Applicant::where('email',$request->email)->first();
        if(!$app){return back()->with('fail','We do not recognize the supplied email');}
        else{
