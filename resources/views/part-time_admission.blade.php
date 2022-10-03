@@ -77,7 +77,7 @@ RUN/DEST/REG/ADM/PT/{{$data->session_formulated}}
                     @elseif(strtoupper($data->sex) == 'F') {{'Miss'}}
                     @else <b>{{''}}</b>
                     @endif
-                    {{$data->surname}} 
+                    {{$data->surname.' '.$data->first_name}} 
             </p>
             <h5>
                 <u>
