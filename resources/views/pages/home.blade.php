@@ -56,7 +56,7 @@
                     <span class="float-right grey-700 font-size-30">{{$pending}}</span>
                   </div>
                   <div class="mb-20 grey-500">
-                    <a href="application">View</a>
+                    <a href="application" data-tour="step: 2; title: DEST Portal; content: Click here to view your pending applications">View</a>
                   </div>
                   <div class="ct-chart h-50"></div>
                 </div>
