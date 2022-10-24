@@ -14,9 +14,9 @@
                             <div class="panel-heading">
                                 <h3 class="panel-title">Course Registration</h3>
                             </div>
+                            <form id="courseRegForm" method="POST">
                             <div class="table-responsive h-250" data-plugin="scrollable">
                                 <div data-role="container">
-                                <form id="courseRegForm" method="POST">
                                     <div data-role="content">
                                         <table id="reg_table" class="table table-responsive-sm table-hover table-striped">
                                             <thead>
@@ -49,10 +49,10 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <button type="submit" id="btnSubmitRegForm" class="btn btn-danger btn-block">Submit</button>
-                                </form>
                                 </div>
                             </div>
+                            <button type="submit" id="btnSubmitRegForm" class="btn btn-danger btn-block">Submit</button>
+                            </form>
                         </div>
                         <!-- End Panel Tasks -->
                     </div>
