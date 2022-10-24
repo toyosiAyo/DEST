@@ -15,6 +15,7 @@
                                 <h3 class="panel-title">Course Registration</h3>
                             </div>
                             <form id="courseRegForm" method="POST">
+                                @csrf
                             <div class="table-responsive h-250" data-plugin="scrollable">
                                 <div data-role="container">
                                     <div data-role="content">
