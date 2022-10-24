@@ -29,7 +29,6 @@ class StudentController extends Controller
                 ->where([['curriculum.degree',$_COOKIE['degree']],
                     ['curriculum.semester',1],['curriculum.year',1],['curriculum.programme_id',$prog->programme_id]])
                 ->select('curriculum.*','courses.unit','courses.course_title')->get();
-            dd($courses);          
             //$registered = $this->viewRegisteredCourses($request);
             return view('student.registration',['courses'=>$courses,'data'=>$data]);
                 
