@@ -17,6 +17,7 @@ $(document).ready(function ($) {
         hideMethod: "fadeOut",
     };
 
+    alert("ok");
     $("#app_table").on("click", ".view", function () {
         $("#view_app").modal("show");
         var status = $(this).data("status");
