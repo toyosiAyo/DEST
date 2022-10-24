@@ -1,7 +1,7 @@
 @extends("layouts.auth") 
 
   @section("title")
-      Login
+      Student Login
   @endsection
     
   @push('head')
@@ -26,45 +26,15 @@
             </div>
             <h3 class="font-size-24">Log In</h3>
             <p>Log in with your email and password</p>
-             
-            @if(Session::get('pass_reset'))
-                <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                  <i class="icon md-close" aria-hidden="true"></i> {{Session::get('pass_reset')}}
-                </div>
-            @endif
-            
-            @if(Session::get('verified'))
-                <div class="alert dark alert-icon alert-success alert-dismissible" role="alert">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                  <i class="icon md-close" aria-hidden="true"></i> {{Session::get('verified')}}
-                </div>
-            @endif
-         
-              @if(Session::get('success'))
-                <p>{{Session::get('success')}}</p>
-              @endif
-              @if(Session::get('fail'))
-                <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                  <i class="icon md-close" aria-hidden="true"></i> {{Session::get('fail')}}
-                </div>
-              @endif
-            <form action="{{route('auth.check')}}" method="post" autocomplete="off">
+            <form  method="post" id="studentLoginForm" autocomplete="off">
               @csrf
               <div class="form-group form-material floating" data-plugin="formMaterial">
-                <input type="email" class="form-control empty" id="inputEmail" name="email" required>
-                <label class="floating-label" for="inputEmail">Email</label>
+                <input type="email" class="form-control empty" id="student_email" name="student_email" required>
+                <label class="floating-label" for="student_email">Email</label>
               </div>
               <div class="form-group form-material floating" data-plugin="formMaterial">
-                <input type="password" class="form-control empty" id="inputPassword" name="password" required>
-                <label class="floating-label" for="inputPassword">Password</label>
+                <input type="password" class="form-control empty" id="student_password" name="student_password" required>
+                <label class="floating-label" for="student_password">Password</label>
               </div>
               <div class="form-group clearfix">
                 <div class="checkbox-custom checkbox-inline checkbox-primary float-left">
@@ -73,9 +43,8 @@
                 </div>
                 <a class="float-right" href="{{route('forgot.password')}}">Forgot password?</a>
               </div>
-              <button type="submit" class="btn btn-primary btn-block">Log in</button>
+              <button type="submit" id="btnStudentLogin" class="btn btn-primary btn-block">Log in</button>
             </form>
-            <!-- <p>No account? <a href="{{route('get.account.form')}}">Create Profile here</a></p> -->
             <p>Applicant Login <a href="/">here</a></p>
             <p>Admin Login <a href="admin">here</a></p>
             @include("partials.auth_footer")
@@ -83,5 +52,8 @@
         
         </div>
       </div>
+      
+      <script src=" {{ asset('scripts/validation.min.js') }}"></script>
+      <script src=" {{ asset('scripts/student_auth.js') }}"></script>
     </body>
   @endsection

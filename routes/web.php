@@ -49,6 +49,7 @@ Route::get('resend_otp',[AuthController::class,'resend_otp'])->name('resend_otp'
 Route::get('student',function(){
     return view('auth/student');
 });
+Route::post('student_login_access',[AuthController::class,'studentLogin'])->name('student_login_access');
 Route::get('/applicant',[AuthController::class,'auth_login']);
 
 
