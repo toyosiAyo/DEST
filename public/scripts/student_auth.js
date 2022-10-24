@@ -46,7 +46,7 @@ $(document).ready(function ($) {
                     console.log(response);
                     toastr["success"](response.message);
                     setTimeout(function () {
-                        window.location.href = "/dashboard";
+                        window.location.href = "/student_dashboard";
                     }, 2800);
                 },
                 error: function (response) {

@@ -59,6 +59,8 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('/',[AuthController::class,'auth_login'])->name('auth.login');
     Route::get('dashboard',[AuthController::class,'applicant_dashboard'])->name('applicant.dashboard');
 
+    Route::get('student_dashboard',[AuthController::class,'studentDashboard'])->name('student.dashboard');
+
 
     Route::post('save/app/form',[ApplicationController::class,'save_app_form'])->name('save.app.form');
     Route::get('app_form',[ApplicationController::class,'get_app_form'])->name('app.form');
