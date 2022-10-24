@@ -134,6 +134,22 @@ class AuthController extends Controller
        
     }
 
+    public function studentDashboard(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $applications = DB::table('applications')->select('*','first_choice->prog as Programme')
+        ->where('submitted_by', $data->email)->latest()->get();
+        $count = count($applications);
+        $success = DB::table('applications')->where([
+            ['submitted_by', $data->email],
+            ['status', 'success'],
+        ])->count();
+        $pending = DB::table('applications')->where([
+            ['submitted_by', $data->email],
+            ['status', 'pending'],
+        ])->count();
+        return view('student.dashboard',['apps'=>$applications,'count'=>$count,'success'=>$success,'pending'=>$pending])->with('data', $data);
+    }
+
 
 
     public function password_reset(Request $request){
