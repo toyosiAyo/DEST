@@ -1,7 +1,7 @@
 @extends("layouts.master_student") 
 
   @section("title")
-      Registration
+      Course Registration
   @endsection
 
   @section("content")
