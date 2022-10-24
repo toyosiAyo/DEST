@@ -23,6 +23,7 @@ class StudentController extends Controller
             if($_COOKIE['degree']=="" || $_COOKIE['prog_id']==""){
                 return response()->json(['msg'=>'failed', 'info'=>'programme/degree is required!']);
             }   
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             $prog = DB::table('programmes')->where('programme',$_COOKIE['prog_id'])->first();            
             $courses = DB::table('curriculum')->join('courses', 'curriculum.course_code', '=', 'courses.course_code')
                 ->where([['degree',$_COOKIE['degree']],
@@ -30,7 +31,7 @@ class StudentController extends Controller
                 ->select('curriculum.*','courses.unit','courses.course_title')->get();
             
             //$registered = $this->viewRegisteredCourses($request);
-            return view('student.registration',['courses'=>$courses]);
+            return view('student.registration',['courses'=>$courses,'data'=>$data]);
                 
         } catch (\Throwable $th) {
                 return response()->json(['status'=>'Nok','msg'=>'failed, Error from catch'],401); 
