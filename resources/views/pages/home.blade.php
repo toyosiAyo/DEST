@@ -39,7 +39,6 @@
                   </div>
                   <div class="mb-20 grey-500">
                      <a href="create_application" data-tour="step: 1; title: DEST Portal; content: Click here to create a new application">Create New</a>
-                     <!-- <h1 data-tour="step: 1; title: Page Title; content: This is page title">Tour example</h1> -->
                   </div>
                   <div class="ct-chart h-50"></div>
                 </div>
