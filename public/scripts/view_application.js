@@ -27,7 +27,6 @@ $(document).ready(function ($) {
     $("#courseRegForm").on("submit", function (e) {
         e.preventDefault();
         var formData = $("#courseRegForm").serialize();
-        let user = JSON.parse(localStorage.user);
         $.ajax({
             type: "POST",
             url: "submit_registration",
