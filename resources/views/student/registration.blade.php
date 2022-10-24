@@ -29,20 +29,15 @@
                                             </thead>
                                             <tbody>
                                                 @php $i = 1; @endphp
-                                                @foreach($apps as $app)
+                                                @foreach($courses as $course)
                                                 <tr>
                                                     <td>{{ $i }} @php $i++ @endphp</td>
-                                                    <td>{{ $app->Programme }}</td>
-                                                    <td>{{ $app->app_type }}</td>
-                                                    <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
-                                                    <td>@php echo $app->status == 'pending' ? 
-                                                        '<span class="badge badge-warning">'.$app->status.'</span>' :
-                                                        '<span class="badge badge-success">'.$app->status.'</span>' @endphp
-                                                    </td>
-                                                    <td><button type="button" class="btn btn-info view" data-id="{{$app->id}}" 
-                                                            data-status="{{$app->status}}">
-                                                            <i class="icon md-trending-up" aria-hidden="true"></i> View
-                                                        </button>
+                                                    <td>{{ $course->course_code }}</td>
+                                                    <td>{{ $course->course_title }}</td>
+                                                    <td>{{ $course->unit }}</td>
+                                                    <td>@php echo $course->course_status == 'C' ? 
+                                                        '<span class="badge badge-danger">'.$course->course_status.'</span>' :
+                                                        '<span class="badge badge-success">'.$course->course_status.'</span>' @endphp
                                                     </td>
                                                 </tr>
                                                 @endforeach

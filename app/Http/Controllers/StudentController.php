@@ -24,8 +24,10 @@ class StudentController extends Controller
                 return response()->json(['msg'=>'failed', 'info'=>'programme/degree is required!']);
             }   
             $prog = DB::table('programmes')->where('programme',$_COOKIE['prog_id'])->first();            
-            $courses = DB::table('curriculum')->where([['degree',$_COOKIE['degree']],
-                ['semester',1],['year',1],['programme_id',$prog->programme_id]])->select('*')->get();
+            $courses = DB::table('curriculum')->join('courses', 'curriculum.course_code', '=', 'courses.course_code')
+                ->where([['degree',$_COOKIE['degree']],
+                    ['curriculum.semester',1],['year',1],['programme_id',$prog->programme_id]])
+                ->select('curriculum.*','courses.unit','courses.course_title')->get();
             
             //$registered = $this->viewRegisteredCourses($request);
             return view('student.registration',['courses'=>$courses]);
