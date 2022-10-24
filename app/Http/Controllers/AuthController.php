@@ -88,17 +88,17 @@ class AuthController extends Controller
 
     public function studentLogin(Request $request){
         $request->validate([
-            'email'=>'required|email',
-            'password'=>'required',
+            'student_email'=>'required|email',
+            'student_password'=>'required',
         ]);
-        $app = Application::where(['email',$request->email],['status','admitted'])->first();
-        $user = Applicant::where('email',$request->email)->first();
+        $app = Application::where(['email',$request->student_email],['status','admitted'])->first();
+        $user = Applicant::where('email',$request->student_email)->first();
         if(!$app){
             return response(['status'=>'Nok','message'=>'Login failed... We do not recognize your credentials'], 401);
         }
         else{
-            if(Hash::check($request->password,$user->password)){
-                $request->session()->put('user',$app->email);
+            if(Hash::check($request->student_password,$user->password)){
+                $request->session()->put('user',$app->student_email);
                 return response(['status'=>'ok','message'=>'Login was successful'], 200);
             }
             else{
