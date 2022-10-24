@@ -48,12 +48,12 @@
                 </li>
               </ul>
             </li>
-            <li class="site-menu-item @php echo Request::path()=='payments'? 'active':'' @endphp">
+            <!-- <li class="site-menu-item @php echo Request::path()=='payments'? 'active':'' @endphp">
               <a href="payments">
                 <i class="site-menu-icon md-card" aria-hidden="true"></i>
                 <span class="site-menu-title">Payment History</span>
               </a>
-            </li>
+            </li> -->
             <li class="site-menu-item">
               <a href="{{route('logout')}}">
                 <i class="site-menu-icon md-power" aria-hidden="true"></i>

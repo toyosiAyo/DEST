@@ -92,7 +92,7 @@ class AuthController extends Controller
             'student_password'=>'required',
         ]);
 
-        $app = DB::table('applications')->where([
+        $app = DB::table('applications')->select('*','first_choice->prog as programme')->where([
                     ['submitted_by', $request->student_email],
                     ['status', 'admitted'],
                 ])->first();
@@ -104,7 +104,7 @@ class AuthController extends Controller
         else{
             if(Hash::check($request->student_password,$user->password)){
                 $request->session()->put('user',$app->submitted_by);
-                return response(['status'=>'ok','message'=>'Login was successful'], 200);
+                return response(['status'=>'ok','message'=>'Login was successful','user'=>$app], 200);
             }
             else{
                 return response(['status'=>'Nok','message'=>'Login failed... Incorrect password'], 401);
