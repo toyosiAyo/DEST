@@ -91,10 +91,16 @@ class AuthController extends Controller
             'student_email'=>'required|email',
             'student_password'=>'required',
         ]);
-        $app = Application::where([
-            ['submitted_by', $request->student_email],
-            ['status', 'admitted'],
-        ])->first();
+        // $app = Application::where([
+        //     ['submitted_by', $request->student_email],
+        //     ['status', 'admitted'],
+        // ])->first();
+
+        $app = DB::table('applications')->where([
+                    ['submitted_by', $request->student_email],
+                    ['status', 'admitted'],
+                ])->first();
+                
         $user = Applicant::where('email',$request->student_email)->first();
         if(!$app){
             return response(['status'=>'Nok','message'=>'Login failed... We do not recognize your credentials'], 401);
