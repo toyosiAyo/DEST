@@ -45,12 +45,11 @@ class StudentController extends Controller
             //     return response()->json(['status'=>'Nok','message'=>'60 percent of your school fees is required!',],401); 
             // }
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-            dd($data->id);
             foreach($request->course as $index => $value){ 
                 $course = explode("_", $value);
                 DB::table('registration')->insert([
                     'course_code' => $course[0],
-                    'student_id' => $userid,
+                    'student_id' => $data->id,
                     'settings_id' => 3,
                     'unit' => $course[2]
                 ]);
