@@ -16,13 +16,13 @@
                             </div>
                             <div class="table-responsive h-250" data-plugin="scrollable">
                                 <div data-role="container">
+                                <form id="courseRegForm" method="POST">
                                     <div data-role="content">
-                                    <form id="courseRegForm" method="POST">
                                         <table id="reg_table" class="table table-responsive-sm table-hover table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>S/N</th>
                                                     <th></th>
+                                                    <th>S/N</th>
                                                     <th>Course Code</th>
                                                     <th>Course Title</th>
                                                     <th>Unit</th>
@@ -33,10 +33,10 @@
                                                 @php $i = 1; @endphp
                                                 @foreach($courses as $course)
                                                 <tr>
-                                                    <td>{{ $i }} @php $i++ @endphp</td>
                                                     <td style="width: 50px;">
                                                         <input type="checkbox" value="{{$course->course_code.'_'.$course->course_title.'_'.$course->unit.'_'.$course->course_status}}" name="course[]" required>
                                                     </td>
+                                                    <td>{{ $i }} @php $i++ @endphp</td>
                                                     <td>{{ $course->course_code }}</td>
                                                     <td>{{ $course->course_title }}</td>
                                                     <td>{{ $course->unit }}</td>
@@ -48,9 +48,9 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        <button type="submit" id="btnSubmitRegForm" class="btn btn-danger">Submit</button>
-                                    </form>
                                     </div>
+                                    <button type="submit" id="btnSubmitRegForm" class="btn btn-danger btn-block">Submit</button>
+                                </form>
                                 </div>
                             </div>
                         </div>
