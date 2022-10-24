@@ -30,7 +30,7 @@ $(document).ready(function ($) {
         $.ajax({
             type: "POST",
             url: "submit_registration",
-            data: formData + "&userid=" + user.id,
+            data: formData,
             dataType: "json",
             beforeSend: function () {
                 $("#btnSubmitRegForm").html(

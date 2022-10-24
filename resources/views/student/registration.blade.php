@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" id="btnSubmitRegForm" class="btn btn-danger btn-block">Submit</button>
+                            <button type="submit" id="btnSubmitRegForm" class="btn btn-primary btn-block">Submit</button>
                             </form>
                         </div>
                         <!-- End Panel Tasks -->

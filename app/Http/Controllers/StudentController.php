@@ -21,7 +21,7 @@ class StudentController extends Controller
     public function view_registration(Request $request){
         try {   
             if($_COOKIE['degree']=="" || $_COOKIE['prog_id']==""){
-                return response()->json(['msg'=>'failed', 'info'=>'programme/degree is required!']);
+                return response()->json(['message'=>'failed', 'info'=>'programme/degree is required!']);
             }   
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             $prog = DB::table('programmes')->where('programme',$_COOKIE['prog_id'])->first();  
@@ -33,8 +33,34 @@ class StudentController extends Controller
             return view('student.registration',['courses'=>$courses,'data'=>$data]);
                 
         } catch (\Throwable $th) {
-                return response()->json(['status'=>'Nok','msg'=>'failed, Error from catch'],401); 
+                return response()->json(['status'=>'Nok','message'=>'failed, Error from catch'],401); 
         }
+    }
+
+    public function saveRegistration(Request $request){
+        $request->validate([ 'course' => 'required']);
+        try {
+            // $pay = DB::table('student_transactions')->where(['user_id'=> $request->userid,'status'=>'SUCCESS'])->pluck('amount');
+            // if($pay->isEmpty()){
+            //     return response()->json(['status'=>'Nok','message'=>'60 percent of your school fees is required!',],401); 
+            // }
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            dd($data);
+            foreach($request->course as $index => $value){ 
+                $course = explode("_", $value);
+                DB::table('registration')->insert([
+                    'course_code' => $course[0],
+                    'student_id' => $userid,
+                    'settings_id' => 3,
+                    'unit' => $course[2]
+                ]);
+            }
+            return response()->json(['status'=>'ok','message'=>'success, Course registration submitted successfully',],201);    
+        }   
+        catch (\Throwable $th) {
+            return response()->json(['status'=>'Nok','message'=>'failed, Error from catch'],401);    
+        }
+
     }
 
 }
