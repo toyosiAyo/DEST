@@ -39,7 +39,7 @@ $(document).ready(function ($) {
             },
             success: function (response) {
                 $("#btnSubmitRegForm").html("Submit");
-                toastr["success"](response.msg);
+                toastr["success"](response.message);
                 console.log(response);
             },
             error: function (response) {

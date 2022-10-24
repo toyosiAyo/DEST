@@ -40,11 +40,11 @@ class StudentController extends Controller
     public function saveRegistration(Request $request){
         $request->validate([ 'course' => 'required']);
         try {
-            // $pay = DB::table('student_transactions')->where(['user_id'=> $request->userid,'status'=>'SUCCESS'])->pluck('amount');
-            // if($pay->isEmpty()){
-            //     return response()->json(['status'=>'Nok','message'=>'60 percent of your school fees is required!',],401); 
-            // }
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            $check = DB::table('registration')->where(['student_id'=> $data->id,'settings_id'=>'3'])->first();
+                if($check){
+                    return response()->json(['status'=>'Nok','message'=>'You have already registered!',],401); 
+            }
             foreach($request->course as $index => $value){ 
                 $course = explode("_", $value);
                 DB::table('registration')->insert([
