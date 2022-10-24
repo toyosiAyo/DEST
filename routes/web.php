@@ -87,6 +87,7 @@ Route::group(['middleware'=>['authcheck']], function() {
 
 
     Route::get('registration',[StudentController::class,'view_registration'])->name('registration');
+    Route::post('submit_registration',[StudentController::class,'saveRegistration']);
 
 
 
