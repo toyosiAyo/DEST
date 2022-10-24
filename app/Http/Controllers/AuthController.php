@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applicant;
+use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -82,6 +83,27 @@ class AuthController extends Controller
             $request->session()->put('user',$app->email);
             return redirect('dashboard');
            }else{return back()->with('fail','incorrect email/password!'); }
+       }
+    }
+
+    public function studentLogin(Request $request){
+        $request->validate([
+            'email'=>'required|email',
+            'password'=>'required',
+        ]);
+        $app = Application::where(['email',$request->email],['status','admitted'])->first();
+        $user = Applicant::where('email',$request->email)->first();
+        if(!$app){
+            return response(['status'=>'Nok','message'=>'Login failed... We do not recognize your credentials'], 401);
+        }
+        else{
+            if(Hash::check($request->password,$user->password)){
+                $request->session()->put('user',$app->email);
+                return response(['status'=>'ok','message'=>'Login was successful'], 200);
+            }
+            else{
+                return response(['status'=>'Nok','message'=>'Login failed... Incorrect password'], 401);
+            }
        }
     }
 
