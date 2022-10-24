@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="{{ asset('global/fonts/material-design/material-design.minfd53.css?v4.0.1') }}">
   <link rel="stylesheet" href="{{ asset('global/fonts/brand-icons/brand-icons.minfd53.css?v4.0.1') }}">
   <link rel='stylesheet' href="https://fonts.googleapis.com/css?family=Roboto:400,400italic,700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- Scripts -->
   <script src=" {{ asset('global/vendor/jquery/jquery.minfd53.js?v4.0.1') }}"></script>
