@@ -55,5 +55,7 @@
 
       <script src=" {{ asset('scripts/validation.min.js') }}"></script>
       <script src=" {{ asset('scripts/student_auth.js') }}"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
+
     </body>
   @endsection
