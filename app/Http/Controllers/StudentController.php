@@ -55,7 +55,7 @@ class StudentController extends Controller
                     'unit' => $course[2]
                 ]);
             }
-            return response()->json(['status'=>'ok','message'=>'success, Course registration submitted successfully',],201);    
+            return response()->json(['status'=>'ok','message'=>'Course registration successfully submitted',],201);    
         }   
         catch (\Throwable $th) {
             return response()->json(['status'=>'Nok','message'=>'failed, Error from catch'],401);    
