@@ -12,7 +12,7 @@
                         <!-- Panel Tasks -->
                         <div class="panel">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Registered Courses</h3>
+                                <h3 class="panel-title">Registered Courses - {{$data->surname .' '. $data->first_name.' '.$data->other_name}}</h3>
                             </div>
                             <div class="table-responsive">
                                 <div data-role="container">
