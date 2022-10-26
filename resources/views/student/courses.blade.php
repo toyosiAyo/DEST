@@ -7,8 +7,8 @@
   @section("content")
     <body class="animsition site-menubar-push site-menubar-open site-menubar-fixed">
             <div class="page-content container-fluid">
-                <div class="row" data-plugin="masonry">
-                    <div class="col-lg-12 masonry-item">
+                <div class="row">
+                    <div class="col-lg-12">
                         <!-- Panel Tasks -->
                         <div class="panel">
                             <div class="panel-heading">
@@ -17,7 +17,7 @@
                             <div class="table-responsive h-250">
                                 <div data-role="container">
                                     <div data-role="content">
-                                        <table id="reg_table" class="table table-responsive-sm">
+                                        <table id="reg_table" class="table table-responsive-sm table-hover table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>S/N</th>
