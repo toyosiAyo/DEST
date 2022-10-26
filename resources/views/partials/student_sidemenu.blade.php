@@ -37,7 +37,7 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item @php echo Request::path()=='create_application'? 'active':'' @endphp">
-                  <a href="#">
+                  <a href="courses">
                     <span class="site-menu-title">Courses</span>
                   </a>
                 </li>

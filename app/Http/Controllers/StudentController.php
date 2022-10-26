@@ -37,6 +37,13 @@ class StudentController extends Controller
         }
     }
 
+    public function view_registered_courses(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $courses = DB::table('registration')->join('courses', 'registration.course_code', '=', 'courses.course_code')
+            ->where([['student_id', $data->id],['settings_id', '3']])->get();
+        return view('student.courses',['courses'=>$courses,'data'=>$data]);
+    }
+
     public function saveRegistration(Request $request){
         $request->validate([ 'course' => 'required']);
         try {
