@@ -14,7 +14,7 @@
                             <div class="panel-heading">
                                 <h3 class="panel-title">Registered Courses</h3>
                             </div>
-                            <div class="table-responsive h-250">
+                            <div class="table-responsive">
                                 <div data-role="container">
                                     <div data-role="content">
                                         <table id="reg_table" class="table table-responsive-sm table-hover table-striped">
