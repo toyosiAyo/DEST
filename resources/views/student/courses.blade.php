@@ -35,9 +35,9 @@
                                                     <td>{{ $course->course_code }}</td>
                                                     <td>{{ $course->course_title }}</td>
                                                     <td>{{ $course->unit }}</td>
-                                                    <td>@php echo $course->course_status == 'C' ? 
-                                                        '<span class="badge badge-danger">'.$course->course_status.'</span>' :
-                                                        '<span class="badge badge-success">'.$course->course_status.'</span>' @endphp
+                                                    <td>@php echo $course->status == 'C' ? 
+                                                        '<span class="badge badge-danger">'.$course->status.'</span>' :
+                                                        '<span class="badge badge-success">'.$course->status.'</span>' @endphp
                                                     </td>
                                                 </tr>
                                                 @endforeach
