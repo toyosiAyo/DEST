@@ -149,7 +149,7 @@ class AdminController extends Controller
     public function adminDashboard(Request $request){
         $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $applicants = DB::table('applicants')->where('status','applicant')->count();
-        $students = DB::table('applicants')->where('status','student')->count();
+        $students = DB::table('applications')->select('first_choice->prog as programme')->where('status', 'admitted')->count();
         $applications = DB::table('applications')->count();
         $payments = DB::table('application_payments')->where('status_msg','pending')->count();
         return view('admin.pages.dashboard',['data'=>$data,'applicants'=>$applicants,'students'=>$students,'applications'=>$applications,'payments'=>$payments]);
