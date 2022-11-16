@@ -55,6 +55,12 @@
                         <li><a href="{{route('events')}}">Post News/Events</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="{{route('view_registration')}}">
+                        <i data-feather="file-text"></i>
+                        <span>Course Registration</span>
+                    </a>
+                </li>
                 @endif
             </ul>
         </div>
