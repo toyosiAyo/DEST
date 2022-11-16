@@ -161,6 +161,13 @@ $(document).ready(function ($) {
         $("#graduation").html($(this).data("date_left"));
     });
 
+    $("#tblStudent").on("click", ".viewStudent", function () {
+        id = $(this).data("id");
+        name = $(this).data("name");
+        $.cookie("student_id", id);
+        viewRegCourses(id, name);
+    });
+
     const handleApplication = (
         id,
         action,
@@ -199,6 +206,29 @@ $(document).ready(function ($) {
             error: function (response) {
                 $.unblockUI();
                 toastr["error"](response.responseJSON.message);
+            },
+        });
+    };
+
+    const viewRegCourses = (id, name) => {
+        $.ajax({
+            type: "GET",
+            url: "viewRegCourses",
+            data: { id: id },
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                $("#exampleModal").modal("show");
+                $("#studentLabel").html(name);
+                $("#bodylist").empty();
+                response.forEach((element) => {
+                    $("#courselist").append(
+                        `<tr><td>${element.course_title}</td><td>${element.course_code}</td><td>${element.course_unit}</td></tr>`
+                    );
+                });
+            },
+            error: function (response) {
+                console.log(response);
             },
         });
     };
