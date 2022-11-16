@@ -137,7 +137,7 @@
                                                     id="programme_" placeholder="Search for programmes">
                                                     <option value="" selected>Select Programme</option>
                                                     @foreach($programmes as $program)
-                                                    <option value="{{ $program->id }}">{{ $program->programme }}</option>
+                                                    <option value="{{ $program->programme_id }}">{{ $program->programme }}</option>
                                                     @endforeach
                                                 </select>
                                                 <input type="hidden" name="user" value="{{$data->email}}">
