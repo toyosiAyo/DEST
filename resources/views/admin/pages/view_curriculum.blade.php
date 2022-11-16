@@ -120,10 +120,7 @@
 
         <!-- init js -->
         <script src="../assets_admin/js/pages/datatable-pages.init.js"></script>
-        <script src="../assets_admin/js/pages/modal.init.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
-        <script src="../assets_admin/scripts/utility.js"></script>
-        
+        <script src="../assets_admin/js/pages/modal.init.js"></script>        
     @endsection
         
 
