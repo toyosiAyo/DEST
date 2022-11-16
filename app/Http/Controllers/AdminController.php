@@ -268,6 +268,40 @@ class AdminController extends Controller
         }      
     }
 
+    public function import_courses(Request $request){
+        try {
+            $validator = Validator::make(
+                [ 'courses'      => $request->courses,
+                    'extension' => strtolower($request->courses->getClientOriginalExtension())],
+                [ 'courses'          => 'required',
+                    'extension'      => 'required|in:csv,xlsx,xls' ],
+                ['user'=>'required']
+            );
+            if ($validator->fails()) {
+              return response()->json(['error' => 'select proper excel file to import or User required'], 401);
+            }
+            $failed_data = [];
+            $data =  Excel::toArray(new CourseImport, request()->file('courses'));
+            foreach($data[0] as $index => $row){
+                if($index == 0) continue;
+                    if (strlen(ltrim(rtrim($row[0]))) < 7) {
+                    $failed_data = $row;
+                    continue;
+                }
+                DB::table('courses')->insertOrIgnore([
+                'course_code'=> $row[0],
+                'course_title'=> $row[1],
+                'unit'=> $row[2],
+                'status'=> $row[3],
+                'semester'=> $row[4],
+                ]);
+            }
+                return response()->json(['success' => 'Course(s) uploaded successfully','failed'=>$failed_data], 201);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Error Uploading Courses', 'th' => $th], 401);
+        }
+    }
+
     public function adminviewCurriculum(Request $request){
         $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));         
         $curriculum = DB::table('curriculum')->join('programmes', 'curriculum.programme_id', '=', 'programmes.programme_id')
@@ -276,6 +310,18 @@ class AdminController extends Controller
             ->orderby('programme_id')->get();
         $count = count($curriculum);
         return view('admin.pages.view_curriculum',['count'=>$count, 'curriculum'=>$curriculum,'data'=>$data]);
+    }
+
+    public function getStudentsRegistrations(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));           
+        $students = DB::table('registration')->join('applicants', 'registration.student_id', '=', 'applicants.id')
+            ->join('courses', 'registration.course_code', '=', 'courses.course_code')
+            ->join('applications', 'applicants.email', '=', 'applications.submitted_by')->where('status','admitted')
+            ->select('registration.*','applicants.id','applicants.surname','applicants.first_name','applicants.email',
+            'applications.first_choice->prog AS programme','applications.app_type')
+            ->groupBy('registration.settings_id', 'registration.student_id')->get();
+        $count = count($students);
+        return view('admin.pages.registration',['count'=>$count, 'students'=>$students,'data'=>$data]);
     }
 
     public function postEvents(Request $request){
