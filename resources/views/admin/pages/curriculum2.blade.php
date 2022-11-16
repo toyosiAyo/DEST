@@ -19,7 +19,7 @@
                     <!-- end page title -->
 
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Create Curriculum</h4>
@@ -108,6 +108,56 @@
                             <!-- end card -->
                         </div>
                         <!-- end col -->
+
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Upload Curriculum (Excel)</h4>
+                                    <p class="card-title-desc">NOTE: Upload your courses before Curriculum</p>
+                                </div>
+                                
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <form method="POST" id="form_file_course">
+                                                @csrf
+                                                <label for="courses" class="form-label font-size-13 text-muted">Upload Course</label>
+                                                <div class="mb-3 d-flex">
+                                                    <input type="file" name="courses" id="courses" required>
+                                                    <input type="hidden" name="user" value="{{$data->email}}">
+                                                    <button id="btn_file_course" type="submit" class="btn btn-info">Upload Course</button>
+                                                </div>
+                                            </form>
+                                            
+                                            <form method="POST" id="form_file_curr">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label for="programme_" class="form-label font-size-13 text-muted">Select Program</label>
+                                                <select class="form-control" data-trigger name="programme_"
+                                                    id="programme_" placeholder="Search for programmes">
+                                                    <option value="" selected>Select Programme</option>
+                                                    @foreach($programmes as $program)
+                                                    <option value="{{ $program->id }}">{{ $program->programme }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <input type="hidden" name="user" value="{{$data->email}}">
+                                            </div>
+                                            <label for="curriculum" class="form-label font-size-13 text-muted">Upload Curriculum</label>
+                                            <div class="mb-3 d-flex">
+                                                <input type="file" name="curriculum" id="curriculum" required>
+                                                <button id="btn_file_curr" type="submit" class="btn btn-danger">Upload Curriculum</button>
+                                            </div>
+                                            </form>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- end card -->
+                        </div>
+
                     </div>
                     <!-- end row -->
 
