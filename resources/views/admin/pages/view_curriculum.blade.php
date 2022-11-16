@@ -49,8 +49,8 @@
                                 @foreach($curriculum as $curr)
                                 <tr>
                                     <td>{{ $i }} @php $i++ @endphp</td>
-                                    <td>{{ $curr->code }}</td>
-                                    <td>{{ $curr->description }}</td>
+                                    <td>{{ $curr->course_code }}</td>
+                                    <td>{{ $curr->course_title }}</td>
                                     <td>{{ $curr->programme }}</td>
                                     <td>{{ $curr->unit }}</td>
                                     <td>{{ $curr->course_status }}</td>
@@ -78,38 +78,6 @@
             @include("admin.partials.footer")            
         </div>
 
-        <div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <form id="eventForm" method="post">
-                    <div class="modal-header">
-                        <h5>Course Registration- <span id="studentLabel"></span></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="table-responsive px-3" data-simplebar style="max-height: 352px;">
-                        <table id="courselist" class="table align-middle table-nowrap table-borderless">
-                            <thead>
-                                <tr>
-                                    <th>Course Title</th>
-                                    <th>Course Code</th>
-                                    <th>Unit</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bodylist">
-                               
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
         <!-- Required datatable js -->
         <script src="../assets_admin/libs/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="../assets_admin/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -120,7 +88,6 @@
 
         <!-- init js -->
         <script src="../assets_admin/js/pages/datatable-pages.init.js"></script>
-        <script src="../assets_admin/js/pages/modal.init.js"></script>        
     @endsection
         
 
