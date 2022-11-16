@@ -51,6 +51,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="#">Create Course</a></li>
                         <li><a href="{{route('curriculum')}}">Create Curriculum</a></li>
+                        <li><a href="{{route('view_curriculum')}}">View Curriculum</a></li>
                         <li><a href="{{route('events')}}">Post News/Events</a></li>
                     </ul>
                 </li>
