@@ -270,9 +270,10 @@ class AdminController extends Controller
 
     public function adminviewCurriculum(Request $request){
         $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));         
-        $curriculum = DB::table('curriculum')->join('programmes', 'curriculum.programme_id', '=', 'programmes.id')
-        ->join('courses', 'curriculum.course_code', '=', 'courses.course_code')
-        ->select('curriculum.*','courses.course_code','courses.course_title','courses.unit','programmes.programme')->get();
+        $curriculum = DB::table('curriculum')->join('programmes', 'curriculum.programme_id', '=', 'programmes.programme_id')
+            ->join('courses', 'curriculum.course_code', '=', 'courses.course_code')
+            ->select('curriculum.*','courses.course_code','courses.course_title','courses.unit','programmes.programme')
+            ->orderby('programme_id')->get();
         $count = count($curriculum);
         return view('admin.pages.view_curriculum',['count'=>$count, 'curriculum'=>$curriculum,'data'=>$data]);
     }
