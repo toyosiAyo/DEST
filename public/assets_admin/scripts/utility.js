@@ -223,7 +223,7 @@ $(document).ready(function ($) {
                 $("#bodylist").empty();
                 response.forEach((element) => {
                     $("#courselist").append(
-                        `<tr><td>${element.course_title}</td><td>${element.course_code}</td><td>${element.course_unit}</td></tr>`
+                        `<tr><td>${element.course_title}</td><td>${element.course_code}</td><td>${element.unit}</td></tr>`
                     );
                 });
             },
