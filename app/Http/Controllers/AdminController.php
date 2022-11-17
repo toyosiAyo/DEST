@@ -326,6 +326,14 @@ class AdminController extends Controller
         return view('admin.pages.registration',['count'=>$count, 'students'=>$students,'data'=>$data]);
     }
 
+    public function viewRegisteredCourses(Request $request){
+        $setting = app('App\Http\Controllers\ConfigController')->settings($request);
+        return $setting;
+        $courses = DB::table('registration')->where([['student_id',$_COOKIE['student_id']],
+            ['settings_id',app('App\Http\Controllers\ConfigController')->settings($request)]])->select('*')->get();
+        return $courses;
+    }
+
     public function postEvents(Request $request){
         try{
             $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
