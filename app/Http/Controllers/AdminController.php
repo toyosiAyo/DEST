@@ -329,7 +329,7 @@ class AdminController extends Controller
 
     public function viewRegisteredCourses(Request $request){
         $setting = app('App\Http\Controllers\ConfigController')->settings($request);
-        $courses = DB::table('registration')->where([['student_id',$_COOKIE['student_id']],
+        $courses = DB::table('registration')->where([['student_id',$request->id],
             ['settings_id',$setting->id]])->select('*')->get();
         return $courses;
     }
