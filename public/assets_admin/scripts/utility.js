@@ -5,6 +5,8 @@ $(document).ready(function ($) {
         },
     });
 
+    $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+
     toastr.options = {
         closeButton: true,
         debug: false,
