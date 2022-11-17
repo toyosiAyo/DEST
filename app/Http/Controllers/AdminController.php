@@ -319,8 +319,9 @@ class AdminController extends Controller
             ->join('applications', 'applicants.email', '=', 'applications.submitted_by')
             ->where('applications.status','admitted')
             ->select('registration.*','applicants.id','applicants.surname','applicants.first_name','applicants.email',
-            'applications.first_choice->prog AS programme','applications.app_type');
-            //->groupBy('registration.settings_id', 'registration.student_id')->get();
+            'applications.first_choice->prog AS programme','applications.app_type')
+            //->groupBy('registration.settings_id', 'registration.student_id')
+            ->get();
         $count = count($students);
         return view('admin.pages.registration',['count'=>$count, 'students'=>$students,'data'=>$data]);
     }
