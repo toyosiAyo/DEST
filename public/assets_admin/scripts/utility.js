@@ -162,8 +162,8 @@ $(document).ready(function ($) {
     });
 
     $("#tblStudent").on("click", ".viewStudent", function () {
-        id = $(this).data("id");
-        name = $(this).data("name");
+        var id = $(this).data("id");
+        var name = $(this).data("name");
         $.cookie("student_id", id);
         viewRegCourses(id, name);
     });

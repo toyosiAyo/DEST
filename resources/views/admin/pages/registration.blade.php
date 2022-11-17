@@ -58,7 +58,7 @@
                                                 <i class="bx bx-dots-horizontal-rounded"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
-                                                <li><button type="button" data-name="{{$student->first_name}}" data-id="{{$student->id}}" class="dropdown-item viewStudent">View</button></li>
+                                                <li><button type="button" data-name="{{$student->first_name}}" data-id="{{$student->stud_id}}" class="dropdown-item viewStudent">View</button></li>
                                             </ul>
                                         </div>
                                     </td>
