@@ -313,11 +313,12 @@ class AdminController extends Controller
     }
 
     public function getStudentsRegistrations(Request $request){
-        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));           
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));    
+        $setting = app('App\Http\Controllers\ConfigController')->settings($request);       
         $students = DB::table('registration')->join('applicants', 'registration.student_id', '=', 'applicants.id')
             ->join('courses', 'registration.course_code', '=', 'courses.course_code')
             ->join('applications', 'applicants.email', '=', 'applications.submitted_by')
-            ->where('applications.status','admitted')
+            ->where([['applications.status','admitted'],['registration.settings_id',$setting->id]])
             ->select('registration.*','applicants.id AS stud_id','applicants.surname','applicants.first_name','applicants.email',
             'applications.first_choice->prog AS programme','applications.app_type')
             ->groupBy('registration.settings_id', 'registration.student_id')
@@ -328,9 +329,8 @@ class AdminController extends Controller
 
     public function viewRegisteredCourses(Request $request){
         $setting = app('App\Http\Controllers\ConfigController')->settings($request);
-        return $setting;
         $courses = DB::table('registration')->where([['student_id',$_COOKIE['student_id']],
-            ['settings_id',app('App\Http\Controllers\ConfigController')->settings($request)]])->select('*')->get();
+            ['settings_id',$setting->id]])->select('*')->get();
         return $courses;
     }
 
