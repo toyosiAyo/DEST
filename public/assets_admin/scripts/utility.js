@@ -213,7 +213,7 @@ $(document).ready(function ($) {
     const viewRegCourses = (id, name) => {
         $.ajax({
             type: "GET",
-            url: "/viewRegCourses",
+            url: `/viewRegCourses`,
             data: { id: id },
             dataType: "json",
             success: function (response) {
