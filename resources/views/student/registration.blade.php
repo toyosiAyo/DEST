@@ -37,9 +37,9 @@
                                                 @foreach($courses as $course)
 
                                                 @if($course->course_status == 'C')
-                                                    $required = 'required';
+                                                    $required = "required"
                                                  @else
-                                                    $required = ''; 
+                                                    $required = "" 
                                                 @endif
                                                 <tr>
                                                     <td style="width: 50px;">
