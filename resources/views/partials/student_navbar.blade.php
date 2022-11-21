@@ -11,7 +11,7 @@
         <i class="icon md-more" aria-hidden="true"></i>
       </button>
       <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
-        <a href="dashboard"><img class="navbar-brand-logo" src="{{ asset('assets/images/run_logo.png') }}" title="RUN DEST">
+        <a href="student_dashboard"><img class="navbar-brand-logo" src="{{ asset('assets/images/run_logo.png') }}" title="RUN DEST">
         <span class="navbar-brand-text hidden-xs-down"> RUN DEST</span></a>
       </div>
     </div>
@@ -84,7 +84,7 @@
         <!-- End Navbar Toolbar Right -->
 
         <div class="navbar-brand navbar-brand-center">
-          <a href="dashboard">
+          <a href="student_dashboard">
             <img class="navbar-brand-logo navbar-brand-logo-normal" style="height:65px; width:113%" src="assets/images/run_logo.png"
               title="RUN DEST">
             <img class="navbar-brand-logo navbar-brand-logo-special" src="assets/images/run_logo.png"
