@@ -35,11 +35,11 @@
                                                     $i = 1; 
                                                 @endphp
                                                 @foreach($courses as $course)
-                                                
+
                                                 @if($course->course_status == 'C')
                                                     $required = 'required'
-                                                @else
-                                                    $required = ''
+                                                <!-- @else
+                                                    $required = '' -->
                                                 @endif
                                                 <tr>
                                                     <td style="width: 50px;">
