@@ -58,7 +58,7 @@
       }
     </style>
   <!-- Page -->
-    @include("partials.navbar")
+    @include("partials.student_navbar")
 
     @include("partials.student_sidemenu")
 
