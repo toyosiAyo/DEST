@@ -31,11 +31,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @php $i = 1; @endphp
+                                                @php 
+                                                    $i = 1; 
+                                                @endphp
                                                 @foreach($courses as $course)
+                                                @if($course->course_status == 'C')
+                                                    $required = 'required'
+                                                @else
+                                                    $required = ''
                                                 <tr>
                                                     <td style="width: 50px;">
-                                                        <input type="checkbox" value="{{$course->course_code.'_'.$course->course_title.'_'.$course->unit.'_'.$course->course_status}}" name="course[]" required>
+                                                        <input type="checkbox" value="{{$course->course_code.'_'.$course->course_title.'_'.$course->unit.'_'.$course->course_status}}" name="course[]" {{$required}}>
                                                     </td>
                                                     <td>{{ $i }} @php $i++ @endphp</td>
                                                     <td>{{ $course->course_code }}</td>
