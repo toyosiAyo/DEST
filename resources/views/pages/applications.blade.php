@@ -81,7 +81,7 @@
             </div>
             <div class="modal-body">
                 <!-- <p>My applicatioon details</p> -->
-                <span id="details"></span>
+                <span id="details"></span><hr>
                 Click <a href="" class="download_letter">here</a> to download admission letter
             </div>
             <div class="modal-footer">
