@@ -18,7 +18,6 @@ $(document).ready(function ($) {
     };
 
     $("#app_table").on("click", ".view", function () {
-        alert("hey");
         $("#view_app").modal("show");
         var status = $(this).data("status");
         var appID = $(this).data("id");
