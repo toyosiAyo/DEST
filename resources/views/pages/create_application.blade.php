@@ -98,7 +98,7 @@
                           <div class="panel-heading" id="question-8" role="tab">
                             <a class="panel-title" aria-controls="answer-8" aria-expanded="true" data-toggle="collapse"
                               href="#answer-8" data-parent="#accordion1">
-                              HND Conversion Programme
+                              HND Conversion/Part-Time Programme
                             </a>
                           </div>
                           <div class="panel-collapse collapse show" id="answer-8" aria-labelledby="question-8"
