@@ -99,6 +99,7 @@ $(document).ready(function ($) {
         var email = $(this).data("email");
         $("#btn_approve").click(function (e) {
             e.preventDefault();
+            $("#btn_approve").html('<i class="fa fa-spinner fa-spin"></i>');
             var duration = $("#duration").val();
             var resumption = $("#resumption").val();
             var closing = $("#registration_closing").val();
@@ -207,6 +208,7 @@ $(document).ready(function ($) {
             },
             error: function (response) {
                 $.unblockUI();
+                $("#btn_approve").html("Submit");
                 toastr["error"](response.responseJSON.message);
             },
         });
