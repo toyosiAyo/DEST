@@ -345,8 +345,9 @@ class AdminController extends Controller
 
     public function createLecturers(Request $request){
         try{
+            $password = Hash::make('12345678');
             DB::table('admin')->insert([
-                'name' => $request->name, 'email'=> $request->email,'programme' => $request->programme
+                'name' => $request->name, 'email'=> $request->email,'role' => $request->programme, 'password' => $password
             ]);
             return response()->json(['status'=>'ok','message'=>'Lecturer created!'], 200);
         }
