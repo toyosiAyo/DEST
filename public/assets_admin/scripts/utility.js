@@ -263,7 +263,7 @@ $(document).ready(function ($) {
                     $("#btnLecturerForm").html("Create");
                     toastr["success"](response.message);
                     setTimeout(function () {
-                        window.location.href = "/lecturers";
+                        window.location.href = "lecturers";
                     }, 2800);
                 },
                 error: function (response) {
