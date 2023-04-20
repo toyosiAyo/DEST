@@ -106,6 +106,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('admin/view_registration',[AdminController::class,'getStudentsRegistrations'])->name('view_registration');
     Route::get('admin/events',[AdminController::class,'viewEventsPage'])->name('events');
     Route::post('create_event',[AdminController::class,'postEvents']);
+    Route::post('create_lecturer',[AdminController::class,'createLecturers']);
     Route::post('app_actions',[AdminController::class,'app_actions']);
     Route::get('viewRegCourses',[AdminController::class,'viewRegisteredCourses']);
     Route::get('admin/lecturers',[AdminController::class,'viewLecturers'])->name('view_lecturers');

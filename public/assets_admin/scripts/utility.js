@@ -236,4 +236,42 @@ $(document).ready(function ($) {
             },
         });
     };
+
+    $("#btnLecturerForm").click(function () {
+        $("#lecturerForm").validate({
+            submitHandler: submitlecturerForm,
+            errorClass: "invalid",
+        });
+
+        function submitlecturerForm(e) {
+            var formData = $("#lecturerForm").serialize();
+            var type = "POST";
+            var ajaxurl = "/create_lecturer";
+
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: "json",
+                beforeSend: function () {
+                    $("#btnLecturerForm").html(
+                        '<i class="fa fa-spinner fa-spin"></i>'
+                    );
+                },
+                success: function (response) {
+                    console.log(response);
+                    $("#btnLecturerForm").html("Create");
+                    toastr["success"](response.message);
+                    setTimeout(function () {
+                        window.location.href = "/lecturers";
+                    }, 2800);
+                },
+                error: function (response) {
+                    console.log(response);
+                    $("#btnLecturerForm").html("Create");
+                    toastr["error"](response.responseJSON.message);
+                },
+            });
+        }
+    });
 });
