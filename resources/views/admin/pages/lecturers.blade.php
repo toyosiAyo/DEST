@@ -101,7 +101,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="programme" class="col-form-label">Programme:</label>
-                            <select class="form-control" name="programme" id="programme" required>
+                            <select class="form-control" data-trigger name="programme"
+                                id="programme"
+                                placeholder="Search for programmes">
+                                @foreach($programmes as $program)
+                                <option value="{{ $program->programme_id }}">{{ $program->programme }}</option>
+                                @endforeach
                             </select>
                         </div>                            
                     </div>

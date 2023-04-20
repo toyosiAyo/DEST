@@ -338,8 +338,9 @@ class AdminController extends Controller
     public function viewLecturers(Request $request){
         $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $lecturers = DB::table('admin')->whereNotIn('role', ['director', 'admin', 'accountant'])->get();
+        $programmes = DB::table('programmes')->select('*')->get();
         $count = count($lecturers);
-        return view('admin.pages.lecturers',['count'=>$count, 'lecturers'=>$lecturers,'data'=>$data]);
+        return view('admin.pages.lecturers',['count'=>$count,'$programmes'=>$programmes, 'lecturers'=>$lecturers,'data'=>$data]);
     }
 
     public function postEvents(Request $request){
