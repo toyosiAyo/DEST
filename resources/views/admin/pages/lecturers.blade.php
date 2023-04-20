@@ -81,32 +81,33 @@
             @include("admin.partials.footer")            
         </div>
 
-        <div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+        <div class="modal fade" id="addLecturer" tabindex="-1" aria-labelledby="addLecturerLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
-                    <form id="eventForm" method="post">
+                    <form id="lecturerForm" method="post">
+                    @csrf
                     <div class="modal-header">
-                        <h5>Course Registration- <span id="studentLabel"></span></h5>
+                        <h5>Create New Lecturer</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="table-responsive px-3" data-simplebar style="max-height: 352px;">
-                        <table id="courselist" class="table align-middle table-nowrap table-borderless">
-                            <thead>
-                                <tr>
-                                    <th>Course Title</th>
-                                    <th>Course Code</th>
-                                    <th>Unit</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bodylist">
-                               
-                            </tbody>
-                        </table>
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" name="name" id="name" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="email" class="col-form-label">Email:</label>
+                            <input type="email" class="form-control" name="email" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="programme" class="col-form-label">Programme:</label>
+                            <select class="form-control" name="programme" id="programme" required>
+                            </select>
+                        </div>                            
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="btnLecturerForm" type="submit" class="btn btn-primary">Create</button>
                     </div>
                     </form>
                 </div>
