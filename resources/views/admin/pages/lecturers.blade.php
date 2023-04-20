@@ -29,7 +29,11 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-danger">Add</button>
+                            <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+                                <div>
+                                    <a href="#" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addLecturer"><i class="bx bx-plus me-1"></i> Add New</a>
+                                </div>                              
+                            </div>
                         </div>
                     </div>
                     <!-- end row -->
