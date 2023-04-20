@@ -108,6 +108,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::post('create_event',[AdminController::class,'postEvents']);
     Route::post('app_actions',[AdminController::class,'app_actions']);
     Route::get('viewRegCourses',[AdminController::class,'viewRegisteredCourses']);
+    Route::get('admin/lecturers',[AdminController::class,'viewLecturers'])->name('view_lecturers');
     Route::get('admin/advance',function(){ return view('admin/pages/form-advanced'); });
 
 });

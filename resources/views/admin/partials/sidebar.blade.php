@@ -22,6 +22,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('view_lecturers')}}">
+                        <i data-feather="users"></i>
+                        <span>Lecturers</span>
+                    </a>
+                </li>
+                <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i data-feather="file-text"></i>
                         <span>Applications</span>

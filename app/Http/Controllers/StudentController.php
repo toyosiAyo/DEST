@@ -54,7 +54,7 @@ class StudentController extends Controller
             $check = DB::table('registration')->where(['student_id'=> $data->id,'settings_id'=>'3'])->first();
                 if($check){
                     return response()->json(['status'=>'Nok','message'=>'Registration already submitted for approval',],401); 
-            }
+                }
             foreach($request->course as $index => $value){ 
                 $course = explode("_", $value);
                 DB::table('registration')->insert([
