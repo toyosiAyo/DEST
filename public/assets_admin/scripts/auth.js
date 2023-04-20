@@ -46,8 +46,6 @@ $(document).ready(function ($) {
                 },
                 success: function (response) {
                     console.log(response);
-                    $("#login-submit").html("Login");
-                    toastr.options;
                     toastr["success"](response.message);
                     setTimeout(function () {
                         window.location.href = "admin/dashboard";
@@ -56,7 +54,6 @@ $(document).ready(function ($) {
                 error: function (response) {
                     console.log(response);
                     $("#login-submit").html("Login");
-                    toastr.options;
                     toastr["error"](response.responseJSON.message);
                 },
             });
