@@ -27,8 +27,8 @@
                             <div class="mb-3">
                                 <h5 class="card-title">DEST Lecturers <span class="text-muted fw-normal ms-2">({{$count}})</span></h5>
                             </div>
+                            <button type="button" class="btn btn-danger">Add</button>
                         </div>
-                        <button type="button" class="btn btn-danger">Add</button>
                     </div>
                     <!-- end row -->
 
