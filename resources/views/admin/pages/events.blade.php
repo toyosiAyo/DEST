@@ -143,7 +143,7 @@
         <!-- init js -->
         <script src="../assets_admin/js/pages/datatable-pages.init.js"></script>
         <script src="../assets_admin/js/pages/modal.init.js"></script>
-        <script src="../assets/scripts/validation.min.js"></script>
+        <script src="../scripts/validation.min.js"></script>
         <script src="../assets_admin/scripts/utility.js"></script>
 
         
