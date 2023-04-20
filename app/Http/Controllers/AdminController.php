@@ -343,6 +343,18 @@ class AdminController extends Controller
         return view('admin.pages.lecturers',['count'=>$count,'programmes'=>$programmes, 'lecturers'=>$lecturers,'data'=>$data]);
     }
 
+    public function createLecturers(Request $request){
+        try{
+            DB::table('admin')->insert([
+                'name' => $request->name, 'email'=> $request->email,'programme' => $request->programme
+            ]);
+            return response()->json(['status'=>'ok','message'=>'Lecturer created!'], 200);
+        }
+        catch (\Throwable $th) {
+            return response()->json(['status'=>'Nok','message'=>'Error creating lecturer'], 500);
+        } 
+    }
+
     public function postEvents(Request $request){
         try{
             $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
