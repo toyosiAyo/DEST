@@ -45,7 +45,6 @@ $(document).ready(function ($) {
             error: function (response) {
                 console.log(response);
                 $("#btnSubmitRegForm").html("Submit");
-                toastr.options;
                 toastr["error"](response.responseJSON.message);
             },
         });
