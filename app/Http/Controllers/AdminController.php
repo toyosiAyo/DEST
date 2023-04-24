@@ -345,14 +345,18 @@ class AdminController extends Controller
 
     public function createLecturers(Request $request){
         try{
+            $check = DB::table('admin')->where('email',$request->email)->first();
+            if($check){
+                return response(['status'=>'Nok','message'=>'Email already exists!'], 500);
+            }
             $password = Hash::make('12345678');
             DB::table('admin')->insert([
                 'name' => $request->name, 'email'=> $request->email,'role' => $request->programme, 'password' => $password
             ]);
-            return response()->json(['status'=>'ok','message'=>'Lecturer created!'], 200);
+            return response(['status'=>'ok','message'=>'Lecturer created!'], 200);
         }
         catch (\Throwable $th) {
-            return response()->json(['status'=>'Nok','message'=>'Error creating lecturer'], 500);
+            return response(['status'=>'Nok','message'=>'Error creating lecturer'], 500);
         } 
     }
 
