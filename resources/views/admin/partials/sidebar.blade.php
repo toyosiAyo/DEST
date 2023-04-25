@@ -71,7 +71,7 @@
                     </a>
                 </li>
                 @endif
-                @if($data->role != 'director' || $data->role != 'admin' || $data->role != 'accountant')
+                @if($data->role !== 'director' && $data->role !== 'admin' && $data->role !== 'accountant')
                 <li>
                     <a href="{{route('score_input')}}">
                         <i data-feather="edit"></i>
