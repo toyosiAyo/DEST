@@ -344,6 +344,7 @@ class AdminController extends Controller
                 ['registration.course_code',$data->role]])
             ->select('registration.*','applicants.id AS stud_id','applicants.surname','applicants.first_name',
             'applications.first_choice->prog AS programme','applications.app_type')->get();
+        $count = count($students);
         return view('admin.pages.score_input',['count'=>$count, 'students'=>$students,'data'=>$data]);
     }
 
