@@ -69,7 +69,6 @@
                             <button type="submit" id="btnScoreInput" class="btn btn-primary">Submit</button>    
                         </div>
                         </form>
-                        <div id="example-console-form"></div>
                         <!-- end table -->
                     </div>
                     <!-- end table responsive -->

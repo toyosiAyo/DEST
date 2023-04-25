@@ -291,7 +291,7 @@ $(document).ready(function ($) {
                 );
             }
         });
-        $("#example-console-form").text($(form).serialize());
+        //$("#example-console-form").text($(form).serialize());
         var mydata = $(form).serialize();
         console.log(mydata);
         var type = "POST";
