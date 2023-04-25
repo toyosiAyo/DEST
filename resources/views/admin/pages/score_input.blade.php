@@ -59,6 +59,10 @@
                                 @endforeach                            
                             </tbody>
                         </table>
+                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                            <input type="text" name="course_code" value="{{$student->course_code}}" hidden>
+                            <button type="submit" id="btnScoreInput" class="btn btn-primary">Submit</button>    
+                        </div>
                         <!-- end table -->
                     </div>
                     <!-- end table responsive -->
