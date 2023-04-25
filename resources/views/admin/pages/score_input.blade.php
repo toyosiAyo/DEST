@@ -25,7 +25,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <h5 class="card-title">Student List <span class="text-muted fw-normal ms-2">({{$count}})</span></h5>
+                                <h5 class="card-title">Student List for {{$data->role}} <span class="text-muted fw-normal ms-2">({{$count}})</span></h5>
                             </div>
                         </div>
                     </div>
