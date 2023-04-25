@@ -100,12 +100,12 @@
                             <input type="email" class="form-control" name="email" id="email" required>
                         </div>
                         <div class="mb-3">
-                            <label for="programme" class="col-form-label">Programme:</label>
-                            <select class="form-control" data-trigger name="programme"
-                                id="programme"
-                                placeholder="Search for programmes">
-                                @foreach($programmes as $program)
-                                <option value="{{ $program->programme_id }}">{{ $program->programme }}</option>
+                            <label for="course" class="col-form-label">Course:</label>
+                            <select class="form-control" data-trigger name="course"
+                                id="course"
+                                placeholder="Search for courses">
+                                @foreach($courses as $course)
+                                <option value="{{ $course->course_code }}">{{ $course->course_code }}</option>
                                 @endforeach
                             </select>
                         </div>                            

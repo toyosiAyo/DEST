@@ -351,9 +351,9 @@ class AdminController extends Controller
     public function viewLecturers(Request $request){
         $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $lecturers = DB::table('admin')->whereNotIn('role', ['director', 'admin', 'accountant'])->get();
-        $programmes = DB::table('programmes')->select('*')->get();
+        $courses = DB::table('courses')->select('*')->get();
         $count = count($lecturers);
-        return view('admin.pages.lecturers',['count'=>$count,'programmes'=>$programmes, 'lecturers'=>$lecturers,'data'=>$data]);
+        return view('admin.pages.lecturers',['count'=>$count,'courses'=>$courses, 'lecturers'=>$lecturers,'data'=>$data]);
     }
 
     public function createLecturers(Request $request){
@@ -364,7 +364,7 @@ class AdminController extends Controller
             }
             $password = Hash::make('12345678');
             DB::table('admin')->insert([
-                'name' => $request->name, 'email'=> $request->email,'role' => $request->programme, 'password' => $password
+                'name' => $request->name, 'email'=> $request->email,'role' => $request->course, 'password' => $password
             ]);
             return response(['status'=>'ok','message'=>'Lecturer created!'], 200);
         }
