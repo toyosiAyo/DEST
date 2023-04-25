@@ -14,7 +14,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                @if($data->role !== 'accountant')
+                @if($data->role == 'director' || $data->role == 'admin')
                 <li>
                     <a href="{{route('viewApplicants')}}">
                         <i data-feather="users"></i>
@@ -48,7 +48,7 @@
                         <li><a href="{{route('pending_payments')}}">Pending</a></li>
                     </ul>
                 </li>
-                @if($data->role !== 'accountant')
+                @if($data->role == 'director' || $data->role == 'admin')
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i class="fab fa-whmcs"></i>
@@ -65,6 +65,12 @@
                     <a href="{{route('view_registration')}}">
                         <i data-feather="file-text"></i>
                         <span>Course Registration</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('score_input')}}">
+                        <i data-feather="file-text"></i>
+                        <span>Score Input</span>
                     </a>
                 </li>
                 @endif

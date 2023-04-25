@@ -110,6 +110,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::post('app_actions',[AdminController::class,'app_actions']);
     Route::get('viewRegCourses',[AdminController::class,'viewRegisteredCourses']);
     Route::get('admin/lecturers',[AdminController::class,'viewLecturers'])->name('view_lecturers');
+    Route::get('admin/score_input',[AdminController::class,'viewRegPerProgramme'])->name('score_input');
     Route::get('admin/advance',function(){ return view('admin/pages/form-advanced'); });
 
 });

@@ -335,6 +335,18 @@ class AdminController extends Controller
         return $courses;
     }
 
+    public function viewRegPerProgramme(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));    
+        $setting = app('App\Http\Controllers\ConfigController')->settings($request);
+        $students = DB::table('registration')->join('applicants', 'registration.student_id', '=', 'applicants.id')
+            ->join('applications', 'applicants.email', '=', 'applications.submitted_by')
+            ->where([['applications.status','admitted'],['registration.settings_id',$setting->id],
+                ['registration.course_code',$data->role]])
+            ->select('registration.*','applicants.id AS stud_id','applicants.surname','applicants.first_name',
+            'applications.first_choice->prog AS programme','applications.app_type')->get();
+        return view('admin.pages.score_input',['count'=>$count, 'students'=>$students,'data'=>$data]);
+    }
+
     public function viewLecturers(Request $request){
         $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $lecturers = DB::table('admin')->whereNotIn('role', ['director', 'admin', 'accountant'])->get();
