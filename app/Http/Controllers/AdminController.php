@@ -373,6 +373,15 @@ class AdminController extends Controller
         } 
     }
 
+    public function enterScore(Request $request){
+        try{
+            return response(['status'=>'ok','message'=>'Scores successfully saved'], 200);
+        }
+        catch (\Throwable $th) {
+            return response(['status'=>'Nok','message'=>'Error creating lecturer'], 500);
+        }
+    }
+
     public function postEvents(Request $request){
         try{
             $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
