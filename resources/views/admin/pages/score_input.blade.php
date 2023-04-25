@@ -32,7 +32,8 @@
                     <!-- end row -->
 
                     <div class="table-responsive mb-4">
-                        <table id="tblStudent" class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+                    <form method="post" id="inputScoreForm">
+                        <table id="tblScoreInput" class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
                             <thead>
                                 <tr>
                                 <th scope="col">S/N</th>
@@ -63,6 +64,7 @@
                             <input type="text" name="course_code" value="{{$student->course_code}}" hidden>
                             <button type="submit" id="btnScoreInput" class="btn btn-primary">Submit</button>    
                         </div>
+                        </form>
                         <!-- end table -->
                     </div>
                     <!-- end table responsive -->

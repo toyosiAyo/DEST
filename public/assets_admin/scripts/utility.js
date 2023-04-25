@@ -274,4 +274,50 @@ $(document).ready(function ($) {
             });
         }
     });
+
+    $("#inputScoreForm").on("submit", function (e) {
+        var table = $("#tblScoreInput").DataTable();
+        var form = this;
+        var params = table.$("input").serializeArray();
+        e.preventDefault();
+
+        $.each(params, function () {
+            if (!$.contains(document, form[this.name])) {
+                $(form).append(
+                    $("<input>")
+                        .attr("type", "hidden")
+                        .attr("name", this.name)
+                        .val(this.value)
+                );
+            }
+        });
+        var mydata = $(form).serialize();
+        console.log(mydata);
+        var type = "POST";
+        var ajaxurl = "/enter_score";
+        $.ajax({
+            type: type,
+            url: ajaxurl,
+            data: mydata,
+            dataType: "json",
+            beforeSend: function () {
+                $("#btnScoreInput").html(
+                    '<i class="fa fa-spinner fa-spin"></i>'
+                );
+                $("#btnScoreInput").prop("disabled", true);
+            },
+            success: function (response) {
+                console.log(response);
+                alert(response.message);
+                $("#btnScoreInput").html("Submit");
+                $("#btnScoreInput").prop("disabled", false);
+            },
+            error: function (response) {
+                console.log(response);
+                $("#btnScoreInput").html("Submit");
+                $("#btnScoreInput").prop("disabled", false);
+                alert(response.responseJSON.message);
+            },
+        });
+    });
 });
