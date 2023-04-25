@@ -54,13 +54,17 @@
                                     <td>{{ $student->course_code }}</td>
                                     <td>{{ $student->programme }}</td>
                                     <td>{{ $student->app_type }}</td>
-                                    <td><input value="{{ $student->score }}" type="text"></td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <input value="{{ $student->score }}" name="{{$student->stud_id}}" type="text" required>
+                                        </div>
+                                    </td>
                                     <td>{{ $student->grade }}</td>
                                 </tr>   
                                 @endforeach                            
                             </tbody>
                         </table>
-                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                        <div class="btn-group" role="group">
                             <input type="text" name="course_code" value="{{$student->course_code}}" hidden>
                             <button type="submit" id="btnScoreInput" class="btn btn-primary">Submit</button>    
                         </div>
