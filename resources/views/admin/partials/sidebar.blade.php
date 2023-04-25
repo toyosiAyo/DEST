@@ -38,6 +38,7 @@
                     </ul>
                 </li>
                 @endif
+                @if($data->role == 'director' || $data->role == 'admin' || $data->role == 'accountant')
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
                         <i class="fas fa-hand-holding-usd"></i>
@@ -48,6 +49,7 @@
                         <li><a href="{{route('pending_payments')}}">Pending</a></li>
                     </ul>
                 </li>
+                @endif
                 @if($data->role == 'director' || $data->role == 'admin')
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
@@ -67,6 +69,8 @@
                         <span>Course Registration</span>
                     </a>
                 </li>
+                @endif
+                @if($data->role !== 'director' || $data->role !== 'admin' || $data->role !== 'accountant')
                 <li>
                     <a href="{{route('score_input')}}">
                         <i data-feather="edit"></i>
