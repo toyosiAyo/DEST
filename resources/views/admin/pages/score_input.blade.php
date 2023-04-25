@@ -37,6 +37,7 @@
                                 <tr>
                                 <th scope="col">S/N</th>
                                 <th scope="col">Name</th>
+                                <th scope="col">Course Code</th>
                                 <th scope="col">Programme</th>
                                 <th scope="col">Degree</th>
                                 <th scope="col">Score</th>
@@ -49,6 +50,7 @@
                                 <tr>
                                     <td>{{ $i }} @php $i++ @endphp</td>
                                     <td>{{ $student->surname.' '.$student->first_name }}</td>
+                                    <td>{{ $student->course_code }}</td>
                                     <td>{{ $student->programme }}</td>
                                     <td>{{ $student->app_type }}</td>
                                     <td><input value="{{ $student->score }}" type="text"></td>
