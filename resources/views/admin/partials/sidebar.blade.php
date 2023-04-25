@@ -7,13 +7,14 @@
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title">Menu</li>
-
+                @if($data->role == 'director' || $data->role == 'admin' || $data->role == 'accountant')
                 <li>
                     <a href="dashboard">
                         <i data-feather="home"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
+                @endif
                 @if($data->role == 'director' || $data->role == 'admin')
                 <li>
                     <a href="{{route('viewApplicants')}}">
