@@ -56,7 +56,7 @@
                                     <td>{{ $student->app_type }}</td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <input value="{{ $student->score }}" name="{{$student->stud_id}}" type="text" required>
+                                            <input class="form-control form-control-md" value="{{ $student->score }}" name="{{$student->stud_id}}" type="text" required>
                                         </div>
                                     </td>
                                     <td>{{ $student->grade }}</td>
@@ -69,6 +69,7 @@
                             <button type="submit" id="btnScoreInput" class="btn btn-primary">Submit</button>    
                         </div>
                         </form>
+                        <div id="example-console-form"></div>
                         <!-- end table -->
                     </div>
                     <!-- end table responsive -->
