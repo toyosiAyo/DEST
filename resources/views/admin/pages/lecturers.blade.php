@@ -45,7 +45,7 @@
                                 <th scope="col">S/N</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Programme</th>
+                                <th scope="col">Course</th>
                                 <th scope="col">Status</th>
                                 <th style="width: 80px; min-width: 80px;">Action</th>
                                 </tr>
