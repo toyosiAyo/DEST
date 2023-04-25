@@ -51,7 +51,7 @@
                                     <td>{{ $student->surname.' '.$student->first_name }}</td>
                                     <td>{{ $student->programme }}</td>
                                     <td>{{ $student->app_type }}</td>
-                                    <td>{{ $student->score }}</td>
+                                    <td><input value="{{ $student->score }}" type="text"></td>
                                     <td>{{ $student->grade }}</td>
                                 </tr>   
                                 @endforeach                            
