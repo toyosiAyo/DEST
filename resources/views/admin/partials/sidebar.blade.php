@@ -69,7 +69,7 @@
                 </li>
                 <li>
                     <a href="{{route('score_input')}}">
-                        <i data-feather="file-text"></i>
+                        <i data-feather="edit"></i>
                         <span>Score Input</span>
                     </a>
                 </li>
