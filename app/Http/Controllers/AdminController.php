@@ -376,13 +376,11 @@ class AdminController extends Controller
     public function enterScore(Request $request){
         //try{
             $setting = app('App\Http\Controllers\ConfigController')->settings($request);
-            $students = DB::table('registration')->where(['course_code' => $request->course_code, 'settings_id' =>$setting->id])
-                ->get();
+            $students = DB::table('registration')->where(['course_code' => $request->course_code, 'settings_id' =>$setting->id])->get();
             foreach($students as $index => $value){ 
-                print_r($value);
-                // DB::table('registration')->update(
-                //     ['reg_id' =>$check->id , 'course_id' => $value['id'],'course_unit'=>$value['unit'],
-                //     'course_status' => $value['course_status']]);
+                $id = $value->student_id;
+                DB::table('registration')->where(['student_id'=>$request->student_id, 'course_code' => $request->course_code])->update(
+                    ['score' => $request->$id ]);
             }
             return response(['status'=>'ok','message'=>'Scores successfully saved'], 200);
         // }
