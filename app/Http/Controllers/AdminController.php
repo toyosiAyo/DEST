@@ -375,7 +375,10 @@ class AdminController extends Controller
 
     public function enterScore(Request $request){
         try{
-            foreach($request->scores as $index => $value){ 
+            $setting = app('App\Http\Controllers\ConfigController')->settings($request);
+            $students = DB::table('registration')->where(['course_code' => $request->course_code, 'settings_id' =>$setting->id])
+                ->get();
+            foreach($students as $index => $value){ 
                 echo $value;
                 // DB::table('registration')->update(
                 //     ['reg_id' =>$check->id , 'course_id' => $value['id'],'course_unit'=>$value['unit'],
