@@ -380,12 +380,26 @@ class AdminController extends Controller
             foreach($students as $index => $value){ 
                 $id = $value->student_id;
                 DB::table('registration')->where(['student_id'=>$id, 'course_code' => $request->course_code])->update(
-                    ['score' => $request->$id ]);
+                    ['score' => $request->$id, 'grade' => $this->getGrade($request->$id) ]);
             }
             return response(['status'=>'ok','message'=>'Scores successfully saved'], 200);
         }
         catch (\Throwable $th) {
             return response(['status'=>'Nok','message'=>'Error updating scores'], 500);
+        }
+    }
+
+    public function getGrade($score){
+        if($score >= 70) {
+            return "A";
+        } elseif ($score < 70 && $score > 59) {
+            return "B";
+        } elseif ($score < 60 && $score > 49) {
+            return "C";
+        } elseif ($score < 50 && $score > 39) {
+            return "D";
+        } else {
+            return "F";
         }
     }
 
