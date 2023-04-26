@@ -379,7 +379,7 @@ class AdminController extends Controller
             $students = DB::table('registration')->where(['course_code' => $request->course_code, 'settings_id' =>$setting->id])
                 ->get();
             foreach($students as $index => $value){ 
-                echo $value;
+                print_r($value);
                 // DB::table('registration')->update(
                 //     ['reg_id' =>$check->id , 'course_id' => $value['id'],'course_unit'=>$value['unit'],
                 //     'course_status' => $value['course_status']]);
