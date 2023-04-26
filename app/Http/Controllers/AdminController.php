@@ -375,7 +375,12 @@ class AdminController extends Controller
 
     public function enterScore(Request $request){
         try{
-            return $request->course_code;
+            foreach($request->scores as $index => $value){ 
+                echo $value;
+                // DB::table('registration')->update(
+                //     ['reg_id' =>$check->id , 'course_id' => $value['id'],'course_unit'=>$value['unit'],
+                //     'course_status' => $value['course_status']]);
+            }
             return response(['status'=>'ok','message'=>'Scores successfully saved'], 200);
         }
         catch (\Throwable $th) {
