@@ -49,7 +49,7 @@
                                 @php $i = 1; @endphp
                                 @foreach($students as $student)
                                 <tr>
-                                    <td>{{ $i }} @php $i++ @endphp</td>
+                                    <td>{{ $i }} </td>
                                     <td>{{ $student->surname.' '.$student->first_name }}</td>
                                     <td>{{ $student->course_code }}</td>
                                     <td>{{ $student->programme }}</td>
@@ -61,10 +61,11 @@
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <input class="form-control form-control-md grade" value="{{ $student->grade }}" type="text" size="1" readonly>
+                                            <input id="{{$i}}" class="form-control form-control-md grade" value="{{ $student->grade }}" type="text" size="1" readonly>
                                         </div>
                                     </td>
-                                </tr>   
+                                </tr> 
+                                @php $i++ @endphp  
                                 @endforeach                            
                             </tbody>
                         </table>
