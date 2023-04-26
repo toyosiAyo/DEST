@@ -374,7 +374,7 @@ class AdminController extends Controller
     }
 
     public function enterScore(Request $request){
-        try{
+        //try{
             $setting = app('App\Http\Controllers\ConfigController')->settings($request);
             $students = DB::table('registration')->where(['course_code' => $request->course_code, 'settings_id' =>$setting->id])
                 ->get();
@@ -385,10 +385,10 @@ class AdminController extends Controller
                 //     'course_status' => $value['course_status']]);
             }
             return response(['status'=>'ok','message'=>'Scores successfully saved'], 200);
-        }
-        catch (\Throwable $th) {
-            return response(['status'=>'Nok','message'=>'Error creating lecturer'], 500);
-        }
+        // }
+        // catch (\Throwable $th) {
+        //     return response(['status'=>'Nok','message'=>'Error updating scores'], 500);
+        // }
     }
 
     public function postEvents(Request $request){
