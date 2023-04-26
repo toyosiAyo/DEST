@@ -321,4 +321,26 @@ $(document).ready(function ($) {
             },
         });
     });
+
+    $(".scoreTable").on("focusout", ".score", function () {
+        const score = $(this).val();
+        const grade = getGrade(score);
+        const tr = $(this).closest("tr");
+        const current_row = tr.index() + 1;
+        $("#" + current_row).val(grade);
+    });
+
+    const getGrade = (score) => {
+        if (score >= 70) {
+            return "A";
+        } else if (score < 70 && score > 59) {
+            return "B";
+        } else if (score < 60 && score > 49) {
+            return "C";
+        } else if (score < 50 && score > 39) {
+            return "D";
+        } else {
+            return "F";
+        }
+    };
 });
