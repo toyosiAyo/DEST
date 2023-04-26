@@ -375,6 +375,7 @@ class AdminController extends Controller
 
     public function enterScore(Request $request){
         try{
+            return $request->course_code;
             return response(['status'=>'ok','message'=>'Scores successfully saved'], 200);
         }
         catch (\Throwable $th) {
