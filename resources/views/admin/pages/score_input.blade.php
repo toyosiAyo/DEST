@@ -33,7 +33,7 @@
 
                     <div class="table-responsive mb-4">
                     <form method="post" id="inputScoreForm">
-                        <table id="tblScoreInput" class="table align-middle datatable dt-responsive table-check nowrap" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+                        <table id="tblScoreInput" class="table align-middle datatable dt-responsive table-check nowrap scoreTable" style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
                             <thead>
                                 <tr>
                                 <th scope="col">S/N</th>
@@ -56,10 +56,14 @@
                                     <td>{{ $student->app_type }}</td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <input class="form-control form-control-md" value="{{ $student->score }}" name="{{$student->stud_id}}" type="text" required>
+                                            <input class="form-control form-control-md score" value="{{ $student->score }}" name="{{$student->stud_id}}" type="text" required>
                                         </div>
                                     </td>
-                                    <td>{{ $student->grade }}</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <input class="form-control form-control-md grade" value="{{ $student->grade }}" type="text" size="1" readonly>
+                                        </div>
+                                    </td>
                                 </tr>   
                                 @endforeach                            
                             </tbody>
