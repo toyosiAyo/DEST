@@ -112,6 +112,8 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('viewRegCourses',[AdminController::class,'viewRegisteredCourses']);
     Route::get('admin/lecturers',[AdminController::class,'viewLecturers'])->name('view_lecturers');
     Route::get('admin/score_input',[AdminController::class,'viewRegPerProgramme'])->name('score_input');
+    Route::get('admin/results',[AdminController::class,'viewResults'])->name('view_results');
+
     Route::get('admin/advance',function(){ return view('admin/pages/form-advanced'); });
 
 });
