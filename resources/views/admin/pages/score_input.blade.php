@@ -71,7 +71,8 @@
                         </table>
                         <div class="btn-group" role="group">
                             <input type="text" name="course_code" value="{{$student->course_code}}" hidden>
-                            <button type="submit" id="btnScoreInput" class="btn btn-primary">Submit</button>    
+                            <button type="submit" id="btnScoreInput" class="btn btn-danger">Submit</button>    
+                            <hr>
                         </div>
                         </form>
                         <!-- end table -->
