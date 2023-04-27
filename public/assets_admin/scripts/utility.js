@@ -329,6 +329,7 @@ $(document).ready(function ($) {
         const current_row = tr.index() + 1;
         $("#" + current_row).val(grade);
         console.log(grade);
+        console.log(current_row);
     });
 
     const getGrade = (score) => {
