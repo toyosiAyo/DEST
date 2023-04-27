@@ -323,13 +323,15 @@ $(document).ready(function ($) {
     });
 
     $(".scoreTable").on("focusout", ".score", function () {
+        const id = $(this).data("id");
         const score = $(this).val();
         const grade = getGrade(score);
         const tr = $(this).closest("tr");
         const current_row = tr.index() + 1;
-        $("#" + current_row).val(grade);
+        $("#" + id).val(grade);
         console.log(grade);
         console.log(current_row);
+        console.log(id);
     });
 
     const getGrade = (score) => {
