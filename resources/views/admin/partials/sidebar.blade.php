@@ -24,7 +24,7 @@
                 </li>
                 <li>
                     <a href="{{route('view_lecturers')}}">
-                        <i data-feather="user"></i>
+                        <i data-feather="user-plus"></i>
                         <span>Lecturers</span>
                     </a>
                 </li>
@@ -68,6 +68,12 @@
                     <a href="{{route('view_registration')}}">
                         <i data-feather="file-text"></i>
                         <span>Course Registration</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('view_results')}}">
+                        <i data-feather="layers"></i>
+                        <span>Results</span>
                     </a>
                 </li>
                 @endif
