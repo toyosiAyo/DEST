@@ -356,6 +356,12 @@ class AdminController extends Controller
         return view('admin.pages.lecturers',['count'=>$count,'courses'=>$courses, 'lecturers'=>$lecturers,'data'=>$data]);
     }
 
+    public function viewResults(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
+        $setting = app('App\Http\Controllers\ConfigController')->settings($request);
+        return view('admin.pages.view_results',['data'=>$data]);
+    }
+
     public function createLecturers(Request $request){
         try{
             $check = DB::table('admin')->where('email',$request->email)->first();
