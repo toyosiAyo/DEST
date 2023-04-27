@@ -47,9 +47,19 @@ $(document).ready(function ($) {
                 success: function (response) {
                     console.log(response);
                     toastr["success"](response.message);
-                    setTimeout(function () {
-                        window.location.href = "admin/dashboard";
-                    }, 2800);
+                    if (
+                        response.role === "director" ||
+                        response.role === "admin" ||
+                        response.role === "accountant"
+                    ) {
+                        setTimeout(function () {
+                            window.location.href = "admin/dashboard";
+                        }, 2800);
+                    } else {
+                        setTimeout(function () {
+                            window.location.href = "admin/score_input";
+                        }, 2800);
+                    }
                 },
                 error: function (response) {
                     console.log(response);

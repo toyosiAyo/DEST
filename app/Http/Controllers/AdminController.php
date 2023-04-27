@@ -138,7 +138,7 @@ class AdminController extends Controller
        else{
             if(Hash::check($request->password,$app->password)){
                 $request->session()->put('user',$app->email);
-                return response()->json(['status'=>'ok','message'=>'Login was successful'], 200);
+                return response()->json(['status'=>'ok','message'=>'Login was successful','role' => $app->role], 200);
             }
             else{
                 return response()->json(['status'=>'Nok','message'=>'Wrong Credentilas'], 401);
