@@ -171,7 +171,7 @@ class ConfigController extends Controller
 public function auth_user($email){
  try {
     $data =  DB::table('applicants')->select('id','email',
-    'surname','first_name','other_name',
+    'surname','first_name','other_name','matric_number',
     'phone','gender','dob','religion',
     'marital_status','disability',
     'address_resident','city_resident','state_resident',
