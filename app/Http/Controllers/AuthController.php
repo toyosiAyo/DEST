@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -253,6 +254,7 @@ class AuthController extends Controller
 
 
     public function logout(){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
         if(session()->has('user')){
             DB::table('applicants')->where('email', Auth::user()->email)->update(['status' => 'applicant']);
             session()->pull('user');
