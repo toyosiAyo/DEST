@@ -103,6 +103,7 @@ class AuthController extends Controller
         }
         else{
             if(Hash::check($request->student_password,$user->password)){
+                DB::table('applicants')->where('email', $request->student_email)->update(['status' => 'student']);
                 $request->session()->put('user',$app->submitted_by);
                 return response(['status'=>'ok','message'=>'Login was successful','user'=>$app], 200);
             }
@@ -253,6 +254,7 @@ class AuthController extends Controller
 
     public function logout(){
         if(session()->has('user')){
+            DB::table('applicants')->where('email', Auth::user()->email)->update(['status' => 'applicant']);
             session()->pull('user');
             if (isset($_COOKIE['pin']) && isset($_COOKIE['app_type'])) {
                 unset($_COOKIE['pin']); setcookie('pin', '', time() - 3600, '/');
