@@ -1,7 +1,7 @@
-@if($data->status == 'applicant')
-    @extends("layouts.master") 
-@else
+@if($data->status == 'student')
     @extends("layouts.master_student") 
+@else
+    @extends("layouts.master") 
 @endif
 
 
