@@ -1,4 +1,9 @@
-@extends("layouts.master") 
+@if($data->status == 'applicant')
+    @extends("layouts.master") 
+@else
+    @extends("layouts.master_student") 
+@endif
+
 
   @section("title")
       Profile

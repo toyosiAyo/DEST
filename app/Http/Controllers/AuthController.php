@@ -111,29 +111,27 @@ class AuthController extends Controller
             else{
                 return response(['status'=>'Nok','message'=>'Login failed... Incorrect password'], 401);
             }
-       }
+        }
     }
 
     public function applicant_dashboard(Request $request){
-       
-            try {
-                $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-                $applications = DB::table('applications')->select('*','first_choice->prog as Programme')
-                ->where('submitted_by', $data->email)->latest()->get();
-                $count = count($applications);
-                $success = DB::table('applications')->where([
-                    ['submitted_by', $data->email],
-                    ['status', 'success'],
-                ])->count();
-                $pending = DB::table('applications')->where([
-                    ['submitted_by', $data->email],
-                    ['status', 'pending'],
-                ])->count();
-                return view('pages.home',['apps'=>$applications,'count'=>$count,'success'=>$success,'pending'=>$pending])->with('data', $data);
-            } catch (\Throwable $th) {
-                return back()->with('applicant_dashboard','applicant_dashboard');
-            }  
-       
+        try {
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            $applications = DB::table('applications')->select('*','first_choice->prog as Programme')
+            ->where('submitted_by', $data->email)->latest()->get();
+            $count = count($applications);
+            $success = DB::table('applications')->where([
+                ['submitted_by', $data->email],
+                ['status', 'success'],
+            ])->count();
+            $pending = DB::table('applications')->where([
+                ['submitted_by', $data->email],
+                ['status', 'pending'],
+            ])->count();
+            return view('pages.home',['apps'=>$applications,'count'=>$count,'success'=>$success,'pending'=>$pending])->with('data', $data);
+        } catch (\Throwable $th) {
+            return back()->with('applicant_dashboard','applicant_dashboard');
+        }  
     }
 
     public function studentDashboard(Request $request){
@@ -152,11 +150,8 @@ class AuthController extends Controller
         return view('student.dashboard',['apps'=>$applications,'count'=>$count,'success'=>$success,'pending'=>$pending])->with('data', $data);
     }
 
-
-
     public function password_reset(Request $request){
         $request->validate(['password'=>'required|confirmed|min:4|max:8', 'current_pass'=>'required|min:4|max:8',]) ;
-
         try {
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user')); 
             $user_obj = Applicant::findOrFail($data->id);
@@ -164,46 +159,43 @@ class AuthController extends Controller
                 $user_obj->password = Hash::make($request->password);
                 $user_obj->save();
                 return response()->json(['status'=>'ok','msg'=>"Password reset successfully!"],201); 
-               }else{
+            }
+            else{
                 return response()->json(['status'=>'Nok','msg'=>"Your old password isn't match!"],401); 
-                }
+            }
         } catch (\Throwable $th) {
             return response()->json(['status'=>'Nok','msg'=>'failed reseting password'],401); 
         }
     }
 
-
     public function forgot_password(){
-
         return view('auth.forgot-password');
     }
-
 
     public function forgot_password_post(Request $request){
         $request->validate(['email'=>'required|email',]) ;
         try {
-          $app = Applicant::where('email',$request->email)->first();
-          if(!empty($app)){
-              $auto_pass = app('App\Http\Controllers\ConfigController')->generateRandomString(6);
-              $app->password = Hash::make($auto_pass);
-              if($app->save()){
-                $Msg = 'Kindly use this auto-generated password '.$auto_pass.' to login into your portal </br></br>
-                Note: Remeber to change this password!';
-                $Subject = "DEST@REDEEMER's UNIVERSITY Password Reset!";
-                if(app('App\Http\Controllers\ConfigController')->applicant_mail($app,$Subject,$Msg)['status'] == 'ok'){
-                    return redirect('/')->with('pass_reset','Success, Check your email for the new password!');
-                } return back()->with('fail','Error sending email for password reset!');          
+            $app = Applicant::where('email',$request->email)->first();
+            if(!empty($app)){
+                $auto_pass = app('App\Http\Controllers\ConfigController')->generateRandomString(6);
+                $app->password = Hash::make($auto_pass);
+                if($app->save()){
+                    $Msg = 'Kindly use this auto-generated password '.$auto_pass.' to login into your portal </br></br>
+                    Note: Remeber to change this password!';
+                    $Subject = "DEST@REDEEMER's UNIVERSITY Password Reset!";
+                    if(app('App\Http\Controllers\ConfigController')->applicant_mail($app,$Subject,$Msg)['status'] == 'ok'){
+                        return redirect('/')->with('pass_reset','Success, Check your email for the new password!');
+                    } 
+                return back()->with('fail','Error sending email for password reset!');          
               }
-          }
-          return back()->with('fail','Wrong email supplied!');
+            }
+            return back()->with('fail','Wrong email supplied!');
         } catch (\Throwable $th) {
             return back()->with('fail','Email issue with forgot password!');
         }
-
     }
 
     public function account_activate_view(){
-
         return view('auth/verify');
     }
 
@@ -227,15 +219,14 @@ class AuthController extends Controller
         } catch (\Throwable $th) {
             return back()->with('fail','Error verifying account, Supply correct Email!');
         }
-        
     }
+
     public function resend_otp(Request $request){
         $validator = Validator::make($_COOKIE, [ 'email' => 'required|string',]);
         if ($validator->fails()) {
             return back()->with('fail','Email issue!');
         }
         //try {
-          
             $app = Applicant::where('email',$_COOKIE['email'])->first();
             if(!empty($app)){
                 $Msg = app('App\Http\Controllers\ConfigController')->email_msg($code=$app->otp);
@@ -245,13 +236,10 @@ class AuthController extends Controller
                 }               
             }
             return back()->with('fail','Error resending OTP 1 !');
-
         // } catch (\Throwable $th) { 
         //     return back()->with('fail','Error resending OTP 2 ! ');
         // }
-        
     }
-
 
     public function logout(){
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
@@ -266,17 +254,4 @@ class AuthController extends Controller
             return redirect('/');
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
