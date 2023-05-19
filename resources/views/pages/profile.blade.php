@@ -65,7 +65,7 @@
                                                                 <span class="input-group-addon">
                                                                     <i class="icon md-user" aria-hidden="true"></i>
                                                                 </span>
-                                                                <input type="text" value="{{$data->matric_number}}" class="form-control" id="matric" name="matric">
+                                                                <input type="text" value="{{$data->matric_number}}" class="form-control" id="matric" name="matric" required>
                                                             </div>
                                                         </div>
                                                     </div>
