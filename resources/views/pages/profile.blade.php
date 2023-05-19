@@ -59,6 +59,19 @@
                                             <ul class="list-group">
                                                 <li class="list-group-item">
                                                     <div class="form-group row form-material">
+                                                        <label class="col-xl-12 col-md-3 form-control-label">Matric Number</label>
+                                                        <div class="col-xl-12 col-md-9">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">
+                                                                    <i class="icon md-user" aria-hidden="true"></i>
+                                                                </span>
+                                                                <input type="text" value="{{$data->matric_number}}" class="form-control" id="matric" name="matric">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="form-group row form-material">
                                                         <label class="col-xl-12 col-md-3 form-control-label">Email</label>
                                                         <div class="col-xl-12 col-md-9">
                                                             <div class="input-group">

@@ -83,6 +83,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('/receipt/{id}',[ApplicantPaymentController::class,'viewReceipt']);
 
     Route::post('password_reset',[AuthController::class,'password_reset'])->name('password_reset');
+    Route::post('update_profile',[ApplicationController::class,'updateProfile']);
     Route::post('log_new_teller',[RemitaConfig::class,'log_new_teller'])->name('log_new_teller');
 
 
