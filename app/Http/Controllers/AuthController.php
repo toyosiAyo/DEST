@@ -10,11 +10,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('authcheck',['only' => ['password_reset','applicant_dashboard']]);
@@ -22,39 +20,36 @@ class AuthController extends Controller
        // $this->middleware('subscribed')->except('store');
     }
  
-
     public function auth_login(){
         return view('auth.login');
     }
+
     public function register_form(){
-        
         return view('auth.register');
     }
 
-
     public function save_new_account(Request $request){
-            
-         $request->validate([
-             'surname'=>'required|string',
-             'firstname'=>'required|string',
-             'othername'=>'required|string',
-             'phone'=>'required|string|min:8|max:15|unique:applicants,phone',
-             'email'=>'required|email|unique:applicants,email',
-             'password'=>'required|confirmed|min:4|max:8',
-             'gender'=>'required|size:1',
-         ]) ;
-         $num_str = sprintf("%06d", mt_rand(1, 999999));
-         $app = new Applicant;
-         $app->surname = $request->surname;
-         $app->first_name = $request->firstname;
-         $app->other_name = $request->othername;
-         $app->phone = $request->phone;
-         $app->email = $request->email;
-         $app->gender = $request->gender;
-         $app->password = Hash::make($request->password);
-         $app->otp = $num_str;
-         if($app->save()){
-             //setcookie(name, value, expire, path, domain, secure, httponly);
+        $request->validate([
+            'surname'=>'required|string',
+            'firstname'=>'required|string',
+            'othername'=>'required|string',
+            'phone'=>'required|string|min:8|max:15|unique:applicants,phone',
+            'email'=>'required|email|unique:applicants,email',
+            'password'=>'required|confirmed|min:4|max:8',
+            'gender'=>'required|size:1',
+        ]);
+        $num_str = sprintf("%06d", mt_rand(1, 999999));
+        $app = new Applicant;
+        $app->surname = $request->surname;
+        $app->first_name = $request->firstname;
+        $app->other_name = $request->othername;
+        $app->phone = $request->phone;
+        $app->email = $request->email;
+        $app->gender = $request->gender;
+        $app->password = Hash::make($request->password);
+        $app->otp = $num_str;
+        if($app->save()){
+            //setcookie(name, value, expire, path, domain, secure, httponly);
             setcookie('email',$request->email,time()+(84000*30),'/');
             $Msg = app('App\Http\Controllers\ConfigController')->email_msg($code=$num_str);
             $Subject = " DEST@REDEEMER's UNIVERSITY, Email Verification";
@@ -62,12 +57,11 @@ class AuthController extends Controller
                 return redirect('account_activate_view')->with('account_created','Account created successfully, Kindly get OTP sent to your email for account activation!');
             }
             return back()->with('fail','Issue sending mail for account activation!');         
-        }else{
-             return back()->with('fail','Issue creating account');
-         }
+        }
+        else{
+            return back()->with('fail','Issue creating account');
+        }
     }
-
- 
 
     public function auth_check(Request $request){
         $request->validate([
@@ -75,16 +69,22 @@ class AuthController extends Controller
             'password'=>'required|min:4|max:8',
         ]);
         $email_cookie = setcookie('email',$request->email, time() + (86400 * 30), "/");
-       $app = Applicant::where('email',$request->email)->first();
-       if(!$app){return back()->with('fail','We do not recognize the supplied email');}
-       else{
+        $app = Applicant::where('email',$request->email)->first();
+        if(!$app){
+            return back()->with('fail','We do not recognize the supplied email');
+        }
+        else{
             if(empty($app->email_verified_at)){
-                return redirect('account_activate_view')->with('verify',' Kindly supply here, OTP sent to your email for account activation!');}
-           if(Hash::check($request->password,$app->password)){
-            $request->session()->put('user',$app->email);
-            return redirect('dashboard');
-           }else{return back()->with('fail','incorrect email/password!'); }
-       }
+                return redirect('account_activate_view')->with('verify',' Kindly supply here, OTP sent to your email for account activation!');
+            }
+            if(Hash::check($request->password,$app->password)){
+                $request->session()->put('user',$app->email);
+                return redirect('dashboard');
+            }
+            else{
+                return back()->with('fail','incorrect email/password!'); 
+            }
+        }
     }
 
     public function studentLogin(Request $request){
@@ -256,7 +256,7 @@ class AuthController extends Controller
     public function logout(){
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
         if(session()->has('user')){
-            DB::table('applicants')->where('email', Auth::user()->email)->update(['status' => 'applicant']);
+            DB::table('applicants')->where('email', $data->email)->update(['status' => 'applicant']);
             session()->pull('user');
             if (isset($_COOKIE['pin']) && isset($_COOKIE['app_type'])) {
                 unset($_COOKIE['pin']); setcookie('pin', '', time() - 3600, '/');
