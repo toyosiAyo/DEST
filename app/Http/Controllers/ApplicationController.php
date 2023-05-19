@@ -324,7 +324,7 @@ class ApplicationController extends Controller
             return response(['status'=>'failed','message'=>'Matric Number exists already'], 401);  
         }
         DB::table('applicants')->where('email', $request->email)->update(
-            ['phone' => $request->phone, 'matric_number' =>  $request->email,'updated_at' => Carbon::now() ]);
+            ['phone' => $request->phone, 'matric_number' =>  $request->matric,'updated_at' => Carbon::now() ]);
 
         return response(['status'=>'success','message'=>'Profile successfully updated'], 200); 
     }
