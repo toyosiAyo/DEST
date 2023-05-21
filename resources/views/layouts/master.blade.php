@@ -60,7 +60,11 @@
   <!-- Page -->
     @include("partials.navbar")
 
-    @include("partials.sidemenu")
+    @if($data->status == 'student')
+      @include("partials.student_sidemenu")
+    @else
+      @include("partials.sidemenu")
+    @endif
 
     @yield('content')
   <!-- End Page -->
