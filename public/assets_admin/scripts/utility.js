@@ -26,7 +26,6 @@ $(document).ready(function ($) {
     };
 
     $("#btnCurr").click(function (e) {
-        alert("ok");
         e.preventDefault();
         $("#formCurr").validate({
             submitHandler: submitCurrForm,
