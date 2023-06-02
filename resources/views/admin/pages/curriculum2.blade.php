@@ -19,7 +19,7 @@
                     <!-- end page title -->
 
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Create Curriculum</h4>
@@ -109,7 +109,7 @@
                         </div>
                         <!-- end col -->
 
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">Upload Curriculum (Excel)</h4>

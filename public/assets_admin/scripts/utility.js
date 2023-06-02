@@ -25,15 +25,15 @@ $(document).ready(function ($) {
         hideMethod: "fadeOut",
     };
 
-    $("#btnCurr").click(function () {
+    $("#btnCurr").click(function (e) {
         alert("ok");
+        e.preventDefault();
         $("#eventForm").validate({
             submitHandler: submitCurrForm,
             errorClass: "invalid",
         });
 
-        function submitCurrForm(e) {
-            e.preventDefault();
+        function submitCurrForm() {
             var formData = $("#formCurr").serialize();
             var type = "POST";
             var ajaxurl = "/create_curriculum";
