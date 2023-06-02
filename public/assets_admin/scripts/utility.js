@@ -29,7 +29,6 @@ $(document).ready(function ($) {
         e.preventDefault();
         $("#formCurr").validate({
             submitHandler: submitCurrForm,
-            errorClass: "invalid",
         });
 
         function submitCurrForm() {
