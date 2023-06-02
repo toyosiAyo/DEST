@@ -29,7 +29,7 @@
                                     @csrf
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="programme" class="form-label font-size-13 text-muted">Select Programme</label>
                                                 <select class="form-control" data-trigger name="programme"
