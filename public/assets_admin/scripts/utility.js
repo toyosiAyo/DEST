@@ -379,4 +379,46 @@ $(document).ready(function ($) {
             return "F";
         }
     };
+
+    $("#btn_result").click(function () {
+        $("#form_resullt").validate({
+            submitHandler: submitformresullt,
+            errorClass: "invalid",
+        });
+
+        function submitformresullt(e) {
+            var formData = $("#form_resullt").serialize();
+            var type = "POST";
+            var ajaxurl = "/view_result";
+
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: "json",
+                beforeSend: function () {
+                    $("#btn_result").html(
+                        '<i class="fa fa-spinner fa-spin"></i>'
+                    );
+                },
+                success: function (response) {
+                    console.log(response);
+                    $("#btn_result").html(
+                        "<i data-feather='printer'></i> Download"
+                    );
+                    toastr["success"](response.message);
+                    setTimeout(function () {
+                        window.open = "lecturers";
+                    }, 2000);
+                },
+                error: function (response) {
+                    console.log(response);
+                    $("#btn_result").html(
+                        "<i data-feather='printer'></i> Download"
+                    );
+                    toastr["error"](response.responseJSON.message);
+                },
+            });
+        }
+    });
 });

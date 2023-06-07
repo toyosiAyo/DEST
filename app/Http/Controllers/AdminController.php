@@ -444,8 +444,32 @@ class AdminController extends Controller
         }
     }
 
-    public function getRegCoursesAndScores($matric_number){
+    public function getTableHeader($courses){
+        $table_header = '<tr >
+            <th style="text-align: center;width:2px;height: 5px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;"> SN</th>
+            <th style="text-align: center;width:18px;height: 5px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">Matric Number</th>
+            <th style="text-align: center;width:20px;height: 5px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">Names</th>
+            <th style="text-align: center;width:3px;height: 5px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">TUR</th>';
+            foreach ($courses as $course) {
+                $table_header+= '<th  style="text-align: center;height: 20px;padding:0px;margin:0;overflow:hidden;white-space:nowrap;">
+                <div  >'+  $course->course_code +'
+                <h6 style="white-space:nowrap;padding:1px;margin:0;"> '+ $course->unit+'</h6>
+                <h6>' + $course->status +'</h6>
+                </div></th>';
+                $table_header += '</tr>';
+            }
+        return $table_header;
+    }
 
+    public function getHtmlResult(Request $request){
+        $students = $this->getRegisteredStudents($request);
+        return $students;
+    }
+
+    public function getRegCoursesAndScores($request,$matric_number){
+        $settings = $this->getSessionSettings($request);
+        $courses = DB::table('registration')->where(['student_id'=>$matric_number,'settings_id' => $settings])->get();
+        return $courses;
     }
 
     //per faculty
