@@ -465,7 +465,7 @@ class AdminController extends Controller
         $students = $this->getRegisteredStudents($request);
         $courses = [];
         foreach ($students as $key => $value) {
-            $courses[] = $this->getRegCoursesAndScores($value->student_id);
+            $courses[] = $this->getRegCoursesAndScores($request,$value->student_id);
         }
         return $courses;
     }
