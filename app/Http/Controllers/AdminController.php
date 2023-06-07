@@ -463,7 +463,9 @@ class AdminController extends Controller
 
     public function getHtmlResult(Request $request){
         $students = $this->getRegisteredStudents($request);
-        return $students;
+        foreach ($students as $key => $value) {
+            return $key;
+        }
     }
 
     public function getRegCoursesAndScores($request,$matric_number){
@@ -477,7 +479,7 @@ class AdminController extends Controller
         $settings = $this->getSessionSettings($request);
         $students = DB::table('registration')->join('applicants', 'registration.student_id', '=', 'applicants.id')
             ->join('applications', 'applicants.email', '=', 'applications.submitted_by')
-            ->select('applicants.surname', 'applicants.first_name', 'applicants.other_name', 'applicants.matric_number')
+            ->select('registration.student_id','applicants.surname', 'applicants.first_name', 'applicants.other_name', 'applicants.matric_number')
             ->where(['applications.first_choice->faculty' => $request->faculty, 'applications.status' => 'admitted',
                 'registration.settings_id' => $settings])->groupBy('registration.student_id')->get();
         return $students;
