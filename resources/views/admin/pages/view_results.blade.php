@@ -37,6 +37,14 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3">
+                                                <label for="faculty" class="form-label font-size-13 text-muted">Select Faculty</label>
+                                                <select class="form-control" name="faculty" id="faculty">
+                                                    @foreach($faculty as $fac)
+                                                        <option value="{{$fac->college}}">{{$fac->college}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
                                                 <label for="session" class="form-label font-size-13 text-muted">Select Session</label>
                                                 <select class="form-control" name="session" id="session">
                                                     <option value="2022/2023">2022/2023</option>
@@ -45,8 +53,8 @@
                                             <div class="mb-3">
                                                 <label for="semester" class="form-label font-size-13 text-muted">Select Semester</label>
                                                 <select class="form-control" name="semester" id="semester">
-                                                    <option value="first">First Semester</option>
-                                                    <option value="second">Second Semester</option>
+                                                    <option value="1">First Semester</option>
+                                                    <option value="2">Second Semester</option>
                                                 </select>
                                             </div>
                                             <button id="btn_result" type="submit" class="btn btn-danger"><i data-feather="printer"></i> Download</button>

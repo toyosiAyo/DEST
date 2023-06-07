@@ -358,8 +358,9 @@ class AdminController extends Controller
 
     public function viewResults(Request $request){
         $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
+        $faculties = DB::table('faculty')->select('college')->get();
         $setting = app('App\Http\Controllers\ConfigController')->settings($request);
-        return view('admin.pages.view_results',['data'=>$data]);
+        return view('admin.pages.view_results',['data'=>$data, 'faculty'=>$faculties]);
     }
 
     public function createLecturers(Request $request){
@@ -434,7 +435,6 @@ class AdminController extends Controller
     }
 
 
-
     public function get_delivery_msg($data){
         try {
             return "Kindly find attached, Admission letter for
@@ -442,6 +442,26 @@ class AdminController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
         }
+    }
+
+    public function getRegCoursesAndScores($matric_number){
+
+    }
+
+    //per faculty
+    public function getRegisteredStudents($request){
+        $settings = $this->getSessionSettings($request);
+        $students = DB::table('registration')->join('applicants', 'registration.student_id', '=', 'applicants.id')
+            ->join('applications', 'applicants.email', '=', 'applications.submitted_by')
+            ->select('applicants.surname', 'applicants.first_name', 'applicants.other_name', 'applicants.matric_number')
+            ->where(['applications.first_choice->faculty' => $request->faculty, 'applications.status' => 'admitted',
+                'registration.settings_id' => $settings])->get();
+        return $students;
+    }
+
+    public function getSessionSettings(Request $request){
+        $settings = DB::table('settings')->where(['session'=>$request->session,'semester_code'=>$request->semester])->first();
+        return $settings->id;
     }
 
 
