@@ -406,10 +406,10 @@ $(document).ready(function ($) {
                     $("#btn_result").html(
                         "<i data-feather='printer'></i> Download"
                     );
-                    toastr["success"](response.message);
-                    setTimeout(function () {
-                        window.open = "lecturers";
-                    }, 2000);
+                    // toastr["success"](response.message);
+                    // setTimeout(function () {
+                    //     window.open = "lecturers";
+                    // }, 2000);
                 },
                 error: function (response) {
                     console.log(response);
