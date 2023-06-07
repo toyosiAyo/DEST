@@ -463,9 +463,11 @@ class AdminController extends Controller
 
     public function getHtmlResult(Request $request){
         $students = $this->getRegisteredStudents($request);
+        $courses = [];
         foreach ($students as $key => $value) {
-            return $value;
+            $courses[] = $this->getRegCoursesAndScores($value->student_id);
         }
+        return $courses;
     }
 
     public function getRegCoursesAndScores($request,$matric_number){
