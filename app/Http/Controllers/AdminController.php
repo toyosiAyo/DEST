@@ -469,8 +469,8 @@ class AdminController extends Controller
             array_push($courses,$stud_courses);
         }
         //$courses = $this->getRegCoursesAndScores($request,$students[0]->student_id);
-        $table_header = $this->getTableHeader($courses);
-        return $table_header;
+        //$table_header = $this->getTableHeader($courses);
+        return $courses;
     }
 
     public function getRegCoursesAndScores($request,$matric_number){
