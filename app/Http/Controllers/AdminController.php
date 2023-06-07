@@ -451,12 +451,12 @@ class AdminController extends Controller
             <th style="text-align: center;width:20px;height: 5px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">Names</th>
             <th style="text-align: center;width:3px;height: 5px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">TUR</th>';
             foreach ($courses as $course) {
-                $table_header+= '<th  style="text-align: center;height: 20px;padding:0px;margin:0;overflow:hidden;white-space:nowrap;">
+                $table_header .= '<th  style="text-align: center;height: 20px;padding:0px;margin:0;overflow:hidden;white-space:nowrap;">
                 <div  >'.$course->course_code.'
                 <h6 style="white-space:nowrap;padding:1px;margin:0;"> '.$course->unit.'</h6>
-                <h6>' .$course->unit.'</h6>
+                <h6>'.$course->unit.'</h6>
                 </div></th>';
-                $table_header += '</tr>';
+                $table_header .= '</tr>';
             }
         return $table_header;
     }
