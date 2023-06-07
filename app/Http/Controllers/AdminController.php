@@ -479,7 +479,7 @@ class AdminController extends Controller
             ->join('applications', 'applicants.email', '=', 'applications.submitted_by')
             ->select('applicants.surname', 'applicants.first_name', 'applicants.other_name', 'applicants.matric_number')
             ->where(['applications.first_choice->faculty' => $request->faculty, 'applications.status' => 'admitted',
-                'registration.settings_id' => $settings])->get();
+                'registration.settings_id' => $settings])->groupBy('registration.student_id')->get();
         return $students;
     }
 
