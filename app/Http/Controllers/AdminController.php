@@ -464,7 +464,7 @@ class AdminController extends Controller
     public function getHtmlResult(Request $request){
         $students = $this->getRegisteredStudents($request);
         foreach ($students as $key => $value) {
-            return $key;
+            return $value;
         }
     }
 
