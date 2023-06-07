@@ -467,7 +467,7 @@ class AdminController extends Controller
         // foreach ($students as $key => $value) {
         //     $courses[] = $this->getRegCoursesAndScores($request,$value->student_id);
         // }
-        $courses = $this->getRegCoursesAndScores($request,$student_id[0]);
+        $courses = $this->getRegCoursesAndScores($request,$students[0]->student_id);
         $table_header = $this->getTableHeader($courses);
         return $table_header;
     }
