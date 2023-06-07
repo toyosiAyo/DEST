@@ -109,6 +109,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::post('create_event',[AdminController::class,'postEvents']);
     Route::post('create_curriculum',[AdminController::class,'create_curriculum']);
     Route::post('create_lecturer',[AdminController::class,'createLecturers']);
+    Route::post('view_result',[AdminController::class,'getHtmlResult']);
     Route::post('enter_score',[AdminController::class,'enterScore']);
     Route::post('app_actions',[AdminController::class,'app_actions']);
     Route::get('viewRegCourses',[AdminController::class,'viewRegisteredCourses']);
@@ -117,7 +118,6 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('admin/results',[AdminController::class,'viewResults'])->name('view_results');
 
     Route::get('admin/advance',function(){ return view('admin/pages/form-advanced'); });
-
 });
 
 //******************************************************Admin Normal Route******************************************************
