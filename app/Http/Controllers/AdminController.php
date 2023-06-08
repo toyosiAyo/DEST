@@ -472,7 +472,11 @@ class AdminController extends Controller
         //$courses = $this->getRegCoursesAndScores($request,$students[0]->student_id);
         //$table_header = $this->getTableHeader($courses);
         //return array_unique($courses);
-        return collect($courses)->unique('course_code')->all();
+        $courses = $courses->map(function ($array) {
+            return collect($array)->unique('course_code')->all();
+        });
+        return $courses;
+        //return collect($courses)->unique('course_code')->all();
     }
 
     public function getRegCoursesAndScores($request,$matric_number){
