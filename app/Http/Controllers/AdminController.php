@@ -465,7 +465,7 @@ class AdminController extends Controller
         $students = $this->getRegisteredStudents($request);
         $courses = [];
         foreach ($students as $key => $value) {
-            $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
+            $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id)['course_codes'];
             array_push($courses,$stud_courses);
         }
         //$courses = $this->getRegCoursesAndScores($request,$students[0]->student_id);
@@ -476,7 +476,8 @@ class AdminController extends Controller
     public function getRegCoursesAndScores($request,$matric_number){
         $settings = $this->getSessionSettings($request);
         $courses = DB::table('registration')->where(['student_id'=>$matric_number,'settings_id' => $settings])->get();
-        return $courses;
+        $course_codes = DB::table('registration')->where(['student_id'=>$matric_number,'settings_id' => $settings])->pluck('course_code');
+        return ['course'=>$courses, 'course_codes'=>$course_codes];
     }
 
     //per faculty
