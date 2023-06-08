@@ -473,10 +473,16 @@ class AdminController extends Controller
         //$table_header = $this->getTableHeader($courses);
         //return array_unique($courses);
         $courses = collect($courses);
-        $courses = $courses->map(function ($array) {
-            return collect($array)->unique('course_code')->all();
+        // $courses = $courses->map(function ($array) {
+        //     return collect($array)->unique('course_code')->all();
+        // });
+
+        $uniquecourses = $courses->unique(function ($item) {
+            return $item['course_code'];
         });
-        return $courses;
+
+        $uniquecourses->all();
+        return $uniquecourses;
         //return collect($courses)->unique('course_code')->all();
     }
 
