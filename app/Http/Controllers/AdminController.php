@@ -465,12 +465,14 @@ class AdminController extends Controller
         $students = $this->getRegisteredStudents($request);
         $courses = [];
         foreach ($students as $key => $value) {
-            $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id)['course_codes'];
+            //$stud_courses = $this->getRegCoursesAndScores($request,$value->student_id)['course_codes'];
+            $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id)['course'];
             array_push($courses,$stud_courses);
         }
         //$courses = $this->getRegCoursesAndScores($request,$students[0]->student_id);
         //$table_header = $this->getTableHeader($courses);
-        return array_unique($courses);
+        //return array_unique($courses);
+        return $courses->unique();
     }
 
     public function getRegCoursesAndScores($request,$matric_number){
