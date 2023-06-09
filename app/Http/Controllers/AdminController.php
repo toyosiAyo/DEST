@@ -469,22 +469,25 @@ class AdminController extends Controller
             $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id)['course'];
             array_push($courses,$stud_courses);
         }
+        collect($courses)->flatten(1)->unique(function ($item) {
+            return $item['course_code'];
+        });
         //$courses = $this->getRegCoursesAndScores($request,$students[0]->student_id);
         //$table_header = $this->getTableHeader($courses);
-        return array_unique($courses);
-        // Flatten the array of arrays into a single array
-        $flattenedArray = array_merge(...$courses);
-        // Extract unique values from the 'course_code' key
-        $uniqueValues = array_unique(array_column($flattenedArray, 'course_code'));
-        // Create an array of objects based on unique values
-        $arrayOfObjects = [];
-        foreach ($uniqueValues as $value) {
-            $objects = array_filter($flattenedArray, function ($item) use ($value) {
-                return $item['course_code'] === $value;
-            });
 
-            $arrayOfObjects[] = (object) $objects;
-        }
+        // Flatten the array of arrays into a single array
+        // $flattenedArray = array_merge(...$courses);
+        // Extract unique values from the 'course_code' key
+        // $uniqueValues = array_unique(array_column($flattenedArray, 'course_code'));
+        // Create an array of objects based on unique values
+        // $arrayOfObjects = [];
+        // foreach ($uniqueValues as $value) {
+        //     $objects = array_filter($flattenedArray, function ($item) use ($value) {
+        //         return $item['course_code'] === $value;
+        //     });
+
+        //     $arrayOfObjects[] = (object) $objects;
+        // }
 
 
         // $uniqueValues = array_unique(array_column($courses, 'course_code'));
@@ -496,7 +499,7 @@ class AdminController extends Controller
             
         //     $arrayOfObjects[] = (object) $objects;
         // }
-        return $arrayOfObjects;
+        // return $arrayOfObjects;
         // $courses = collect($courses);
         // $uniquecourses = $courses->map(function ($array) {
         //     return collect($array)->unique('course_code')->all();
