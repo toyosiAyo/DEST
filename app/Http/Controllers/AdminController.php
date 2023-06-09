@@ -454,7 +454,7 @@ class AdminController extends Controller
                 $table_header .= '<th  style="text-align: center;height: 20px;padding:0px;margin:0;overflow:hidden;white-space:nowrap;">
                 <div  >'.$course->course_code.'
                 <h6 style="white-space:nowrap;padding:1px;margin:0;"> '.$course->unit.'</h6>
-                <h6>'.$course->unit.'</h6>
+                <h6>'.$course->status.'</h6>
                 </div></th>';
                 $table_header .= '</tr>';
             }
@@ -471,28 +471,15 @@ class AdminController extends Controller
         $unique = collect($courses)->flatten(1)->unique(function ($item) {
             return $item->course_code;
         });
-        //$courses = $this->getRegCoursesAndScores($request,$students[0]->student_id);
         $table_header = $this->getTableHeader($unique);
         return $table_header;
-
-        // Flatten the array of arrays into a single array
-        // $flattenedArray = array_merge(...$courses);
-        // Extract unique values from the 'course_code' key
-        // $uniqueValues = array_unique(array_column($flattenedArray, 'course_code'));
-        // Create an array of objects based on unique values
-        // $arrayOfObjects = [];
-        // foreach ($uniqueValues as $value) {
-        //     $objects = array_filter($flattenedArray, function ($item) use ($value) {
-        //         return $item['course_code'] === $value;
-        //     });
-
-        //     $arrayOfObjects[] = (object) $objects;
-        // }
     }
 
     public function getRegCoursesAndScores($request,$matric_number){
         $settings = $this->getSessionSettings($request);
-        $courses = DB::table('registration')->where(['student_id'=>$matric_number,'settings_id' => $settings])->get();
+        $courses = DB::table('registration')->join('courses', 'registration.course_code', '=', 'courses.course_code')
+        ->select('registration.*','courses.status')
+        ->where(['student_id'=>$matric_number,'settings_id' => $settings])->get();
         return $courses;
     }
 
