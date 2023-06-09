@@ -469,9 +469,10 @@ class AdminController extends Controller
             $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id)['course'];
             array_push($courses,$stud_courses);
         }
-        collect($courses)->flatten(1)->unique(function ($item) {
+        $unique = collect($courses)->flatten(1)->unique(function ($item) {
             return $item;
         });
+        return $unique;
         //$courses = $this->getRegCoursesAndScores($request,$students[0]->student_id);
         //$table_header = $this->getTableHeader($courses);
 
