@@ -461,6 +461,33 @@ class AdminController extends Controller
         return $table_header;
     }
 
+    public function getPageHeader($request){
+        return  '<div class="page"> 
+                    <div class="header">
+                        <img src="../assets/images/run_logo.png" class="logo"/>
+                        <h1>REDEEMER\'S UNIVERSITY</h1>
+                        <h5>DIRECTORATE OF EDUCATIONAL SERVICES AND TRAINING</h5>
+                        <table>
+                            <tr>
+                                <td style="text-align: left">FACULTY OF: <strong>'.$request->faculty.'</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">PROGRAMME: <strong>FOUNDATION</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left">SESSION: <strong>'.$request->session.'</strong></td>
+                                <td style="text-align: left">SEMESTER: <strong>'.$request->semester.'</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+                <div class="header2">
+                </div>';
+    }
+
+    public function getSummaryTable(){
+        
+    }
+
     public function getHtmlResult(Request $request){
         $students = $this->getRegisteredStudents($request);
         $courses = [];
@@ -472,7 +499,7 @@ class AdminController extends Controller
             return $item->course_code;
         });
         $table_header = $this->getTableHeader($unique);
-        return $table_header;
+        return view('result.master_sheet',['data'=>$data]);
     }
 
     public function getRegCoursesAndScores($request,$matric_number){
