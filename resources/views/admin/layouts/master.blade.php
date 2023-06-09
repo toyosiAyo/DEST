@@ -5,8 +5,8 @@
         <meta charset="utf-8" />
         <title>@yield('title')</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="ICOBA WORLD" name="description" />
-        <meta content="ICOBA" name="author" />
+        <meta content="RUN DEST" name="description" />
+        <meta content="DEST" name="author" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- App favicon -->
         <link rel="shortcut icon" href="../assets/images/run_logo.png">
