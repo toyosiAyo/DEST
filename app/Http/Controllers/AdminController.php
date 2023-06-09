@@ -472,15 +472,31 @@ class AdminController extends Controller
         //$courses = $this->getRegCoursesAndScores($request,$students[0]->student_id);
         //$table_header = $this->getTableHeader($courses);
         //return array_unique($courses);
-        $uniqueValues = array_unique(array_column($courses, 'course_code'));
+
+        // Flatten the array of arrays into a single array
+        $flattenedArray = array_merge(...$courses);
+        // Extract unique values from the 'course_code' key
+        $uniqueValues = array_unique(array_column($flattenedArray, 'course_code'));
+        // Create an array of objects based on unique values
         $arrayOfObjects = [];
         foreach ($uniqueValues as $value) {
-            $objects = array_filter($arrayOfArrays, function ($item) use ($value) {
-                return $item['course_code'] === $value;
+            $objects = array_filter($flattenedArray, function ($item) use ($value) {
+                return $item['name'] === $value;
             });
-            
+
             $arrayOfObjects[] = (object) $objects;
         }
+
+
+        // $uniqueValues = array_unique(array_column($courses, 'course_code'));
+        // $arrayOfObjects = [];
+        // foreach ($uniqueValues as $value) {
+        //     $objects = array_filter($arrayOfArrays, function ($item) use ($value) {
+        //         return $item['course_code'] === $value;
+        //     });
+            
+        //     $arrayOfObjects[] = (object) $objects;
+        // }
         return $arrayOfObjects;
         // $courses = collect($courses);
         // $uniquecourses = $courses->map(function ($array) {
