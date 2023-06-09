@@ -465,8 +465,7 @@ class AdminController extends Controller
         $students = $this->getRegisteredStudents($request);
         $courses = [];
         foreach ($students as $key => $value) {
-            //$stud_courses = $this->getRegCoursesAndScores($request,$value->student_id)['course_codes'];
-            $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id)['course'];
+            $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
             array_push($courses,$stud_courses);
         }
         $unique = collect($courses)->flatten(1)->unique(function ($item) {
@@ -474,7 +473,7 @@ class AdminController extends Controller
         });
         return $unique;
         //$courses = $this->getRegCoursesAndScores($request,$students[0]->student_id);
-        //$table_header = $this->getTableHeader($courses);
+        $table_header = $this->getTableHeader($unique);
 
         // Flatten the array of arrays into a single array
         // $flattenedArray = array_merge(...$courses);
@@ -489,32 +488,12 @@ class AdminController extends Controller
 
         //     $arrayOfObjects[] = (object) $objects;
         // }
-
-
-        // $uniqueValues = array_unique(array_column($courses, 'course_code'));
-        // $arrayOfObjects = [];
-        // foreach ($uniqueValues as $value) {
-        //     $objects = array_filter($arrayOfArrays, function ($item) use ($value) {
-        //         return $item['course_code'] === $value;
-        //     });
-            
-        //     $arrayOfObjects[] = (object) $objects;
-        // }
-        // return $arrayOfObjects;
-        // $courses = collect($courses);
-        // $uniquecourses = $courses->map(function ($array) {
-        //     return collect($array)->unique('course_code')->all();
-        // });   
-
-        // return $uniquecourses;
-        //return collect($courses)->unique('course_code')->all();
     }
 
     public function getRegCoursesAndScores($request,$matric_number){
         $settings = $this->getSessionSettings($request);
         $courses = DB::table('registration')->where(['student_id'=>$matric_number,'settings_id' => $settings])->get();
-        $course_codes = DB::table('registration')->where(['student_id'=>$matric_number,'settings_id' => $settings])->pluck('course_code');
-        return ['course'=>$courses, 'course_codes'=>$course_codes];
+        return $courses;
     }
 
     //per faculty
