@@ -480,7 +480,7 @@ class AdminController extends Controller
         $arrayOfObjects = [];
         foreach ($uniqueValues as $value) {
             $objects = array_filter($flattenedArray, function ($item) use ($value) {
-                return $item['name'] === $value;
+                return $item['course_code'] === $value;
             });
 
             $arrayOfObjects[] = (object) $objects;
