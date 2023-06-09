@@ -471,9 +471,9 @@ class AdminController extends Controller
         $unique = collect($courses)->flatten(1)->unique(function ($item) {
             return $item->course_code;
         });
-        return $unique;
         //$courses = $this->getRegCoursesAndScores($request,$students[0]->student_id);
         $table_header = $this->getTableHeader($unique);
+        return $table_header;
 
         // Flatten the array of arrays into a single array
         // $flattenedArray = array_merge(...$courses);
