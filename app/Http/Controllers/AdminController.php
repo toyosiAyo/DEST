@@ -467,12 +467,11 @@ class AdminController extends Controller
         foreach ($students as $key => $value) {
             //$stud_courses = $this->getRegCoursesAndScores($request,$value->student_id)['course_codes'];
             $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id)['course'];
-            array_push($courses,$stud_courses);
+            array_push($courses,(array) $stud_courses);
         }
         //$courses = $this->getRegCoursesAndScores($request,$students[0]->student_id);
         //$table_header = $this->getTableHeader($courses);
         //return array_unique($courses);
-        return $courses;
         // Flatten the array of arrays into a single array
         $flattenedArray = array_merge(...$courses);
         // Extract unique values from the 'course_code' key
