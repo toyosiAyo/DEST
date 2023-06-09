@@ -473,6 +473,7 @@ class AdminController extends Controller
         //$table_header = $this->getTableHeader($courses);
         //return array_unique($courses);
         // Flatten the array of arrays into a single array
+        return $courses;
         $flattenedArray = array_merge(...$courses);
         // Extract unique values from the 'course_code' key
         $uniqueValues = array_unique(array_column($flattenedArray, 'course_code'));
