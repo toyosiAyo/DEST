@@ -472,12 +472,22 @@ class AdminController extends Controller
         //$courses = $this->getRegCoursesAndScores($request,$students[0]->student_id);
         //$table_header = $this->getTableHeader($courses);
         //return array_unique($courses);
-        $courses = collect($courses);
-        $uniquecourses = $courses->map(function ($array) {
-            return collect($array)->unique('course_code')->all();
-        });   
+        $uniqueValues = array_unique(array_column($courses, 'course_code'));
+        $arrayOfObjects = [];
+        foreach ($uniqueValues as $value) {
+            $objects = array_filter($arrayOfArrays, function ($item) use ($value) {
+                return $item['course_code'] === $value;
+            });
+            
+            $arrayOfObjects[] = (object) $objects;
+        }
+        return $arrayOfObjects;
+        // $courses = collect($courses);
+        // $uniquecourses = $courses->map(function ($array) {
+        //     return collect($array)->unique('course_code')->all();
+        // });   
 
-        return $uniquecourses;
+        // return $uniquecourses;
         //return collect($courses)->unique('course_code')->all();
     }
 
