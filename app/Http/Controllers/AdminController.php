@@ -472,7 +472,7 @@ class AdminController extends Controller
         //$courses = $this->getRegCoursesAndScores($request,$students[0]->student_id);
         //$table_header = $this->getTableHeader($courses);
         //return array_unique($courses);
-
+        return $courses;
         // Flatten the array of arrays into a single array
         $flattenedArray = array_merge(...$courses);
         // Extract unique values from the 'course_code' key
