@@ -545,7 +545,7 @@ class AdminController extends Controller
         $head_tracker = 0;
         $last_index = 0;
         $sn = 0;
-        $students = $this->getRegisteredStudents($request);
+        $students = $this->getRegisteredStudents($request)['students'];
         foreach ($students as $key => $value) {
             $key = 1;
             if($key > $last_index){
@@ -582,17 +582,17 @@ class AdminController extends Controller
     }
 
     public function getHtmlResult(Request $request){
-        $students = $this->getRegisteredStudents($request);
+        $students = $this->getRegisteredStudents($request)['students'];
         $courses = [];
         foreach ($students as $key => $value) {
             $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
             array_push($courses,$stud_courses);
         }
-        return collect($courses)->flatten(1);
         $unique = collect($courses)->flatten(1)->unique(function ($item) {
             return $item->course_code;
         });
-        return $courses;
+        $students_prev = $this->getRegisteredStudents($request)['students_prev'];
+        return $students_prev;
         $table_header = $this->getTableHeader($unique);
         return view('result.master_sheet',['data'=>$data]);
     }
@@ -614,7 +614,14 @@ class AdminController extends Controller
             ->select('registration.student_id','applicants.surname', 'applicants.first_name', 'applicants.other_name', 'applicants.matric_number')
             ->where(['applications.first_choice->faculty' => $request->faculty, 'applications.status' => 'admitted',
                 'registration.settings_id' => $settings])->groupBy('registration.student_id')->get();
-        return $students;
+        $students_prev = DB::table('registration')->join('applicants', 'registration.student_id', '=', 'applicants.id')
+            ->join('applications', 'applicants.email', '=', 'applications.submitted_by')
+            ->join('settings', 'registration.settings_id', '=', 'settings.id')
+            ->select('registration.*','applicants.surname', 'applicants.first_name', 'applicants.other_name', 'applicants.matric_number')
+            ->where(['applications.first_choice->faculty' => $request->faculty, 'applications.status' => 'admitted',
+            'registration.settings_id'=>$settings])
+            ->orWhere('registration.settings_id', '=', $settings - 1)->groupBy('registration.student_id')->get();
+        return ['students'=>$students,'students_prev'=>$students_prev];
     }
 
     public function getSessionSettings(Request $request){
