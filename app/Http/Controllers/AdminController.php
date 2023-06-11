@@ -583,7 +583,6 @@ class AdminController extends Controller
 
     public function getHtmlResult(Request $request){
         $students = $this->getRegisteredStudents($request);
-        return $students;
         $courses = [];
         foreach ($students as $key => $value) {
             $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
@@ -592,6 +591,7 @@ class AdminController extends Controller
         $unique = collect($courses)->flatten(1)->unique(function ($item) {
             return $item->course_code;
         });
+        return $courses;
         $table_header = $this->getTableHeader($unique);
         return view('result.master_sheet',['data'=>$data]);
     }
