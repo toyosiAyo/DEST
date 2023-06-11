@@ -461,6 +461,18 @@ class AdminController extends Controller
         return $table_header;
     }
 
+    public function getStaticTableHeader(){
+        return 
+            '<table class="result_table">
+                <tr>
+                    <th>SN </th> <th> Matric Number</th> <th>Names </th> <th>Prev CTNUR </th>
+                    <th>Prev CTNUP </th> <th>Prev CTCP </th> <th>Prev CGPA </th>
+                    <th>Curr TNUR </th> <th>Curr TNUP </th> <th> Curr TCP </th> <th>Curr GPA </th>
+                    <th>Outstd</th> <th>CTNUR </th> <th> CTNUP </th> <th> CTCP </th> <th> CGPA </th>
+                    <th> Outstanding Course </th> <th>Status</th>
+                </tr>';
+    }
+
     public function getPageHeader($request){
         return  '<div class="page"> 
                     <div class="header">
@@ -484,12 +496,94 @@ class AdminController extends Controller
                 </div>';
     }
 
-    public function getSummaryTable(){
+    public function getValuesForSummary(){
+        $t_str = '';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;"> '.str(get_prev_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_prev_ctnup($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;"> '.str(get_prev_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;"> '.str(get_prev_cgpa(get_prev_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')), get_prev_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')))).'</td>';
         
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_cur_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_cur_ctnup($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_cur_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_cur_gpa( get_cur_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')), get_cur_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')) ) ).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_stud_oustanding_2($stud, $courses_from_reg, $courses_from_curr,$list_all_course_code_and_equivalence, $request)[0]).'</td>';
+    
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(format_for_str_issue(get_prev_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')), get_cur_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')))) .'</td> ';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str( format_for_str_issue(get_prev_ctnup($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')) , get_cur_ctnup($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')))) .'</td> ';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str( format_for_str_issue(get_prev_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')) , get_cur_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')))) .'</td> ';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_cgpa(
+            get_prev_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')),
+            get_prev_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')),
+            get_cur_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')),
+            get_cur_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))
+        )).'</td>';
+        $t_str .='<td style="text-align:left;width:25px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_stud_oustanding_2($stud, $courses_from_reg, $courses_from_curr,$list_all_course_code_and_equivalence, $request)[1]).'</td>';
+        $t_str .='<td style="text-align: left;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_acad_status(get_cgpa(
+            get_prev_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')),
+            get_prev_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')),
+            get_cur_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')),
+            get_cur_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))
+        ),class_performance_summary_dic)).'</td>';
+    
+        return $t_str;
+    }
+
+    public function getPreviousTNU($semester,$session){
+        if($semester == '2'){
+            $prevTNU = 0;
+
+
+        }
+        return '';
+    }
+
+    public function getSummaryTable($request){
+        $table_data = '';
+        $class_performance_summary = ['first_class'=>0, 'second_class_upper'=>0, 'second_class_lower'=>0,'third_class'=>0,'pass'=>0,'poor'=>0,'non_grad'=>0];
+        $table_data .= $this->getPageHeader($request);
+        $head_tracker = 0;
+        $last_index = 0;
+        $sn = 0;
+        $students = $this->getRegisteredStudents($request);
+        foreach ($students as $key => $value) {
+            $key = 1;
+            if($key > $last_index){
+                $last_index = $key;
+            }
+            $head_tracker +=1;
+            if($key == 1){
+                $table_data .= $this->getStaticTableHeader();
+            }
+            $values_for_summary = $this->getValuesForSummary($value,$request);
+            if($values_for_summary == ''){
+                continue;
+            }
+            $sn +=1;
+            $table_data .= '<tr><td>'.str(sn).'</td> <td>'.stud['matric_number'].'</td>
+            <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.stud['surname'].' '.firstName[0].'</td>
+            '.$values_for_summary.'</tr>';
+            if($head_tracker == 25 and $key != len($students)){
+                $table_data .= '</table></div></br></br>';
+                $table_data .= get_page_header($request,$prev_level)+get_static_table_header_for_summary_sheet();
+                $head_tracker = 0;
+            }
+            if(len($students) == $last_index){
+                if($head_tracker <= 15){
+                    $table_data .= '</table></br></br>'.get_summary_sheet_abbr_details(class_performance_summary_dic).'</div>';
+                }
+                elseif($head_tracker > 15){
+                    $table_data .= '</table></div></br></br>';
+                    $table_data .= get_page_header($request,$prev_level)+get_summary_sheet_abbr_details($class_performance_summary).'</table></div>';
+                }
+            }           
+        }
+        return $table_data;
     }
 
     public function getHtmlResult(Request $request){
         $students = $this->getRegisteredStudents($request);
+        return $students;
         $courses = [];
         foreach ($students as $key => $value) {
             $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
@@ -502,6 +596,7 @@ class AdminController extends Controller
         return view('result.master_sheet',['data'=>$data]);
     }
 
+    //per student
     public function getRegCoursesAndScores($request,$matric_number){
         $settings = $this->getSessionSettings($request);
         $courses = DB::table('registration')->join('courses', 'registration.course_code', '=', 'courses.course_code')
