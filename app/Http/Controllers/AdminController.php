@@ -529,10 +529,10 @@ class AdminController extends Controller
         return $t_str;
     }
 
-    public function getPreviousTNU($semester,$session){
+    public function getPreviousTNU($value,$request){
         if($semester == '2'){
             $prevTNU = 0;
-
+            $sum = DB::table('registration')->where(['student_id'=>$value->student_id,])->sum('unit');
 
         }
         return '';
@@ -588,6 +588,7 @@ class AdminController extends Controller
             $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
             array_push($courses,$stud_courses);
         }
+        return collect($courses)->flatten(1);
         $unique = collect($courses)->flatten(1)->unique(function ($item) {
             return $item->course_code;
         });
