@@ -618,7 +618,8 @@ class AdminController extends Controller
     public function getOutstanding($value, $request){
         $settings = $this->getSessionSettings($request);
         $programme = $this->getStudentProgramme($value->appid);
-        $regs = DB::table('registration')->select('course_code')->where(['student_id'=>$value->student_id, 'settings_id'=>$settings]);
+        $regs = DB::table('registration')->select('course_code')->where(['student_id'=>$value->student_id, 'settings_id'=>$settings])
+            ->get();
 
         $collection = collect($regs);
         $collapsed = $collection->collapse();
