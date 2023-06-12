@@ -873,8 +873,8 @@ class AdminController extends Controller
     }
 
     public function getStudentProgramme($appid){
-        $programme = DB::table('applications')->where('id',$appid)->select('first_choice->prog')->first();
-        $code = DB::table('programmes')->where('programme',$programme)->select('programme_id')->first();
+        $programme = DB::table('applications')->where('id',$appid)->select('first_choice->prog as prog')->first();
+        $code = DB::table('programmes')->where('programme',$programme->prog)->select('programme_id')->first();
         return $code;
     }
 
