@@ -63,6 +63,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="result_html"></div>
                             <!-- end card -->
                         </div>
                     </div>
