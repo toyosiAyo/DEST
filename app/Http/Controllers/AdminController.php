@@ -797,7 +797,7 @@ class AdminController extends Controller
         $sn = 0;
         $students = $this->getRegisteredStudents($request)['students'];
         foreach ($students as $key => $value) {
-            $key = 1;
+            //$key = 1;
             if($key > $last_index){
                 $last_index = $key;
             }
