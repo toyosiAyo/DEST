@@ -623,7 +623,7 @@ class AdminController extends Controller
 
         $collection = collect($regs);
         $collapsed = $collection->collapse();
-        dd($regs);
+        dd($collapsed);
 
          dd(collect($regs)->collapse()->all());
  
