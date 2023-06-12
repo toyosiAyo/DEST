@@ -593,7 +593,7 @@ class AdminController extends Controller
         $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getCurrentTNU($value,$request).'</td>';
         $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getCurrentTNUP($value, $request).'</td>';
         $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getCurrentTCP($value, $request).'</td>';
-        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getGPA($this->getCurrentTNU($value,$request), $this->getCurrentTCP($value, $request)) .'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getGPA($this->getCurrentTNU($value,$request), $this->getCurrentTCP($value, $request)).'</td>';
     
         $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getCumulative($this->getPreviousTNU($value, $request), $this->getCurrentTNU($value,$request)).'</td> ';
         $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getCumulative($this->getPreviousTNUP($value, $request), $this->getCurrentTNUP($value, $request)).'</td> ';
