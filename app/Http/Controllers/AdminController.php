@@ -622,7 +622,7 @@ class AdminController extends Controller
         ->get()->toarray();
  
         $curriculum = DB::table('curriculum')->where(['course_status'=>'C','semester'=>$request->semester,'programme_id'=>$programme])
-        ->whereNotIn('course_code', $regs['course_code'])->get();
+        ->whereNotIn('course_code', $regs[0]->course_code)->get();
 
         $failed_courses = DB::table('registration')->where(['student_id'=>$value->student_id])
         ->where([['settings_id', '=', $settings],['score','<',40]])->pluck('course_code');
