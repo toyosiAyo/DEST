@@ -620,7 +620,8 @@ class AdminController extends Controller
         $programme = $this->getStudentProgramme($value->appid);
         $regs = DB::table('registration')->where(['student_id'=>$value->student_id, 'settings_id'=>$settings])
         ->pluck('course_code');
-         dd($regs->collapse());
+
+         dd(collect($regs)->collapse()->all());
  
         $curriculum = DB::table('curriculum')->where(['course_status'=>'C','semester'=>$request->semester,'programme_id'=>$programme])
         ->whereNotIn('course_code', $regs[0]->course_code)->get();
