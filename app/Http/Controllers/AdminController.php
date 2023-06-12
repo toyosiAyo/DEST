@@ -617,24 +617,24 @@ class AdminController extends Controller
 
     public function getOutstanding($value, $request){
         $settings = $this->getSessionSettings($request);
-        $programme = $this->getStudentProgramme($value->appid);
-        $regs = DB::table('registration')->where(['student_id'=>$value->student_id, 'settings_id'=>$settings])
-            ->pluck('course_code');
-        $collection = collect($regs);
-        $keys = $collection->values();
+        //$programme = $this->getStudentProgramme($value->appid);
+        // $regs = DB::table('registration')->where(['student_id'=>$value->student_id, 'settings_id'=>$settings])
+        //     ->pluck('course_code');
+        //$collection = collect($regs);
+        //$keys = $collection->values();
 
         //dd(collect($regs)->collapse()->all());
  
-        $curriculum = DB::table('curriculum')->where(['course_status'=>'C','semester'=>$request->semester,'programme_id'=>$programme])
-        ->whereIn('course_code', $regs)->get();
-        dd($curriculum);
+        // $curriculum = DB::table('curriculum')->select('course_code')->where(['course_status'=>'C','semester'=>$request->semester,'programme_id'=>$programme])
+        // ->whereNotIn('course_code', $regs)->pluck('course_code');
 
         $failed_courses = DB::table('registration')->where(['student_id'=>$value->student_id])
         ->where([['settings_id', '=', $settings],['score','<',40]])->pluck('course_code');
 
-        $merged = $curriculum->merge($failed_courses);
+        //$merged = $curriculum->merge($failed_courses);
 
-        return $merged->toarray();
+        //return $merged->toarray();
+        return $failed_courses;
     }
 
     public function getRemarks($cgpa, $class_performance_summary){
