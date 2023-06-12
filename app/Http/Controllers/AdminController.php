@@ -620,8 +620,12 @@ class AdminController extends Controller
         $programme = $this->getStudentProgramme($value->appid);
         $regs = DB::table('registration')->where(['student_id'=>$value->student_id, 'settings_id'=>$settings])
             ->pluck('course_code');
+        $collection = collect($regs);
+        $keys = $collection->keys();
+ 
+        $keys->all();
 
-            print_r($regs);
+            print_r($keys);
             return;
 
         //dd(collect($regs)->collapse()->all());
