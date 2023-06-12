@@ -496,46 +496,145 @@ class AdminController extends Controller
                 </div>';
     }
 
-    public function getValuesForSummary(){
+    public function getValuesForSummary($value, $request){
         $t_str = '';
-        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;"> '.str(get_prev_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))).'</td>';
-        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_prev_ctnup($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))).'</td>';
-        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;"> '.str(get_prev_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))).'</td>';
-        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;"> '.str(get_prev_cgpa(get_prev_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')), get_prev_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')))).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;"> '.$this->getPreviousTNU($value, $request).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getPreviousTNUP($value, $request).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;"> '.$this->getPreviousTCP($value, $request).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;"> '.$this->getGPA($this->getPreviousTNU($value, $request), $this->getPreviousTCP($value, $request)).'</td>';
         
-        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_cur_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))).'</td>';
-        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_cur_ctnup($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))).'</td>';
-        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_cur_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))).'</td>';
-        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_cur_gpa( get_cur_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')), get_cur_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')) ) ).'</td>';
-        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_stud_oustanding_2($stud, $courses_from_reg, $courses_from_curr,$list_all_course_code_and_equivalence, $request)[0]).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getCurrentTNU($value,$request).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getCurrentTNUP($value, $request).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getCurrentTCP($value, $request).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getGPA($this->getCurrentTNU($value,$request), $this->getCurrentTCP($value, $request)) .'</td>';
     
-        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(format_for_str_issue(get_prev_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')), get_cur_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')))) .'</td> ';
-        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str( format_for_str_issue(get_prev_ctnup($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')) , get_cur_ctnup($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')))) .'</td> ';
-        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str( format_for_str_issue(get_prev_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')) , get_cur_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')))) .'</td> ';
-        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_cgpa(
-            get_prev_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')),
-            get_prev_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')),
-            get_cur_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')),
-            get_cur_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))
-        )).'</td>';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getCumulative($this->getPreviousTNU($value, $request), $this->getCurrentTNU($value,$request)).'</td> ';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getCumulative($this->getPreviousTNUP($value, $request), $this->getCurrentTNUP($value, $request)).'</td> ';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getCumulative($this->getPreviousTCP($value, $request) , $this->getCurrentTCP($value, $request)).'</td> ';
+        $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getCGPA(
+            $this->getPreviousTNU($value, $request),
+            $this->getPreviousTCP($value, $request),
+            $this->getCurrentTNU($value,$request),
+            $this->getCurrentTCP($value, $request)
+        ).'</td>';
         $t_str .='<td style="text-align:left;width:25px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_stud_oustanding_2($stud, $courses_from_reg, $courses_from_curr,$list_all_course_code_and_equivalence, $request)[1]).'</td>';
-        $t_str .='<td style="text-align: left;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_acad_status(get_cgpa(
-            get_prev_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')),
-            get_prev_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')),
-            get_cur_ctnur($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester')),
-            get_cur_ctcp($subjects, $session=request.POST.get('session'),$semester=request.POST.get('semester'))
+        $t_str .='<td style="text-align: left;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_acad_status($this->getCGPA(
+            $this->getPreviousTNU($value, $request),
+            $this->getPreviousTCP($value, $request),
+            $this->getCurrentTNU($value,$request),
+            $this->getCurrentTCP($value, $request)
         ),class_performance_summary_dic)).'</td>';
     
         return $t_str;
     }
 
     public function getPreviousTNU($value,$request){
-        if($semester == '2'){
-            $prevTNU = 0;
-            $sum = DB::table('registration')->where(['student_id'=>$value->student_id,])->sum('unit');
-
+        if($request->semester == '2'){
+            $settings = $this->getSessionSettings($request);
+            $sum = DB::table('registration')->where(['student_id'=>$value->student_id])
+            ->where('settings_id', '=', $settings - 1)->sum('unit');
+            return $sum;
         }
         return '';
+    }
+
+    public function getCurrentTNU($value,$request){
+        $settings = $this->getSessionSettings($request);
+        $sum = DB::table('registration')->where(['student_id'=>$value->student_id,'settings_id'=>$settings])->sum('unit');
+        return $sum;
+    }
+
+    public function getPreviousTNUP($value,$request){
+        if($request->semester == '2'){
+            $settings = $this->getSessionSettings($request);
+            $sum = DB::table('registration')->where(['student_id'=>$value->student_id])
+            ->where([['settings_id', '=', $settings - 1],['score','>=',40]])->sum('unit');
+            return $sum;
+        }
+        return '';
+    }
+
+    public function getCurrentTNUP($value,$request){
+        $settings = $this->getSessionSettings($request);
+        $sum = DB::table('registration')->where(['student_id'=>$value->student_id])
+        ->where([['settings_id', '=', $settings],['score','>=',40]])->sum('unit');
+        return $sum;
+    }
+
+    public function getPreviousTCP($value,$request){
+        if($request->semester == '2'){
+            $tcp = 0;
+            $settings = $this->getSessionSettings($request);
+            $regs = DB::table('registration')->where(['student_id'=>$value->student_id])
+            ->where([['settings_id', '=', $settings - 1],['score','>=',40]])->get();
+            foreach ($regs as $reg) {
+                $tcp += $reg->unit * $this->getPointFromScore($reg->score);
+            }
+            return $tcp;
+        }
+        return '';
+    }
+
+    public function getCurrentTCP($value,$request){
+        $tcp = 0;
+        $settings = $this->getSessionSettings($request);
+        $regs = DB::table('registration')->where(['student_id'=>$value->student_id])
+        ->where([['settings_id', '=', $settings],['score','>=',40]])->get();
+        foreach ($regs as $reg) {
+            $tcp += $reg->unit * $this->getPointFromScore($reg->score);
+        }
+        return $tcp;
+    }
+
+    public function getGPA($tnu,$tcp){
+        if($tnu != 0 && $tnu != '' && $tcp = ''){
+            return round(int($tcp)/int($tnu),2);
+        }
+        return '';
+    }
+
+    public function getCumulative($val1, $val2){
+        return $val1 + $val2;
+    }
+
+    public function getCGPA($ptnu,$ptcp,$ctnu,$ctcp){
+        $divisor = 0;
+        if($ptnu !='' && $ptcp !='' && $ctnu !='' && $ctcp !=''){
+            $divisor = $ptnu + $ctnu;
+            return round(($ptcp + $ctcp)/$divisor,2);
+        }
+        elseif($ptnu =='' && $ptcp =='' && $ctnu !='' && $ctcp !=''){
+            $divisor = $ctnu;
+            return round(($ctcp)/$divisor,2);
+        }
+        elseif($ptnu !='' && $ptcp !='' && $ctnu =='' && $ctcp ==''){
+            $divisor = $ptnu;
+            return round(($ptcp)/$divisor,2);
+        }
+        else{
+            return '';
+        }
+    }
+
+    public function getPointFromScore($score){
+        if($score >= 70){
+            return 5;
+        }
+        elseif($score >= 60 && $score < 70){
+            return 4;  
+        }
+        elseif($score >= 50 && $score < 60){
+            return 3;
+        }
+        elseif($score >= 45 && $score < 50){
+            return 2;
+        } 
+        elseif($score >= 40 && $score < 45){
+            return 1;
+        }
+        else{
+            return 0;
+        } 
     }
 
     public function getSummaryTable($request){
@@ -591,8 +690,6 @@ class AdminController extends Controller
         $unique = collect($courses)->flatten(1)->unique(function ($item) {
             return $item->course_code;
         });
-        $students_prev = $this->getRegisteredStudents($request)['students_prev'];
-        return $students_prev;
         $table_header = $this->getTableHeader($unique);
         return view('result.master_sheet',['data'=>$data]);
     }
@@ -616,7 +713,6 @@ class AdminController extends Controller
                 'registration.settings_id' => $settings])->groupBy('registration.student_id')->get();
         $students_prev = DB::table('registration')->join('applicants', 'registration.student_id', '=', 'applicants.id')
             ->join('applications', 'applicants.email', '=', 'applications.submitted_by')
-            ->join('settings', 'registration.settings_id', '=', 'settings.id')
             ->select('registration.*','applicants.surname', 'applicants.first_name', 'applicants.other_name', 'applicants.matric_number')
             ->where(['applications.first_choice->faculty' => $request->faculty, 'applications.status' => 'admitted',
             'registration.settings_id'=>$settings])
