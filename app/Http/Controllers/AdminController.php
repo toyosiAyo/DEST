@@ -737,6 +737,9 @@ class AdminController extends Controller
     }
 
     public function getCumulative($val1, $val2){
+        if($val1 == ''){
+            $val1 = 0;
+        }
         return $val1 + $val2;
     }
 
