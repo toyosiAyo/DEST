@@ -617,10 +617,11 @@ class AdminController extends Controller
 
     public function getOutstanding($value, $request){
         $settings = $this->getSessionSettings($request);
+        $programme = $this->getStudentProgramme($value->appid);
         $regs = DB::table('registration')->where(['student_id'=>$value->student_id, 'settings_id'=>$settings])
             ->pluck('course_code');
  
-        $curriculum = DB::table('curriculum')->where(['course_status'=>'C','semester'=>$request->semester,'programme_id'=>$request->programme])
+        $curriculum = DB::table('curriculum')->where(['course_status'=>'C','semester'=>$request->semester,'programme_id'=>$programme])
         ->whereNotIn('course_code', $regs)->pluck('course_code');
 
         $failed_courses = DB::table('registration')->where(['student_id'=>$value->student_id])
@@ -851,7 +852,7 @@ class AdminController extends Controller
         $settings = $this->getSessionSettings($request);
         $students = DB::table('registration')->join('applicants', 'registration.student_id', '=', 'applicants.id')
             ->join('applications', 'applicants.email', '=', 'applications.submitted_by')
-            ->select('registration.student_id','applicants.surname', 'applicants.first_name', 'applicants.other_name', 'applicants.matric_number')
+            ->select('registration.student_id','applicants.surname', 'applicants.first_name', 'applicants.other_name', 'applicants.matric_number','applications.id as appid')
             ->where(['applications.first_choice->faculty' => $request->faculty, 'applications.status' => 'admitted',
                 'registration.settings_id' => $settings])->groupBy('registration.student_id')->get();
         $students_prev = DB::table('registration')->join('applicants', 'registration.student_id', '=', 'applicants.id')
@@ -866,6 +867,12 @@ class AdminController extends Controller
     public function getSessionSettings(Request $request){
         $settings = DB::table('settings')->where(['session'=>$request->session,'semester_code'=>$request->semester])->first();
         return $settings->id;
+    }
+
+    public function getStudentProgramme($appid){
+        $programme = DB::table('applications')->where('id',$appid)->select('first_choice->prog')->first();
+        $code = DB::table('programmes')->where('programme',$programme)->select('programme_id')->first();
+        return $code;
     }
 
 
