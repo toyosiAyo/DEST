@@ -626,7 +626,7 @@ class AdminController extends Controller
         //dd(collect($regs)->collapse()->all());
  
         $curriculum = DB::table('curriculum')->select('course_code')->where(['course_status'=>'C','semester'=>$request->semester,'programme_id'=>$programme])
-        ->whereNotIn('course_code', $keys->all())->get();
+        ->whereNotIn('course_code', ['CSC 101'])->get();
         dd($curriculum);
 
         $failed_courses = DB::table('registration')->where(['student_id'=>$value->student_id])
