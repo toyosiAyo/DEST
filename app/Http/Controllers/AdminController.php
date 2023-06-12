@@ -622,7 +622,8 @@ class AdminController extends Controller
         ->pluck('course_code');
 
         $collection = collect($regs);
-        dd($collection);
+        $collapsed = $collection->collapse();
+        dd($collapsed);
 
          dd(collect($regs)->collapse()->all());
  
