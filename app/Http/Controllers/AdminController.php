@@ -806,7 +806,7 @@ class AdminController extends Controller
             '.$values_for_summary.'</tr>';
             if($head_tracker == 25 and $key != count($students)){
                 $table_data .= '</table></div></br></br>';
-                $table_data .= $this->getPageHeader($request)+$this->getStaticTableHeader();
+                $table_data .= $this->getPageHeader($request).$this->getStaticTableHeader();
                 $head_tracker = 0;
             }
             if(count($students) == $last_index){
@@ -815,7 +815,7 @@ class AdminController extends Controller
                 }
                 elseif($head_tracker > 15){
                     $table_data .= '</table></div></br></br>';
-                    $table_data .= $this->getPageHeader($request)+$this->getFooter($class_performance_summary).'</table></div>';
+                    $table_data .= $this->getPageHeader($request).$this->getFooter($class_performance_summary).'</table></div>';
                 }
             }           
         }
@@ -833,6 +833,7 @@ class AdminController extends Controller
             return $item->course_code;
         });
         $table_header = $this->getTableHeader($unique);
+        $data = $this->getSummaryTable($request);
         return view('result.master_sheet',['data'=>$data]);
     }
 
