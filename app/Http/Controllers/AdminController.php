@@ -468,7 +468,7 @@ class AdminController extends Controller
                     <th>SN </th> <th> Matric Number</th> <th>Names </th> <th>Prev CTNUR </th>
                     <th>Prev CTNUP </th> <th>Prev CTCP </th> <th>Prev CGPA </th>
                     <th>Curr TNUR </th> <th>Curr TNUP </th> <th> Curr TCP </th> <th>Curr GPA </th>
-                    <th>Outstd</th> <th>CTNUR </th> <th> CTNUP </th> <th> CTCP </th> <th> CGPA </th>
+                    <th>CTNUR </th> <th> CTNUP </th> <th> CTCP </th> <th> CGPA </th>
                     <th> Outstanding Course </th> <th>Status</th>
                 </tr>';
     }
