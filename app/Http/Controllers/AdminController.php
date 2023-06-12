@@ -465,11 +465,11 @@ class AdminController extends Controller
         return 
             '<table class="result_table">
                 <tr>
-                    <th>SN </th> <th> Matric Number</th> <th>Names </th> <th>Prev CTNUR </th>
-                    <th>Prev CTNUP </th> <th>Prev CTCP </th> <th>Prev CGPA </th>
-                    <th>Curr TNUR </th> <th>Curr TNUP </th> <th> Curr TCP </th> <th>Curr GPA </th>
-                    <th>CTNUR </th> <th> CTNUP </th> <th> CTCP </th> <th> CGPA </th>
-                    <th> Outstanding Course </th> <th>Remarks</th>
+                    <th>SN </th> <th> Matric Number</th> <th>Names </th> <th>Prev TNU</th>
+                    <th>Prev TNUP</th> <th>Prev TCP</th> <th>Prev GPA</th>
+                    <th>Curr TNU</th> <th>Curr TNUP</th> <th> Curr TCP</th> <th>Curr GPA</th>
+                    <th>CTNU</th> <th> CTNUP</th> <th> CTCP</th> <th> CGPA</th>
+                    <th> Outstanding Course(s)</th> <th>Remarks</th>
                 </tr>';
     }
 
@@ -798,7 +798,6 @@ class AdminController extends Controller
         $students = $this->getRegisteredStudents($request)['students'];
         $counter = 1;
         foreach ($students as $key => $value) {
-            //$key = 1;
             if($counter > $last_index){
                 $last_index = $counter;
             }
