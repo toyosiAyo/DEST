@@ -496,7 +496,94 @@ class AdminController extends Controller
                 </div>';
     }
 
-    public function getValuesForSummary($value, $request){
+    public function getFooter($class_performance_summary){
+        return '
+            <table >
+                <tr> 
+                    <td> 
+                        <table width="30%" class="result_table2" style="display:inline-table;">
+                            <tr><span style="margin-left: 5%;">Class Performance Summary</span></tr>
+                            <tr>
+                                <td>1st Class</td>
+                                <td>2nd Class Upper</td>
+                                <td>2nd Class Lower</td>
+                                <td>3rd Class </td>
+                                <td>Pass </td>
+                                <td>Poor </td>
+                                <td>Non Grad </td>
+                            </tr>
+                            <tr>
+                                <td>'.$class_performance_summary['first_class'].'</td>
+                                <td>'.$class_performance_summary['second_class_upper'].'</td>
+                                <td>'.$class_performance_summary['second_class_lower'].'</td>
+                                <td>'.$class_performance_summary['third_class'].'</td>
+                                <td>'.$class_performance_summary['pass'].'</td>
+                                <td>'.$class_performance_summary['poor'].'</td>
+                                <td>'.$class_performance_summary['non_grad'].'</td>
+                            </tr>
+                
+                        </table>
+                    </td>
+
+                    <td>
+                        <table width="30%" class="result_table2" style="display:inline-table;">
+                            <tr><span style="margin-left: 5%;">INTERPRETATION OF TERMS</span></tr>
+                            <tr>
+                                <td>TNUR = Total Number of Units Registered</td>
+                            </tr>
+                            <tr>
+                                <td>TCP = Total Credit Point</td>
+                            </tr>
+                            <tr>
+                                <td>TNUP = Total Number of Units Passed </td>
+                            </tr>
+                            <tr>
+                                <td>GPA = Grade Point Average</td>
+                            </tr>
+                            <tr>
+                                <td>GSD = Good Standing</td>
+                            </tr>
+                            <tr>
+                                <td>PRB = Probation</td>
+                            </tr>
+                            <tr>
+                                <td>WRN = Warning</td>
+                            </tr>
+                            <tr>
+                                <td>WDL = Withdrawal</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr> 
+                <tr> 
+                    <td>
+                        <table  class="result_table2" style="display:inline-table;">
+                            <tr>
+                                <td style="border:0;">   
+                                    <pre>
+            Head of Department                    Dean                                  External Examiner
+            Name: _____________________           Name:_____________________            Name:_____________________
+
+            Sign: _____________________           Sign:_____________________            Sign:_____________________
+
+            Date: _____________________           Date:_____________________            Date:_____________________
+                                    </pre>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+           
+       
+            <div class="print_footer">
+                Generated on the '.date('Y-m-d H:i:s').'<br><br>
+            </div>
+            </div>';
+    }
+
+    public function getValuesForSummary($value, $request,$class_performance_summary){
         $t_str = '';
         $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;"> '.$this->getPreviousTNU($value, $request).'</td>';
         $t_str .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getPreviousTNUP($value, $request).'</td>';
@@ -517,15 +604,70 @@ class AdminController extends Controller
             $this->getCurrentTNU($value,$request),
             $this->getCurrentTCP($value, $request)
         ).'</td>';
-        $t_str .='<td style="text-align:left;width:25px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_stud_oustanding_2($stud, $courses_from_reg, $courses_from_curr,$list_all_course_code_and_equivalence, $request)[1]).'</td>';
-        $t_str .='<td style="text-align: left;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.str(get_acad_status($this->getCGPA(
+        $t_str .='<td style="text-align:left;width:25px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getOutstanding($value,$request).'</td>';
+        $t_str .='<td style="text-align: left;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getRemarks($this->getCGPA(
             $this->getPreviousTNU($value, $request),
             $this->getPreviousTCP($value, $request),
             $this->getCurrentTNU($value,$request),
             $this->getCurrentTCP($value, $request)
-        ),class_performance_summary_dic)).'</td>';
+        ),$class_performance_summary).'</td>';
     
         return $t_str;
+    }
+
+    public function getOutstanding($value, $request){
+        $settings = $this->getSessionSettings($request);
+        $regs = DB::table('registration')->where(['student_id'=>$value->student_id, 'settings_id'=>$settings])
+            ->pluck('course_code');
+ 
+        $curriculum = DB::table('curriculum')->where(['course_status'=>'C','semester'=>$request->semester,'programme_id'=>$request->programme])
+        ->whereNotIn('course_code', $regs)->pluck('course_code');
+
+        $failed_courses = DB::table('registration')->where(['student_id'=>$value->student_id])
+        ->where([['settings_id', '=', $settings],['score','<',40]])->pluck('course_code');
+
+        $merged = $curriculum->merge($failed_courses);
+
+        return $merged->toarray();
+    }
+
+    public function getRemarks($cgpa, $class_performance_summary){
+        if($cgpa == ''){
+            return 'None';
+        }
+        $cgpa = round($cgpa,2);
+        if($cgpa >= 4.50){
+            $class_performance_summary['first_class'] = int($class_performance_summary['first_class']+1);
+            return 'GSD (Excellent)';
+        }
+            
+        elseif($cgpa >= 3.50 && $cgpa <= 4.49) {
+            $class_performance_summary['second_class_upper'] = int($class_performance_summary['second_class_upper']+1);
+            return 'GSD (V. Good)';
+        } 
+            
+        elseif($cgpa >= 2.50 && $cgpa <= 3.49){
+            $class_performance_summary['second_class_lower'] = int($class_performance_summary['second_class_lower']+1);
+            return 'GSD (Good)';
+        } 
+            
+        elseif($cgpa >= 1.50 && $cgpa <= 2.49){
+            $class_performance_summary['third_class'] = int($class_performance_summary['third_class']+1);
+            return 'GSD (Average)';
+        }  
+            
+        elseif($cgpa >= 1.00 && $cgpa <= 1.49){
+            $class_performance_summary['pass'] = int($class_performance_summary['pass']+1);
+            return 'PRB (Fair)';
+        } 
+            
+        elseif($cgpa < 1.00 ){
+            $class_performance_summary['poor'] = int($class_performance_summary['poor']+1);
+            return 'WRN (V. Poor)';
+        }
+        else{
+            return '';
+        }  
     }
 
     public function getPreviousTNU($value,$request){
@@ -654,26 +796,26 @@ class AdminController extends Controller
             if($key == 1){
                 $table_data .= $this->getStaticTableHeader();
             }
-            $values_for_summary = $this->getValuesForSummary($value,$request);
+            $values_for_summary = $this->getValuesForSummary($value,$request,$class_performance_summary);
             if($values_for_summary == ''){
                 continue;
             }
             $sn +=1;
-            $table_data .= '<tr><td>'.str(sn).'</td> <td>'.stud['matric_number'].'</td>
-            <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.stud['surname'].' '.firstName[0].'</td>
+            $table_data .= '<tr><td>'.$sn.'</td> <td>'.$value->matric_number.'</td>
+            <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->surname.' '.$value->first_name.'</td>
             '.$values_for_summary.'</tr>';
-            if($head_tracker == 25 and $key != len($students)){
+            if($head_tracker == 25 and $key != count($students)){
                 $table_data .= '</table></div></br></br>';
-                $table_data .= get_page_header($request,$prev_level)+get_static_table_header_for_summary_sheet();
+                $table_data .= $this->getPageHeader($request)+$this->getStaticTableHeader();
                 $head_tracker = 0;
             }
-            if(len($students) == $last_index){
+            if(count($students) == $last_index){
                 if($head_tracker <= 15){
-                    $table_data .= '</table></br></br>'.get_summary_sheet_abbr_details(class_performance_summary_dic).'</div>';
+                    $table_data .= '</table></br></br>'.$this->getFooter($class_performance_summary).'</div>';
                 }
                 elseif($head_tracker > 15){
                     $table_data .= '</table></div></br></br>';
-                    $table_data .= get_page_header($request,$prev_level)+get_summary_sheet_abbr_details($class_performance_summary).'</table></div>';
+                    $table_data .= $this->getPageHeader($request)+$this->getFooter($class_performance_summary).'</table></div>';
                 }
             }           
         }
