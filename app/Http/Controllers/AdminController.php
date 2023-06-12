@@ -618,12 +618,11 @@ class AdminController extends Controller
     public function getOutstanding($value, $request){
         $settings = $this->getSessionSettings($request);
         $programme = $this->getStudentProgramme($value->appid);
-        $regs = DB::table('registration')->where(['student_id'=>$value->student_id, 'settings_id'=>$settings])
-        ->pluck('course_code');
+        $regs = DB::table('registration')->select('course_code')->where(['student_id'=>$value->student_id, 'settings_id'=>$settings]);
 
         $collection = collect($regs);
         $collapsed = $collection->collapse();
-        dd($collapsed->all());
+        dd($regs);
 
          dd(collect($regs)->collapse()->all());
  
