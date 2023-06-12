@@ -406,9 +406,10 @@ $(document).ready(function ($) {
                     $("#btn_result").html(
                         "<i data-feather='printer'></i> Download"
                     );
-                    // toastr["success"](response.message);
+                    toastr["success"](response.message);
+                    $("#result_html").html(response.html);
                     // setTimeout(function () {
-                    //     window.open = "lecturers";
+                    //     window.open = "view/result";
                     // }, 2000);
                 },
                 error: function (response) {

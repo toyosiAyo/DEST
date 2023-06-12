@@ -843,7 +843,9 @@ class AdminController extends Controller
         });
         $table_header = $this->getTableHeader($unique);
         $data = $this->getSummaryTable($request);
-        return view('result.master_sheet',['data'=>$data]);
+        $returnHTML = view('result.master_sheet',['data'=>$data])->render();
+        return response(['success' => true, 'html'=>$returnHTML], 200);
+        //return view('result.master_sheet',['data'=>$data]);
     }
 
     //per student
