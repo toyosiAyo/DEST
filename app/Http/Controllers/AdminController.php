@@ -618,17 +618,13 @@ class AdminController extends Controller
     public function getOutstanding($value, $request){
         $settings = $this->getSessionSettings($request);
         $programme = $this->getStudentProgramme($value->appid);
-        $regs = DB::table('registration')->select('course_code')->where(['student_id'=>$value->student_id, 'settings_id'=>$settings])
-            ->get();
+        $regs = DB::table('registration')->where(['student_id'=>$value->student_id, 'settings_id'=>$settings])
+            ->pluck('course_code');
 
-        $collection = collect($regs);
-        $collapsed = $collection->collapse();
-        dd($collapsed->all());
-
-         dd(collect($regs)->collapse()->all());
+         //dd(collect($regs)->collapse()->all());
  
         $curriculum = DB::table('curriculum')->where(['course_status'=>'C','semester'=>$request->semester,'programme_id'=>$programme])
-        ->whereNotIn('course_code', $regs[0]->course_code)->get();
+        ->whereNotIn('course_code', $regs)->pluck('course_code');
 
         $failed_courses = DB::table('registration')->where(['student_id'=>$value->student_id])
         ->where([['settings_id', '=', $settings],['score','<',40]])->pluck('course_code');
