@@ -621,6 +621,9 @@ class AdminController extends Controller
         $regs = DB::table('registration')->where(['student_id'=>$value->student_id, 'settings_id'=>$settings])
         ->pluck('course_code');
 
+        $collection = collect($regs);
+        dd($collection);
+
          dd(collect($regs)->collapse()->all());
  
         $curriculum = DB::table('curriculum')->where(['course_status'=>'C','semester'=>$request->semester,'programme_id'=>$programme])
