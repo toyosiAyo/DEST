@@ -469,7 +469,7 @@ class AdminController extends Controller
                     <th>Prev CTNUP </th> <th>Prev CTCP </th> <th>Prev CGPA </th>
                     <th>Curr TNUR </th> <th>Curr TNUP </th> <th> Curr TCP </th> <th>Curr GPA </th>
                     <th>CTNUR </th> <th> CTNUP </th> <th> CTCP </th> <th> CGPA </th>
-                    <th> Outstanding Course </th> <th>Status</th>
+                    <th> Outstanding Course </th> <th>Remarks</th>
                 </tr>';
     }
 
@@ -796,13 +796,14 @@ class AdminController extends Controller
         $last_index = 0;
         $sn = 0;
         $students = $this->getRegisteredStudents($request)['students'];
+        $counter = 1;
         foreach ($students as $key => $value) {
             //$key = 1;
-            if($key > $last_index){
-                $last_index = $key;
+            if($counter > $last_index){
+                $last_index = $counter;
             }
             $head_tracker +=1;
-            if($key == 1){
+            if($counter == 1){
                 $table_data .= $this->getStaticTableHeader();
             }
             $values_for_summary = $this->getValuesForSummary($value,$request,$class_performance_summary);
@@ -810,10 +811,11 @@ class AdminController extends Controller
                 continue;
             }
             $sn +=1;
+            $counter++;
             $table_data .= '<tr><td>'.$sn.'</td> <td>'.$value->matric_number.'</td>
             <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->surname.' '.$value->first_name.'</td>
             '.$values_for_summary.'</tr>';
-            if($head_tracker == 25 and $key != count($students)){
+            if($head_tracker == 25 and $counter != count($students)){
                 $table_data .= '</table></div></br></br>';
                 $table_data .= $this->getPageHeader($request).$this->getStaticTableHeader();
                 $head_tracker = 0;
