@@ -9,6 +9,6 @@
         <link rel="stylesheet" href="../assets_admin/css/run_style3.css">
     </head>
     <body>
-        {{data}}
+        {{$data}}
     </body>
 </html>
