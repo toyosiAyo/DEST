@@ -494,6 +494,17 @@ class AdminController extends Controller
                 </div>';
     }
 
+    public function getCourseDesc($courses){
+        $res = '<table class="result_table"> 
+                <tr><th style="text-align: left" >SN</th><th style="text-align: left">Course Code</th><th style="text-align: left">Course Title</th></tr>';
+        $counter = 1;
+            foreach ($courses as $course) {
+            $res .= '<tr><td>'.$counter.'</td><td>'.$course->course_code.'</td><td>'.$course->course_title.'</td></tr>';
+        }
+        $res .="</table>";
+        return $res;
+    }
+
     public function getFooter($class_performance_summary){
         return '
             <table >
@@ -827,6 +838,59 @@ class AdminController extends Controller
             }           
         }
         return $table_data;
+    }
+
+    public function getBroadsheet($request,$unique){
+        $str_table = '';
+        $str_table .= $this->getPageHeader($request);
+        $head_tracker = 0;
+        $last_index = 0;
+        $students = $this->getRegisteredStudents($request)['students'];
+        $counter = 1;
+        foreach ($students as $key => $value) {
+            if($counter > $last_index){
+                $last_index = $counter;
+            }
+            if($counter == 1){
+                $str_table .= '<table class="result_table" >';
+                $str_table .=$this->getTableHeader($unique);
+            }
+            $head_tracker +=1;
+            $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
+            $str_table .= '<tr >
+                            <td style="text-align: left;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$counter.'</td>
+                            <td style="text-align: center;width:18px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->matric_number.'</td>
+                            <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->surname.' '.$value->firstName.'</td>';
+            foreach ($unique as $course) {
+                $str_table .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getScoreForHeader($stud_courses,$course).'</td>';
+            }
+            $str_table .= '</tr>';
+            if($head_tracker == 25 and $counter != count($students)){
+                $str_table .= '</table></div></br></br>';
+                $str_table .= $this->getPageHeader($request).'<table class="result_table">'.$this->getTableHeader($unique);
+                $head_tracker = 0;
+            }
+            if(count($students)  == $last_index){
+                if($head_tracker <= 10){
+                    $str_table .= '</table></br></br>'.$this->getCourseDesc($unique).'</div>';
+                }
+                elseif($head_tracker > 10){
+                    $str_table .= '</table></div></br></br>';
+                    $str_table .= $this->getPageHeader($request).$this->getCourseDesc($unique).'</table></div>';
+                }
+            }
+        }
+        $str_table .= "</table>"; 
+        return $str_table;
+    }
+
+    public function getScoreForHeader($stud_courses,$course){
+        foreach ($stud_courses as $value) {
+            if($value->course_code == $course){
+                return $value->score.''.$value->grade;
+            }
+            break;
+        }
     }
 
     public function getHtmlResult(Request $request){
