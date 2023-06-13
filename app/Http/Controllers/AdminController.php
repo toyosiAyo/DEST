@@ -455,8 +455,8 @@ class AdminController extends Controller
                 <h6 style="white-space:nowrap;padding:1px;margin:0;"> '.$course->unit.'</h6>
                 <h6>'.$course->status.'</h6>
                 </div></th>';
-                $table_header .= '</tr>';
             }
+            $table_header .= '</tr>';
         return $table_header;
     }
 
