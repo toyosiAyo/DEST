@@ -456,7 +456,6 @@ class AdminController extends Controller
                 <h6>'.$course->status.'</h6>
                 </div></th>';
                 $table_header .= '</tr>';
-                break;
             }
         return $table_header;
     }
