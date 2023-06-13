@@ -786,7 +786,7 @@ class AdminController extends Controller
 
     public function getSummaryTable($request){
         $table_data = '';
-        $class_performance_summary = ['Total'=>0,'GS'=> 0, 'PR'=> 0, 'WD'=> 0, 'NGS'=> 0, 'IR'=> 0];
+        $class_performance_summary = ['Total'=>0,'GS'=>0,'PR'=>0,'WD'=>0,'NGS'=>0,'IR'=>0];
         $table_data .= $this->getPageHeader($request);
         $head_tracker = 0;
         $last_index = 0;
