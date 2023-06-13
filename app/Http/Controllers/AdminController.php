@@ -640,32 +640,32 @@ class AdminController extends Controller
         $cgpa = round($cgpa,2);
         if($cgpa >= 4.50){
             $class_performance_summary['first_class'] = intval($class_performance_summary['first_class']+1);
-            return 'GSD (Excellent)';
+            return 'GS';
         }
             
         elseif($cgpa >= 3.50 && $cgpa <= 4.49) {
             $class_performance_summary['second_class_upper'] = intval($class_performance_summary['second_class_upper']+1);
-            return 'GSD (V. Good)';
+            return 'GS';
         } 
             
         elseif($cgpa >= 2.50 && $cgpa <= 3.49){
             $class_performance_summary['second_class_lower'] = intval($class_performance_summary['second_class_lower']+1);
-            return 'GSD (Good)';
+            return 'GS';
         } 
             
         elseif($cgpa >= 1.50 && $cgpa <= 2.49){
             $class_performance_summary['third_class'] = intval($class_performance_summary['third_class']+1);
-            return 'GSD (Average)';
+            return 'GS';
         }  
             
         elseif($cgpa >= 1.00 && $cgpa <= 1.49){
             $class_performance_summary['pass'] = intval($class_performance_summary['pass']+1);
-            return 'PRB (Fair)';
+            return 'PR';
         } 
             
         elseif($cgpa < 1.00 ){
             $class_performance_summary['poor'] = intval($class_performance_summary['poor']+1);
-            return 'WRN (V. Poor)';
+            return 'WD';
         }
         else{
             return '';
