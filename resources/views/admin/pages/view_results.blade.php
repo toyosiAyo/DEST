@@ -37,6 +37,13 @@
                                                 </select>
                                             </div>
                                             <div class="mb-3">
+                                                <label for="type" class="form-label font-size-13 text-muted">Select Type</label>
+                                                <select class="form-control" name="type" id="type">
+                                                    <option value="summary">Summary</option>
+                                                    <option value="broadsheet">Broadsheet</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
                                                 <label for="faculty" class="form-label font-size-13 text-muted">Select Faculty</label>
                                                 <select class="form-control" name="faculty" id="faculty">
                                                     @foreach($faculty as $fac)
