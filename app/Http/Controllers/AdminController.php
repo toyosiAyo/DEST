@@ -498,8 +498,9 @@ class AdminController extends Controller
                 <tr><th style="text-align: left" >SN</th><th style="text-align: left">Course Code</th><th style="text-align: left">Course Title</th></tr>';
         $counter = 1;
             foreach ($courses as $course) {
-            $res .= '<tr><td>'.$counter.'</td><td>'.$course->course_code.'</td><td>'.$course->course_title.'</td></tr>';
-        }
+                $res .= '<tr><td>'.$counter.'</td><td>'.$course->course_code.'</td><td>'.$course->course_title.'</td></tr>';
+                $counter++;
+            }
         $res .="</table>";
         return $res;
     }
