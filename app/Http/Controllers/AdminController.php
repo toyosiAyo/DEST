@@ -510,12 +510,12 @@ class AdminController extends Controller
                                 <td>Number of Withdrawals </td>
                             </tr>
                             <tr>
-                                <td>'.$class_performance_summary['first_class'].'</td>
-                                <td>'.$class_performance_summary['second_class_upper'].'</td>
-                                <td>'.$class_performance_summary['second_class_lower'].'</td>
-                                <td>'.$class_performance_summary['third_class'].'</td>
-                                <td>'.$class_performance_summary['pass'].'</td>
-                                <td>'.$class_performance_summary['poor'].'</td>
+                                <td>'.$class_performance_summary['Total'].'</td>
+                                <td>'.$class_performance_summary['GS'].'</td>
+                                <td>'.$class_performance_summary['NGS'].'</td>
+                                <td>'.$class_performance_summary['IR'].'</td>
+                                <td>'.$class_performance_summary['PR'].'</td>
+                                <td>'.$class_performance_summary['WD'].'</td>
                             </tr>
                 
                         </table>
@@ -786,7 +786,7 @@ class AdminController extends Controller
 
     public function getSummaryTable($request){
         $table_data = '';
-        $class_performance_summary = ['Total'=>0,'GS'=> 0, 'PR'=> 0, 'WD'=> 0];
+        $class_performance_summary = ['Total'=>0,'GS'=> 0, 'PR'=> 0, 'WD'=> 0, 'NGS'=> 0, 'IR'=> 0];
         $table_data .= $this->getPageHeader($request);
         $head_tracker = 0;
         $last_index = 0;
