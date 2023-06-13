@@ -863,7 +863,7 @@ class AdminController extends Controller
                             <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->surname.' '.$value->first_name.'</td>';
             $counter++;
             foreach ($unique as $course) {
-                $str_table .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getScoreForHeader($stud_courses,$course).'</td>';
+                $str_table .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getScoreForHeader($stud_courses,$course->course_code).'</td>';
             }
             $str_table .= '</tr>';
             if($head_tracker == 25 and $counter != count($students)){
