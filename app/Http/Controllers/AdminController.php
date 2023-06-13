@@ -860,7 +860,7 @@ class AdminController extends Controller
             $str_table .= '<tr >
                             <td style="text-align: left;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$counter.'</td>
                             <td style="text-align: center;width:18px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->matric_number.'</td>
-                            <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->surname.' '.$value->firstName.'</td>';
+                            <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->surname.' '.$value->first_name.'</td>';
             foreach ($unique as $course) {
                 $str_table .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getScoreForHeader($stud_courses,$course).'</td>';
             }
