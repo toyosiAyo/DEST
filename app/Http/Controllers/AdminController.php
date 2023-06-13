@@ -884,30 +884,28 @@ class AdminController extends Controller
         return $str_table;
     }
 
-    public function getScoreForHeader($stud_courses,$course){
-        foreach ($stud_courses as $value) {
-            if($value->course_code == $course){
-                return $value->score.''.$value->grade;
-            }
-            break;
-        }
-    }
-
     public function getHtmlResult(Request $request){
-        $students = $this->getRegisteredStudents($request)['students'];
-        $courses = [];
-        foreach ($students as $key => $value) {
-            $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
-            array_push($courses,$stud_courses);
-        }
-        $unique = collect($courses)->flatten(1)->unique(function ($item) {
-            return $item->course_code;
-        });
-        $table_header = $this->getTableHeader($unique);
-        $data = $this->getSummaryTable($request);
-        $returnHTML = view('result.master_sheet',['data'=>$data])->render();
-        return response(['success' => true,'message'=>'Result Successfully generated!','html'=>html_entity_decode($returnHTML)], 200);
-        //return view('result.master_sheet',['data'=>$data]);
+            $students = $this->getRegisteredStudents($request)['students'];
+            $courses = [];
+            foreach ($students as $key => $value) {
+                $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
+                array_push($courses,$stud_courses);
+            }
+            $unique = collect($courses)->flatten(1)->unique(function ($item) {
+                return $item->course_code;
+            });
+            if($request->type == "summary"){
+                //$table_header = $this->getTableHeader($unique);
+                $data = $this->getSummaryTable($request);
+                $returnHTML = view('result.master_sheet',['data'=>$data])->render();
+                return response(['success' => true,'message'=>'Result Successfully generated!','html'=>html_entity_decode($returnHTML)], 200);
+                //return view('result.master_sheet',['data'=>$data]);
+            }
+            else{
+                $data = $this->getBroadsheet($request,$unique);
+                $returnHTML = view('result.master_sheet',['data'=>$data])->render();
+                return response(['success' => true,'message'=>'Result Successfully generated!','html'=>html_entity_decode($returnHTML)], 200);
+            }
     }
 
     //per student
@@ -934,6 +932,15 @@ class AdminController extends Controller
             'registration.settings_id'=>$settings])
             ->orWhere('registration.settings_id', '=', $settings - 1)->groupBy('registration.student_id')->get();
         return ['students'=>$students,'students_prev'=>$students_prev];
+    }
+
+    public function getScoreForHeader($stud_courses,$course){
+        foreach ($stud_courses as $value) {
+            if($value->course_code == $course){
+                return $value->score.''.$value->grade;
+            }
+            break;
+        }
     }
 
     public function getSessionSettings(Request $request){
