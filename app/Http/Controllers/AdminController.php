@@ -855,6 +855,7 @@ class AdminController extends Controller
                 $str_table .=$this->getTableHeader($unique);
             }
             $head_tracker +=1;
+            $counter++;
             $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
             $str_table .= '<tr >
                             <td style="text-align: left;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$counter.'</td>
