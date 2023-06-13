@@ -639,32 +639,32 @@ class AdminController extends Controller
         }
         $cgpa = round($cgpa,2);
         if($cgpa >= 4.50){
-            $class_performance_summary['first_class'] = intval($class_performance_summary['first_class']+1);
+            $class_performance_summary['GS'] = intval($class_performance_summary['GS']++);
             return 'GS';
         }
             
         elseif($cgpa >= 3.50 && $cgpa <= 4.49) {
-            $class_performance_summary['second_class_upper'] = intval($class_performance_summary['second_class_upper']+1);
+            $class_performance_summary['GS'] = intval($class_performance_summary['GS']++);
             return 'GS';
         } 
             
         elseif($cgpa >= 2.50 && $cgpa <= 3.49){
-            $class_performance_summary['second_class_lower'] = intval($class_performance_summary['second_class_lower']+1);
+            $class_performance_summary['GS'] = intval($class_performance_summary['GS']++);
             return 'GS';
         } 
             
         elseif($cgpa >= 1.50 && $cgpa <= 2.49){
-            $class_performance_summary['third_class'] = intval($class_performance_summary['third_class']+1);
+            $class_performance_summary['GS'] = intval($class_performance_summary['GS']++);
             return 'GS';
         }  
             
         elseif($cgpa >= 1.00 && $cgpa <= 1.49){
-            $class_performance_summary['pass'] = intval($class_performance_summary['pass']+1);
+            $class_performance_summary['PR'] = intval($class_performance_summary['PR']++);
             return 'PR';
         } 
             
         elseif($cgpa < 1.00 ){
-            $class_performance_summary['poor'] = intval($class_performance_summary['poor']+1);
+            $class_performance_summary['WD'] = intval($class_performance_summary['WD']++);
             return 'WD';
         }
         else{
@@ -786,7 +786,7 @@ class AdminController extends Controller
 
     public function getSummaryTable($request){
         $table_data = '';
-        $class_performance_summary = ['first_class'=>0, 'second_class_upper'=>0, 'second_class_lower'=>0,'third_class'=>0,'pass'=>0,'poor'=>0,'non_grad'=>0];
+        $class_performance_summary = ['Total'=>0,'GS'=> 0, 'PR'=> 0, 'WD'=> 0];
         $table_data .= $this->getPageHeader($request);
         $head_tracker = 0;
         $last_index = 0;
@@ -807,6 +807,7 @@ class AdminController extends Controller
             }
             $sn +=1;
             $counter++;
+            $class_performance_summary['Total']++;
             $table_data .= '<tr><td>'.$sn.'</td> <td>'.$value->matric_number.'</td>
             <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->surname.' '.$value->first_name.'</td>
             '.$values_for_summary.'</tr>';
