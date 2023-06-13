@@ -63,7 +63,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="result_html"></div>
                             <!-- end card -->
                         </div>
                     </div>
@@ -75,8 +74,25 @@
             </div>
             <!-- End Page-content -->
 
+            <div class="modal fade" id="viewResultModal" tabindex="-1" aria-labelledby="viewResultModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5>View Result</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body result_html">                                                      
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @include("admin.partials.footer")            
         </div>
+        <script src="../assets_admin/js/pages/modal.init.js"></script>
         <script src="../scripts/validation.min.js"></script>
         <script src="../assets_admin/scripts/utility.js"></script>
     @endsection
