@@ -502,13 +502,12 @@ class AdminController extends Controller
                         <table width="30%" class="result_table2" style="display:inline-table;">
                             <tr><span style="margin-left: 5%;">Class Performance Summary</span></tr>
                             <tr>
-                                <td>1st Class</td>
-                                <td>2nd Class Upper</td>
-                                <td>2nd Class Lower</td>
-                                <td>3rd Class </td>
-                                <td>Pass </td>
-                                <td>Poor </td>
-                                <td>Non Grad </td>
+                                <td>Total Number of Students</td>
+                                <td>Number in Good Standing</td>
+                                <td>Number Not in Good Standing</td>
+                                <td>Number with Incomplete Results</td>
+                                <td>Number of Probation </td>
+                                <td>Number of Withdrawals </td>
                             </tr>
                             <tr>
                                 <td>'.$class_performance_summary['first_class'].'</td>
@@ -517,7 +516,6 @@ class AdminController extends Controller
                                 <td>'.$class_performance_summary['third_class'].'</td>
                                 <td>'.$class_performance_summary['pass'].'</td>
                                 <td>'.$class_performance_summary['poor'].'</td>
-                                <td>'.$class_performance_summary['non_grad'].'</td>
                             </tr>
                 
                         </table>
@@ -527,28 +525,28 @@ class AdminController extends Controller
                         <table width="30%" class="result_table2" style="display:inline-table;">
                             <tr><span style="margin-left: 5%;">INTERPRETATION OF TERMS</span></tr>
                             <tr>
-                                <td>TNUR = Total Number of Units Registered</td>
-                            </tr>
-                            <tr>
-                                <td>TCP = Total Credit Point</td>
+                                <td>TNU = Total Number of Units Registered</td>
                             </tr>
                             <tr>
                                 <td>TNUP = Total Number of Units Passed </td>
                             </tr>
                             <tr>
+                                <td>TCP = Total Credit Point</td>
+                            </tr>
+                            <tr>
                                 <td>GPA = Grade Point Average</td>
                             </tr>
                             <tr>
-                                <td>GSD = Good Standing</td>
+                                <td>GS = Good Standing</td>
                             </tr>
                             <tr>
-                                <td>PRB = Probation</td>
+                                <td>PR = Probation</td>
                             </tr>
                             <tr>
-                                <td>WRN = Warning</td>
+                                <td>NGS = Not Good Standing</td>
                             </tr>
                             <tr>
-                                <td>WDL = Withdrawal</td>
+                                <td>WD = Withdrawal</td>
                             </tr>
                         </table>
                     </td>
@@ -559,12 +557,12 @@ class AdminController extends Controller
                             <tr>
                                 <td style="border:0;">   
                                     <pre>
-            Head of Department                    Dean                                  External Examiner
-            Name: _____________________           Name:_____________________            Name:_____________________
+            Director, DEST                                                      External Examiner
+            Name: _____________________                                         Name:_____________________
 
-            Sign: _____________________           Sign:_____________________            Sign:_____________________
+            Sign: _____________________                                         Sign:_____________________
 
-            Date: _____________________           Date:_____________________            Date:_____________________
+            Date: _____________________                                         Date:_____________________
                                     </pre>
                                 </td>
                             </tr>
