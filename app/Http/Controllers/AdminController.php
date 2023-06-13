@@ -481,14 +481,14 @@ class AdminController extends Controller
                         <h5>DIRECTORATE OF EDUCATIONAL SERVICES AND TRAINING</h5>
                         <table>
                             <tr>
-                                <td style="text-align: left">FACULTY OF: <strong>'.$request->faculty.'</strong></td>
+                                <td style="text-align: center">FACULTY OF: <strong>'.$request->faculty.'</strong></td>
                             </tr>
                             <tr>
-                                <td style="text-align: left">PROGRAMME: <strong>FOUNDATION</strong></td>
+                                <td style="text-align: center">PROGRAMME: <strong>FOUNDATION</strong></td>
                             </tr>
                             <tr>
-                                <td style="text-align: left">SESSION: <strong>'.$request->session.'</strong></td>
-                                <td style="text-align: left">SEMESTER: <strong>'.$request->semester.'</strong></td>
+                                <td style="text-align: center">SESSION: <strong>'.$request->session.'</strong></td>
+                                <td style="text-align: center">SEMESTER: <strong>'.$request->semester.'</strong></td>
                             </tr>
                         </table>
                     </div>
