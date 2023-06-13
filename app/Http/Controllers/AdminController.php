@@ -479,6 +479,7 @@ class AdminController extends Controller
                         <img src="../assets/images/run_logo.png" class="logo"/>
                         <h1>REDEEMER\'S UNIVERSITY</h1>
                         <h5>DIRECTORATE OF EDUCATIONAL SERVICES AND TRAINING</h5>
+                        <h5>FACULTY OF: <strong>'.$request->faculty.'</h5>
                         <table>
                             <tr>
                                 <td style="text-align: center">FACULTY OF: <strong>'.$request->faculty.'</strong></td>
