@@ -841,7 +841,7 @@ class AdminController extends Controller
         });
         $table_header = $this->getTableHeader($unique);
         $data = $this->getSummaryTable($request);
-        $returnHTML = view('result.master_sheet',['data'=>$data])->render();
+        $returnHTML = view('result.master_sheet',['data'=>$data,'message'=>'Result Successfully generated!'])->render();
         return response(['success' => true, 'html'=>html_entity_decode($returnHTML)], 200);
         //return view('result.master_sheet',['data'=>$data]);
     }
