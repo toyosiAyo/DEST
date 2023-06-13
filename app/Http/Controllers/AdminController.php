@@ -498,7 +498,7 @@ class AdminController extends Controller
                 <tr><th style="text-align: left" >SN</th><th style="text-align: left">Course Code</th><th style="text-align: left">Course Title</th></tr>';
         $counter = 1;
             foreach ($courses as $course) {
-                $res .= '<tr><td>'.$counter.'</td><td>'.$course->course_code.'</td><td>'.$course->course_code.'</td></tr>';
+                $res .= '<tr><td>'.$counter.'</td><td>'.$course->course_code.'</td><td>'.$course->course_title.'</td></tr>';
                 $counter++;
             }
         $res .="</table>";
@@ -913,7 +913,7 @@ class AdminController extends Controller
     public function getRegCoursesAndScores($request,$matric_number){
         $settings = $this->getSessionSettings($request);
         $courses = DB::table('registration')->join('courses', 'registration.course_code', '=', 'courses.course_code')
-        ->select('registration.*','courses.status')
+        ->select('registration.*','courses.status','courses.course_title')
         ->where(['student_id'=>$matric_number,'settings_id' => $settings])->get();
         return $courses;
     }
