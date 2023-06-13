@@ -852,16 +852,16 @@ class AdminController extends Controller
                 $last_index = $counter;
             }
             if($counter == 1){
-                $str_table .= '<table class="result_table" >';
+                $str_table .= '<table class="result_table">';
                 $str_table .=$this->getTableHeader($unique);
             }
             $head_tracker +=1;
-            $counter++;
             $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
             $str_table .= '<tr >
                             <td style="text-align: left;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$counter.'</td>
                             <td style="text-align: center;width:18px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->matric_number.'</td>
                             <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->surname.' '.$value->first_name.'</td>';
+            $counter++;
             foreach ($unique as $course) {
                 $str_table .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getScoreForHeader($stud_courses,$course).'</td>';
             }
