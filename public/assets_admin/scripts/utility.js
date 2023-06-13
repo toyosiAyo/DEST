@@ -407,10 +407,8 @@ $(document).ready(function ($) {
                         "<i data-feather='printer'></i> Download"
                     );
                     toastr["success"](response.message);
-                    $("#result_html").html(response.html);
-                    // setTimeout(function () {
-                    //     window.open = "view/result";
-                    // }, 2000);
+                    $("#viewResultModal").modal("show");
+                    $(".result_html").html(response.html);
                 },
                 error: function (response) {
                     console.log(response);
