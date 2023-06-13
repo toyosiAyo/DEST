@@ -479,10 +479,10 @@ class AdminController extends Controller
                         <img src="../assets/images/run_logo.png" class="logo"/>
                         <h1>REDEEMER\'S UNIVERSITY</h1>
                         <h5>DIRECTORATE OF EDUCATIONAL SERVICES AND TRAINING</h5>
-                        <h5>FACULTY OF: <strong>'.$request->faculty.'</strong></h5>
+                        <h5>FACULTY OF <strong>'.$request->faculty.'</strong></h5>
                         <h5>PROGRAMME: <strong>FOUNDATION</strong></h5>
                         <h5>SESSION: <strong>'.$request->session.'</strong></h5>
-                        <h5>SESSION: SEMESTER: <strong>'.$request->semester.'</strong></h5>                                                                                 
+                        <h5>SEMESTER: @php echo $request->semester == 1? <strong>FIRST</strong>:<strong>SECOND</strong>@endphp</h5>                                                                                 
                     </div>
                 <div class="header2">
                 </div>';
