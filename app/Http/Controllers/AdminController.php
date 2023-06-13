@@ -853,7 +853,7 @@ class AdminController extends Controller
             if($counter == 1){
                 $str_table .= '<table class="result_table" >';
                 $str_table .=$this->getTableHeader($unique);
-                return;
+                break;
             }
             $head_tracker +=1;
             $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
