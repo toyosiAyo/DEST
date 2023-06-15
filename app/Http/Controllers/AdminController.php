@@ -343,7 +343,8 @@ class AdminController extends Controller
             ->where([['applications.status','admitted'],['registration.settings_id',$setting->id],
                 ['registration.course_code',$data->role]])
             ->select('registration.*','applicants.id AS stud_id','applicants.surname','applicants.first_name',
-            'applications.first_choice->prog AS programme','applications.app_type','applicants.matric_number')->get();
+            'applications.first_choice->prog AS programme','applications.app_type','applicants.matric_number')
+            ->orderBy('applicants.matric_number')->get();
         $count = count($students);
         return view('admin.pages.score_input',['count'=>$count, 'students'=>$students,'data'=>$data]);
     }
