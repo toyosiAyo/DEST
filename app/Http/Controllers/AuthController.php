@@ -161,7 +161,7 @@ class AuthController extends Controller
                 return response()->json(['status'=>'ok','message'=>"Password reset successfully!"],201); 
             }
             else{
-                return response()->json(['status'=>'Nok','message'=>"Your old password isn't match!"],401); 
+                return response()->json(['status'=>'Nok','message'=>"incorrect Old Password!"],401); 
             }
         } catch (\Throwable $th) {
             return response()->json(['status'=>'Nok','message'=>'failed reseting password'],401); 
