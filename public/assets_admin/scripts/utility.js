@@ -325,6 +325,7 @@ $(document).ready(function ($) {
             }
         });
         //$("#example-console-form").text($(form).serialize());
+        console.log(form);
         var mydata = $(form).serialize();
         console.log(mydata);
         var type = "POST";
