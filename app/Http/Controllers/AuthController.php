@@ -151,7 +151,7 @@ class AuthController extends Controller
     }
 
     public function password_reset(Request $request){
-        $request->validate(['password'=>'required|confirmed|min:4|max:8', 'current_pass'=>'required|min:4|max:8',]) ;
+        $request->validate(['password'=>'required|confirmed|min:4|max:8', 'current_pass'=>'required|min:4|max:8',]);
         try {
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user')); 
             $user_obj = Applicant::findOrFail($data->id);
@@ -173,7 +173,7 @@ class AuthController extends Controller
     }
 
     public function forgot_password_post(Request $request){
-        $request->validate(['email'=>'required|email',]) ;
+        $request->validate(['email'=>'required|email',]);
         try {
             $app = Applicant::where('email',$request->email)->first();
             if(!empty($app)){
@@ -186,8 +186,8 @@ class AuthController extends Controller
                     if(app('App\Http\Controllers\ConfigController')->applicant_mail($app,$Subject,$Msg)['status'] == 'ok'){
                         return redirect('/')->with('pass_reset','Success, Check your email for the new password!');
                     } 
-                return back()->with('fail','Error sending email for password reset!');          
-              }
+                    return back()->with('fail','Error sending email for password reset!');          
+                }
             }
             return back()->with('fail','Wrong email supplied!');
         } catch (\Throwable $th) {
