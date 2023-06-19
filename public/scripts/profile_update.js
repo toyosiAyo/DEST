@@ -32,7 +32,7 @@ $(document).ready(function ($) {
         function submitFormPassword(e) {
             var formData = $("#update_password_form").serialize();
             var type = "POST";
-            var ajaxurl = "password_reset";
+            var ajaxurl = "/password_reset";
 
             $.ajax({
                 type: type,
