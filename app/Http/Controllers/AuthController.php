@@ -158,13 +158,13 @@ class AuthController extends Controller
             if(Hash::check($request->current_pass,$user_obj->password)){
                 $user_obj->password = Hash::make($request->password);
                 $user_obj->save();
-                return response()->json(['status'=>'ok','msg'=>"Password reset successfully!"],201); 
+                return response()->json(['status'=>'ok','message'=>"Password reset successfully!"],201); 
             }
             else{
-                return response()->json(['status'=>'Nok','msg'=>"Your old password isn't match!"],401); 
+                return response()->json(['status'=>'Nok','message'=>"Your old password isn't match!"],401); 
             }
         } catch (\Throwable $th) {
-            return response()->json(['status'=>'Nok','msg'=>'failed reseting password'],401); 
+            return response()->json(['status'=>'Nok','message'=>'failed reseting password'],401); 
         }
     }
 

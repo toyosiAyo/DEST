@@ -47,12 +47,12 @@ $(document).ready(function ($) {
                 success: function (response) {
                     console.log(response);
                     $("#btn_pass").html("Update Password");
-                    toastr["success"](response.msg);
+                    toastr["success"](response.message);
                 },
                 error: function (response) {
                     console.log(response);
                     $("#btn_pass").html("Update Password");
-                    toastr["error"](response.msg);
+                    toastr["error"](response.responseJSON.message);
                 },
             });
         }
