@@ -116,6 +116,7 @@
                                                     </div>
                                                     <div class="form-group form-material floating" data-plugin="formMaterial">
                                                         <input type="password" class="form-control empty" id="password_confirmation" name="password_confirmation" required>
+                                                        <input type="hidden" value="applicant" class="form-control" id="user" name="user">
                                                         <label class="floating-label" for="password_confirmation">Confirm New Password</label>
                                                     </div>
                                                 </li>

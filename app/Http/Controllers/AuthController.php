@@ -154,8 +154,15 @@ class AuthController extends Controller
     public function password_reset(Request $request){
         $request->validate(['password'=>'required|confirmed|min:4|max:8', 'current_pass'=>'required|min:4|max:8',]);
         try {
-            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user')); 
-            $user_obj = Applicant::findOrFail($data->id);
+            if($request->user == 'admin'){
+                $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
+                $user_obj = Admin::findOrFail($data->id);
+            }
+            else{
+                $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user')); 
+                $user_obj = Applicant::findOrFail($data->id);
+            }
+            
             if(Hash::check($request->current_pass,$user_obj->password)){
                 $user_obj->password = Hash::make($request->password);
                 $user_obj->save();
@@ -172,7 +179,7 @@ class AuthController extends Controller
     public function admin_password_reset(Request $request){
         $request->validate(['password'=>'required|confirmed|min:4|max:8', 'current_pass'=>'required|min:4|max:8',]);
         try {
-            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user')); 
+            $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
             $user_obj = Admin::findOrFail($data->id);
             if(Hash::check($request->current_pass,$user_obj->password)){
                 $user_obj->password = Hash::make($request->password);
