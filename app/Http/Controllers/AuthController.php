@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applicant;
+use App\Models\Admin;
 use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -155,6 +156,24 @@ class AuthController extends Controller
         try {
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user')); 
             $user_obj = Applicant::findOrFail($data->id);
+            if(Hash::check($request->current_pass,$user_obj->password)){
+                $user_obj->password = Hash::make($request->password);
+                $user_obj->save();
+                return response()->json(['status'=>'ok','message'=>"Password reset successfully!"],201); 
+            }
+            else{
+                return response()->json(['status'=>'Nok','message'=>"incorrect Old Password!"],401); 
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['status'=>'Nok','message'=>'failed reseting password'],401); 
+        }
+    }
+
+    public function admin_password_reset(Request $request){
+        $request->validate(['password'=>'required|confirmed|min:4|max:8', 'current_pass'=>'required|min:4|max:8',]);
+        try {
+            $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user')); 
+            $user_obj = Admin::findOrFail($data->id);
             if(Hash::check($request->current_pass,$user_obj->password)){
                 $user_obj->password = Hash::make($request->password);
                 $user_obj->save();
