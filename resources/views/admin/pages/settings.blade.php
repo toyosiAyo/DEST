@@ -39,6 +39,7 @@
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
                                     <label class="floating-label" for="password">New Password</label>
                                     <input type="password" class="form-control empty" id="password" name="password" required>
+                                    <input type="hidden" value="admin" class="form-control" id="user" name="user">
                                 </div>
                                 <div class="form-group form-material floating" data-plugin="formMaterial">
                                     <label class="floating-label" for="password_confirmation">Confirm New Password</label>
