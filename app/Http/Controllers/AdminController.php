@@ -243,6 +243,11 @@ class AdminController extends Controller
         return view('admin.pages.events',['data'=>$data,'events'=>$events,'count'=>$count]);
     }
 
+    public function viewSettingsPage(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
+        return view('admin.pages.settings',['data'=>$data]);
+    }
+
 
     public function create_curriculum(Request $request){
         $validator = Validator::make($request->all(), ['programme'=>'required',
