@@ -832,6 +832,9 @@ class AdminController extends Controller
             $sn +=1;
             $counter++;
             $class_performance_summary['Total']++;
+            if($this->getRemarks($this->getCGPA($this->getPreviousTNU($value, $request),$this->getPreviousTCP($value, $request),$this->getCurrentTNU($value,$request),$this->getCurrentTCP($value, $request)),$class_performance_summary) == 'GS'){
+                $class_performance_summary['GS']++;
+            }
             $table_data .= '<tr><td>'.$sn.'</td> <td>'.$value->matric_number.'</td>
             <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->surname.' '.$value->first_name.'</td>
             '.$values_for_summary.'</tr>';
