@@ -673,22 +673,22 @@ class AdminController extends Controller
         } 
             
         elseif($cgpa >= 2.50 && $cgpa <= 3.49){
-            $class_performance_summary['GS'] = $class_performance_summary['GS'] + 1;
+            $class_performance_summary['GS'] +1;
             return 'GS';
         } 
             
         elseif($cgpa >= 1.50 && $cgpa <= 2.49){
-            $class_performance_summary['GS'] = $class_performance_summary['GS'] + 1;
+            $class_performance_summary['GS'] + 1;
             return 'GS';
         }  
             
         elseif($cgpa >= 1.00 && $cgpa <= 1.49){
-            $class_performance_summary['PR'] = $class_performance_summary['PR'] + 1;
+            $class_performance_summary['PR'] + 1;
             return 'PR';
         } 
             
         elseif($cgpa < 1.00 ){
-            $class_performance_summary['WD'] = $class_performance_summary['WD'] + 1;
+            $class_performance_summary['WD'] + 1;
             return 'WD';
         }
         else{
@@ -832,6 +832,9 @@ class AdminController extends Controller
             $sn +=1;
             $counter++;
             $class_performance_summary['Total']++;
+            if($this->getRemarks($this->getCGPA($this->getPreviousTNU($value, $request),$this->getPreviousTCP($value, $request),$this->getCurrentTNU($value,$request),$this->getCurrentTCP($value, $request)),$class_performance_summary) == 'GS'){
+                $class_performance_summary['GS']++;
+            }
             $table_data .= '<tr><td>'.$sn.'</td> <td>'.$value->matric_number.'</td>
             <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->surname.' '.$value->first_name.'</td>
             '.$values_for_summary.'</tr>';
