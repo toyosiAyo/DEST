@@ -412,9 +412,13 @@ class AdminController extends Controller
             return "B";
         } elseif ($score < 60 && $score > 49) {
             return "C";
-        } elseif ($score < 50 && $score > 39) {
+        } elseif ($score < 50 && $score > 44) {
             return "D";
-        } else {
+        }
+        elseif ($score < 45 && $score > 39) {
+            return "E";
+        } 
+        else {
             return "F";
         }
     }
