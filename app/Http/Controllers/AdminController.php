@@ -899,27 +899,27 @@ class AdminController extends Controller
     }
 
     public function getHtmlResult(Request $request){
-            $students = $this->getRegisteredStudents($request)['students'];
-            $courses = [];
-            foreach ($students as $key => $value) {
-                $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
-                array_push($courses,$stud_courses);
-            }
-            $unique = collect($courses)->flatten(1)->unique(function ($item) {
-                return $item->course_code;
-            });
-            if($request->type == "summary"){
-                //$table_header = $this->getTableHeader($unique);
-                $data = $this->getSummaryTable($request);
-                $returnHTML = view('result.master_sheet',['data'=>$data])->render();
-                return response(['success' => true,'message'=>'Result Successfully generated!','html'=>html_entity_decode($returnHTML)], 200);
-                //return view('result.master_sheet',['data'=>$data]);
-            }
-            else{
-                $data = $this->getBroadsheet($request,$unique);
-                $returnHTML = view('result.master_sheet',['data'=>$data])->render();
-                return response(['success' => true,'message'=>'Result Successfully generated!','html'=>html_entity_decode($returnHTML)], 200);
-            }
+        $students = $this->getRegisteredStudents($request)['students'];
+        $courses = [];
+        foreach ($students as $key => $value) {
+            $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
+            array_push($courses,$stud_courses);
+        }
+        $unique = collect($courses)->flatten(1)->unique(function ($item) {
+            return $item->course_code;
+        });
+        if($request->type == "summary"){
+            //$table_header = $this->getTableHeader($unique);
+            $data = $this->getSummaryTable($request);
+            $returnHTML = view('result.master_sheet',['data'=>$data])->render();
+            return response(['success' => true,'message'=>'Result Successfully generated!','html'=>html_entity_decode($returnHTML)], 200);
+            //return view('result.master_sheet',['data'=>$data]);
+        }
+        else{
+            $data = $this->getBroadsheet($request,$unique);
+            $returnHTML = view('result.master_sheet',['data'=>$data])->render();
+            return response(['success' => true,'message'=>'Result Successfully generated!','html'=>html_entity_decode($returnHTML)], 200);
+        }
     }
 
     //per student
@@ -938,7 +938,7 @@ class AdminController extends Controller
             ->join('applications', 'applicants.email', '=', 'applications.submitted_by')
             ->select('registration.student_id','applicants.surname', 'applicants.first_name', 'applicants.other_name', 'applicants.matric_number','applications.id as appid')
             ->where(['applications.first_choice->faculty' => $request->faculty, 'applications.status' => 'admitted',
-                'registration.settings_id' => $settings])->groupBy('registration.student_id')->get();
+                'registration.settings_id' => $settings])->groupBy('registration.student_id')->orderBy('applicants.matric_number')->get();
         $students_prev = DB::table('registration')->join('applicants', 'registration.student_id', '=', 'applicants.id')
             ->join('applications', 'applicants.email', '=', 'applications.submitted_by')
             ->select('registration.*','applicants.surname', 'applicants.first_name', 'applicants.other_name', 'applicants.matric_number')
