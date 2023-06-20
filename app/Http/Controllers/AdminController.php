@@ -663,32 +663,32 @@ class AdminController extends Controller
         }
         $cgpa = round($cgpa,2);
         if($cgpa >= 4.50){
-            $class_performance_summary['GS']++;
+            $class_performance_summary['GS'] = $class_performance_summary['GS'] + 1;
             return 'GS';
         }
             
         elseif($cgpa >= 3.50 && $cgpa <= 4.49) {
-            $class_performance_summary['GS']++;
+            $class_performance_summary['GS'] = $class_performance_summary['GS'] + 1;
             return 'GS';
         } 
             
         elseif($cgpa >= 2.50 && $cgpa <= 3.49){
-            $class_performance_summary['GS']++;
+            $class_performance_summary['GS'] = $class_performance_summary['GS'] + 1;
             return 'GS';
         } 
             
         elseif($cgpa >= 1.50 && $cgpa <= 2.49){
-            $class_performance_summary['GS']++;
+            $class_performance_summary['GS'] = $class_performance_summary['GS'] + 1;
             return 'GS';
         }  
             
         elseif($cgpa >= 1.00 && $cgpa <= 1.49){
-            $class_performance_summary['PR']++;
+            $class_performance_summary['PR'] = $class_performance_summary['PR'] + 1;
             return 'PR';
         } 
             
         elseif($cgpa < 1.00 ){
-            $class_performance_summary['WD']++;
+            $class_performance_summary['WD'] = $class_performance_summary['WD'] + 1;
             return 'WD';
         }
         else{
