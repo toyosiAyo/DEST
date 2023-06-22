@@ -90,6 +90,7 @@
                         <div class="modal-body result_html">                                                      
                         </div>
                         <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="print_result">Print</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
