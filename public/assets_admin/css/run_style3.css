@@ -32,6 +32,12 @@ font-size: 20px; */
 @media print {
     .page {
 		page-break-after: always;
+		position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        overflow: visible!important;
 	}
 	.print_footer {
 		position: fixed;
