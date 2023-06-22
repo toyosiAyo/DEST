@@ -101,5 +101,6 @@
         </div>
         <script src="../assets_admin/js/pages/modal.init.js"></script>
         <script src="../scripts/validation.min.js"></script>
+        <script src="../assets_admin/scripts/printThis.js"></script>
         <script src="../assets_admin/scripts/utility.js"></script>
     @endsection
