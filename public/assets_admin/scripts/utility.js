@@ -433,7 +433,7 @@ $(document).ready(function ($) {
             importStyle: true,
             printContainer: true,
             loadCSS: "../css/run_style3.css",
-            pageTitle: "My Modal",
+            pageTitle: "DEST Result",
             removeInline: false,
             printDelay: 333,
             header: null,
