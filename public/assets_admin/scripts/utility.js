@@ -346,6 +346,7 @@ $(document).ready(function ($) {
                 alert(response.message);
                 $("#btnScoreInput").html("Submit");
                 $("#btnScoreInput").prop("disabled", false);
+                location.reload();
             },
             error: function (response) {
                 console.log(response);
