@@ -962,7 +962,7 @@ class AdminController extends Controller
             if($value->course_code == $course){
                 return $value->score.''.$value->grade;
             }
-            break;
+            continue;
         }
     }
 
