@@ -654,6 +654,7 @@ class AdminController extends Controller
         //$merged = $curriculum->merge($failed_courses);
 
         //return $merged->toarray();
+        $failed_courses = str_replace(array('[[',']]'),'',$failed_courses);
         return $failed_courses;
     }
 
