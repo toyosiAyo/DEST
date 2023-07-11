@@ -775,15 +775,21 @@ class AdminController extends Controller
         $divisor = 0;
         if($ptnu !='' && $ptcp !='' && $ctnu !='' && $ctcp !=''){
             $divisor = $ptnu + $ctnu;
-            return round(($ptcp + $ctcp)/$divisor,2);
+            $value = round(($ptcp + $ctcp)/$divisor,2);
+            $value = number_format($value, 2);
+            return $value;
         }
         elseif($ptnu =='' && $ptcp =='' && $ctnu !='' && $ctcp !=''){
             $divisor = $ctnu;
-            return round(($ctcp)/$divisor,2);
+            $value = round(($ctcp)/$divisor,2);
+            $value = number_format($value, 2);
+            return $value;
         }
         elseif($ptnu !='' && $ptcp !='' && $ctnu =='' && $ctcp ==''){
             $divisor = $ptnu;
-            return round(($ptcp)/$divisor,2);
+            $value = round(($ptcp)/$divisor,2);
+            $value = number_format($value, 2);
+            return $value;
         }
         else{
             return '';
