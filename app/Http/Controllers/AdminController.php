@@ -758,7 +758,7 @@ class AdminController extends Controller
     public function getGPA($tnu,$tcp){
         if($tnu != 0 && $tnu != '' && $tcp != ''){
             $value = round(intval($tcp)/intval($tnu),2);
-            $value = printf("%.2f", $value);
+            $value = number_format($value, 2);
             return $value;
         }
         return '';
