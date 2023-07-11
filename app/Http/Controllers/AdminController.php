@@ -842,7 +842,7 @@ class AdminController extends Controller
             else{
                 $class_performance_summary['WD']++;
             }
-            $table_data .= '<tr><td>'.$sn.'</td> <td style="text-align: center;width:18px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->matric_number.'</td>
+            $table_data .= '<tr><td style="text-align: left;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$sn.'</td> <td style="text-align: center;width:18px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->matric_number.'</td>
             <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->surname.' '.$value->first_name.'</td>
             '.$values_for_summary.'</tr>';
             if($head_tracker == 25 and $counter != count($students)){
