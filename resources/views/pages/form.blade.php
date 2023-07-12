@@ -559,8 +559,8 @@
                                       <select class="form-control" data-plugin="selectpicker" required
                                         name="screening_date" id="screening_date" data-live-search="true" data-allow-clear="true">
                                         <option>Select Screening Date</option>
-                                        <option value="21/11/2022">21/11/2022</option>
-                                        <option value="25/11/2022">25/11/2022</option>
+                                        <option value="19/08/2023">19/08/2023</option>
+                                        <option value="26/08/2022">26/08/2022</option>
                                       </select>
                                     </div>
                                   </div>
