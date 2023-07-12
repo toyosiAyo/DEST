@@ -52,7 +52,7 @@ class ApplicationController extends Controller
             if(!empty($pin)){
                 $o_level = DB::table('o_level_subjects')->select('id','subject')->get();
                 $faculties = app('App\Http\Controllers\ConfigController')->college_dept_prog($request)['faculties'];
-                $sub_grade = array("A1", "B2", "B3", "C4", "C5", "C6", "D7", "E8", "F9");
+                $sub_grade = array("A1", "B2", "B3", "C4", "C5", "C6", "D7", "E8", "F9", "AR");
                 return view('/pages/form',['o_level'=> $o_level,'sub_grade'=>$sub_grade,'pin'=>$pin,'data'=> $data,'faculties'=> $faculties,'form_status'=>$form_status,'application'=>$application ]);
             }
             else {
