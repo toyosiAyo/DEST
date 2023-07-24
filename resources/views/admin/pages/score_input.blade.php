@@ -58,7 +58,7 @@
                                     <td>{{ $student->app_type }}</td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <input class="form-control form-control-md score" data-id="{{$i}}" value="{{ $student->score }}" name="{{$student->stud_id}}" type="text" required>
+                                            <input class="form-control form-control-md score" data-id="{{$i}}" value="{{ $student->score }}" name="{{$student->stud_id}}" type="number" required>
                                         </div>
                                     </td>
                                     <td>
