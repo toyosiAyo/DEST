@@ -392,8 +392,8 @@ class AdminController extends Controller
             $students = DB::table('registration')->where(['course_code' => $request->course_code, 'settings_id' =>$setting->id])->get();
             foreach($students as $index => $value){ 
                 $id = $value->student_id;
-                //if($value->score == '' || $value->score == 0){
-                if($value->score != $request->$id){
+                if($value->score == '' || $value->score == 0){
+                //if($value->score != $request->$id){
                     DB::table('registration')->where(['student_id'=>$id, 'course_code' => $request->course_code])->update(
                         ['score' => $request->$id, 'grade' => $this->getGrade($request->$id) ]);
                 }
