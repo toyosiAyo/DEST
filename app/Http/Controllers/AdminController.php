@@ -952,6 +952,12 @@ class AdminController extends Controller
 
     //per faculty
     public function getRegisteredStudents($request){
+        if($request->faculty == 'BASIC MEDICAL SCIENCES'){
+            $request->faculty = 'MEDICAL SCIENCES';
+        }
+        if($request->faculty == 'BUILT ENVIRONMENT'){
+            $request->faculty = 'ENVIRONMENTAL SCIENCE';
+        }
         $settings = $this->getSessionSettings($request);
         $students = DB::table('registration')->join('applicants', 'registration.student_id', '=', 'applicants.id')
             ->join('applications', 'applicants.email', '=', 'applications.submitted_by')
@@ -966,6 +972,10 @@ class AdminController extends Controller
             ->orWhere('registration.settings_id', '=', $settings - 1)->groupBy('registration.student_id')->get();
         return ['students'=>$students,'students_prev'=>$students_prev];
     }
+
+    // public function updateFaculty(Request $request){
+    //     $facs = DB::table('applications')->where('first_choice->faculty')
+    // }
 
     public function getScoreForHeader($stud_courses,$course){
         foreach ($stud_courses as $value) {
