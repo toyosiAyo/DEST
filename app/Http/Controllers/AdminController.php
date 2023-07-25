@@ -851,8 +851,8 @@ class AdminController extends Controller
             else{
                 $class_performance_summary['WD']++;
             }
-            $table_data .= '<tr><td style="text-align: left;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$sn.'</td> <td style="text-align: center;width:18px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->matric_number.'</td>
-            <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->surname.' '.$value->first_name.'</td>
+            $table_data .= '<tr><td style="text-align: left;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$sn.'</td> <td style="text-align: center;width:18px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.strtoupper($value->matric_number).'</td>
+            <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.strtoupper($value->surname.' '.$value->first_name).'</td>
             '.$values_for_summary.'</tr>';
             if($head_tracker == 25 and $counter != count($students)){
                 $table_data .= '</table></div></br></br>';
@@ -891,8 +891,8 @@ class AdminController extends Controller
             $stud_courses = $this->getRegCoursesAndScores($request,$value->student_id);
             $str_table .= '<tr >
                             <td style="text-align: left;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$counter.'</td>
-                            <td style="text-align: center;width:18px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->matric_number.'</td>
-                            <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$value->surname.' '.$value->first_name.'</td>';
+                            <td style="text-align: center;width:18px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.strtoupper($value->matric_number).'</td>
+                            <td style="text-align: left;width: 20px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.strtoupper($value->surname.' '.$value->first_name).'</td>';
             $counter++;
             foreach ($unique as $course) {
                 $str_table .='<td style="text-align: center;width:2px;height: 20px;padding:0px 0px 0px 0px;overflow:hidden;white-space:nowrap;">'.$this->getScoreForHeader($stud_courses,$course->course_code).'</td>';
