@@ -493,6 +493,12 @@ class AdminController extends Controller
         else{
             $semester = 'SECOND';
         }
+        if($request->faculty == 'MEDICAL SCIENCES'){
+            $request->faculty = 'BASIC MEDICAL SCIENCES';
+        }
+        if($request->faculty == 'ENVIRONMENTAL SCIENCE'){
+            $request->faculty = 'BUILT ENVIRONMENT';
+        }
         return  '<div class="page"> 
                     <div class="header">
                         <img src="../assets/images/run_logo.png" class="logo"/>
