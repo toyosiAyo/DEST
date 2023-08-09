@@ -51,7 +51,7 @@ class StudentController extends Controller
         try {
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             $setting = app('App\Http\Controllers\ConfigController')->settings($request);
-            $check = DB::table('registration')->where(['student_id'=> $data->id,'settings_id'=>'3'])->first();
+            $check = DB::table('registration')->where(['student_id'=> $data->id,'settings_id'=>$setting->id])->first();
                 if($check){
                     return response()->json(['status'=>'Nok','message'=>'Registration already submitted for approval',],401); 
                 }
