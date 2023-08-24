@@ -355,7 +355,7 @@ class AdminController extends Controller
             return view('admin.pages.score_input',['count'=>$count, 'students'=>$students,'data'=>$data]);
         }
         else{
-            dd($data->role.'-'.$count);
+            dd($data->role.' - '.$count);
         }
     }
 
@@ -984,9 +984,10 @@ class AdminController extends Controller
         return ['students'=>$students,'students_prev'=>$students_prev];
     }
 
-    // public function updateFaculty(Request $request){
-    //     $facs = DB::table('applications')->where('first_choice->faculty')
-    // }
+    public function updateFaculty(Request $request){
+        $facs = DB::table('applications')->where('first_choice->faculty','MEDICAL SCIENCES')->get();
+        dd($facs);
+    }
 
     public function getScoreForHeader($stud_courses,$course){
         foreach ($stud_courses as $value) {

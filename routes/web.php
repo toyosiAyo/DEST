@@ -119,6 +119,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('admin/results',[AdminController::class,'viewResults'])->name('view_results');
 
     Route::get('admin/advance',function(){ return view('admin/pages/form-advanced'); });
+    Route::get('admin/facs',[AdminController::class,'updateFaculty']);
 });
 
 //******************************************************Admin Normal Route******************************************************
