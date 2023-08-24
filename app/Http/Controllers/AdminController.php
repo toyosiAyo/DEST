@@ -985,8 +985,11 @@ class AdminController extends Controller
     }
 
     public function updateFaculty(Request $request){
-        $facs = DB::table('applications')->where('first_choice->faculty','MEDICAL SCIENCES')->get();
-        dd($facs);
+        //$facs = DB::table('applications')->where('first_choice->faculty','MEDICAL SCIENCES')->get();
+        $affected = DB::table('applications')
+            ->where('first_choice->faculty','MEDICAL SCIENCES')
+            ->update(['first_choice->faculty' => 'BASIC MEDICAL SCIENCES']);
+        dd($affected);
     }
 
     public function getScoreForHeader($stud_courses,$course){
