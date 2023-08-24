@@ -498,12 +498,6 @@ class AdminController extends Controller
         else{
             $semester = 'SECOND';
         }
-        if($request->faculty == 'MEDICAL SCIENCES'){
-            $request->faculty = 'BASIC MEDICAL SCIENCES';
-        }
-        if($request->faculty == 'ENVIRONMENTAL SCIENCE'){
-            $request->faculty = 'BUILT ENVIRONMENT';
-        }
         return  '<div class="page"> 
                     <div class="header">
                         <img src="../assets/images/run_logo.png" class="logo"/>
@@ -963,12 +957,6 @@ class AdminController extends Controller
 
     //per faculty
     public function getRegisteredStudents($request){
-        if($request->faculty == 'BASIC MEDICAL SCIENCES'){
-            $request->faculty = 'MEDICAL SCIENCES';
-        }
-        if($request->faculty == 'BUILT ENVIRONMENT'){
-            $request->faculty = 'ENVIRONMENTAL SCIENCE';
-        }
         $settings = $this->getSessionSettings($request);
         $students = DB::table('registration')->join('applicants', 'registration.student_id', '=', 'applicants.id')
             ->join('applications', 'applicants.email', '=', 'applications.submitted_by')
@@ -1011,24 +999,4 @@ class AdminController extends Controller
         $code = DB::table('programmes')->where('programme',$programme->prog)->select('programme_id')->first();
         return $code;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
