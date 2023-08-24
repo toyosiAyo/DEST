@@ -351,8 +351,12 @@ class AdminController extends Controller
             'applications.first_choice->prog AS programme','applications.app_type','applicants.matric_number')
             ->orderBy('applicants.matric_number')->get();
         $count = count($students);
-        dd($count);
-        return view('admin.pages.score_input',['count'=>$count, 'students'=>$students,'data'=>$data]);
+        if($count > 0){
+            return view('admin.pages.score_input',['count'=>$count, 'students'=>$students,'data'=>$data]);
+        }
+        else{
+            dd($data->role.'-'.$count);
+        }
     }
 
     public function viewLecturers(Request $request){
