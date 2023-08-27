@@ -49,12 +49,18 @@
                                                         '<span class="badge badge-warning">'.$app->status.'</span>' :
                                                         '<span class="badge badge-success">'.$app->status.'</span>' @endphp
                                                     </td>
-                                                    <td><button type="button" class="btn btn-info view" data-id="{{$app->id}}" 
+                                                    <td>
+                                                        @if($app->status == 'pending')
+                                                        <button type="submit" data-email="{{$app->submitted_by}}" data-amount="7500" data-paytype="{{$app->app_type}}" class="btn btn-dark animation-scale-up pay">Continue Application</button>
+                                                        @elseif($app->status == 'admitted')
+                                                        <button type="button" class="btn btn-info view" data-id="{{$app->id}}" 
                                                             data-status="{{$app->status}}">
                                                             <i class="icon md-trending-up" aria-hidden="true"></i> View
                                                         </button>
+                                                        @endif
                                                     </td>
                                                 </tr>
+                                                
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -93,8 +99,6 @@
     </div>
         <!-- End Modal -->
     <script src="{{ asset('scripts/view_application.js') }}"></script>
-
-
-
-
+    <script src=" {{ asset('scripts/create_application.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
   @endsection
