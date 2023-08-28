@@ -41,8 +41,7 @@
                 padding-top: 40px;
             }
             .main{
-                margin: 20% auto;
-                padding-top: 5px;
+                margin: 5% auto;
                 padding-right: 30px; 
                 padding-bottom: 5px; 
                 padding-left: 30px; 
@@ -63,7 +62,7 @@
                     <img src="https://dest.run.edu.ng/img/Runny.png" class="center"/>
                 </header>
 <pre>
-{{date("F j, Y")}}  
+ {{date("d M Y", strtotime($data->approved_at))}} 
 RUN/DEST/REG/ADM/PT/{{$data->session_formulated}}
                                                                                             
 {{$data->address_resident}}  
@@ -89,7 +88,7 @@ RUN/DEST/REG/ADM/PT/{{$data->session_formulated}}
 
                 <p>With reference to your application for admission to a Part-Time degree programme in Redeemer’s
                     University, I have the pleasure to inform you that you have been offered provisional admission to
-                    study for a degree programme leading to the award of {{$data->degree}}
+                    study for a degree programme leading to the award of {{$data->degree_4_pt}}
                 </p>
                     
                 <p>The duration of the programme is {{ $data->duration }} sessions. Please note that this offer is provisional and can
@@ -105,7 +104,7 @@ RUN/DEST/REG/ADM/PT/{{$data->session_formulated}}
                     completed and returned the Acceptance form.
                 </p>
 
-                <p>The University part time programme resumes for the {{$data->session}} academic session on {{$data->resumption_date}}.
+                <p>The University part time programme resumes for the {{$data->session_admitted}} academic session on {{$data->resumption_date}}.
                     Please come along with the completed acceptance form, originals and photocopies of your
                     credentials and two passport photographs to the Directorate of Educational Services and Training (DEST).
                 </p>                
