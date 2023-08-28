@@ -132,7 +132,12 @@ class AdminController extends Controller
         $get_app = Application::join('applicants','applications.submitted_by','applicants.email')
          ->where(['applications.id'=>$app_id,'adms_y_n'=>'Y']) 
          ->select('applications.first_choice->prog as Programme1','applications.second_choice->prog as Programme2','applicants.*','applications.*')->first();
-        return view('foundation_admission',['data'=>$get_app]);
+        if($get_app->app_type == 'foundation'){
+            return view('foundation_admission',['data'=>$get_app]);
+        }
+        else{
+            return view('part-time_admission',['data'=>$get_app]);
+        }
     }
 
     public function login(Request $request){
