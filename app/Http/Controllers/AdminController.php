@@ -71,8 +71,9 @@ class AdminController extends Controller
                             $get_app->registration_closing = $request->registration_closing ;
                             $get_app->status ="admitted";
                             unset($get_app->session);
-                            unset($get_app->session_formulated);
+                            //unset($get_app->session_formulated);
                             if($get_app->save()){
+                                unset($get_app->session_formulated);
                                 //  File::delete($app_stud->address.'.pdf');
                                  return response(["status"=>"success","message"=>"Admission Letter successfully delivered"],200);  }
                             else{return response(["status"=>"failed","message"=>"Error updating recod for application"],401); }    
@@ -98,9 +99,10 @@ class AdminController extends Controller
                         $get_app->degree_4_pt =$request->degree ;
                         $get_app->status ="admitted";
                         unset($get_app->session);
-                        unset($get_app->session_formulated);
+                        //unset($get_app->session_formulated);
                         unset($get_app->degree);
                         if($get_app->save()){
+                            unset($get_app->session_formulated);
                             //  File::delete($app_stud->address.'.pdf');
                              return response(["status"=>"success","message"=>"Admission Letter successfully delivered"],200);  }
                         else{return response(["status"=>"failed","message"=>"Error updating recod for application"],401); }    
