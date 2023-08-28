@@ -42,7 +42,7 @@
             }
             .main{
                 margin: 20% auto;
-                padding-top: 5px;
+                /* padding-top: 5px; */
                 padding-right: 30px; 
                 padding-bottom: 5px; 
                 padding-left: 30px; 
