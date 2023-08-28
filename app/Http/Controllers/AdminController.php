@@ -62,6 +62,7 @@ class AdminController extends Controller
                         if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment_foundation($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
                             $get_app->adms_y_n = "Y";
                             $get_app->approved_by = $data->email;
+                            $get_app->session_formulated = substr(explode('/',$request->session)[0],-2). '-'.substr(explode('/',$request->session)[1],-2);
                             $get_app->approved_at = date("F j, Y, g:i a");
                             $get_app->duration = $request->duration;
                             $get_app->accept_date = Date("F j, Y", strtotime('+14 days'));
@@ -87,6 +88,7 @@ class AdminController extends Controller
                     if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment_pt($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
                         $get_app->adms_y_n = "Y";
                         $get_app->approved_by = $data->email;
+                        $get_app->session_formulated = substr(explode('/',$request->session)[0],-2). '-'.substr(explode('/',$request->session)[1],-2);
                         $get_app->approved_at = date("F j, Y, g:i a");
                         $get_app->duration = $request->duration;
                         $get_app->accept_date = Date("F j, Y", strtotime('+14 days'));
