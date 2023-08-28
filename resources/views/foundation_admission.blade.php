@@ -17,11 +17,13 @@
             }
             
             .bodyBody {
+                position: fixed;
                 font-family: Arial;
                 font-size: 11px;
                 /* background-image: url('/www/wwwroot/trans/public/assets/images/original.jpg'); */
                 background-size: contain;
                 background-repeat: no-repeat;
+                top: 2px;
 
             }
             .divHeader {
