@@ -22,11 +22,12 @@ $(document).ready(function ($) {
         var status = $(this).data("status");
         var appID = $(this).data("id");
         $("#details").html(status + appID);
+        var encoded_link = window.btoa(appID);
         var _href = $("a.download_letter").attr("href");
-        var link = `adms_letter?app_id=${appID}`;
+        var link = `adms_letter?app_id=${encoded_link}`;
         $("a.download_letter").attr("href", _href + link);
 
-        $("a").attr("href", `adms_letter?app_id=${appID}`);
+        $("a").attr("href", `adms_letter?app_id=${encoded_link}`);
     });
 
     $("#courseRegForm").on("submit", function (e) {
