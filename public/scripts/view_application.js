@@ -22,6 +22,10 @@ $(document).ready(function ($) {
         var status = $(this).data("status");
         var appID = $(this).data("id");
         $("#details").html(status + appID);
+        var _href = $("a.download_letter").attr("href");
+        var link = `adms_letter?app_id=${appID}`;
+        $("a.download_letter").attr("href", _href + link);
+
         $("a").attr("href", `adms_letter?app_id=${appID}`);
     });
 
