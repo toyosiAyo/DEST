@@ -63,9 +63,9 @@
                     <img src="https://dest.run.edu.ng/img/Runny.png" class="center"/>
                 </header>
 <pre>
-{{date("F j, Y")}}  
+{{date("d M Y", strtotime($data->approved_at))}}  
 RUN/DEST/REG/ADM/FUND/{{$data->session_formulated}} 
-                                                                                            
+                                                                                    
 {{$data->address_resident}}  
 </pre> 
         </div>
