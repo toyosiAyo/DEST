@@ -62,7 +62,7 @@
                     <img src="https://dest.run.edu.ng/img/Runny.png" class="center"/>
                 </header>
 <pre>
- {{date("d M Y", strtotime($data->approved_at))}} 
+{{date("d M Y", strtotime($data->approved_at))}} 
 RUN/DEST/REG/ADM/PT/{{$data->session_formulated}}
                                                                                             
 {{$data->address_resident}}  
