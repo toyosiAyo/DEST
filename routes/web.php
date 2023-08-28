@@ -91,6 +91,8 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('courses',[StudentController::class,'view_registered_courses'])->name('registered_courses');
     Route::post('submit_registration',[StudentController::class,'saveRegistration']);
 
+    Route::get('adms_letter',[AdminController::class,'generateADMSLetter']);
+
 
 
     //********************************************Admin Authenticated Route************************************************
