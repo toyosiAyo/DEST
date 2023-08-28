@@ -88,7 +88,7 @@
             <div class="modal-body">
                 <!-- <p>My applicatioon details</p> -->
                 <span id="details"></span><hr>
-                Click <a href="" target="_blank" class="download_letter">here</a> to download admission letter
+                Click <a href="#" target="_blank" class="download_letter">here</a> to download admission letter
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Close</button>
