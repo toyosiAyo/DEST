@@ -128,8 +128,9 @@ class AdminController extends Controller
     }
 
     public function generateADMSLetter(Request $request){
+        $app_id = base64_decode($request->app_id);
         $get_app = Application::join('applicants','applications.submitted_by','applicants.email')
-         ->where(['applications.id'=>$request->app_id,'adms_y_n'=>'Y']) 
+         ->where(['applications.id'=>$app_id,'adms_y_n'=>'Y']) 
          ->select('applications.first_choice->prog as Programme1','applications.second_choice->prog as Programme2','applicants.*','applications.*')->first();
         return view('foundation_admission',['data'=>$get_app]);
     }
