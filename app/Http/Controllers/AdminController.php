@@ -120,10 +120,14 @@ class AdminController extends Controller
                 // }
                 return response()->json(['status'=>'Nok','message'=>'No category of request found...','rsp'=>''], 404);  
             }
- }else{return response()->json(['status'=>'Nok','message'=>'Application not found...','rsp'=>''], 404);   }
+        }else{return response()->json(['status'=>'Nok','message'=>'Application not found...','rsp'=>''], 404);   }    
+    }
 
-    
-    
+    public function generateADMSLetter(Request $request){
+        $get_app = Application::join('applicants','applications.submitted_by','applicants.email')
+         ->where(['applications.id'=>$request->app_id,'adms_y_n'=>'Y']) 
+         ->select('applications.first_choice->prog as Programme1','applications.second_choice->prog as Programme2','applicants.*','applications.*')->first();
+        return view('foundation_admission',['data'=>$get_app]);
     }
 
     public function login(Request $request){

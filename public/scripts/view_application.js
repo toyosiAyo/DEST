@@ -22,6 +22,7 @@ $(document).ready(function ($) {
         var status = $(this).data("status");
         var appID = $(this).data("id");
         $("#details").html(status + appID);
+        $("a").attr("href", `adms_letter?app_id=${appID}`);
     });
 
     $("#courseRegForm").on("submit", function (e) {
