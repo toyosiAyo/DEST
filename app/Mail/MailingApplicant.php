@@ -30,7 +30,7 @@ class MailingApplicant extends Mailable
     public function build()
     { //dd($this->data['dataset']['Programme1']) ;
          if($this->data["app_type"] == 'foundation'){
-        $mail = $this->from('dest@run.edu.ng')->view('foundation_admission')->subject($this->data["sub"])->with('data', $this->data['dataset']);
+        $mail = $this->from('dest@run.edu.ng')->view('adms_notice')->subject($this->data["sub"])->with('data', $this->data['dataset']);
         if(!empty($this->data["docs"])){
             foreach($this->data["docs"] as $k => $v){
                 $mail = $mail->attach($v["path"],[
@@ -42,7 +42,7 @@ class MailingApplicant extends Mailable
             return $mail;
 
     }elseif($this->data["app_type"] == 'part_time'){
-        $mail = $this->from('dest@run.edu.ng')->view('part-time_admission')->subject($this->data["sub"])->with('data', $this->data['dataset']);
+        $mail = $this->from('dest@run.edu.ng')->view('adms_notice')->subject($this->data["sub"])->with('data', $this->data['dataset']);
         if(!empty($this->data["docs"])){
             foreach($this->data["docs"] as $k => $v){
                 $mail = $mail->attach($v["path"],[
