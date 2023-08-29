@@ -11,7 +11,7 @@
             style="display:block; color:#000000; text-decoration:none; font-family:Helvetica, arial, sans-serif; font-size:16px;"
             width="100%" alt=""
             data-proportionally-constrained="true"
-            data-responsive="false" src="https://dest.run.edu.ng/img/Runny.png" height="150px">
+            data-responsive="false" src="https://dest.run.edu.ng/img/Runny.png">
         </td>
         </tr>
     </tbody>
@@ -19,7 +19,7 @@
 <table style="width:100%;max-width:620px;margin:0 auto;background-color:#ffffff;">
     <tbody>
         <tr>
-            <td style="text-align:center;padding: 0 30px 20px">
+            <td style="text-align:left;padding: 0 30px 20px">
                 <p style="margin-bottom: 10px;">Dear.
                     @if(strtoupper($data->sex) == 'M') {{'Mr.'}}
                         @elseif(strtoupper($data->sex) == 'F') {{'Miss'}}
@@ -27,7 +27,7 @@
                     @endif
                         {{$data->surname.' '.$data->first_name}}  
                 </p>
-                <p style="margin-bottom: 25px;">With reference to your application for admission to the Foundation Programme of Redeemer’s
+                <p style="margin-bottom: 25px;">With reference to your application for admission to the {{$data->app_type}} Programme of Redeemer’s
                     University and further to the screening exercise, I have the pleasure to inform you that you have been
                     offered provisional admission into the {{$data->app_type}} Programme of the Redeemer’s University, Ede
                     Osun-State
