@@ -106,7 +106,7 @@ RUN/DEST/REG/ADM/FUND/{{$data->session_formulated}}
                 <p>If you accept the offer, please complete the <u>Acceptance Form</u> and return same with evidence of
                     payment of the Acceptance/Processing Fee (non-refundable deposit) of <u>Ninety-Two Thousand, Five
                     Hundred Naira (₦92,500.00) and Thirty-Five Thousand Naira (₦35,000) for JUPEB
-                    Examinations</u> not later than $data->accept_date. The procedure for payment of fees is herewith
+                    Examinations</u> not later than {{$data->accept_date}}. The procedure for payment of fees is herewith
                     attached.
                 </p>
 
