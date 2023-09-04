@@ -58,7 +58,7 @@ class AdminController extends Controller
             // if($get_app->adms_y_n == "N"){
                 if($get_app->app_type == 'foundation'){
                     // $pdf = PDF::loadView('foundation_admission',['data'=> $get_app]); 
-                    if (File::exists('FOUNDATION_ACCEPTANCE_FORM.pdf') && File::exists('2022_2023_PROPOSED_FOUNDATION_FEE.pdf')) {  
+                    if (File::exists('FOUNDATION_ACCEPTANCE_FORM.pdf') && File::exists('2023_2024_FOUNDATION_FEE_FOR_NON_SCIENCE.pdf') && File::exists('2023_2024_FOUNDATION_FEE_FOR_SCIENCE.pdf')) {  
                         if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment_foundation($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
                             $get_app->adms_y_n = "Y";
                             $get_app->approved_by = $data->email;
