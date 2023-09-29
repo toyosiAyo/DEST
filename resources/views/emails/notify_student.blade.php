@@ -226,7 +226,7 @@
 <td>
 <div style="font-family: Tahoma, Verdana, sans-serif">
 <div style="font-size: 12px; font-family: Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 14.399999999999999px; color: #393d47; line-height: 1.2;">
-<p style="margin: 0; font-size: 14px; text-align: center;"><span style="font-size:10px;"> If you have any problems</span><br/><span style="font-size:10px;">please feel free to chat with us via the <a href="https://reg.run.edu.ng/transcript" target="_blank">Transcript Portal</a> or contact us at <a href="mailto:transcript@run.edu.ng" rel="noopener" style="text-decoration: underline; color: #393d47;" title="transcript@run.edu.ng">transcript@run.edu.ng</a> or call us at +2348154740043 <a href="Example.com" rel="noopener" style="text-decoration: underline; color: #393d47;" target="_blank"></a></span></p>
+<p style="margin: 0; font-size: 14px; text-align: center;"><span style="font-size:10px;"> If you have any problems</span><br/><span style="font-size:10px;">please contact us at <a href="mailto:info.dest@run.edu.ng" rel="noopener" style="text-decoration: underline; color: #393d47;" title="info.dest@run.edu.ng">info.dest@run.edu.ng</a> or call us at +2348150465869 </span></p>
 <div style="display: flex; justify-content: space-between; margin-top: 20px;">
 <div><a href="https://www.twitter.com/RedeemersUni"><img src="https://transcriptapp.run.edu.ng/images/twitter2x.png" alt="" width="40px" ></a></div>
 <div><a href="https://www.instagram.com/redeemersuniversity"><img src="https://transcriptapp.run.edu.ng/images/instagram2x.png" alt="" width="40px"></a></div>
@@ -292,7 +292,7 @@
 <p style="margin: 0; text-align: center;"></p>
 <p style="margin: 0; text-align: center;"></p>
 <p style="margin: 0; text-align: center; mso-line-height-alt: 14.399999999999999px;"> </p>
-<p style="margin: 0; text-align: center;">Copyright © 2022 Redeemer's University. All rights reserved.<a href="https://run.edu.ng" style=""></a></p>
+<p style="margin: 0; text-align: center;">Copyright © 2023 RUNDEST. All rights reserved.<a href="https://dest.edu.ng" style=""></a></p>
 <p style="margin: 0; font-size: 12px; text-align: center;"><span style="color:#c0c0c0;"> </span></p>
 </div>
 </div>
