@@ -91,7 +91,7 @@ RUN/DEST/REG/ADM/PT/{{$data->session_formulated}}
                     study for a degree programme leading to the award of {{$data->degree_4_pt}}
                 </p>
                     
-                <p>The duration of the programme is {{ $data->duration }} sessions. Please note that this offer is provisional and can
+                <p>The duration of the programme is {{ $data->duration }} semesters. Please note that this offer is provisional and can
                     be revoked if you fail to produce the original copies of your credentials.
                 </p>
 
