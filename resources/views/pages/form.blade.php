@@ -550,7 +550,7 @@
                                         <span class="input-group-btn">
                                           <span class="btn btn-primary btn-file">
                                             <i class="icon md-upload" aria-hidden="true"></i>
-                                            <input type="file" id="signature" name="signature" accept="image/*" required> 
+                                            <input type="file" id="signature" name="signature" accept="image/*"> 
                                           </span>
                                         </span>
                                       </div>
@@ -559,8 +559,8 @@
                                       <select class="form-control" data-plugin="selectpicker" required
                                         name="screening_date" id="screening_date" data-live-search="true" data-allow-clear="true">
                                         <option>Select Screening Date</option>
-                                        <option value="19/08/2023">19/08/2023</option>
-                                        <option value="26/08/2022">26/08/2022</option>
+                                        <option value="13/04/2024">13/04/2024</option>
+                                        <option value="13/05/2024">13/05/2024</option>
                                       </select>
                                     </div>
                                   </div>
@@ -574,7 +574,7 @@
                                         <span class="input-group-btn">
                                           <span class="btn btn-info btn-file">
                                             <i class="icon md-upload" aria-hidden="true"></i>
-                                            <input type="file" name="olevel" required> 
+                                            <input type="file" name="olevel"> 
                                           </span>
                                         </span>
                                       </div>
@@ -585,7 +585,7 @@
                                         <span class="input-group-btn">
                                           <span class="btn btn-danger btn-file">
                                             <i class="icon md-upload" aria-hidden="true"></i>
-                                            <input type="file" name="birth_cert" required> 
+                                            <input type="file" name="birth_cert"> 
                                           </span>
                                         </span>
                                       </div>
