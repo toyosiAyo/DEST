@@ -607,7 +607,7 @@
                                   </label>
                                 </div>
                                 <div class="form-group form-material col-xl-12 text-right padding-top-m">
-                                  <button type="submit" class="btn btn-primary" id="btn_declaration">Submit Application</button>
+                                  <button type="submit" class="btn btn-info" id="btn_declaration">Submit Application</button>
                                 </div>
                               </form>
                             </div>
