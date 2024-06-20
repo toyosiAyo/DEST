@@ -54,7 +54,8 @@
                                             <div class="mb-3">
                                                 <label for="session" class="form-label font-size-13 text-muted">Select Session</label>
                                                 <select class="form-control" name="session" id="session">
-                                                    <option value="2022/2023">2022/2023</option>
+                                                    <option value="2022/2023">2022/2023</option> 
+                                                    <option value="2023/2024">2023/2024</option> 
                                                 </select>
                                             </div>
                                             <div class="mb-3">
