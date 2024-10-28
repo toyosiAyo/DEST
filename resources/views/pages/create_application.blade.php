@@ -53,9 +53,9 @@
                             role="tabpanel">
                             <div class="panel-body">
                             Click the button below to create a new application or to continue with your unsubmitted application<br>
-                              Application fee is (₦7,500)
+                              Application fee is (₦10,000)
                                 <div class="animation-example animation-hover hover">
-                                  <button type="submit" data-email="{{$data->email}}" data-amount="7500" data-paytype="foundation" class="btn btn-dark animation-scale-up pay">Create Application </button>
+                                  <button type="submit" data-email="{{$data->email}}" data-amount="10000" data-paytype="foundation" class="btn btn-dark animation-scale-up pay">Create Application </button>
                                 </div>
                             </div>
                           </div>
@@ -79,9 +79,9 @@
                             role="tabpanel">
                             <div class="panel-body">
                             Click the button below to create a new application or to continue with your unsubmitted application<br>
-                            Application fee is (₦7,500)
+                            Application fee is (₦10,000)
                                 <div class="animation-example animation-hover hover">
-                                  <button type="submit" data-email="{{$data->email}}" data-amount="7500" data-paytype="predegree" class="btn btn-dark animation-scale pay">Create Application </button>
+                                  <button type="submit" data-email="{{$data->email}}" data-amount="10000" data-paytype="predegree" class="btn btn-dark animation-scale pay">Create Application </button>
                                 </div>
                             </div>
                           </div>
