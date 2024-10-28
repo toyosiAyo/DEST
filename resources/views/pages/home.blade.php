@@ -107,11 +107,18 @@
                         <td>{{ $app->Programme }}</td>
                         <td>{{ $app->app_type }}</td>
                         <td>
-                          <span class="badge badge-info">{{ $app->status }}</span>
+                            @if($app->status == 'admitted')
+                            <span class="badge badge-success">{{ $app->status }}</span>
+                            @else
+                            <span class="badge badge-info">{{ $app->status }}</span>
+                            @endif
                         </td>
                         <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
                         <td>@if($app->status == 'pending')
-                            <button type="submit" data-email="{{$app->submitted_by}}" data-amount="7500" data-paytype="{{$app->app_type}}" class="btn btn-dark animation-scale-up pay">Continue Application</button>
+                            <button type="submit" data-email="{{$app->submitted_by}}" data-amount="10000" data-paytype="{{$app->app_type}}" class="btn btn-dark animation-scale-up pay">Continue Application
+                            </button>
+                            @else
+                            <a href="/application" type="button" class="btn btn-info animation-scale-up ">View</a>
                             @endif
                         </td>
                       </tr> 
