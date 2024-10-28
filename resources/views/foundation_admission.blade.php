@@ -104,8 +104,8 @@ RUN/DEST/REG/ADM/FUND/{{$data->session_formulated}}
                 </p>
 
                 <p>If you accept the offer, please complete the <u>Acceptance Form</u> and return same with evidence of
-                    payment of the Acceptance/Processing Fee (non-refundable deposit) of <u>Ninety-Two Thousand, Five
-                    Hundred Naira (₦92,500.00) and Thirty-Five Thousand Naira (₦35,000) for JUPEB
+                    payment of the Acceptance Fee (non-refundable deposit) of <u>Fifty Thousand,
+                    (₦50,000.00) and Fifty-Five Thousand Naira (₦55,000) for JUPEB
                     Examinations</u> not later than {{$data->accept_date}}. The procedure for payment of fees is herewith
                     attached.
                 </p>
@@ -127,9 +127,9 @@ RUN/DEST/REG/ADM/FUND/{{$data->session_formulated}}
 
         <div class="divAdios">
             Yours sincerely,<br>
-            <img alt="" src="https://destadms.run.edu.ng/images/sd.png" style=" height: auto; width: 100px;" title="DEST" /><br>
+            <img alt="" src="http://destadms.run.edu.ng/images/sd.png" style=" height: auto; width: 100px;" title="DEST" /><br>
             Samuel Ajayi<br>
-            Administrative Officer, Directorate of Educational Services and Training (DEST)<br>
+            Senior Administrative Officer, Directorate of Educational Services and Training (DEST)<br>
             E-mail: info.dest@run.edu.ng.
         </div>
     </body>
