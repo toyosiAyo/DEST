@@ -48,7 +48,7 @@ class StudentController extends Controller
 
     public function saveRegistration(Request $request){
         $request->validate([ 'course' => 'required']);
-        //return response(['status'=>'Nok','message'=>'Registration not opened for the semester yet',],401); 
+        return response(['status'=>'Nok','message'=>'Registration not opened for the semester yet',],401); 
         try {
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             $setting = app('App\Http\Controllers\ConfigController')->settings($request);

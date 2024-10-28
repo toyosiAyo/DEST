@@ -58,7 +58,7 @@ class AdminController extends Controller
             // if($get_app->adms_y_n == "N"){
                 if($get_app->app_type == 'foundation'){
                     // $pdf = PDF::loadView('foundation_admission',['data'=> $get_app]); 
-                    if (File::exists('FOUNDATION_ACCEPTANCE_FORM.pdf') && File::exists('2023_2024_FOUNDATION_FEE_FOR_NON_SCIENCE.pdf') && File::exists('2023_2024_FOUNDATION_FEE_FOR_SCIENCE.pdf')) {  
+                    if (File::exists('FOUNDATION_ACCEPTANCE_FORM.pdf') && File::exists('2024_2025_FOUNDATION_FEE_FOR_NON_SCIENCE.pdf') && File::exists('2024_2025_FOUNDATION_FEE_FOR_SCIENCE.pdf')) {  
                         if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment_foundation($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
                             $get_app->adms_y_n = "Y";
                             $get_app->approved_by = $data->email;
@@ -75,12 +75,21 @@ class AdminController extends Controller
                             if($get_app->save()){
                                 unset($get_app->session_formulated);
                                 //  File::delete($app_stud->address.'.pdf');
-                                 return response(["status"=>"success","message"=>"Admission Letter successfully delivered"],200);  }
-                            else{return response(["status"=>"failed","message"=>"Error updating recod for application"],401); }    
-                        }else{return response(["status"=>"failed","message"=>"Error sending admission letter email "],401);}
-                        }else{return response(["status"=>"failed","message"=>"No supporting document(s) in the directory"],401);  } 
-
-                }elseif($get_app->app_type == 'part_time'){
+                                 return response(["status"=>"success","message"=>"Admission Letter successfully delivered"],200);  
+                            }
+                            else{
+                                return response(["status"=>"failed","message"=>"Error updating recod for application"],401); 
+                            }    
+                        }
+                        else{
+                             return response(["status"=>"failed","message"=>"Error sending admission letter email "],401);
+                        }
+                    }
+                    else{
+                        return response(["status"=>"failed","message"=>"No supporting document(s) in the directory"],401);  
+                    } 
+                }
+                elseif($get_app->app_type == 'part_time'){
                 //  $pdf = PDF::loadView('part-time_admission',['data'=> $get_app]); 
                 $validator = Validator::make($request->all(), ['degree'=>'required',]);
                 if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'degree is required','rsp'=>''], 401); } 
@@ -411,7 +420,7 @@ class AdminController extends Controller
             $students = DB::table('registration')->where(['course_code' => $request->course_code, 'settings_id' =>$setting->id])->get();
             foreach($students as $index => $value){ 
                 $id = $value->student_id;
-                if($value->score == '' || $value->score == 0 || $value->score != $request->$id){
+                if($value->score == '' || $value->score == 0 || $value->score !== $request->$id){
                 //if($value->score != $request->$id){
                     DB::table('registration')->where(['student_id'=>$id, 'course_code' => $request->course_code])->update(
                         ['score' => $request->$id, 'grade' => $this->getGrade($request->$id) ]);
