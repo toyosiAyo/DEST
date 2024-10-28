@@ -550,7 +550,7 @@
                                         <span class="input-group-btn">
                                           <span class="btn btn-primary btn-file">
                                             <i class="icon md-upload" aria-hidden="true"></i>
-                                            <input type="file" id="signature" name="signature" accept="image/*"> 
+                                            <input type="file" id="signature" name="signature" accept="image/*" required> 
                                           </span>
                                         </span>
                                       </div>
@@ -559,8 +559,8 @@
                                       <select class="form-control" data-plugin="selectpicker" required
                                         name="screening_date" id="screening_date" data-live-search="true" data-allow-clear="true">
                                         <option>Select Screening Date</option>
-                                        <option value="13/04/2024">13/04/2024</option>
-                                        <option value="13/05/2024">13/05/2024</option>
+                                        <option value="7/09/2024">7/09/2024</option>
+                                        <option value="31/08/2024">31/08/2024</option>
                                       </select>
                                     </div>
                                   </div>
@@ -574,7 +574,7 @@
                                         <span class="input-group-btn">
                                           <span class="btn btn-info btn-file">
                                             <i class="icon md-upload" aria-hidden="true"></i>
-                                            <input type="file" name="olevel"> 
+                                            <input type="file" name="olevel" required> 
                                           </span>
                                         </span>
                                       </div>
@@ -585,7 +585,7 @@
                                         <span class="input-group-btn">
                                           <span class="btn btn-danger btn-file">
                                             <i class="icon md-upload" aria-hidden="true"></i>
-                                            <input type="file" name="birth_cert"> 
+                                            <input type="file" name="birth_cert" required> 
                                           </span>
                                         </span>
                                       </div>
@@ -607,7 +607,7 @@
                                   </label>
                                 </div>
                                 <div class="form-group form-material col-xl-12 text-right padding-top-m">
-                                  <button type="submit" class="btn btn-info" id="btn_declaration">Submit Application</button>
+                                  <button type="submit" class="btn btn-primary" id="btn_declaration">Submit Application</button>
                                 </div>
                               </form>
                             </div>
