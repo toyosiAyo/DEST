@@ -32,7 +32,7 @@
                     offered provisional admission into the {{$data->app_type}} Programme of the Redeemer’s University, Ede
                     Osun-State
                 </p>
-                <p>Kindly find attached the necessary documents and logon to your portal (https://destadms.run.edu.ng) to download your admission letter</p>
+                <p>Kindly find attached the necessary documents and logon to your portal (http://destadms.run.edu.ng) to download your admission letter</p>
                 <p>Thank you</p>
 
             </td>
