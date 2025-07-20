@@ -846,9 +846,9 @@
                                                                                     data-live-search="true"
                                                                                     data-allow-clear="true">
                                                                                     <option>Select Screening Date</option>
-                                                                                    <option value="7/09/2024">7/09/2025
+                                                                                    <option value="7/09/2025">7/09/2025
                                                                                     </option>
-                                                                                    <option value="31/08/2024">31/08/2025
+                                                                                    <option value="31/08/2025">31/08/2025
                                                                                     </option>
                                                                                 </select>
                                                                             </div>

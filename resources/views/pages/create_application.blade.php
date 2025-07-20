@@ -55,7 +55,7 @@
                                                     <div class="panel-body">
                                                         Click the button below to create a new application or to continue
                                                         with your unsubmitted application<br>
-                                                        Application fee is (₦7,500)
+                                                        Application fee is (₦10,000)
                                                         <div class="animation-example animation-hover hover">
                                                             <button type="submit" data-surname="{{ $data->surname }}"
                                                                 data-firstname="{{ $data->first_name }}"
@@ -72,33 +72,29 @@
                                     <!-- End Categroy 1 -->
 
                                     <!-- Categroy 2 -->
-                                    <div class="tab-pane" id="category-2" role="tabpanel">
-                                        <div class="panel-group panel-group-simple panel-group-continuous" id="accordion"
-                                            aria-multiselectable="true" role="tablist">
-                                            <div class="panel">
-                                                <div class="panel-heading" id="question-5" role="tab">
-                                                    <a class="panel-title" aria-controls="answer-5" aria-expanded="true"
-                                                        data-toggle="collapse" href="#answer-5" data-parent="#accordion">
-                                                        Pre-degree Programme
-                                                    </a>
-                                                </div>
-                                                <div class="panel-collapse collapse show" id="answer-5"
-                                                    aria-labelledby="question-5" role="tabpanel">
-                                                    <div class="panel-body">
-                                                        Click the button below to create a new application or to continue
-                                                        with your unsubmitted application<br>
-                                                        Application fee is (₦7,500)
-                                                        <div class="animation-example animation-hover hover">
-                                                            <button type="submit" data-email="{{ $data->email }}"
-                                                                data-amount="7500" data-paytype="predegree"
-                                                                class="btn btn-dark animation-scale pay">Create Application
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!--<div class="tab-pane" id="category-2" role="tabpanel">-->
+                                    <!--  <div class="panel-group panel-group-simple panel-group-continuous" id="accordion"-->
+                                    <!--    aria-multiselectable="true" role="tablist">-->
+                                    <!--    <div class="panel">-->
+                                    <!--      <div class="panel-heading" id="question-5" role="tab">-->
+                                    <!--        <a class="panel-title" aria-controls="answer-5" aria-expanded="true" data-toggle="collapse"-->
+                                    <!--          href="#answer-5" data-parent="#accordion">-->
+                                    <!--          Pre-degree Programme-->
+                                    <!--        </a>-->
+                                    <!--      </div>-->
+                                    <!--      <div class="panel-collapse collapse show" id="answer-5" aria-labelledby="question-5"-->
+                                    <!--        role="tabpanel">-->
+                                    <!--        <div class="panel-body">-->
+                                    <!--        Click the button below to create a new application or to continue with your unsubmitted application<br>-->
+                                    <!--        Application fee is (₦10,000)-->
+                                    <!--            <div class="animation-example animation-hover hover">-->
+                                    <!--              <button type="submit" data-surname="{{ $data->surname }}" data-firstname="{{ $data->first_name }}" data-email="{{ $data->email }}" data-amount="10000" data-paytype="predegree" class="btn btn-dark animation-scale pay">Create Application </button>-->
+                                    <!--            </div>-->
+                                    <!--        </div>-->
+                                    <!--      </div>-->
+                                    <!--    </div>-->
+                                    <!--  </div>-->
+                                    <!--</div>-->
                                     <!-- End Categroy 2 -->
 
                                     <!-- Categroy 3 -->
