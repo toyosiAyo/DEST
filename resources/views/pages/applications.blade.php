@@ -1,20 +1,21 @@
-@extends("layouts.master") 
+@extends('layouts.master')
 
-  @section("title")
-      Applications
-  @endsection
+@section('title')
+    Applications
+@endsection
 
-  @section("content")
+@section('content')
+
     <body class="animsition site-menubar-push site-menubar-open site-menubar-fixed">
         <div class="page">
-        @if(Session::get('appSubmit'))
-        <div class="alert dark alert-icon alert-success alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <i class="icon md-close" aria-hidden="true"></i> {{Session::get('appSubmit')}}
-        </div>
-         @endif
+            @if (Session::get('appSubmit'))
+                <div class="alert dark alert-icon alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <i class="icon md-close" aria-hidden="true"></i> {{ Session::get('appSubmit') }}
+                </div>
+            @endif
             <div class="page-content container-fluid">
                 <div class="row" data-plugin="masonry">
                     <div class="col-lg-12 masonry-item">
@@ -39,28 +40,38 @@
                                             </thead>
                                             <tbody>
                                                 @php $i = 1; @endphp
-                                                @foreach($apps as $app)
-                                                <tr>
-                                                    <td>{{ $i }} @php $i++ @endphp</td>
-                                                    <td>{{ $app->Programme }}</td>
-                                                    <td>{{ $app->app_type }}</td>
-                                                    <td>{{ date("d M Y", strtotime($app->updated_at)) }}</td>
-                                                    <td>@php echo $app->status == 'pending' ? 
-                                                        '<span class="badge badge-warning">'.$app->status.'</span>' :
-                                                        '<span class="badge badge-success">'.$app->status.'</span>' @endphp
-                                                    </td>
-                                                    <td>
-                                                        @if($app->status == 'pending')
-                                                        <button type="submit" data-email="{{$app->submitted_by}}" data-amount="7500" data-paytype="{{$app->app_type}}" class="btn btn-dark animation-scale-up pay">Continue Application</button>
-                                                        @elseif($app->status == 'admitted')
-                                                        <button type="button" class="btn btn-info view" data-id="{{$app->id}}" 
-                                                            data-status="{{$app->status}}">
-                                                            <i class="icon md-trending-up" aria-hidden="true"></i> View
-                                                        </button>
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                                
+                                                @foreach ($apps as $app)
+                                                    <tr>
+                                                        <td>{{ $i }} @php $i++ @endphp</td>
+                                                        <td>{{ $app->Programme }}</td>
+                                                        <td>{{ $app->app_type }}</td>
+                                                        <td>{{ date('d M Y', strtotime($app->updated_at)) }}</td>
+                                                        <td>@php echo $app->status == 'pending' ? '<span class="badge badge-warning">' . $app->status . '</span>' : '<span class="badge badge-success">' . $app->status . '</span>'; @endphp
+                                                        </td>
+                                                        <td>
+                                                            @if ($app->status == 'pending')
+                                                                <button type="submit" data-email="{{ $app->submitted_by }}"
+                                                                    data-firstname="{{ $data->first_name }}"
+                                                                    data-surname="{{ $data->surname }}" data-amount="10000"
+                                                                    data-paytype="{{ $app->app_type }}"
+                                                                    class="btn btn-dark animation-scale-up pay">Continue
+                                                                    Application</button>
+                                                            @elseif($app->status == 'admitted')
+                                                                <button type="button" class="btn btn-info view"
+                                                                    data-id="{{ $app->id }}"
+                                                                    data-status="{{ $app->status }}">
+                                                                    <i class="icon md-trending-up" aria-hidden="true"></i>
+                                                                    View
+                                                                </button>
+                                                                <button type="button" class="btn btn-success view_schedule"
+                                                                    data-app_id="{{ $app->id }}"
+                                                                    data-app_type="{{ $app->app_type }}">
+                                                                    <i class="icon md-trending-up" aria-hidden="true"></i>
+                                                                    Pay
+                                                                </button>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -75,30 +86,64 @@
         </div>
     </body>
     <!-- Modal -->
-    <div class="modal fade modal-newspaper" id="view_app" aria-hidden="true"
-        aria-labelledby="exampleModalTitle" role="dialog" tabindex="-1">
+    <div class="modal fade modal-newspaper" id="view_app" aria-hidden="true" aria-labelledby="exampleModalTitle"
+        role="dialog" tabindex="-1">
         <div class="modal-dialog modal-simple">
             <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-                </button>
-                <h4 class="modal-title">Application details</h4>
-            </div>
-            <div class="modal-body">
-                <!-- <p>My applicatioon details</p> -->
-                <span style="color:green" id="details"></span><hr>
-                Click <a href="#" target="_blank" class="download_letter">here</a> to download admission letter
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-            </div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Application details</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- <p>My applicatioon details</p> -->
+                    <span style="color:green" id="details"></span>
+                    <hr>
+                    Click <a href="#" target="_blank" class="download_letter">here</a> to download admission letter
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
             </div>
         </div>
     </div>
-        <!-- End Modal -->
+
+    <div class="modal fade modal-newspaper" id="payment_modal" aria-hidden="true" aria-labelledby="exampleModalTitle"
+        role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Admission Fees</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Item</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentBody">
+                            <!-- Data will be inserted here -->
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Close</button>
+                    <button type="button" id="btn_proceed_to_payment" class="btn btn-success"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
     <script src="{{ asset('scripts/view_application.js') }}"></script>
-    <script src=" {{ asset('scripts/create_application.js') }}"></script>
+    <script src=" {{ asset('scripts/payment.js') }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
-  @endsection
+@endsection

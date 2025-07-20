@@ -63,33 +63,56 @@ class ApplicationController extends Controller
         }
     }
 
+    public function getFacultyCategory($id){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $sciences = ["NATURAL SCIENCES","BASIC MEDICAL SCIENCES","ENGINEERING"];
+        $check = Application::findOrFail($id);
+        $faculty = $check->first_choice["faculty"];
+        if($check->app_type == "part_time"){
+            return "other";
+        }
+        else{
+            if (in_array($faculty, $sciences)) {
+                return "science";
+            }
+            else{
+                return "non-science";
+            }
+        }
+    }
+
     public function checkForUsedPin($request){
         try {
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            $session = app('App\Http\Controllers\ConfigController')->settings($request)->id;
+
             $used_pin = DB::table('application_payments')
             ->join('applications','application_payments.rrr','applications.used_pin')
             ->where('application_payments.email',$data->email)->pluck('rrr'); 
 
             $success_pin = DB::table('application_payments')->select('rrr')
-            ->where('email',$data->email)
-            ->where('status_code','00')->where('pay_type', $request->payType)->whereNotIn('rrr', $used_pin)->get();
+            ->where(['email'=>$data->email,'status_msg'=>'success', 'status_code'=>'00','pay_type'=> $request->payType,'amount'=>$request->amount,'session'=>$session])
+            ->whereNotIn('rrr', $used_pin)->get();
+
             // Remove when payment gateway is ready
-            $pending_pin = DB::table('application_payments')->select('rrr')
-            ->where('email',$data->email)
-            ->where('status_msg','pending')->where('pay_type', $request->payType)->whereNotIn('rrr', $used_pin)->get();
-           // Remove when payment gateway is ready
-            if($pending_pin->count() !=0){
-                $pin = $pending_pin[0]->rrr;
-                $this->pin = $pending_pin[0]->rrr;
-               // return $pin;
-                return ['status'=>'ok','msg'=>'pending','pin'=>$pin];  
-            }
+            // $pending_pin = DB::table('application_payments')->select('rrr')
+            // ->where('email',$data->email)
+            // ->where('status_msg','pending')->where('pay_type', $request->payType)->whereNotIn('rrr', $used_pin)->get();
+
             if($success_pin->count() !=0){
                 $pin = $success_pin[0]->rrr;
                 $this->pin = $success_pin[0]->rrr;
-               // return $pin;
                 return ['status'=>'ok','msg'=>'success','pin'=>$pin];  
             }
+
+           // Remove when payment gateway is ready
+            // if($pending_pin->count() !=0){
+            //     $pin = $pending_pin[0]->rrr;
+            //     $this->pin = $pending_pin[0]->rrr;
+            //    // return $pin;
+            //     return ['status'=>'ok','msg'=>'pending','pin'=>$pin];  
+            // }
+            
             return ['status'=>'Nok','msg'=>'No Pin','pin'=>''];  
 
         } 

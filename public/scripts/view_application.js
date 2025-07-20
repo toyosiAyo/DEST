@@ -16,6 +16,7 @@ $(document).ready(function ($) {
         showMethod: "fadeIn",
         hideMethod: "fadeOut",
     };
+    $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 
     $("#app_table").on("click", ".view", function () {
         $("#view_app").modal("show");
@@ -28,6 +29,45 @@ $(document).ready(function ($) {
         $("a.download_letter").attr("href", _href + link);
 
         $("a").attr("href", `adms_letter?app_id=${encoded_link}`);
+    });
+
+    $("#app_table").on("click", ".view_schedule", function () {
+        var degree = $(this).data("app_type");
+        var app_id = $(this).data("app_id");
+        var type = "admission";
+        $.ajax({
+            url: "get-payment-schedule",
+            method: "GET",
+            data: { app_type: degree, type: type, app_id: app_id },
+            dataType: "json",
+            success: function (response) {
+                let rows = "";
+                response.payload.forEach(function (item) {
+                    rows += `
+            <tr>
+              <td><input type="checkbox" checked disabled></td>
+              <td>${item.item}</td>
+              <td>${item.amount}</td>
+            </tr>
+          `;
+                });
+                $("#paymentBody").html(rows);
+                if (response.payment_status == "success") {
+                    $("#btn_proceed_to_payment").html("PAID");
+                    $("#btn_proceed_to_payment").prop("disabled", true);
+                } else {
+                    $("#btn_proceed_to_payment").html(
+                        `Proceed to Payment (₦ ${response.total})`
+                    );
+                }
+
+                $("#payment_modal").modal("show");
+            },
+            error: function (response) {
+                toastr["error"](response.responseJSON.message);
+                console.log(xhr.responseText);
+            },
+        });
     });
 
     $("#courseRegForm").on("submit", function (e) {

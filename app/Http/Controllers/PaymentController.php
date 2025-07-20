@@ -16,6 +16,26 @@ class PaymentController extends Controller
     public function __construct(){
         $this->middleware('authcheck');
     }
+
+    public function checkAdmissionPayment($app_id, $total){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+
+        $check_payment = DB::table("admission_payments")->where(['email'=>$data->email,'app_id'=>$app_id,'amount'=>$total,
+            'status'=>'success'])->first();
+        if($check_payment){
+            return $check_payment->status;
+        }
+    }
+
+    public function getPaymentSchedule(Request $request){
+        $category = app('App\Http\Controllers\ApplicationController')->getFacultyCategory($request->app_id);
+        $payload = DB::table('fee_schedule')->where(['degree'=>$request->app_type,'type'=>$request->type,'category'=>$category])->get();
+        $total = $payload->sum('amount');
+
+        $payment_status = $this->checkAdmissionPayment($request->app_id,$total);
+
+        return response(['payload'=>$payload,'total'=>$total,'payment_status'=>$payment_status], 200);
+    }
     
     public function initApplicationPayment(Request $request){
         $validator = Validator::make($request->all(), [ 
