@@ -95,8 +95,7 @@ class AuthController extends Controller
         ]);
 
         $app = DB::table('applications')->select('*','first_choice->prog as programme')->where([
-                    ['submitted_by', $request->student_email],
-                    ['status', 'admitted'],
+                    'submitted_by'=> $request->student_email,'status'=> 'admitted',
                 ])->first();
 
         $user = Applicant::where('email',$request->student_email)->first();
@@ -279,5 +278,6 @@ class AuthController extends Controller
             }
             return redirect('/');
         }
+        return redirect('/');
     }
 }

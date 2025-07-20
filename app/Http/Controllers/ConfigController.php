@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\State;
 use App\Models\Lga;
 use App\Models\Setting;
+use App\Models\PartTimeSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -49,8 +50,8 @@ class ConfigController extends Controller
             'to' => [$get_app->email],
             'docs'=> [ 
                 ['path'=> public_path('FOUNDATION_ACCEPTANCE_FORM.pdf'), 'as' => "FOUNDATION_ACCEPTANCE_FORM.pdf",'mime' => 'application/pdf'], 
-                ['path'=> public_path('2023_2024_FOUNDATION_FEE_FOR_NON_SCIENCE.pdf'), 'as' => "FOUNDATION_FEES.pdf",'mime' => 'application/pdf'], 
-                ['path'=> public_path('2023_2024_FOUNDATION_FEE_FOR_SCIENCE.pdf'), 'as' => "FOUNDATION_FEES(SCIENCE).pdf",'mime' => 'application/pdf'], 
+                ['path'=> public_path('2024_2025_FOUNDATION_FEE_FOR_NON_SCIENCE.pdf'), 'as' => "FOUNDATION_FEES.pdf",'mime' => 'application/pdf'], 
+                ['path'=> public_path('2024_2025_FOUNDATION_FEE_FOR_SCIENCE.pdf'), 'as' => "FOUNDATION_FEES(SCIENCE).pdf",'mime' => 'application/pdf'], 
             ],
             'name' => $get_app->surname ." ". $get_app->firstname,
             'sub' => $Subject,
@@ -163,6 +164,15 @@ class ConfigController extends Controller
         $settings = Setting::where('status', 'active')->first();
         return $settings;
     }
+    
+    public  function part_time_settings($request){
+        if ($request->has('settingId') && $request->filled('settingId') ){
+            $settings = PartTimeSetting::where('id', $request->settingId)->first();
+            return $settings;
+        }
+        $settings = PartTimeSetting::where('status', 'active')->first();
+        return $settings;
+    }
 
 //ALTER TABLE `state` MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 // ALTER TABLE tableName MODIFY COLUMN id INT; /* First you should drop auto increment */
@@ -172,7 +182,7 @@ class ConfigController extends Controller
 public function auth_user($email){
  try {
     $data =  DB::table('applicants')->select('id','email',
-    'surname','first_name','other_name','matric_number','status',
+    'surname','first_name','other_name','matric_number','status','level',
     'phone','gender','dob','religion',
     'marital_status','disability',
     'address_resident','city_resident','state_resident',

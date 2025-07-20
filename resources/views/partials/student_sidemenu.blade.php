@@ -36,24 +36,24 @@
                 <span class="site-menu-arrow"></span>
               </a>
               <ul class="site-menu-sub">
-                <li class="site-menu-item @php echo Request::path()=='create_application'? 'active':'' @endphp">
-                  <a href="courses">
-                    <span class="site-menu-title">Courses</span>
-                  </a>
-                </li>
                 <li class="site-menu-item @php echo Request::path()=='application'? 'active':'' @endphp">
                   <a href="registration">
-                    <span class="site-menu-title">Registration</span>
+                    <span class="site-menu-title">List of Courses</span>
+                  </a>
+                </li>
+                <li class="site-menu-item @php echo Request::path()=='create_application'? 'active':'' @endphp">
+                  <a href="courses">
+                    <span class="site-menu-title">Registered Courses</span>
                   </a>
                 </li>
               </ul>
             </li>
-            <!-- <li class="site-menu-item @php echo Request::path()=='payments'? 'active':'' @endphp">
-              <a href="payments">
+            <li class="site-menu-item @php echo Request::path()=='result'? 'active':'' @endphp">
+              <a href="#">
                 <i class="site-menu-icon md-card" aria-hidden="true"></i>
-                <span class="site-menu-title">Payment History</span>
+                <span class="site-menu-title">Result</span>
               </a>
-            </li> -->
+            </li>
             <li class="site-menu-item">
               <a href="{{route('logout')}}">
                 <i class="site-menu-icon md-power" aria-hidden="true"></i>

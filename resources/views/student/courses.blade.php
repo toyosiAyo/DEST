@@ -11,8 +11,10 @@
                     <div class="col-lg-12">
                         <!-- Panel Tasks -->
                         <div class="panel">
-                            <div class="panel-heading">
+                            <div class="panel-heading d-flex">
                                 <h3 class="panel-title">Registered Courses - {{$data->surname .' '. $data->first_name.' '.$data->other_name}}</h3>
+                                <h3 class="panel-title">Semester - {{$settings->semester_name}}</h3>
+                                <h3 class="panel-title">Session - {{$settings->session}}</h3>
                             </div>
                             <div class="table-responsive">
                                 <div data-role="container">

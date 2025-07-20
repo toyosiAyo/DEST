@@ -103,6 +103,12 @@ $(document).ready(function ($) {
         var pay_type = $(this).data("pay_type");
         approvePayment(id, rrr, email, pay_type);
     });
+    
+    $(".students").on("click", ".reset", function () {
+        var id = $(this).data("student_id");
+        var firstname = $(this).data("firstname")
+        adminResetPassword(id, firstname);
+    });
 
     $("#tblapplications").on("click", ".downloadApp", function () {
         var id = $(this).data("app_id");
@@ -175,6 +181,29 @@ $(document).ready(function ($) {
             },
         });
     };
+    
+    const adminResetPassword = (id, firstname) => {
+        $.ajax({
+            type: "POST",
+            url: "/admin-reset-password",
+            data: { id: id },
+            dataType: "json",
+            beforeSend: function () {
+                if (confirm(`Reset ${firstname}'s password to 123456?`) == false) return false;
+                $.blockUI();
+            },
+            success: function (response) {
+                console.log(response);
+                $.unblockUI();
+                toastr["success"](response.message);
+            },
+            error: function (response) {
+                $.unblockUI();
+                toastr["error"](response.responseJSON.message);
+            },
+        });
+        
+    }
 
     $(".viewForgotMatric").click(function () {
         $("#forgotMatric").modal("show");
@@ -305,6 +334,19 @@ $(document).ready(function ($) {
                     toastr["error"](response.responseJSON.message);
                 },
             });
+        }
+    });
+    
+    $(".score").on("input", function (e) {
+        var keyCode = e.which;
+        if (keyCode < 48 || keyCode > 57) {
+            e.preventDefault();
+        }
+        var value = $(this).val();
+        
+        if (value.includes('.') || value.startsWith('0')) {
+            alert('Invalid Input')
+            $(this).val(0);
         }
     });
 

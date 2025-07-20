@@ -278,7 +278,7 @@ class RemitaConfig extends Controller
             $txId = $txId . rand(0, 9);
             $txId = $txId . $this->frnt_2_digit_pad_wit_zero(idate("s"));  // seconds
     
-            return "14-" . $txId;
+            return "15-" . $txId;
         } catch (Exception $ex) {
             return false;
         }

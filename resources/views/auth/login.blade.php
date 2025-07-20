@@ -27,7 +27,7 @@
             <p>Log in with your email and password</p>
              
             @if(Session::get('pass_reset'))
-                <div class="alert dark alert-icon alert-danger alert-dismissible" role="alert">
+                <div class="alert dark alert-icon alert-info alert-dismissible" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>

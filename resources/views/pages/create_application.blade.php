@@ -23,8 +23,8 @@
                   <div class="list-group faq-list" role="tablist">
                     <a class="list-group-item active" data-toggle="tab" href="#category-1" aria-controls="category-1"
                       role="tab">Foundation</a>
-                    <a class="list-group-item" data-toggle="tab" href="#category-2" aria-controls="category-2"
-                      role="tab">Pre-degree</a>
+                    <!--<a class="list-group-item" data-toggle="tab" href="#category-2" aria-controls="category-2"-->
+                    <!--  role="tab">Pre-degree</a>-->
                     <a class="list-group-item" data-toggle="tab" href="#category-3" aria-controls="category-3"
                       role="tab">Part-Time</a>
                   </div>
@@ -53,9 +53,9 @@
                             role="tabpanel">
                             <div class="panel-body">
                             Click the button below to create a new application or to continue with your unsubmitted application<br>
-                              Application fee is (₦7,500)
+                              Application fee is (₦10,000) 
                                 <div class="animation-example animation-hover hover">
-                                  <button type="submit" data-email="{{$data->email}}" data-amount="7500" data-paytype="foundation" class="btn btn-dark animation-scale-up pay">Create Application </button>
+                                  <button type="submit" data-surname="{{$data->surname}}" data-firstname="{{$data->first_name}}" data-email="{{$data->email}}" data-amount="10000" data-paytype="foundation" class="btn btn-dark animation-scale-up pay">Create Application </button>
                                 </div>
                             </div>
                           </div>
@@ -65,29 +65,29 @@
                     <!-- End Categroy 1 -->
 
                     <!-- Categroy 2 -->
-                    <div class="tab-pane" id="category-2" role="tabpanel">
-                      <div class="panel-group panel-group-simple panel-group-continuous" id="accordion"
-                        aria-multiselectable="true" role="tablist">
-                        <div class="panel">
-                          <div class="panel-heading" id="question-5" role="tab">
-                            <a class="panel-title" aria-controls="answer-5" aria-expanded="true" data-toggle="collapse"
-                              href="#answer-5" data-parent="#accordion">
-                              Pre-degree Programme
-                            </a>
-                          </div>
-                          <div class="panel-collapse collapse show" id="answer-5" aria-labelledby="question-5"
-                            role="tabpanel">
-                            <div class="panel-body">
-                            Click the button below to create a new application or to continue with your unsubmitted application<br>
-                            Application fee is (₦7,500)
-                                <div class="animation-example animation-hover hover">
-                                  <button type="submit" data-email="{{$data->email}}" data-amount="7500" data-paytype="predegree" class="btn btn-dark animation-scale pay">Create Application </button>
-                                </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <!--<div class="tab-pane" id="category-2" role="tabpanel">-->
+                    <!--  <div class="panel-group panel-group-simple panel-group-continuous" id="accordion"-->
+                    <!--    aria-multiselectable="true" role="tablist">-->
+                    <!--    <div class="panel">-->
+                    <!--      <div class="panel-heading" id="question-5" role="tab">-->
+                    <!--        <a class="panel-title" aria-controls="answer-5" aria-expanded="true" data-toggle="collapse"-->
+                    <!--          href="#answer-5" data-parent="#accordion">-->
+                    <!--          Pre-degree Programme-->
+                    <!--        </a>-->
+                    <!--      </div>-->
+                    <!--      <div class="panel-collapse collapse show" id="answer-5" aria-labelledby="question-5"-->
+                    <!--        role="tabpanel">-->
+                    <!--        <div class="panel-body">-->
+                    <!--        Click the button below to create a new application or to continue with your unsubmitted application<br>-->
+                    <!--        Application fee is (₦10,000)-->
+                    <!--            <div class="animation-example animation-hover hover">-->
+                    <!--              <button type="submit" data-surname="{{$data->surname}}" data-firstname="{{$data->first_name}}" data-email="{{$data->email}}" data-amount="10000" data-paytype="predegree" class="btn btn-dark animation-scale pay">Create Application </button>-->
+                    <!--            </div>-->
+                    <!--        </div>-->
+                    <!--      </div>-->
+                    <!--    </div>-->
+                    <!--  </div>-->
+                    <!--</div>-->
                     <!-- End Categroy 2 -->
 
                     <!-- Categroy 3 -->
@@ -107,7 +107,9 @@
                               Click the button below to create a new application or to continue with your unsubmitted application<br>
                             Application fee is (₦10,000)
                               <div class="animation-example animation-hover hover">
-                                <button type="button" data-email="{{$data->email}}" data-amount="10000" data-paytype="part_time" class="btn btn-dark animation-shake pay">Create Application</button>
+                                @if($data->email == 'toyxyboy@gmail.com')
+                                <button type="button" data-surname="{{$data->surname}}" data-firstname="{{$data->first_name}}" data-email="{{$data->email}}" data-amount="10000" data-paytype="part_time" class="btn btn-dark animation-shake pay">Create Application</button>
+                              @endif
                               </div>
                             </div>
                           </div>
@@ -159,9 +161,10 @@
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha512/0.8.0/sha512.min.js"></script>
-      <script src=" https://login.remita.net/payment/v1/remita-pay-inline.bundle.js"></script>
+      <!--<script src=" https://login.remita.net/payment/v1/remita-pay-inline.bundle.js"></script>-->
       <script src="{{ asset('assets/examples/js/pages/faq.minfd53.js?v4.0.1') }}"></script>
-      <script src=" {{ asset('scripts/create_application.js') }}"></script>
+      <!--<script src=" {{ asset('scripts/create_application.js') }}"></script>-->
+      <script src=" {{ asset('scripts/payment.js') }}"></script>
       <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
     </body>
   @endsection

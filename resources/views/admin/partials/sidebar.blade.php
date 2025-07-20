@@ -23,6 +23,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="/admin/students">
+                        <i data-feather="users"></i>
+                        <span>Students</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{route('view_lecturers')}}">
                         <i data-feather="user-plus"></i>
                         <span>Lecturers</span>

@@ -21,7 +21,7 @@ $(document).ready(function ($) {
         $("#view_app").modal("show");
         var status = $(this).data("status");
         var appID = $(this).data("id");
-        $("#details").html(status + appID);
+        $("#details").html(`You have been Admitted!`);
         var encoded_link = window.btoa(appID);
         var _href = $("a.download_letter").attr("href");
         var link = `adms_letter?app_id=${encoded_link}`;

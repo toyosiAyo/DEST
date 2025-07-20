@@ -11,12 +11,14 @@
                     <div class="col-lg-12 masonry-item">
                         <!-- Panel Tasks -->
                         <div class="panel">
-                            <div class="panel-heading">
+                            <div class="panel-heading d-flex">
                                 <h3 class="panel-title">Course Registration</h3>
+                                <h3 class="panel-title">Semester - {{$settings->semester_name}}</h3>
+                                <h3 class="panel-title">Session - {{$settings->session}}</h3>
                             </div>
                             <form id="courseRegForm" method="POST">
                                 @csrf
-                            <div class="table-responsive h-250" data-plugin="scrollable">
+                            <div class="table-responsive" data-plugin="scrollable">
                                 <div data-role="container">
                                     <div data-role="content">
                                         <table id="reg_table" class="table table-responsive-sm table-hover table-striped">
@@ -38,7 +40,7 @@
                                                 <tr>
                                                     <td style="width: 50px;">
                                                         @if($course->course_status == 'C')
-                                                        <input type="checkbox" value="{{$course->course_code.'_'.$course->course_title.'_'.$course->unit.'_'.$course->course_status}}" name="course[]" required>
+                                                        <input type="checkbox" value="{{$course->course_code.'_'.$course->course_title.'_'.$course->unit.'_'.$course->course_status.'_'.$course->course_id}}" name="course[]" required>
                                                         @else
                                                         <input type="checkbox" value="{{$course->course_code.'_'.$course->course_title.'_'.$course->unit.'_'.$course->course_status}}" name="course[]">
                                                         @endif  
@@ -58,7 +60,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" id="btnSubmitRegForm" class="btn btn-primary btn-block">Submit</button>
+                            @if(count($courses) > 0)<hr><button type="submit" id="btnSubmitRegForm" class="btn btn-primary btn-block">Submit</button>@endif
                             </form>
                         </div>
                         <!-- End Panel Tasks -->

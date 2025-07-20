@@ -25,14 +25,14 @@
                         @elseif(strtoupper($data->sex) == 'F') {{'Miss'}}
                         @else <b>{{''}}</b>
                     @endif
-                        {{$data->surname.' '.$data->first_name}}  
+                        {{$data->surname.' '.$data->first_name.' '.$data->other_name}}  
                 </p>
                 <p style="margin-bottom: 25px;">With reference to your application for admission to the {{$data->app_type}} Programme of Redeemer’s
                     University and further to the screening exercise, I have the pleasure to inform you that you have been
                     offered provisional admission into the {{$data->app_type}} Programme of the Redeemer’s University, Ede
                     Osun-State
                 </p>
-                <p>Kindly find attached the necessary documents and logon to your portal (https://destadms.run.edu.ng) to download your admission letter</p>
+                <p>Kindly find attached the necessary documents and logon to your portal (http://destadms.run.edu.ng) to download your admission letter</p>
                 <p>Thank you</p>
 
             </td>

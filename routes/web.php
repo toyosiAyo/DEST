@@ -8,6 +8,7 @@ use App\Http\Controllers\RemitaConfig;
 use App\Http\Controllers\ApplicantPaymentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\PaymentController;
 
 use Illuminate\Support\Facades\Http;
 
@@ -92,6 +93,9 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::post('submit_registration',[StudentController::class,'saveRegistration']);
 
     Route::get('adms_letter',[AdminController::class,'generateADMSLetter']);
+    
+    Route::post('init-application-payment',[PaymentController::class,'initApplicationPayment']);
+    Route::get('validate-payment',[PaymentController::class,'validateApplicationPayment']);
 
 
 
@@ -102,6 +106,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('admin/pending_payments',[AdminController::class,'pendingPayments'])->name('pending_payments');
     Route::get('admin/payments',[AdminController::class,'allPayments'])->name('allpayments');
     Route::get('admin/applicants',[AdminController::class,'viewApplicants'])->name('viewApplicants');
+    Route::get('admin/students',[AdminController::class,'viewStudents']);
     Route::get('admin/applications',[AdminController::class,'viewApplications'])->name('viewApplications');
     Route::get('admin/pending_applications',[AdminController::class,'viewPendingApplications'])->name('viewPendingApplications');
     Route::get('admin/curriculum',[AdminController::class,'curriculum'])->name('curriculum');
@@ -115,6 +120,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::post('view_result',[AdminController::class,'getHtmlResult']);
     Route::post('enter_score',[AdminController::class,'enterScore']);
     Route::post('app_actions',[AdminController::class,'app_actions']);
+    Route::post('admin-reset-password',[AdminController::class,'adminResetPassword']);
     Route::get('viewRegCourses',[AdminController::class,'viewRegisteredCourses']);
     Route::get('admin/lecturers',[AdminController::class,'viewLecturers'])->name('view_lecturers');
     Route::get('admin/score_input',[AdminController::class,'viewRegPerProgramme'])->name('score_input');
