@@ -1,4 +1,10 @@
 $(document).ready(function ($) {
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+
     toastr.options = {
         closeButton: true,
         debug: false,
@@ -44,18 +50,25 @@ $(document).ready(function ($) {
                 let rows = "";
                 response.payload.forEach(function (item) {
                     rows += `
-            <tr>
-              <td><input type="checkbox" checked disabled></td>
-              <td>${item.item}</td>
-              <td>${item.amount}</td>
-            </tr>
-          `;
+                    <tr>
+                        <td><input type="checkbox" checked disabled></td>
+                        <td>${item.item}</td>
+                        <td>${item.amount}</td>
+                    </tr>`;
                 });
                 $("#paymentBody").html(rows);
                 if (response.payment_status == "success") {
                     $("#btn_proceed_to_payment").html("PAID");
                     $("#btn_proceed_to_payment").prop("disabled", true);
                 } else {
+                    $("#btn_proceed_to_payment").attr(
+                        "data-amount",
+                        response.total
+                    );
+                    $("#btn_proceed_to_payment").attr(
+                        "data-payload",
+                        response.payload
+                    );
                     $("#btn_proceed_to_payment").html(
                         `Proceed to Payment (₦ ${response.total})`
                     );
@@ -68,6 +81,44 @@ $(document).ready(function ($) {
                 console.log(xhr.responseText);
             },
         });
+
+        $("#btn_proceed_to_payment")
+            .off("click")
+            .on("click", function () {
+                $("#btn_proceed_to_payment").html(
+                    '<i class="fa fa-spinner fa-spin"></i>'
+                );
+                $("#btn_proceed_to_payment").prop("disabled", true);
+
+                var email = $(this).data("email");
+                var payload = $(this).data("payload");
+                var amount = $(this).data("amount");
+                $.ajax({
+                    type: "POST",
+                    url: "init-admission-payment",
+                    data: {
+                        app_id: app_id,
+                        email: email,
+                        payload: payload,
+                        amount: amount,
+                    },
+                    dataType: "json",
+                    success: function (response) {
+                        toastr["success"](response.message);
+                        window.location.href = response.url;
+                        console.log(response);
+                    },
+                    error: function (response) {
+                        console.log(response);
+                        $("#btn_proceed_to_payment").prop("disabled", false);
+                        $("#btn_proceed_to_payment").html(
+                            `Proceed to Payment (₦ ${amount})`
+                        );
+                        toastr.options;
+                        toastr["error"](response.responseJSON.message);
+                    },
+                });
+            });
     });
 
     $("#courseRegForm").on("submit", function (e) {

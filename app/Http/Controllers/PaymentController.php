@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ApplicantPayment;
+use App\Models\AdmissionPayment;
 use Illuminate\Support\Facades\Http;
 use App\Models\Applicant;
 use App\Models\Application;
@@ -35,6 +36,72 @@ class PaymentController extends Controller
         $payment_status = $this->checkAdmissionPayment($request->app_id,$total);
 
         return response(['payload'=>$payload,'total'=>$total,'payment_status'=>$payment_status], 200);
+    }
+
+    public function initAdmissionPayment(Request $request){
+        $validator = Validator::make($request->all(), [ 
+            'app_id' => 'required|string',
+            'email' => 'required|string',
+            'payload' => 'required',
+            'amount' => 'required|string',
+            'surname' => 'required|string',
+            'first_name' => 'required|string'
+        ]);
+        if ($validator->fails()) {
+            return response(['status'=>'failed','message'=>'Validation error'], 400);
+        }
+
+        $session = app('App\Http\Controllers\ConfigController')->settings($request)->id;
+        $check_pending_payment = DB::table('admission_payments')->where(['email'=>$request->email,'amount'=>$request->amount,'app_id'=>$request->app_id,'status'=>'pending','session'=>$session])->first();
+
+        if($check_pending_payment){
+            return response(['status'=>'ok','message'=>'Redirecting to payment gateway...', 'url'=>$check_pending_payment->url], 201);
+        }
+
+        $timesammp = DATE("dmyHis"); 
+        $reference = app('App\Http\Controllers\RemitaConfig')->remita_generate_trans_ID();
+            
+        $body = [
+            'amount' => $request->amount * 100,
+            'bearer' => 0,
+            'callbackUrl' => 'https://destadms.run.edu.ng/validate-payment',
+            'channels' => ['card', 'bank'],
+            'currency' => 'NGN',
+            'customerFirstName' => $request->first_name,
+            'customerLastName' => $request->surname,
+            'email' => $request->email,
+            'reference' => $reference,
+        ];
+
+        $headers = [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => '1PUB6199pVbAtClO8n3DBSLG7H9yW6xesgi2Xn',
+        ];
+
+        $response = Http::withHeaders($headers)->post('https://api.credocentral.com/transaction/initialize', $body);
+        $data = $response->json();
+
+        if($data["status"] == 200){
+            $details = $data["data"];
+
+            $payment = new AdmissionPayment();
+            $payment->email = $request->email;
+            $payment->amount = $request->amount;
+            $payment->app_id = $request->app_id;
+            $payment->trans_ref = $reference;
+            $payment->session = $session;
+            $payment->url = $details["authorizationUrl"];
+            $payment->reference = $details["credoReference"];
+            $payment->payload = $request->payload;
+            $payment->status = 'pending';
+            $payment->save();
+
+            return response(['status'=>'ok','message'=>'Payment successfully logged', 'url'=>$details["authorizationUrl"]], 201);
+        }
+        
+        return response(['status'=>'failed','message'=>'Unable to initiate payment'], 400);
+    
     }
     
     public function initApplicationPayment(Request $request){

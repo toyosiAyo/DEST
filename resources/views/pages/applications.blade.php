@@ -137,7 +137,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-pure" data-dismiss="modal">Close</button>
-                    <button type="button" id="btn_proceed_to_payment" class="btn btn-success"></button>
+                    <button type="button" data-email="{{ $data->email }}" id="btn_proceed_to_payment"
+                        class="btn btn-success"></button>
                 </div>
             </div>
         </div>

@@ -4,7 +4,8 @@ $(document).ready(function () {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
     });
-    
+    $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+
     toastr.options = {
         closeButton: true,
         debug: false,
@@ -22,7 +23,7 @@ $(document).ready(function () {
         showMethod: "fadeIn",
         hideMethod: "fadeOut",
     };
-    
+
     $(".pay").click(function (e) {
         e.preventDefault();
         $(this).html('<i class="fa fa-spinner fa-spin"></i>');
@@ -31,11 +32,17 @@ $(document).ready(function () {
         var amount = $(this).data("amount");
         var surname = $(this).data("surname");
         var first_name = $(this).data("firstname");
-        
+
         $.ajax({
             type: "POST",
             url: "init-application-payment",
-            data: {payType:payType,email:email,surname:surname,first_name:first_name,amount:amount},
+            data: {
+                payType: payType,
+                email: email,
+                surname: surname,
+                first_name: first_name,
+                amount: amount,
+            },
             dataType: "json",
             success: function (response) {
                 $(".pay").html("Create Application");
@@ -50,6 +57,5 @@ $(document).ready(function () {
                 toastr["error"](response.responseJSON.message);
             },
         });
-    })
-    
-})
+    });
+});

@@ -12,8 +12,9 @@
     <script src=" {{ asset('global/vendor/bootstrap-select/bootstrap-select.minfd53.js?v4.0.1') }}"></script>
     <script src=" {{ asset('global/vendor/select2/select2.full.minfd53.js?v4.0.1') }}"></script>
 
-    <script src=" {{ asset('global/js/Plugin/bootstrap-select.minfd53.js?v4.0.1') }}"></script>
-    <script src=" {{ asset('global/js/Plugin/select2.minfd53.js?v4.0.1') }}"></script>
+    {{-- <script src=" {{ asset('global/js/Plugin/bootstrap-select.minfd53.js?v4.0.1') }}"></script>
+    <script src=" {{ asset('global/js/Plugin/select2.minfd53.js?v4.0.1') }}"></script> --}}
+
     <script src="{{ asset('scripts/misc.js') }}"></script>
     <script src="{{ asset('scripts/save_application.js') }}"></script>
     <script src="{{ asset('scripts/validation.min.js') }}"></script>
@@ -817,38 +818,32 @@
                                                                     </div>
 
                                                                     <div class="col-xl-12 form-horizontal">
-                                                                        <div class="form-group row form-material">
+                                                                        <div class="form-group row">
                                                                             <div class="example col-xl-6 col-md-3">
-                                                                                <div class="input-group input-group-file"
-                                                                                    data-plugin="inputGroupFile">
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        placeholder="Upload Signature"
-                                                                                        readonly="">
-                                                                                    <span class="input-group-btn">
-                                                                                        <span
-                                                                                            class="btn btn-primary btn-file">
-                                                                                            <i class="icon md-upload"
-                                                                                                aria-hidden="true"></i>
-                                                                                            <input type="file"
-                                                                                                id="signature"
-                                                                                                name="signature"
-                                                                                                accept="image/*" required>
-                                                                                        </span>
-                                                                                    </span>
-                                                                                </div>
+                                                                                <label for="signature"
+                                                                                    class="form-label">Upload
+                                                                                    Signature</label>
+                                                                                <input type="file" class="form-control"
+                                                                                    id="signature" name="signature"
+                                                                                    placeholder="Upload Signature"
+                                                                                    accept="image/*" required>
                                                                             </div>
                                                                             <div class="example col-xl-6 col-md-3">
+                                                                                <label for="screening_date"
+                                                                                    class="form-label">Select Screening
+                                                                                    Date</label>
                                                                                 <select class="form-control"
                                                                                     data-plugin="selectpicker" required
                                                                                     name="screening_date"
                                                                                     id="screening_date"
                                                                                     data-live-search="true"
                                                                                     data-allow-clear="true">
-                                                                                    <option>Select Screening Date</option>
-                                                                                    <option value="7/09/2025">7/09/2025
+
+                                                                                    <option value="23/08/2025">23/08/2025
+                                                                                        (Main Campus, Ede)
                                                                                     </option>
-                                                                                    <option value="31/08/2025">31/08/2025
+                                                                                    <option value="6/09/2025">6/09/2025
+                                                                                        (Redemption City)
                                                                                     </option>
                                                                                 </select>
                                                                             </div>
@@ -856,42 +851,20 @@
                                                                     </div>
 
                                                                     <div class="col-xl-12 form-horizontal">
-                                                                        <div class="form-group row form-material">
+                                                                        <div class="form-group row">
                                                                             <div class="example col-xl-6 col-md-3">
-                                                                                <div class="input-group input-group-file"
-                                                                                    data-plugin="inputGroupFile">
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        placeholder="Upload O'Level Result"
-                                                                                        readonly="">
-                                                                                    <span class="input-group-btn">
-                                                                                        <span
-                                                                                            class="btn btn-info btn-file">
-                                                                                            <i class="icon md-upload"
-                                                                                                aria-hidden="true"></i>
-                                                                                            <input type="file"
-                                                                                                name="olevel">
-                                                                                        </span>
-                                                                                    </span>
-                                                                                </div>
+                                                                                <label for="olevel"
+                                                                                    class="form-label">Upload
+                                                                                    O' Level Result</label>
+                                                                                <input type="file" id="olevel"
+                                                                                    name="olevel" required>
                                                                             </div>
                                                                             <div class="example col-xl-6 col-md-3">
-                                                                                <div class="input-group input-group-file"
-                                                                                    data-plugin="inputGroupFile">
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        placeholder="Upload Birth Certificate"
-                                                                                        readonly="">
-                                                                                    <span class="input-group-btn">
-                                                                                        <span
-                                                                                            class="btn btn-danger btn-file">
-                                                                                            <i class="icon md-upload"
-                                                                                                aria-hidden="true"></i>
-                                                                                            <input type="file"
-                                                                                                name="birth_cert">
-                                                                                        </span>
-                                                                                    </span>
-                                                                                </div>
+                                                                                <label for="birth_cert"
+                                                                                    class="form-label">Upload
+                                                                                    Birth Certificate</label>
+                                                                                <input type="file" id="birth_cert"
+                                                                                    name="birth_cert" required>
                                                                             </div>
                                                                         </div>
                                                                     </div>
