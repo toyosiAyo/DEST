@@ -1,4 +1,4 @@
-name: 🚀 Deploy Laravel to aapanel
+name: 🚀 Deploy Laravel app to aapanel
 
 on:
   push:
