@@ -51,7 +51,8 @@ class PaymentController extends Controller
             return response(['status'=>'failed','message'=>'Validation error'], 400);
         }
 
-        $session = app('App\Http\Controllers\ConfigController')->settings($request)->id;
+        //$session = app('App\Http\Controllers\ConfigController')->settings($request)->id;
+        $session = "9";
         $check_pending_payment = DB::table('admission_payments')->where(['email'=>$request->email,'amount'=>$request->amount,'app_id'=>$request->app_id,'status'=>'pending','session'=>$session])->first();
 
         if($check_pending_payment){
@@ -128,7 +129,8 @@ class PaymentController extends Controller
                 return response(['status'=>'ok','message'=>'Redirecting to application form...', 'url'=>'/app_form'], 201);
             }
             
-            $session = app('App\Http\Controllers\ConfigController')->settings($request)->id;
+            //$session = app('App\Http\Controllers\ConfigController')->settings($request)->id;
+            $session = "9";
             $check_pending_payment = ApplicantPayment::where(['email'=>$request->email,'amount'=>$request->amount,'pay_type'=>$request->payType,'status_msg'=>'pending','session'=>$session])->first();
 
             if($check_pending_payment){
@@ -223,7 +225,9 @@ class PaymentController extends Controller
                    
                    setcookie("app_type", $check->pay_type, time() + 3600, "/");
                    setcookie("pin", $check->rrr, time() + 3600, "/");
-                   
+                   if($request->action == "requery"){
+                        return response(['status'=>'success','message'=>"Transaction successfully updated, you will be redirected to application form now"], 200);
+                   }
                    return redirect('/app_form');
                 }
             }
