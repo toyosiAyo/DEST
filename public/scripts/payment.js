@@ -58,4 +58,28 @@ $(document).ready(function () {
             },
         });
     });
+
+    $("#payment_history").on("click", ".requery", function () {
+        var reference = $(this).data("reference");
+        var amount = $(this).data("amount");
+        alert(amount);
+        $.ajax({
+            type: "GET",
+            url: "validate-payment",
+            data: {
+                reference: reference,
+                transAmount: amount,
+                action: "requery",
+            },
+            dataType: "json",
+            success: function (response) {
+                toastr["success"](response.message);
+                window.location.href = "/app_form";
+            },
+            error: function (response) {
+                console.log(response);
+                toastr["error"](response.responseJSON.message);
+            },
+        });
+    });
 });
