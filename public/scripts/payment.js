@@ -62,7 +62,6 @@ $(document).ready(function () {
     $("#payment_history").on("click", ".requery", function () {
         var reference = $(this).data("reference");
         var amount = $(this).data("amount");
-        alert(amount);
         $.ajax({
             type: "GET",
             url: "validate-payment",
