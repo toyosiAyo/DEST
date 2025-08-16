@@ -827,6 +827,8 @@
                                                                                     id="signature" name="signature"
                                                                                     placeholder="Upload Signature"
                                                                                     accept="image/*" required>
+                                                                                <small style="color: red">(png/jpg max
+                                                                                    500kb)</small>
                                                                             </div>
                                                                             <div class="example col-xl-6 col-md-3">
                                                                                 <label for="screening_date"
@@ -857,14 +859,20 @@
                                                                                     class="form-label">Upload
                                                                                     O' Level Result</label>
                                                                                 <input type="file" id="olevel"
-                                                                                    name="olevel" required>
+                                                                                    name="olevel" class="form-control"
+                                                                                    accept="image/*" required>
+                                                                                <small style="color: red">(png/jpg max
+                                                                                    500kb)</small>
                                                                             </div>
                                                                             <div class="example col-xl-6 col-md-3">
                                                                                 <label for="birth_cert"
                                                                                     class="form-label">Upload
                                                                                     Birth Certificate</label>
                                                                                 <input type="file" id="birth_cert"
-                                                                                    name="birth_cert" required>
+                                                                                    name="birth_cert" class="form-control"
+                                                                                    accept="image/*" required>
+                                                                                <small style="color: red">(png/jpg max
+                                                                                    500kb)</small>
                                                                             </div>
                                                                         </div>
                                                                     </div>
