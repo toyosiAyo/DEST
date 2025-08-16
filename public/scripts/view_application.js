@@ -34,7 +34,10 @@ $(document).ready(function ($) {
         var link = `adms_letter?app_id=${encoded_link}`;
         $("a.download_letter").attr("href", _href + link);
 
-        $("a").attr("href", `adms_letter?app_id=${encoded_link}`);
+        $("a.download_letter").attr(
+            "href",
+            `adms_letter?app_id=${encoded_link}`
+        );
     });
 
     $("#app_table").on("click", ".view_schedule", function () {
