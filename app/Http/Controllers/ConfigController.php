@@ -208,6 +208,11 @@ public function adminUser($email){
     }
 }
 
+public function getStateGivenID($id){
+    $state = State::findorFail($id);
+    return $state->name;
+}
+
 public function get_lga_state_country(Request $request){
         
     try {
