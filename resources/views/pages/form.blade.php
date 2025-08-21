@@ -841,7 +841,7 @@
                                                                                     data-live-search="true"
                                                                                     data-allow-clear="true">
 
-                                                                                    <option value="23/08/2025">23/08/2025
+                                                                                    <option value="17/09/2025">17/09/2025
                                                                                         (Main Campus, Ede)
                                                                                     </option>
                                                                                     <option value="6/09/2025">6/09/2025
