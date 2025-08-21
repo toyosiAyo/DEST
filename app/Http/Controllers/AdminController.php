@@ -1088,7 +1088,7 @@ class AdminController extends Controller
             'category'=>'required'
         ]);
         $applications = DB::table('applications')->join('applicants', 'applications.submitted_by', '=', 'applicants.email')
-        ->select('applicants.email','applicants.first_name')->where('applications.screen_date','21/08/2022')
+        ->select('applicants.email','applicants.first_name')->where('applications.screen_date',$request->category)
         ->get();
 
         $data = [
