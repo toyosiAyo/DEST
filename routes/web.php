@@ -105,12 +105,15 @@ Route::group(['middleware'=>['authcheck']], function() {
     //********************************************Admin Authenticated Route************************************************
 
     Route::post('approve_payments',[AdminController::class,'approve_payments']);
+    Route::post('send-bulk-emails',[AdminController::class,'sendBulkEmails']);
     Route::get('admin/dashboard',[AdminController::class,'adminDashboard']);
     Route::get('admin/pending_payments',[AdminController::class,'pendingPayments'])->name('pending_payments');
     Route::get('admin/payments',[AdminController::class,'allPayments'])->name('allpayments');
     Route::get('admin/applicants',[AdminController::class,'viewApplicants'])->name('viewApplicants');
     Route::get('admin/students',[AdminController::class,'viewStudents']);
     Route::get('admin/applications',[AdminController::class,'viewApplications'])->name('viewApplications');
+    Route::get('admin/submitted-applications',[AdminController::class,'viewSubmittedApplications'])->name('viewSubmittedApplications');
+    Route::get('admin/preview-application/{id}',[AdminController::class,'previewApplication']);
     Route::get('admin/pending_applications',[AdminController::class,'viewPendingApplications'])->name('viewPendingApplications');
     Route::get('admin/curriculum',[AdminController::class,'curriculum'])->name('curriculum');
     Route::get('admin/view_curriculum',[AdminController::class,'adminviewCurriculum'])->name('view_curriculum');
