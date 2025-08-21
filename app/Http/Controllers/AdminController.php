@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\File;
 use PDF;
+use App\Jobs\SendBulkEmailJob;
 
 class AdminController extends Controller
 {    
@@ -41,26 +42,65 @@ class AdminController extends Controller
     public function app_actions(Request $request){
         // view / approve / download ... 
         $validator = Validator::make($request->all(), ['email'=>'required|email','app_id'=>'required','action'=>'required','duration'=>'required']);
-        if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'Email/app_id/action are required','rsp'=>''], 401);        } 
+        if ($validator->fails()) { 
+            return response()->json(['status'=>'Nok','message'=>'Email/app_id/action are required','rsp'=>''], 422);        
+        } 
         $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
         $get_app = Application::join('applicants','applications.submitted_by','applicants.email')
-         ->where(['applications.id'=>$request->app_id,'applications.submitted_by'=>$request->email,'adms_y_n'=>'N']) 
-         ->select('applications.first_choice->prog as Programme1','applications.second_choice->prog as Programme2','applicants.*','applications.*')->first(); 
-         if($get_app){    
-        if(strtoupper($request->action) == 'APPROVE'){
-            $validator = Validator::make($request->all(), ['session'=>'required|min:8','duration'=>'required','resumption_date'=>'required', 'registration_closing'=>'required',]);
-            if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'session/duration/resumption_date/registration_closing are required','rsp'=>''], 401);        } 
-            $get_app['duration'] = $request->duration;
-            $get_app['accept_date'] = Date("F j, Y", strtotime('+14 days'));
-            $get_app['session'] = $request->session;
-            $get_app['session_formulated'] = substr(explode('/',$request->session)[0],-2). '-'.substr(explode('/',$request->session)[1],-2);
-            $get_app['resumption_date'] = $request->resumption_date ; 
-            $get_app['registration_closing'] = $request->registration_closing ; 
-            // if($get_app->adms_y_n == "N"){
-                if($get_app->app_type == 'foundation'){
-                    // $pdf = PDF::loadView('foundation_admission',['data'=> $get_app]); 
-                    if (File::exists('FOUNDATION_ACCEPTANCE_FORM.pdf') && File::exists('2024_2025_FOUNDATION_FEE_FOR_NON_SCIENCE.pdf') && File::exists('2024_2025_FOUNDATION_FEE_FOR_SCIENCE.pdf')) {  
-                        if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment_foundation($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
+            ->where(['applications.id'=>$request->app_id,'applications.submitted_by'=>$request->email,'adms_y_n'=>'N']) 
+            ->select('applications.first_choice->prog as Programme1','applications.second_choice->prog as Programme2','applicants.*','applications.*')
+            ->first(); 
+        if($get_app){    
+            if(strtoupper($request->action) == 'APPROVE'){
+                $validator = Validator::make($request->all(), ['session'=>'required|min:8','duration'=>'required','resumption_date'=>'required', 'registration_closing'=>'required',]);
+                if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'session/duration/resumption_date/registration_closing are required','rsp'=>''], 401);        } 
+                $get_app['duration'] = $request->duration;
+                $get_app['accept_date'] = Date("F j, Y", strtotime('+14 days'));
+                $get_app['session'] = $request->session;
+                $get_app['session_formulated'] = substr(explode('/',$request->session)[0],-2). '-'.substr(explode('/',$request->session)[1],-2);
+                $get_app['resumption_date'] = $request->resumption_date ; 
+                $get_app['registration_closing'] = $request->registration_closing ; 
+                // if($get_app->adms_y_n == "N"){
+                    if($get_app->app_type == 'foundation'){
+                        // $pdf = PDF::loadView('foundation_admission',['data'=> $get_app]); 
+                        if (File::exists('FOUNDATION_ACCEPTANCE_FORM.pdf') && File::exists('2024_2025_FOUNDATION_FEE_FOR_NON_SCIENCE.pdf') && File::exists('2024_2025_FOUNDATION_FEE_FOR_SCIENCE.pdf')) {  
+                            if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment_foundation($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
+                                $get_app->adms_y_n = "Y";
+                                $get_app->approved_by = $data->email;
+                                $get_app->session_formulated = substr(explode('/',$request->session)[0],-2). '-'.substr(explode('/',$request->session)[1],-2);
+                                $get_app->approved_at = date("F j, Y, g:i a");
+                                $get_app->duration = $request->duration;
+                                $get_app->accept_date = Date("F j, Y", strtotime('+14 days'));
+                                $get_app->session_admitted = $request->session;
+                                $get_app->resumption_date = $request->resumption_date ;
+                                $get_app->registration_closing = $request->registration_closing ;
+                                $get_app->status ="admitted";
+                                unset($get_app->session);
+                                //unset($get_app->session_formulated);
+                                if($get_app->save()){
+                                    unset($get_app->session_formulated);
+                                    //  File::delete($app_stud->address.'.pdf');
+                                    return response(["status"=>"success","message"=>"Admission Letter successfully delivered"],200);  
+                                }
+                                else{
+                                    return response(["status"=>"failed","message"=>"Error updating recod for application"],401); 
+                                }    
+                            }
+                            else{
+                                return response(["status"=>"failed","message"=>"Error sending admission letter email "],401);
+                            }
+                        }
+                        else{
+                            return response(["status"=>"failed","message"=>"No supporting document(s) in the directory"],401);  
+                        } 
+                    }
+                    elseif($get_app->app_type == 'part_time'){
+                    //  $pdf = PDF::loadView('part-time_admission',['data'=> $get_app]); 
+                    $validator = Validator::make($request->all(), ['degree'=>'required',]);
+                    if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'degree is required','rsp'=>''], 401); } 
+                        $get_app['degree'] = $request->degree;
+                        if (File::exists('PART_TIME_ACCEPTANCE_FORM.pdf')&&File::exists('2022_2023_PROPOSED_CONVERSION_PROGRAMME.pdf')) {
+                        if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment_pt($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
                             $get_app->adms_y_n = "Y";
                             $get_app->approved_by = $data->email;
                             $get_app->session_formulated = substr(explode('/',$request->session)[0],-2). '-'.substr(explode('/',$request->session)[1],-2);
@@ -70,64 +110,35 @@ class AdminController extends Controller
                             $get_app->session_admitted = $request->session;
                             $get_app->resumption_date = $request->resumption_date ;
                             $get_app->registration_closing = $request->registration_closing ;
+                            $get_app->degree_4_pt =$request->degree ;
                             $get_app->status ="admitted";
                             unset($get_app->session);
                             //unset($get_app->session_formulated);
+                            unset($get_app->degree);
                             if($get_app->save()){
                                 unset($get_app->session_formulated);
                                 //  File::delete($app_stud->address.'.pdf');
-                                 return response(["status"=>"success","message"=>"Admission Letter successfully delivered"],200);  
-                            }
-                            else{
-                                return response(["status"=>"failed","message"=>"Error updating recod for application"],401); 
-                            }    
-                        }
-                        else{
-                             return response(["status"=>"failed","message"=>"Error sending admission letter email "],401);
-                        }
-                    }
-                    else{
-                        return response(["status"=>"failed","message"=>"No supporting document(s) in the directory"],401);  
-                    } 
-                }
-                elseif($get_app->app_type == 'part_time'){
-                //  $pdf = PDF::loadView('part-time_admission',['data'=> $get_app]); 
-                $validator = Validator::make($request->all(), ['degree'=>'required',]);
-                if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'degree is required','rsp'=>''], 401); } 
-                    $get_app['degree'] = $request->degree;
-                    if (File::exists('PART_TIME_ACCEPTANCE_FORM.pdf')&&File::exists('2022_2023_PROPOSED_CONVERSION_PROGRAMME.pdf')) {
-                    if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment_pt($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
-                        $get_app->adms_y_n = "Y";
-                        $get_app->approved_by = $data->email;
-                        $get_app->session_formulated = substr(explode('/',$request->session)[0],-2). '-'.substr(explode('/',$request->session)[1],-2);
-                        $get_app->approved_at = date("F j, Y, g:i a");
-                        $get_app->duration = $request->duration;
-                        $get_app->accept_date = Date("F j, Y", strtotime('+14 days'));
-                        $get_app->session_admitted = $request->session;
-                        $get_app->resumption_date = $request->resumption_date ;
-                        $get_app->registration_closing = $request->registration_closing ;
-                        $get_app->degree_4_pt =$request->degree ;
-                        $get_app->status ="admitted";
-                        unset($get_app->session);
-                        //unset($get_app->session_formulated);
-                        unset($get_app->degree);
-                        if($get_app->save()){
-                            unset($get_app->session_formulated);
-                            //  File::delete($app_stud->address.'.pdf');
-                             return response(["status"=>"success","message"=>"Admission Letter successfully delivered"],200);  }
-                        else{return response(["status"=>"failed","message"=>"Error updating recod for application"],401); }    
-                    }else{return response(["status"=>"failed","message"=>"Error sending admission letter email "],401);}
-                    }else{return response(["status"=>"failed","message"=>"No Letter File in the directory"],401);  } 
-                 }else{return response(["status"=>"failed","message"=>"Error with application type"],401); }
-            // File::put($get_app->surname."_".$get_app->app_type."_".$get_app->id.'.pdf', $pdf->output()); 
-            // if (File::exists($get_app->surname."_".$get_app->app_type."_".$get_app->id.'.pdf')) {
-            // }else{return response(["status"=>"failed","message"=>"Already approved application"],200) ;} 
-        }elseif(strtoupper($request->action) == 'DOWNLOAD'){
+                                return response(["status"=>"success","message"=>"Admission Letter successfully delivered"],200);  }
+                            else{return response(["status"=>"failed","message"=>"Error updating recod for application"],401); }    
+                        }else{return response(["status"=>"failed","message"=>"Error sending admission letter email "],401);}
+                        }else{return response(["status"=>"failed","message"=>"No Letter File in the directory"],401);  } 
+                    }else{return response(["status"=>"failed","message"=>"Error with application type"],401); }
+                // File::put($get_app->surname."_".$get_app->app_type."_".$get_app->id.'.pdf', $pdf->output()); 
+                // if (File::exists($get_app->surname."_".$get_app->app_type."_".$get_app->id.'.pdf')) {
+                // }else{return response(["status"=>"failed","message"=>"Already approved application"],200) ;} 
+            }elseif(strtoupper($request->action) == 'DOWNLOAD'){
 
-                $headers = [ 'Content-Description' => 'File Transfer', 'Content-Type' => 'application/octet-stream',];                
-                return Response::download(storage_path('app/'.$get_app->olevel_file),
-                strtoupper($get_app->surname).'_O_LEVEL.jpg',$headers);
+                // $headers = [ 'Content-Description' => 'File Transfer', 'Content-Type' => 'application/octet-stream',];                
+                // return Response::download(storage_path('app/'.$get_app->olevel_file),
+                // strtoupper($get_app->surname).'_O_LEVEL.jpg',$headers);
 
+                $state_name = app('App\Http\Controllers\ConfigController')->getStateGivenID($get_app->state_origin);
+                $get_app->state_origin = $state_name;
+                $pdf = PDF::loadView('admission.view_app', [    
+                    'application' => $get_app
+                ]);
+
+                return $pdf->download('application_info.pdf');
             }else{
                 // foreach ($get_app->other_cert as $index => $val){
                 //      explode('~',$val);
@@ -245,6 +256,36 @@ class AdminController extends Controller
         ->get();
         $count = count($applications);
         return view('admin.pages.applications',['data'=>$data,'applications'=>$applications,'count'=>$count]);
+    }
+
+    public function viewSubmittedApplications(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
+        $request->merge([
+            'settingId' => 9
+        ]);
+        $session = app('App\Http\Controllers\ConfigController')->settings($request)->session;
+        $applications = DB::table('applications')->join('applicants', 'applications.submitted_by', '=', 'applicants.email')
+        ->join('application_payments','applications.used_pin','application_payments.rrr')
+        ->select('applications.*','first_choice->prog as Programme','applicants.surname','applicants.first_name','applicants.other_name')->latest()
+        ->where('application_payments.session','9')->latest('applications.updated_at')
+        ->get();
+        $categories = DB::table('applications')->join('application_payments','applications.used_pin','application_payments.rrr')
+            ->where('application_payments.session','9')->distinct('screen_date')->select('screen_date','screen_center')->get();
+
+        $count = count($applications);
+        return view('admin.pages.submitted_applications',['data'=>$data,'applications'=>$applications,'count'=>$count, 'session'=>$session, 'categories'=>$categories]);
+    }
+
+    public function previewApplication(Request $request, $id){
+        $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
+        $get_app = Application::join('applicants','applications.submitted_by','applicants.email')
+            ->where(['applications.id'=>$id]) 
+            ->select('applications.first_choice->prog as Programme1','applications.second_choice->prog as Programme2','applicants.*','applications.*')
+            ->first();
+
+        $state_name = app('App\Http\Controllers\ConfigController')->getStateGivenID($get_app->state_origin);
+        $get_app->state_origin = $state_name;
+        return view('admission.view_app',['data'=>$data,'application'=>$get_app]);
     }
 
     public function viewPendingApplications(Request $request){
@@ -1038,5 +1079,28 @@ class AdminController extends Controller
         $programme = DB::table('applications')->where('id',$appid)->select('first_choice->prog as prog')->first();
         $code = DB::table('programmes')->where('programme',$programme->prog)->select('programme_id')->first();
         return $code;
+    }
+
+    public function sendBulkEmails(Request $request){
+        $request->validate([
+            'subject'=>'required',
+            'message'=>'required',
+            'category'=>'required'
+        ]);
+        $applications = DB::table('applications')->join('applicants', 'applications.submitted_by', '=', 'applicants.email')
+        ->select('applicants.email','applicants.first_name')->where('applications.screen_date','21/08/2022')
+        ->get();
+
+        $data = [
+            'subject' => $request->subject,
+            'message' => $request->message
+        ];
+
+        foreach ($applications as $application) {
+            SendBulkEmailJob::dispatch($application->email, $application->first_name, $data);
+        }
+        
+        return response(['success' => true,'message'=>'Bulk emails queued successfully!'], 200);
+
     }
 }
