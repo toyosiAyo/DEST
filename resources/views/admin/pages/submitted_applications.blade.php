@@ -1,0 +1,196 @@
+@extends('admin.layouts.master')
+
+@section('title')
+    Submitted Applications
+@endsection
+
+@section('content')
+    <link href="../assets_admin/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0 font-size-18">Submitted Applications for {{ $session }}</h4>
+                            <button id= "btnbulkEmailModal" type="button" class="btn btn-success">
+                                Send Bulk Email
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <h5 class="card-title">Application List <span
+                                    class="text-muted fw-normal ms-2">({{ $count }})</span></h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+                <div class="table-responsive mb-4">
+                    <table id="tblapplications" class="table align-middle datatable dt-responsive table-check nowrap"
+                        style="border-collapse: collapse; border-spacing: 0 8px; width: 100%;">
+                        <thead>
+                            <tr>
+                                <th scope="col">S/N</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Programme</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Date/Center</th>
+                                <th scope="col">Status</th>
+                                <th style="width: 80px; min-width: 80px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php $i = 1; @endphp
+                            @foreach ($applications as $application)
+                                <tr>
+                                    <td>{{ $i }} @php $i++ @endphp</td>
+                                    <td>
+                                        {{ $application->surname . ' ' . $application->first_name }}
+                                    </td>
+                                    <td>{{ $application->submitted_by }}</td>
+                                    <td>{{ $application->Programme }}</td>
+                                    <td>{{ $application->app_type }}</td>
+                                    <td>{{ $application->screen_date . ' (' . $application->screen_center . ')' }}
+                                    </td>
+                                    <td>
+                                        @if ($application->status == 'pending')
+                                            <div class="d-flex gap-2">
+                                                <a href="#"
+                                                    class="badge badge-soft-danger">{{ $application->status }}</a>
+                                            </div>
+                                        @elseif($application->status == 'admitted')
+                                            <div class="d-flex gap-2">
+                                                <a href="#"
+                                                    class="badge badge-soft-success">{{ $application->status }}</a>
+                                            </div>
+                                        @else
+                                            <div class="d-flex gap-2">
+                                                <a href="#"
+                                                    class="badge badge-soft-primary">{{ $application->status }}</a>
+                                            </div>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button
+                                                class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle"
+                                                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="bx bx-dots-horizontal-rounded"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                @if ($application->status == 'success')
+                                                    <li><a class="dropdown-item"
+                                                            href="preview-application/{{ $application->id }}">View</a></li>
+                                                    <li><button data-email="{{ $application->submitted_by }}"
+                                                            data-action="download" data-app_id="{{ $application->id }}"
+                                                            class="dropdown-item downloadApp">Download</button></li>
+                                                    <li><button data-email="{{ $application->submitted_by }}"
+                                                            data-action="approve" data-app_id="{{ $application->id }}"
+                                                            class="dropdown-item approveApp">Approve</button></li>
+                                                @endif
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <!-- end table -->
+                </div>
+                <!-- end table responsive -->
+
+            </div> <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        @include('admin.partials.footer')
+    </div>
+
+    <div class="modal fade" id="bulkEmailModal" tabindex="-1" role="dialog" aria-labelledby="bulkEmailModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bulkEmailModalLabel">Send Bulk Email</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <label for="subject" class="col-form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject"
+                            placeholder="Enter Mail Subject" required>
+                        <label for="message" class="col-form-label">Message</label>
+                        <textarea class="form-control" rows="5" id="message" name="message" placeholder="Enter Message Body" required></textarea>
+                        <label for="category" class="col-form-label">Select screening category</label>
+                        <select class="form-control" name="category" id="category" required>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->screen_date }}">
+                                    {{ $category->screen_date . ' (' . $category->screen_center . ')' }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnSendBulkMail" type="button" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="approveApplication" tabindex="-1" aria-labelledby="approveApplicationLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-primary">
+                    <h5 class="my-0 text-primary"><i class="mdi mdi-bullseye-arrow me-3"></i>Approve Application</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="col-lg-12">
+                    <div class="card border border-primary">
+                        <div class="card-body">
+                            <form method="post">
+                                <label for="duration" class="col-form-label">Duration</label>
+                                <input type="number" class="form-control" id="duration" name="duration"
+                                    placeholder="Enter Programme Duration" required><br>
+                                <label for="resumption" class="col-form-label">Resumption Date</label>
+                                <input type="text" class="form-control" id="resumption" name="resumption"
+                                    placeholder="e.g. 17th October, 1925" required><br>
+                                <label for="registration_closing" class="col-form-label">Reg Closing Date</label>
+                                <input type="text" class="form-control" id="registration_closing"
+                                    name="registration_closing" placeholder="e.g. 17th October, 1926" required><br>
+                                <label for="session" class="col-form-label">Session</label>
+                                <input type="text" class="form-control" id="session" name="session"
+                                    placeholder="Enter session e.g (2022/2023)" required><br>
+                                <input type="text" class="form-control" id="degree" name="degree"
+                                    placeholder="Enter degree" required><br>
+                                <button type="submit" class="btn btn-primary" id="btn_approve">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Required datatable js -->
+    <script src="../assets_admin/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../assets_admin/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Responsive examples -->
+    <script src="../assets_admin/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../assets_admin/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+    <!-- init js -->
+    <script src="../assets_admin/js/pages/datatable-pages.init.js"></script>
+    <script src="../assets_admin/scripts/utility.js"></script>
+@endsection
