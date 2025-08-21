@@ -103,10 +103,10 @@ $(document).ready(function ($) {
         var pay_type = $(this).data("pay_type");
         approvePayment(id, rrr, email, pay_type);
     });
-    
+
     $(".students").on("click", ".reset", function () {
         var id = $(this).data("student_id");
-        var firstname = $(this).data("firstname")
+        var firstname = $(this).data("firstname");
         adminResetPassword(id, firstname);
     });
 
@@ -114,21 +114,43 @@ $(document).ready(function ($) {
         var id = $(this).data("app_id");
         var action = $(this).data("action");
         var email = $(this).data("email");
-        var duration = "";
-        var resumption = "";
-        var closing = "";
-        var degree = "";
-        var session = "";
-        handleApplication(
-            id,
-            action,
-            email,
-            duration,
-            resumption,
-            degree,
-            session,
-            closing
-        );
+        var duration = "null";
+        downloadPDF(id, action, email, duration);
+    });
+
+    $("#btnbulkEmailModal").click(function () {
+        $("#bulkEmailModal").modal("show");
+        $("#btnSendBulkMail")
+            .off("click")
+            .on("click", function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/send-bulk-emails",
+                    data: {
+                        subject: $("#subject").val(),
+                        message: $("#message").val(),
+                        category: $("#category").val(),
+                    },
+                    dataType: "json",
+                    beforeSend: function () {
+                        if (confirm("Send email?") == false) return false;
+                        $("#btnSendBulkMail").html(
+                            '<i class="fa fa-spinner fa-spin"></i>'
+                        );
+                        $.blockUI();
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        $("#btnSendBulkMail").html("Send");
+                        toastr["success"](response.message);
+                    },
+                    error: function (response) {
+                        $.unblockUI();
+                        $("#btnSendBulkMail").html("Send");
+                        toastr["error"](response.responseJSON.message);
+                    },
+                });
+            });
     });
 
     $("#tblapplications").on("click", ".approveApp", function () {
@@ -181,7 +203,7 @@ $(document).ready(function ($) {
             },
         });
     };
-    
+
     const adminResetPassword = (id, firstname) => {
         $.ajax({
             type: "POST",
@@ -189,7 +211,10 @@ $(document).ready(function ($) {
             data: { id: id },
             dataType: "json",
             beforeSend: function () {
-                if (confirm(`Reset ${firstname}'s password to 123456?`) == false) return false;
+                if (
+                    confirm(`Reset ${firstname}'s password to 123456?`) == false
+                )
+                    return false;
                 $.blockUI();
             },
             success: function (response) {
@@ -202,8 +227,7 @@ $(document).ready(function ($) {
                 toastr["error"](response.responseJSON.message);
             },
         });
-        
-    }
+    };
 
     $(".viewForgotMatric").click(function () {
         $("#forgotMatric").modal("show");
@@ -232,6 +256,41 @@ $(document).ready(function ($) {
         $.cookie("student_id", id);
         viewRegCourses(id, name);
     });
+
+    const downloadPDF = (id, action, email, duration) => {
+        $.ajax({
+            type: "POST",
+            url: "/app_actions",
+            data: {
+                email: email,
+                action: action,
+                app_id: id,
+                duration: duration,
+            },
+            xhrFields: {
+                responseType: "blob",
+            },
+            beforeSend: function () {
+                if (confirm("Download PDF?") == false) return false;
+                $.blockUI();
+            },
+            success: function (response) {
+                console.log(response);
+                var blob = new Blob([response]);
+                var link = document.createElement("a");
+                link.href = window.URL.createObjectURL(blob);
+                link.download = `Application for ${email}.pdf`;
+                link.click();
+                toastr["success"]("File downloaded");
+                $.unblockUI();
+            },
+            error: function (response) {
+                console.log(response);
+                $.unblockUI();
+                toastr["error"](response.responseJSON.message);
+            },
+        });
+    };
 
     const handleApplication = (
         id,
@@ -336,16 +395,16 @@ $(document).ready(function ($) {
             });
         }
     });
-    
+
     $(".score").on("input", function (e) {
         var keyCode = e.which;
         if (keyCode < 48 || keyCode > 57) {
             e.preventDefault();
         }
         var value = $(this).val();
-        
-        if (value.includes('.') || value.startsWith('0')) {
-            alert('Invalid Input')
+
+        if (value.includes(".") || value.startsWith("0")) {
+            alert("Invalid Input");
             $(this).val(0);
         }
     });
