@@ -98,7 +98,7 @@
                                 </h3>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-striped">
+                                <table id="tblapplications" class="table table-striped">
                                     <thead>
                                         <tr>
                                             <td><strong>S/N</strong></td>
@@ -135,6 +135,10 @@
                                                     @else
                                                         <a href="/application" type="button"
                                                             class="btn btn-info animation-scale-up ">View</a>
+                                                        <button data-email="{{ $app->submitted_by }}"
+                                                            data-action="download" data-app_id="{{ $app->id }}"
+                                                            type="button"
+                                                            class="btn btn-success animation-scale-up downloadApp">Print</button>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -238,5 +242,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src=" {{ asset('scripts/payment.js') }}"></script>
     <script src=" {{ asset('scripts/tourguide.min.js') }}"></script>
+    <script src="../assets_admin/scripts/utility.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
 @endsection
