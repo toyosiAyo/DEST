@@ -193,15 +193,14 @@ class PaymentController extends Controller
     public function validateApplicationPayment(Request $request){
         $validator = Validator::make($request->all(), [ 
             'reference' => 'required|string',
-            'transAmount' => 'required|string',
-            'errorMessage' => 'required|string'
+            'transAmount' => 'required|string'
         ]);
         if ($validator->fails()) {
             return response(['status'=>'failed','message'=>'Validation error'], 400);
         }
         
         $reference = $request->reference;
-        $credoMessage = $request->errorMessage;
+        // $credoMessage = $request->errorMessage;
         
         $check = ApplicantPayment::where(['status_msg'=>'pending','trans_ref'=>$reference])->first(); // add 'amount'=>$request->transAmount,
         if($check){
@@ -212,7 +211,7 @@ class PaymentController extends Controller
             ];
             $response = Http::withHeaders($headers)->get('https://api.credocentral.com/transaction/'.$reference.'/verify');
             $data = $response->json();
-            if($data["status"] == 200 && $credoMessage == "Approved"){
+            if($data["status"] == 200){
                 $details = $data["data"];
                 if($details["status"] == 0 && $details["statusMessage"] == "Successfully processed"){
                     $check->status_code = '00';
