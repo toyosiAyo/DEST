@@ -193,13 +193,16 @@ class PaymentController extends Controller
     public function validateApplicationPayment(Request $request){
         $validator = Validator::make($request->all(), [ 
             'reference' => 'required|string',
-            'transAmount' => 'required|string'
+            'transAmount' => 'required|string',
+            'errorMessage' => 'required|string'
         ]);
         if ($validator->fails()) {
             return response(['status'=>'failed','message'=>'Validation error'], 400);
         }
         
         $reference = $request->reference;
+        $credoMessage = $request->errorMessage;
+        
         $check = ApplicantPayment::where(['status_msg'=>'pending','trans_ref'=>$reference])->first(); // add 'amount'=>$request->transAmount,
         if($check){
             $headers = [
@@ -209,31 +212,37 @@ class PaymentController extends Controller
             ];
             $response = Http::withHeaders($headers)->get('https://api.credocentral.com/transaction/'.$reference.'/verify');
             $data = $response->json();
-            if($data["status"] == 200){
+            if($data["status"] == 200 && $credoMessage == "Approved"){
                 $details = $data["data"];
-                $check->status_code = '00';
-                $check->status_msg = 'success';
-                $check->approved_by = 'E-tranzact';
-                $check->approved_at = date("F j, Y, g:i a");
-                if($check->save()){
-                   $init_app = new Application;
-                   $init_app->submitted_by = $check->email;
-                   $init_app->app_type = $check->pay_type;
-                   $init_app->status = "pending";
-                   $init_app->form_status = '0';
-                   $init_app->save();
-                   
-                   setcookie("app_type", $check->pay_type, time() + 3600, "/");
-                   setcookie("pin", $check->rrr, time() + 3600, "/");
-                   if($request->action == "requery"){
-                        return response(['status'=>'success','message'=>"Transaction successfully updated, you will be redirected to application form now"], 200);
-                   }
-                   return redirect('/app_form');
+                if($details["status"] == 0 && $details["statusMessage"] == "Successfully processed"){
+                    $check->status_code = '00';
+                    $check->status_msg = 'success';
+                    $check->approved_by = 'E-tranzact';
+                    $check->approved_at = date("F j, Y, g:i a");
+                    if($check->save()){
+                       $init_app = new Application;
+                       $init_app->submitted_by = $check->email;
+                       $init_app->app_type = $check->pay_type;
+                       $init_app->status = "pending";
+                       $init_app->form_status = '0';
+                       $init_app->save();
+                       
+                       setcookie("app_type", $check->pay_type, time() + 3600, "/");
+                       setcookie("pin", $check->rrr, time() + 3600, "/");
+                       if($request->action == "requery"){
+                            return response(['status'=>'success','message'=>"Transaction successfully updated, you will be redirected to application form now"], 200);
+                       }
+                       return redirect('/app_form');
+                    }
+                    return redirect('/dashboard');
                 }
+                return redirect('/dashboard');
             }
-            return response(['status'=>'failed','message'=>$data["message"]], 400);
+            return redirect('/dashboard');
+            //return response(['status'=>'failed','message'=>$data["message"]], 400);
         }
-        return response(['status'=>'failed','message'=>'Reference not found'], 404);
+        return redirect('/dashboard');
+        //return response(['status'=>'failed','message'=>'Reference not found'], 404);
     }
     
 }
