@@ -271,7 +271,7 @@ class AdminController extends Controller
         ->get();
         $categories = DB::table('applications')->join('application_payments','applications.used_pin','application_payments.rrr')
             ->where('application_payments.session','9')->distinct('screen_date')->select('screen_date','screen_center')->get();
-
+            
         $count = count($applications);
         return view('admin.pages.submitted_applications',['data'=>$data,'applications'=>$applications,'count'=>$count, 'session'=>$session, 'categories'=>$categories]);
     }
@@ -1087,10 +1087,11 @@ class AdminController extends Controller
             'message'=>'required',
             'category'=>'required'
         ]);
+
         $applications = DB::table('applications')->join('applicants', 'applications.submitted_by', '=', 'applicants.email')
         ->select('applicants.email','applicants.first_name')->where('applications.screen_date',$request->category)
         ->get();
-
+        
         $data = [
             'subject' => $request->subject,
             'message' => $request->message
