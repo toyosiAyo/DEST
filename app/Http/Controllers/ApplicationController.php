@@ -141,6 +141,7 @@ class ApplicationController extends Controller
                 $app->address_resident = $request->address_resident;
                 $app->dob = $request->dob;
                 $app->city_resident = $request->city_resident;
+                $app->state_resident = $request->state_resident;
                 $app->country_resident = $request->country;
                 $app->state_origin = $request->state_origin;
                 $app->lga_origin = $request->lga_origin;
