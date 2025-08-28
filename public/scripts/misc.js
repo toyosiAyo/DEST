@@ -257,7 +257,7 @@ $(document).ready(function () {
             method: "GET",
             success: function (response) {
                 $.each(response, function (i, item) {
-                    $("#state_origin").append(
+                    $(".state").append(
                         $("<option>", {
                             value: item.id,
                             text: item.name,
