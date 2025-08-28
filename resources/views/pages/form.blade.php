@@ -175,6 +175,24 @@
 
                                                                             <div class="form-group row form-material">
                                                                                 <label
+                                                                                    class="col-xl-12 col-md-3 form-control-label">State
+                                                                                    of Residence
+                                                                                    <span class="required"
+                                                                                        style="color:red">*</span>
+                                                                                </label>
+                                                                                <div class="col-xl-12 col-md-9">
+                                                                                    <select class="form-control state"
+                                                                                        id="state_resident"
+                                                                                        name="state_resident"
+                                                                                        required="">
+                                                                                        <option value="">Choose a
+                                                                                            State</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group row form-material">
+                                                                                <label
                                                                                     class="col-xl-12 col-md-3 form-control-label">Nationality
                                                                                     <span class="required"
                                                                                         style="color:red">*</span>
@@ -205,7 +223,7 @@
                                                                                         style="color:red">*</span>
                                                                                 </label>
                                                                                 <div class="col-xl-12 col-md-9">
-                                                                                    <select class="form-control"
+                                                                                    <select class="form-control state"
                                                                                         id="state_origin"
                                                                                         name="state_origin"
                                                                                         required="">
@@ -830,6 +848,16 @@
                                                                                 <small style="color: red">(png/jpg max
                                                                                     500kb)</small>
                                                                             </div>
+                                                                            @php
+                                                                                $non_eligible_states = [
+                                                                                    30,
+                                                                                    31,
+                                                                                    28,
+                                                                                    29,
+                                                                                    25,
+                                                                                    13,
+                                                                                ];
+                                                                            @endphp
                                                                             <div class="example col-xl-6 col-md-3">
                                                                                 <label for="screening_date"
                                                                                     class="form-label">Select Screening
@@ -840,7 +868,12 @@
                                                                                     id="screening_date"
                                                                                     data-live-search="true"
                                                                                     data-allow-clear="true">
-
+                                                                                    @if (!in_array($data->state_resident, $non_eligible_states))
+                                                                                        <option value="18/09/2025">
+                                                                                            18/09/2025
+                                                                                            (Online)
+                                                                                        </option>
+                                                                                    @endif
                                                                                     <option value="17/09/2025">17/09/2025
                                                                                         (Main Campus, Ede)
                                                                                     </option>
