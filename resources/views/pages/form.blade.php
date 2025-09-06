@@ -877,9 +877,6 @@
                                                                                     <option value="17/09/2025">17/09/2025
                                                                                         (Main Campus, Ede)
                                                                                     </option>
-                                                                                    <option value="6/09/2025">6/09/2025
-                                                                                        (Redemption City)
-                                                                                    </option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
