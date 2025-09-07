@@ -96,6 +96,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     
     Route::post('init-application-payment',[PaymentController::class,'initApplicationPayment']);
     Route::get('validate-payment',[PaymentController::class,'validateApplicationPayment']);
+    Route::get('validate-admission-payment',[PaymentController::class,'validateAdmissionPayment']);
     Route::get('get-payment-schedule',[PaymentController::class,'getPaymentSchedule']);
     Route::post('init-admission-payment',[PaymentController::class,'initAdmissionPayment']);
 
