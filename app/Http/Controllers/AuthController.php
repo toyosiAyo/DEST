@@ -94,18 +94,18 @@ class AuthController extends Controller
             'student_password'=>'required',
         ]);
 
-        $app = DB::table('applications')->select('*','first_choice->prog as programme')->where([
-                    'submitted_by'=> $request->student_email,'status'=> 'admitted',
-                ])->first();
+        // $app = DB::table('applications')->select('*','first_choice->prog as programme')->where([
+        //             'submitted_by'=> $request->student_email,'status'=> 'admitted',
+        //         ])->first();
 
-        $user = Applicant::where('email',$request->student_email)->first();
-        if(!$app){
+        $user = Applicant::where(['email'=>$request->student_email,'status' => 'student'])->first();
+        if(!$user){
             return response(['status'=>'Nok','message'=>'Login failed... We do not recognize your credentials'], 401);
         }
         else{
             if(Hash::check($request->student_password,$user->password)){
-                DB::table('applicants')->where('email', $request->student_email)->update(['status' => 'student']);
-                $request->session()->put('user',$app->submitted_by);
+                //DB::table('applicants')->where('email', $request->student_email)->update(['status' => 'student']);
+                $request->session()->put('user',$request->student_email);
                 return response(['status'=>'ok','message'=>'Login was successful','user'=>$app], 200);
             }
             else{
