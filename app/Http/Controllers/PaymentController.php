@@ -56,7 +56,7 @@ class PaymentController extends Controller
         $check_pending_payment = DB::table('admission_payments')->where(['email'=>$request->email,'amount'=>$request->amount,'app_id'=>$request->app_id,'status'=>'pending','session'=>$session])->first();
 
         if($check_pending_payment){
-            return response(['status'=>'ok','message'=>'Redirecting to payment gateway...', 'url'=>$check_pending_payment->url], 201);
+            return response(['status'=>'ok','message'=>'Redirecting to payment gateway...', 'url'=>$check_pending_payment->url], 200);
         }
 
         $timesammp = DATE("dmyHis"); 
@@ -65,7 +65,7 @@ class PaymentController extends Controller
         $body = [
             'amount' => $request->amount * 100,
             'bearer' => 0,
-            'callbackUrl' => 'https://destadms.run.edu.ng/validate-payment',
+            'callbackUrl' => 'https://destadms.run.edu.ng/validate-admission-payment',
             'channels' => ['card', 'bank'],
             'currency' => 'NGN',
             'customerFirstName' => $request->first_name,
@@ -94,7 +94,7 @@ class PaymentController extends Controller
             $payment->session = $session;
             $payment->url = $details["authorizationUrl"];
             $payment->reference = $details["credoReference"];
-            $payment->payload = $request->payload;
+            $payment->payload = json_encode($request->payload);
             $payment->status = 'pending';
             $payment->save();
 
@@ -189,6 +189,37 @@ class PaymentController extends Controller
         //     return response(['status'=>'failed','message'=>'Error loging new payment'], 500);
         // }
     }
+
+    public function validateAdmissionPayment(Request $request){
+        $validator = Validator::make($request->all(), [ 
+            'reference' => 'required|string',
+            'transAmount' => 'required|string'
+        ]);
+        if ($validator->fails()) {
+            return response(['status'=>'failed','message'=>'Validation error'], 400);
+        }
+        $reference = $request->reference;
+
+        $check = AdmissionPayment::where(['status'=>'pending','trans_ref'=>$reference])->first(); 
+
+        if($check){
+            $data = $this->validatePaymentEngine($reference);
+            if($data["status"] == 200){
+                $details = $data["data"];
+                if($details["status"] == 0 && $details["statusMessage"] == "Successfully processed"){
+                    $check->status = 'success';
+                    if($check->save()){
+                        DB::table('applicants')->where('email', $check->email)->update(['status' => 'student']);
+                        return redirect('/payments');
+                    }
+                    return redirect('/dashboard');
+                }
+                return redirect('/dashboard');
+            }
+            return redirect('/dashboard');
+        }
+        return redirect('/dashboard');
+    }
     
     public function validateApplicationPayment(Request $request){
         $validator = Validator::make($request->all(), [ 
@@ -204,13 +235,14 @@ class PaymentController extends Controller
         
         $check = ApplicantPayment::where(['status_msg'=>'pending','trans_ref'=>$reference])->first(); // add 'amount'=>$request->transAmount,
         if($check){
-            $headers = [
-              'Content-Type' => 'application/json',
-              'Accept' => 'application/json',
-              'Authorization' => '1PRI6199K1cCrgmOk4OclzZ3neg3cZC31yQzZx',
-            ];
-            $response = Http::withHeaders($headers)->get('https://api.credocentral.com/transaction/'.$reference.'/verify');
-            $data = $response->json();
+            $data = $this->validatePaymentEngine($reference);
+            // $headers = [
+            //   'Content-Type' => 'application/json',
+            //   'Accept' => 'application/json',
+            //   'Authorization' => '1PRI6199K1cCrgmOk4OclzZ3neg3cZC31yQzZx',
+            // ];
+            // $response = Http::withHeaders($headers)->get('https://api.credocentral.com/transaction/'.$reference.'/verify');
+            // $data = $response->json();
             if($data["status"] == 200){
                 $details = $data["data"];
                 if($details["status"] == 0 && $details["statusMessage"] == "Successfully processed"){
@@ -238,10 +270,19 @@ class PaymentController extends Controller
                 return redirect('/dashboard');
             }
             return redirect('/dashboard');
-            //return response(['status'=>'failed','message'=>$data["message"]], 400);
         }
         return redirect('/dashboard');
-        //return response(['status'=>'failed','message'=>'Reference not found'], 404);
+    }
+
+    public function validatePaymentEngine($reference){
+        $headers = [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => '1PRI6199K1cCrgmOk4OclzZ3neg3cZC31yQzZx',
+        ];
+        $response = Http::withHeaders($headers)->get('https://api.credocentral.com/transaction/'.$reference.'/verify');
+        $data = $response->json();
+        return $data;
     }
     
 }
