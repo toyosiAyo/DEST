@@ -68,8 +68,8 @@ $(document).ready(function ($) {
                         "data-amount",
                         response.total
                     );
-                    $("#btn_proceed_to_payment").attr(
-                        "data-payload",
+                    $("#btn_proceed_to_payment").data(
+                        "payload",
                         response.payload
                     );
                     $("#btn_proceed_to_payment").html(
@@ -96,6 +96,9 @@ $(document).ready(function ($) {
                 var email = $(this).data("email");
                 var payload = $(this).data("payload");
                 var amount = $(this).data("amount");
+                var surname = $(this).data("surname");
+                var first_name = $(this).data("first_name");
+
                 $.ajax({
                     type: "POST",
                     url: "init-admission-payment",
@@ -104,6 +107,8 @@ $(document).ready(function ($) {
                         email: email,
                         payload: payload,
                         amount: amount,
+                        surname: surname,
+                        first_name: first_name,
                     },
                     dataType: "json",
                     success: function (response) {
