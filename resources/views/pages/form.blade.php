@@ -868,15 +868,12 @@
                                                                                     id="screening_date"
                                                                                     data-live-search="true"
                                                                                     data-allow-clear="true">
-                                                                                    @if (!in_array($data->state_resident, $non_eligible_states))
-                                                                                        <option value="18/09/2025">
-                                                                                            18/09/2025
-                                                                                            (Online)
-                                                                                        </option>
-                                                                                    @endif
-                                                                                    <option value="17/09/2025">17/09/2025
-                                                                                        (Main Campus, Ede)
+                                                                                    {{-- @if (!in_array($data->state_resident, $non_eligible_states)) --}}
+                                                                                    <option value="29/09/2025">
+                                                                                        29/09/2025
+                                                                                        (Online)
                                                                                     </option>
+                                                                                    {{-- @endif --}}
                                                                                 </select>
                                                                             </div>
                                                                         </div>
