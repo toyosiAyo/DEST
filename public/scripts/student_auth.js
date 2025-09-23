@@ -46,6 +46,7 @@ $(document).ready(function ($) {
                     console.log(response);
                     $.cookie("degree", response.user.app_type);
                     $.cookie("prog_id", response.user.programme);
+                    $.cookie("app_id", response.user.id);
                     toastr["success"](response.message);
                     setTimeout(function () {
                         window.location.href = "/student_dashboard";
