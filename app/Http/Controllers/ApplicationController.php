@@ -234,7 +234,7 @@ class ApplicationController extends Controller
                     return back()->with('fail','pin is required for final submition!');
                 }
                 
-                $request->validate(['signature' => ['required','image','mimes:png,jpg', 'max:500'],'olevel' => ['required','image','mimes:png,jpg', 'max:500'],'birth_cert' => ['required','image','mimes:png,jpg', 'max:500']]);
+                $request->validate(['signature' => ['required','image','mimes:png,jpg,jpeg', 'max:500'],'olevel' => ['required','image','mimes:png,jpg,jpeg', 'max:500'],'birth_cert' => ['required','image','mimes:png,jpg,jpeg', 'max:500']]);
          
                 $fac_name = app('App\Http\Controllers\ConfigController')->get_faculty_name_given_id($request->faculty);
                 $dept_name = app('App\Http\Controllers\ConfigController')->get_dept_name_given_id($request->department);
