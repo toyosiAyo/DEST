@@ -72,13 +72,24 @@ class StudentController extends Controller
         $request->validate([ 'course' => 'required']);
         try {
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+            
+            if($_COOKIE['degree']=="part_time"){
+                $setting = app('App\Http\Controllers\ConfigController')->part_time_settings($request);
+            }else{
+                $setting = app('App\Http\Controllers\ConfigController')->settings($request);
+            }
+            $request->merge(['settings'=>$setting]);
+            $check_payment = app('App\Http\Controllers\PaymentController')->checkSchoolfeePayment($request);
+            if(count($check_payment) < 1){
+                return response(['status'=>'Nok','message'=>'School fee payment required for course registration',],403); 
+            }
 
             if($_COOKIE['degree']=="part_time"){
                 return response(['status'=>'Nok','message'=>'Registration not opened for the semester yet',],401);
                 if($data->matric_number == ""){
                     return response(['status'=>'Nok','message'=>'Matric number required for registration!',],403); 
                 }
-                $setting = app('App\Http\Controllers\ConfigController')->part_time_settings($request);
+                //$setting = app('App\Http\Controllers\ConfigController')->part_time_settings($request);
                 $check = DB::table('part_time_registrations')->where(['matric_number'=> $data->matric_number,'settings_id'=>$setting->id])->first();
                 
                 if($check){
@@ -98,7 +109,7 @@ class StudentController extends Controller
                 return response(['status'=>'ok', 'message'=>'Course registration successfully submitted','settings'=>$setting],200);
             }
             
-            $setting = app('App\Http\Controllers\ConfigController')->settings($request);
+            //$setting = app('App\Http\Controllers\ConfigController')->settings($request);
             $check = DB::table('registration')->where(['student_id'=> $data->id,'settings_id'=>$setting->id])->first();
             if($check){
                 return response()->json(['status'=>'Nok','message'=>'Registration already submitted for approval',],401); 
@@ -118,5 +129,28 @@ class StudentController extends Controller
             return response()->json(['status'=>'Nok','message'=>'failed, Error from catch'],401);    
         }
 
+    }
+
+    public function fetchSchoolFeesPayload(Request $request){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+
+        if($_COOKIE['degree']=="part_time"){
+            $settings = app('App\Http\Controllers\ConfigController')->part_time_settings($request);
+        }else{
+            $settings = app('App\Http\Controllers\ConfigController')->settings($request);
+        }
+
+        $request->merge(['app_id' => $_COOKIE['app_id'], 'app_type' => $_COOKIE['degree'], 'type' => 'school fees','settings'=>$settings]);
+
+        $fee_schedule = app('App\Http\Controllers\PaymentController')->getPaymentSchedule($request);
+        return view('student.payment_schedule',['payload'=>$fee_schedule['combined'],'settings'=>$settings, 'data'=> $data]);
+
+    }
+
+    public function viewTransactions(){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $payments = DB::table('fees_payments')->where('email',$data->email)->orderBy('id','desc')->get();
+        
+        return view('student.transactions',['payments'=>$payments,'data'=>$data]);
     }
 }
