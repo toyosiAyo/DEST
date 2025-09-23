@@ -203,11 +203,13 @@ class ApplicantPaymentController extends Controller
 
 
     public function view_payments(Request $request){
-        
         try {
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             $payments = DB::table('application_payments')->select('*')->where('email', $data->email)->latest()->get();
-            return view('pages.payment_history',['payments'=>$payments])->with('data', $data);
+
+            $admission_payments = DB::table('admission_payments')->select('*')->where('email', $data->email)->latest()->get();
+
+            return view('pages.payment_history',['payments'=>$payments,'admission_payments'=>$admission_payments])->with('data', $data);
         
         } catch (\Throwable $th) {
             return back()->with('view_payments','view_payments');
