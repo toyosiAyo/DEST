@@ -94,9 +94,9 @@ class AuthController extends Controller
             'student_password'=>'required',
         ]);
 
-        // $app = DB::table('applications')->select('*','first_choice->prog as programme')->where([
-        //             'submitted_by'=> $request->student_email,'status'=> 'admitted',
-        //         ])->first();
+        $app = DB::table('applications')->select('*','first_choice->prog as programme')->where([
+                    'submitted_by'=> $request->student_email,'status'=> 'admitted',
+                ])->first();
 
         $user = Applicant::where(['email'=>$request->student_email,'status' => 'student'])->first();
         if(!$user){
@@ -104,9 +104,8 @@ class AuthController extends Controller
         }
         else{
             if(Hash::check($request->student_password,$user->password)){
-                //DB::table('applicants')->where('email', $request->student_email)->update(['status' => 'student']);
                 $request->session()->put('user',$request->student_email);
-                return response(['status'=>'ok','message'=>'Login was successful','user'=>$app], 200);
+                return response(['status'=>'ok','message'=>'Login was successful', 'user'=> $app], 200);
             }
             else{
                 return response(['status'=>'Nok','message'=>'Login failed... Incorrect password'], 401);
@@ -135,19 +134,24 @@ class AuthController extends Controller
     }
 
     public function studentDashboard(Request $request){
+        if($_COOKIE['degree']=="part_time"){
+            $settings = app('App\Http\Controllers\ConfigController')->part_time_settings($request);
+        }else{
+            $settings = app('App\Http\Controllers\ConfigController')->settings($request);
+        }
+        $request->merge(['app_id' => $_COOKIE['app_id'], 'app_type' => $_COOKIE['degree'], 'type' => 'school fees','settings'=>$settings]);
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-        $applications = DB::table('applications')->select('*','first_choice->prog as Programme')
-        ->where('submitted_by', $data->email)->latest()->get();
-        $count = count($applications);
-        $success = DB::table('applications')->where([
-            ['submitted_by', $data->email],
-            ['status', 'success'],
-        ])->count();
-        $pending = DB::table('applications')->where([
-            ['submitted_by', $data->email],
-            ['status', 'pending'],
-        ])->count();
-        return view('student.dashboard',['apps'=>$applications,'count'=>$count,'success'=>$success,'pending'=>$pending])->with('data', $data);
+        $fee_schedule = app('App\Http\Controllers\PaymentController')->getPaymentSchedule($request);
+        $total_fees = $fee_schedule['total'];
+
+        $transactions = DB::table('fees_payments')->select('amount','trans_ref','status','created_at')
+            ->where('email',$data->email)->latest()->get();
+        $total_paid = $transactions->where('status','success')->sum('amount');
+        $count = count($transactions);
+
+        //$settings = app('App\Http\Controllers\ConfigController')->settings($request);
+    
+        return view('student.dashboard',['transactions'=>$transactions,'count'=>$count,'total_fees'=>$total_fees,'total_paid'=>$total_paid, 'settings'=>$settings])->with('data', $data);
     }
 
     public function password_reset(Request $request){
@@ -269,7 +273,7 @@ class AuthController extends Controller
     public function logout(){
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
         if(session()->has('user')){
-            DB::table('applicants')->where('email', $data->email)->update(['status' => 'applicant']);
+            //DB::table('applicants')->where('email', $data->email)->update(['status' => 'applicant']);
             session()->pull('user');
             if (isset($_COOKIE['pin']) && isset($_COOKIE['app_type'])) {
                 unset($_COOKIE['pin']); setcookie('pin', '', time() - 3600, '/');
