@@ -104,6 +104,7 @@ $(document).ready(function ($) {
                     url: "init-admission-payment",
                     data: {
                         app_id: app_id,
+                        degree: degree,
                         email: email,
                         payload: payload,
                         amount: amount,
@@ -150,6 +151,34 @@ $(document).ready(function ($) {
             error: function (response) {
                 console.log(response);
                 $("#btnSubmitRegForm").html("Submit");
+                toastr["error"](response.responseJSON.message);
+            },
+        });
+    });
+
+    $("#schoolfeesForm").on("submit", function (e) {
+        e.preventDefault();
+        var formData = $("#schoolfeesForm").serialize();
+        $.ajax({
+            type: "POST",
+            url: "init-schoolfees-payment",
+            data: formData,
+            dataType: "json",
+            beforeSend: function () {
+                $("#btn_schoolfee").html(
+                    '<i class="fa fa-spinner fa-spin"></i>'
+                );
+                $("#btn_schoolfee").prop("disabled", true);
+            },
+            success: function (response) {
+                window.location.href = response.url;
+                toastr["success"](response.message);
+                console.log(response);
+            },
+            error: function (response) {
+                console.log(response);
+                $("#btn_schoolfee").prop("disabled", false);
+                $("#btn_schoolfee").html("Proceed to Payment");
                 toastr["error"](response.responseJSON.message);
             },
         });
