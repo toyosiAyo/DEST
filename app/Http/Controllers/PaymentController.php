@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Models\ApplicantPayment;
 use App\Models\AdmissionPayment;
+use App\Models\SchoolfeesPayment;
 use Illuminate\Support\Facades\Http;
 use App\Models\Applicant;
 use App\Models\Application;
@@ -28,19 +29,122 @@ class PaymentController extends Controller
         }
     }
 
+    public function checkSchoolfeePayment($request){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $settings = $request->settings;
+
+        $check_payment = DB::table("fees_payments")
+            ->join('fees_payments_breakdown', 'fees_payments.trans_ref', 'fees_payments_breakdown.trans_ref')
+            ->select('fees_payments.trans_ref', 'fees_payments_breakdown.item_id', 'fees_payments_breakdown.amount_paid', 'fees_payments.status')
+            ->where(['email'=>$data->email,'status'=>'success','degree'=>$_COOKIE['degree'],'session'=>$settings->id])->get();
+        return $check_payment;
+    }
+
     public function getPaymentSchedule(Request $request){
+        $settings = $request->settings;
+        $semester = $settings->semester_code;
+
         $category = app('App\Http\Controllers\ApplicationController')->getFacultyCategory($request->app_id);
-        $payload = DB::table('fee_schedule')->where(['degree'=>$request->app_type,'type'=>$request->type,'category'=>$category])->get();
+        $payload = DB::table('fee_schedule')->where(['degree'=>$request->app_type,'type'=>$request->type,'category'=>$category])
+        ->select('id','item','type','amount','degree','category','installment','semester_amount->'.$semester.' as amount_due')->get();
         $total = $payload->sum('amount');
+        $payment_status = "";
 
-        $payment_status = $this->checkAdmissionPayment($request->app_id,$total);
+        if($request->type == "admission"){
+            $payment_status = $this->checkAdmissionPayment($request->app_id,$total);
+            return response(['payload'=>$payload,'total'=>$total,'payment_status'=>$payment_status], 200);
+        }
+        else{
+            $payment_status = $this->checkSchoolfeePayment($request);
+            $combined = $payload->map(function ($item) use ($payment_status) {
+                $payments = $payment_status->where('item_id', $item->id);
+                $item->amount_paid = count($payments) > 0 ? $payments->sum('amount_paid') : 0;
+                if($item->amount_due === null && $item->amount_paid === 0){ 
+                    $item->amount_due = $item->amount;
+                }
+                if($item->amount_paid >= $item->amount_due){
+                    $item->amount_due = $item->amount - $item->amount_paid;
+                }
+                return $item;
+            });
+            return ['payload'=>$payload,'total'=>$total,'combined'=>$combined];
+        }
+    }
 
-        return response(['payload'=>$payload,'total'=>$total,'payment_status'=>$payment_status], 200);
+    public function initSchoolFessPayment(Request $request){
+        $items = $request->item;    // array of item values
+        $amounts = $request->amount; // array of amount values
+
+        $total_amount = array_sum($amounts);
+        $settings = json_decode($request->settings);
+
+        // Validate that both arrays are present and have the same length
+        if (!is_array($items) || !is_array($amounts) || count($items) !== count($amounts)) {
+            return response(['status'=>'failed','message'=>'Invalid input arrays'], 400);
+        }
+
+        $check_pending_payment = DB::table('fees_payments')
+            ->where(['email'=>$request->email,'amount'=>$total_amount,'degree'=>$_COOKIE['degree'],'status'=>'pending','session'=>$settings->id])->first();
+
+        if($check_pending_payment){
+            return response(['status'=>'ok','message'=>'Redirecting to payment gateway...', 'url'=>$check_pending_payment->url], 200);
+        }
+
+        $timesammp = DATE("dmyHis"); 
+        $reference = app('App\Http\Controllers\RemitaConfig')->remita_generate_trans_ID();
+
+        $body = [
+            'amount' => $total_amount * 100,
+            'bearer' => 0,
+            'callbackUrl' => 'https://destadms.run.edu.ng/validate-schoolfees-payment',
+            'channels' => ['card', 'bank'],
+            'currency' => 'NGN',
+            'customerFirstName' => $request->first_name,
+            'customerLastName' => $request->surname,
+            'email' => $request->email,
+            'reference' => $reference,
+        ];
+
+        $headers = [
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
+            'Authorization' => '1PUB6199pVbAtClO8n3DBSLG7H9yW6xesgi2Xn',
+        ];
+
+        $response = Http::withHeaders($headers)->post('https://api.credocentral.com/transaction/initialize', $body);
+        $data = $response->json();
+
+        if($data["status"] == 200){
+            $details = $data["data"];
+
+            $payment = new SchoolfeesPayment();
+            $payment->email = $request->email;
+            $payment->amount = $total_amount;
+            $payment->degree = $_COOKIE['degree'];
+            $payment->trans_ref = $reference;
+            $payment->session = $settings->id;
+            $payment->url = $details["authorizationUrl"];
+            $payment->reference = $details["credoReference"];
+            $payment->status = 'pending';
+            $payment->save();
+
+            foreach ($items as $index => $item) {
+                DB::table('fees_payments_breakdown')->insert([
+                    'item_id' => $item,
+                    'amount_paid' => $amounts[$index],
+                    'trans_ref' => $reference,
+                ]);
+            }
+
+            return response(['status'=>'ok','message'=>'Payment successfully logged', 'url'=>$details["authorizationUrl"]], 201);
+        }
+        return response(['status'=>'failed','message'=>'Unable to initiate payment'], 400);
     }
 
     public function initAdmissionPayment(Request $request){
         $validator = Validator::make($request->all(), [ 
             'app_id' => 'required|string',
+            'degree' => 'required|string',
             'email' => 'required|string',
             'payload' => 'required',
             'amount' => 'required|string',
@@ -90,6 +194,7 @@ class PaymentController extends Controller
             $payment->email = $request->email;
             $payment->amount = $request->amount;
             $payment->app_id = $request->app_id;
+            $payment->degree = $request->degree;
             $payment->trans_ref = $reference;
             $payment->session = $session;
             $payment->url = $details["authorizationUrl"];
@@ -190,6 +295,36 @@ class PaymentController extends Controller
         // }
     }
 
+    public function validateSchoolfeesPayment(Request $request){
+        $validator = Validator::make($request->all(), [ 
+            'reference' => 'required|string',
+            'transAmount' => 'required|string'
+        ]);
+        if ($validator->fails()) {
+            return response(['status'=>'failed','message'=>'Validation error'], 400);
+        }
+        $reference = $request->reference;
+
+        $check = SchoolfeesPayment::where(['status'=>'pending','trans_ref'=>$reference])->first(); 
+        if($check){
+            $data = $this->validatePaymentEngine($reference);
+            if($data["status"] == 200){
+                $details = $data["data"];
+                if($details["status"] == 0 && $details["statusMessage"] == "Successfully processed"){
+                    $check->status = 'success';
+                    if($check->save()){
+                        return redirect('/payments');
+                    }
+                    return redirect('/student_dashboard');
+                }
+                return redirect('/student_dashboard');
+            }
+            return redirect('/student_dashboard');
+        }
+        return redirect('/student_dashboard');
+
+    }
+
     public function validateAdmissionPayment(Request $request){
         $validator = Validator::make($request->all(), [ 
             'reference' => 'required|string',
@@ -236,13 +371,6 @@ class PaymentController extends Controller
         $check = ApplicantPayment::where(['status_msg'=>'pending','trans_ref'=>$reference])->first(); // add 'amount'=>$request->transAmount,
         if($check){
             $data = $this->validatePaymentEngine($reference);
-            // $headers = [
-            //   'Content-Type' => 'application/json',
-            //   'Accept' => 'application/json',
-            //   'Authorization' => '1PRI6199K1cCrgmOk4OclzZ3neg3cZC31yQzZx',
-            // ];
-            // $response = Http::withHeaders($headers)->get('https://api.credocentral.com/transaction/'.$reference.'/verify');
-            // $data = $response->json();
             if($data["status"] == 200){
                 $details = $data["data"];
                 if($details["status"] == 0 && $details["statusMessage"] == "Successfully processed"){
