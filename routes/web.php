@@ -92,13 +92,23 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('courses',[StudentController::class,'view_registered_courses'])->name('registered_courses');
     Route::post('submit_registration',[StudentController::class,'saveRegistration']);
 
+    Route::get('fee_schedule',[StudentController::class,'fetchSchoolFeesPayload'])->name('payment_schedule');
+    Route::get('transactions',[StudentController::class,'viewTransactions']);
+
+    // Route::get('fee_schedule',function(){
+    //     return view('student/payment');
+    // });
+
+
     Route::get('adms_letter',[AdminController::class,'generateADMSLetter']);
     
     Route::post('init-application-payment',[PaymentController::class,'initApplicationPayment']);
     Route::get('validate-payment',[PaymentController::class,'validateApplicationPayment']);
     Route::get('validate-admission-payment',[PaymentController::class,'validateAdmissionPayment']);
+    Route::get('validate-schoolfees-payment',[PaymentController::class,'validateSchoolfeesPayment']);
     Route::get('get-payment-schedule',[PaymentController::class,'getPaymentSchedule']);
     Route::post('init-admission-payment',[PaymentController::class,'initAdmissionPayment']);
+    Route::post('init-schoolfees-payment',[PaymentController::class,'initSchoolFessPayment']);
 
 
 
