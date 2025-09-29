@@ -117,6 +117,7 @@ Route::group(['middleware'=>['authcheck']], function() {
 
     Route::post('approve_payments',[AdminController::class,'approve_payments']);
     Route::post('send-bulk-emails',[AdminController::class,'sendBulkEmails']);
+    Route::post('send-login-details',[AdminController::class,'sendLoginDetails']);
     Route::get('admin/dashboard',[AdminController::class,'adminDashboard']);
     Route::get('admin/pending_payments',[AdminController::class,'pendingPayments'])->name('pending_payments');
     Route::get('admin/payments',[AdminController::class,'allPayments'])->name('allpayments');
