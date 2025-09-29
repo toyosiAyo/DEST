@@ -17,17 +17,19 @@ class SendBulkEmailJob implements ShouldQueue
 
     protected $email;
     protected $name;
+    protected $id;
     protected $data;
 
-    public function __construct($email, $name, $data)
+    public function __construct($email, $name, $id, $data)
     {
         $this->email = $email;
         $this->name = $name;
+        $this->id = $id;
         $this->data = $data;
     }
 
     public function handle()
     {
-        Mail::to($this->email)->send(new BulkEmailMail($this->name,$this->data));
+        Mail::to($this->email)->send(new BulkEmailMail($this->name,$this->id,$this->data));
     }
 }
