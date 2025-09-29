@@ -17,6 +17,9 @@
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0 font-size-18">Submitted Applications for {{ $session }}</h4>
+                            <button id= "btnLoginDetailsModal" type="button" class="btn btn-danger">
+                                Send Login Details
+                            </button>
                             <button id= "btnbulkEmailModal" type="button" class="btn btn-success">
                                 Send Bulk Email
                             </button>
@@ -117,6 +120,37 @@
         @include('admin.partials.footer')
     </div>
 
+    <div class="modal fade" id="loginDetailsModal" tabindex="-1" role="dialog" aria-labelledby="loginDetailsModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginDetailsModalLabel">Send Login Details</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <label for="login_subject" class="col-form-label">Subject</label>
+                        <input type="text" class="form-control" id="login_subject" name="login_subject"
+                            placeholder="Enter Mail Subject" required>
+                        <label for="login_message" class="col-form-label">Password</label>
+                        <input type="text" class="form-control" id="login_message" name="login_message"
+                            placeholder="Enter Exam Login Password" required>
+                        <label for="login_category" class="col-form-label">Select screening category</label>
+                        <select class="form-control" name="login_category" id="login_category" required>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->screen_date }}">
+                                    {{ $category->screen_date . ' (' . $category->screen_center . ')' }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnSendLoginDetails" type="button" class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="bulkEmailModal" tabindex="-1" role="dialog" aria-labelledby="bulkEmailModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -130,7 +164,8 @@
                         <input type="text" class="form-control" id="subject" name="subject"
                             placeholder="Enter Mail Subject" required>
                         <label for="message" class="col-form-label">Message</label>
-                        <textarea class="form-control" rows="5" id="message" name="message" placeholder="Enter Message Body" required></textarea>
+                        <textarea class="form-control" rows="5" id="message" name="message" placeholder="Enter Message Body"
+                            required></textarea>
                         <label for="category" class="col-form-label">Select screening category</label>
                         <select class="form-control" name="category" id="category" required>
                             @foreach ($categories as $category)
