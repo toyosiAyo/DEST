@@ -63,7 +63,7 @@ class AdminController extends Controller
                 // if($get_app->adms_y_n == "N"){
                     if($get_app->app_type == 'foundation'){
                         // $pdf = PDF::loadView('foundation_admission',['data'=> $get_app]); 
-                        if (File::exists('FOUNDATION_ACCEPTANCE_FORM.pdf') && File::exists('2024_2025_FOUNDATION_FEE_FOR_NON_SCIENCE.pdf') && File::exists('2024_2025_FOUNDATION_FEE_FOR_SCIENCE.pdf')) {  
+                        if (File::exists('FOUNDATION_ACCEPTANCE_FORM.pdf') && File::exists('2025_2026_FOUNDATION_FEE_FOR_NON_SCIENCE.pdf') && File::exists('2025_2026_FOUNDATION_FEE_FOR_SCIENCE.pdf')) {  
                             if(app('App\Http\Controllers\ConfigController')->applicant_mail_attachment_foundation($get_app,$Subject="RUN DEST ADMISSION",$Msg=$this->get_delivery_msg($get_app))['status'] == 'ok'){
                                 $get_app->adms_y_n = "Y";
                                 $get_app->approved_by = $data->email;
@@ -1099,6 +1099,31 @@ class AdminController extends Controller
 
         foreach ($applications as $application) {
             SendBulkEmailJob::dispatch($application->email, $application->first_name, $data);
+        }
+        
+        return response(['success' => true,'message'=>'Bulk emails queued successfully!'], 200);
+
+    }
+
+    public function sendLoginDetails(Request $request){
+        $request->validate([
+            'login_subject'=>'required',
+            'login_message'=>'required',
+            'login_category'=>'required'
+        ]);
+
+        $applications = DB::table('applications')->join('applicants', 'applications.submitted_by', '=', 'applicants.email')
+        ->select('applicants.email','applicants.first_name','applicants.id')->where('applications.screen_date',$request->login_category)
+        ->get();
+        
+        $data = [
+            'subject' => $request->login_subject,
+            'message' => $request->login_message,
+            'type' => $request->type
+        ];
+
+        foreach ($applications as $application) {
+            SendBulkEmailJob::dispatch($application->email, $application->first_name, $application->id, $data);
         }
         
         return response(['success' => true,'message'=>'Bulk emails queued successfully!'], 200);
