@@ -153,6 +153,42 @@ $(document).ready(function ($) {
             });
     });
 
+    $("#btnLoginDetailsModal").click(function () {
+        $("#loginDetailsModal").modal("show");
+        $("#btnSendLoginDetails")
+            .off("click")
+            .on("click", function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/send-login-details",
+                    data: {
+                        subject: $("#subject").val(),
+                        message: $("#message").val(),
+                        category: $("#category").val(),
+                        type: "screening",
+                    },
+                    dataType: "json",
+                    beforeSend: function () {
+                        if (confirm("Send email?") == false) return false;
+                        $("#btnSendLoginDetails").html(
+                            '<i class="fa fa-spinner fa-spin"></i>'
+                        );
+                        $.blockUI();
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        $("#btnSendLoginDetails").html("Send");
+                        toastr["success"](response.message);
+                    },
+                    error: function (response) {
+                        $.unblockUI();
+                        $("#btnSendLoginDetails").html("Send");
+                        toastr["error"](response.responseJSON.message);
+                    },
+                });
+            });
+    });
+
     $("#tblapplications").on("click", ".approveApp", function () {
         $("#approveApplication").modal("show");
         var id = $(this).data("app_id");
