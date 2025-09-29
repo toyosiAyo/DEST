@@ -162,9 +162,9 @@ $(document).ready(function ($) {
                     type: "POST",
                     url: "/send-login-details",
                     data: {
-                        subject: $("#subject").val(),
-                        message: $("#message").val(),
-                        category: $("#category").val(),
+                        login_subject: $("#login_subject").val(),
+                        login_message: $("#login_message").val(),
+                        login_category: $("#login_category").val(),
                         type: "screening",
                     },
                     dataType: "json",
