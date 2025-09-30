@@ -81,7 +81,7 @@ $(document).ready(function ($) {
             },
             error: function (response) {
                 toastr["error"](response.responseJSON.message);
-                console.log(xhr.responseText);
+                console.log(response);
             },
         });
 

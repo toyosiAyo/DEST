@@ -41,7 +41,7 @@ class PaymentController extends Controller
     }
 
     public function getPaymentSchedule(Request $request){
-        if($_COOKIE['degree']=="part_time"){
+        if($request->app_type =="part_time"){
             $settings = app('App\Http\Controllers\ConfigController')->part_time_settings($request);
         }else{
             $settings = app('App\Http\Controllers\ConfigController')->settings($request);
