@@ -79,6 +79,7 @@ class AuthController extends Controller
                 return redirect('account_activate_view')->with('verify',' Kindly supply here, OTP sent to your email for account activation!');
             }
             if(Hash::check($request->password,$app->password)){
+                setcookie('login_status','applicant', time() + (86400 * 30), "/");
                 $request->session()->put('user',$app->email);
                 return redirect('dashboard');
             }
@@ -104,6 +105,7 @@ class AuthController extends Controller
         }
         else{
             if(Hash::check($request->student_password,$user->password)){
+                setcookie('login_status','student', time() + (86400 * 30), "/");
                 $request->session()->put('user',$request->student_email);
                 return response(['status'=>'ok','message'=>'Login was successful', 'user'=> $app], 200);
             }
