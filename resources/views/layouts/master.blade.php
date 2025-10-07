@@ -68,7 +68,7 @@
 <!-- Page -->
 @include('partials.navbar')
 
-@if ($data->status == 'student')
+@if ($_COOKIE['login_status'] == 'student')
     @include('partials.student_sidemenu')
 @else
     @include('partials.sidemenu')
