@@ -50,7 +50,8 @@
                                                         </tr>
                                                         <tr>
                                                             <td width="49%" align="left" nowrap="nowrap">
-                                                                <strong>Payment Id</strong></td>
+                                                                <strong>Payment Id</strong>
+                                                            </td>
                                                             <td width="51%" align="left">
                                                                 {{ $payment_data->trans_ref }}</td>
                                                         </tr>
@@ -104,8 +105,9 @@
                                             cellspacing="0">
                                             <tr>
                                                 <td>&nbsp;</td>
-                                                <td align="center"><img src="../bursar/bursar.jpg" width="319"
-                                                        height="145" border="0" /></td>
+                                                <td align="center"><img
+                                                        src="https://destadms.run.edu.ng/assets/images/signature.jpg"
+                                                        width="319" height="145" border="0" /></td>
                                                 <td>&nbsp;</td>
                                             </tr>
                                             <tr>
