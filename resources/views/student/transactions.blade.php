@@ -43,9 +43,7 @@
                                                         </td>
                                                         <td>
                                                             @if ($payment->status == 'success')
-                                                                <a href="receipt/' .
-                                                                    $payment->trans_ref .
-                                                                '"
+                                                                <a href="school-receipt/{{ $payment->trans_ref }}"
                                                                     target="_blank" type="button" class="btn btn-success">
                                                                     <i class="icon md-print" aria-hidden="true"></i> Print
                                                                     Receipt

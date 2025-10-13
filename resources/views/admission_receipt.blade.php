@@ -64,6 +64,14 @@
                                                         </tr>
 
                                                         <tr>
+                                                            <td align="left" nowrap="nowrap"><strong> Amount
+                                                                    Paid</strong></td>
+                                                            <td align="left">
+                                                                {{ $payment_data->total }}
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
                                                             <td align="left" nowrap="nowrap"><strong>Session</strong>
                                                             </td>
                                                             <td align="left">{{ $payment_data->session }}</td>
@@ -121,7 +129,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="center" bgcolor="#003D62"><strong style="color:#FFF">Note : Fees paid are
+                                    <td align="center" bgcolor="#003D62"><strong style="color:#FFF">Note : Fees paid
+                                            are
                                             not re-fundable.</strong></td>
                                 </tr>
                             </table>

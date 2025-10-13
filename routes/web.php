@@ -83,6 +83,7 @@ Route::group(['middleware'=>['authcheck']], function() {
     Route::get('payments',[ApplicantPaymentController::class,'view_payments'])->name('payments');
     Route::get('/receipt/{id}',[ApplicantPaymentController::class,'viewReceipt']);
     Route::get('/admission-receipt/{id}',[ApplicantPaymentController::class,'viewAdmissionReceipt']);
+    Route::get('/school-receipt/{id}',[ApplicantPaymentController::class,'viewSchoolReceipt']);
 
     Route::post('password_reset',[AuthController::class,'password_reset'])->name('password_reset');
     Route::post('update_profile',[ApplicationController::class,'updateProfile']);

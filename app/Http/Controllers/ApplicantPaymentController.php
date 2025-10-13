@@ -233,12 +233,22 @@ class ApplicantPaymentController extends Controller
         $payment_data = DB::table('admission_payments')->join('applicants', 'admission_payments.email', '=', 'applicants.email')
         ->join('settings', 'admission_payments.session', '=', 'settings.id')
         ->where(['admission_payments.email'=>$data->email,'admission_payments.trans_ref'=> $ref,'admission_payments.status'=> 'success'
-            ])->select('admission_payments.*','applicants.profile_pix','settings.session','applicants.surname','applicants.first_name','applicants.other_name')->first();
+            ])->select('admission_payments.*','admission_payments.amount as total','applicants.profile_pix','settings.session','applicants.surname','applicants.first_name','applicants.other_name')->first();
         $payload = $payment_data->payload;
         $payload_array = json_decode($payload);
         return view('admission_receipt',['payment_data'=>$payment_data,'payload'=>$payload_array]);
     }
 
-
-
+    public function viewSchoolReceipt(Request $request, $ref){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $payment_data = DB::table('fees_payments')->join('applicants', 'fees_payments.email', '=', 'applicants.email')
+        ->join('settings', 'fees_payments.session', '=', 'settings.id')
+        ->where(['fees_payments.email'=>$data->email,'fees_payments.trans_ref'=> $ref,'fees_payments.status'=> 'success'
+            ])->select('fees_payments.*','fees_payments.amount as total','applicants.profile_pix','settings.session',
+            'applicants.surname','applicants.first_name','applicants.other_name')->first();
+        
+        $payload = DB::table('fees_payments_breakdown')->join('fee_schedule', 'fees_payments_breakdown.item_id', '=', 'fee_schedule.id')
+        ->where(['fees_payments_breakdown.trans_ref'=>$payment_data->trans_ref])->select('fees_payments_breakdown.amount_paid as amount','fee_schedule.item')->get();
+        return view('admission_receipt',['payment_data'=>$payment_data,'payload'=>$payload]);
+    }
 }
