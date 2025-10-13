@@ -116,8 +116,9 @@
                                             cellspacing="0">
                                             <tr>
                                                 <td>&nbsp;</td>
-                                                <td align="center"><img src="../bursar/bursar.jpg" width="319"
-                                                        height="145" border="0" /></td>
+                                                <td align="center"><img
+                                                        src="https://destadms.run.edu.ng/assets/images/signature.jpg"
+                                                        width="319" height="145" border="0" /></td>
                                                 <td>&nbsp;</td>
                                             </tr>
                                             <tr>
