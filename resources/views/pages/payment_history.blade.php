@@ -43,10 +43,8 @@
                                                         </td>
                                                         <td>
                                                             @if ($payment->status_msg == 'success')
-                                                                <a href="receipt/' .
-                                                                    $payment->trans_ref .
-                                                                '"
-                                                                    target="_blank" type="button" class="btn btn-success">
+                                                                <a href="receipt/{{ $payment->trans_ref }}" target="_blank"
+                                                                    type="button" class="btn btn-success">
                                                                     <i class="icon md-print" aria-hidden="true"></i> Print
                                                                     Receipt
                                                                 </a>
@@ -101,9 +99,7 @@
                                                         </td>
                                                         <td>
                                                             @if ($payment->status == 'success')
-                                                                <a href="receipt/' .
-                                                                    $payment->trans_ref .
-                                                                '"
+                                                                <a href="admission-receipt/{{ $payment->trans_ref }}"
                                                                     target="_blank" type="button" class="btn btn-success">
                                                                     <i class="icon md-print" aria-hidden="true"></i> Print
                                                                     Receipt

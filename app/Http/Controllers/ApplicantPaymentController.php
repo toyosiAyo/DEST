@@ -224,8 +224,19 @@ class ApplicantPaymentController extends Controller
         ->where([
                 ['application_payments.email',$data->email],
                 ['application_payments.trans_ref', $ref],['application_payments.status_code', '00']
-            ])->select('application_payments.*','applicants.profile_pix','settings.session')->first();
+            ])->select('application_payments.*','applicants.profile_pix','settings.session', 'applicants.surname','applicants.first_name','applicants.other_name')->first();
         return view('receipt',['payment_data'=>$payment_data]);
+    }
+
+    public function viewAdmissionReceipt(Request $request, $ref){
+        $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
+        $payment_data = DB::table('admission_payments')->join('applicants', 'admission_payments.email', '=', 'applicants.email')
+        ->join('settings', 'admission_payments.session', '=', 'settings.id')
+        ->where(['admission_payments.email'=>$data->email,'admission_payments.trans_ref'=> $ref,'admission_payments.status'=> 'success'
+            ])->select('admission_payments.*','applicants.profile_pix','settings.session','applicants.surname','applicants.first_name','applicants.other_name')->first();
+        $payload = $payment_data->payload;
+        $payload_array = json_decode($payload);
+        return view('admission_receipt',['payment_data'=>$payment_data,'payload'=>$payload_array]);
     }
 
 

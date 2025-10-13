@@ -50,7 +50,8 @@
                                                         </tr>
                                                         <tr>
                                                             <td width="49%" align="left" nowrap="nowrap">
-                                                                <strong>Payment Id</strong></td>
+                                                                <strong>Payment Id</strong>
+                                                            </td>
                                                             <td width="51%" align="left">
                                                                 {{ $payment_data->trans_ref }}</td>
                                                         </tr>
@@ -94,11 +95,14 @@
                                                         Description</strong></td>
                                                 <td width="19%" bgcolor="#0099CC"><strong>Amount</strong></td>
                                             </tr>
-                                            <tr class="tn">
-                                                <td align="center" valign="top">1</td>
-                                                <td valign="top">{{ $payment_data->pay_type }} Application Fee</td>
-                                                <td valign="top">N {{ $payment_data->amount }}</td>
-                                            </tr>
+                                            @foreach ($payload as $pay)
+                                                <tr class="tn">
+                                                    <td align="center" valign="top">{{ $loop->index + 1 }}</td>
+                                                    <td valign="top">{{ $pay->item }}</td>
+                                                    <td valign="top">N {{ $pay->amount }}</td>
+                                                </tr>
+                                            @endforeach
+
                                         </table>
                                         <table width="95%" border="0" align="center" cellpadding="10"
                                             cellspacing="0">
