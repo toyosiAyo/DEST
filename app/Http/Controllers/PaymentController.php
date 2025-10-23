@@ -352,6 +352,9 @@ class PaymentController extends Controller
                     $check->status = 'success';
                     if($check->save()){
                         DB::table('applicants')->where('email', $check->email)->update(['status' => 'student']);
+                        if($request->action == "requery"){
+                            return response(['status'=>'success','message'=>"Transaction successfully updated"], 200);
+                        }
                         return redirect('/payments');
                     }
                     return redirect('/dashboard');
