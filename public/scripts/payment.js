@@ -81,4 +81,31 @@ $(document).ready(function () {
             },
         });
     });
+
+    $("#payment_history_admission").on(
+        "click",
+        ".requery_admission_payment",
+        function () {
+            var reference = $(this).data("reference");
+            var amount = $(this).data("amount");
+            $.ajax({
+                type: "GET",
+                url: "validate-admission-payment",
+                data: {
+                    reference: reference,
+                    transAmount: amount,
+                    action: "requery",
+                },
+                dataType: "json",
+                success: function (response) {
+                    toastr["success"](response.message);
+                    location.reload();
+                },
+                error: function (response) {
+                    console.log(response);
+                    toastr["error"](response.responseJSON.message);
+                },
+            });
+        }
+    );
 });
