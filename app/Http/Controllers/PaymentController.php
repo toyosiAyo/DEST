@@ -36,7 +36,7 @@ class PaymentController extends Controller
         $check_payment = DB::table("fees_payments")
             ->join('fees_payments_breakdown', 'fees_payments.trans_ref', 'fees_payments_breakdown.trans_ref')
             ->select('fees_payments.trans_ref', 'fees_payments_breakdown.item_id', 'fees_payments_breakdown.amount_paid', 'fees_payments.status')
-            ->where(['email'=>$data->email,'status'=>'success','degree'=>$_COOKIE['degree'],'session'=>$settings->id])->get();
+            ->where(['email'=>$data->email,'status'=>'success','degree'=>$_COOKIE['degree'],'session'=>$settings->session])->get();
         return $check_payment;
     }
 
@@ -66,11 +66,15 @@ class PaymentController extends Controller
             $combined = $payload->map(function ($item) use ($payment_status) {
                 $payments = $payment_status->where('item_id', $item->id);
                 $item->amount_paid = count($payments) > 0 ? $payments->sum('amount_paid') : 0;
+                $item->payment_count = count($payments);
                 if($item->amount_due === null && $item->amount_paid === 0){ 
                     $item->amount_due = $item->amount;
                 }
                 if($item->amount_paid >= $item->amount_due){
                     $item->amount_due = $item->amount - $item->amount_paid;
+                }
+                if($item->amount_paid < $item->amount_due){
+                    $item->amount_due = $item->amount_due - $item->amount_paid;
                 }
                 return $item;
             });
@@ -129,7 +133,7 @@ class PaymentController extends Controller
             $payment->amount = $total_amount;
             $payment->degree = $_COOKIE['degree'];
             $payment->trans_ref = $reference;
-            $payment->session = $settings->id;
+            $payment->session = $settings->session;
             $payment->url = $details["authorizationUrl"];
             $payment->reference = $details["credoReference"];
             $payment->status = 'pending';
@@ -320,9 +324,15 @@ class PaymentController extends Controller
                 if($details["status"] == 0 && $details["statusMessage"] == "Successfully processed"){
                     $check->status = 'success';
                     if($check->save()){
-                        return redirect('/payments');
+                        if($request->action == "requery"){
+                            return response(['status'=>'success','message'=>"Transaction successfully updated"], 200);
+                        }
+                        return redirect('/transactions');
                     }
                     return redirect('/student_dashboard');
+                }
+                if($request->action == "requery"){
+                    return response(['status'=>'failed','message'=>"Transaction still pending"], 400);
                 }
                 return redirect('/student_dashboard');
             }
@@ -358,6 +368,9 @@ class PaymentController extends Controller
                         return redirect('/payments');
                     }
                     return redirect('/dashboard');
+                }
+                if($request->action == "requery"){
+                    return response(['status'=>'failed','message'=>"Transaction still pending"], 400);
                 }
                 return redirect('/dashboard');
             }
@@ -404,6 +417,9 @@ class PaymentController extends Controller
                        return redirect('/app_form');
                     }
                     return redirect('/dashboard');
+                }
+                if($request->action == "requery"){
+                    return response(['status'=>'failed','message'=>"Transaction still pending"], 400);
                 }
                 return redirect('/dashboard');
             }
