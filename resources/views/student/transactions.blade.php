@@ -19,7 +19,7 @@
                             <div class="table-responsive h-250" data-plugin="scrollable">
                                 <div data-role="container">
                                     <div data-role="content">
-                                        <table id="payment_history"
+                                        <table id="fees_payment_history"
                                             class="table table-responsive-sm table-hover table-striped">
                                             <thead>
                                                 <tr>
@@ -52,7 +52,7 @@
                                                                 <button type="button"
                                                                     data-reference="{{ $payment->trans_ref }}"
                                                                     data-amount="{{ $payment->amount }}"
-                                                                    class="btn btn-danger requery_payment">
+                                                                    class="btn btn-danger requery_fees_payment">
                                                                     <i class="icon md-refresh" aria-hidden="true"></i>
                                                                     Requery
                                                                 </button>
