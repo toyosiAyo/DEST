@@ -108,4 +108,31 @@ $(document).ready(function () {
             });
         }
     );
+
+    $("#fees_payment_history").on(
+        "click",
+        ".requery_fees_payment",
+        function () {
+            var reference = $(this).data("reference");
+            var amount = $(this).data("amount");
+            $.ajax({
+                type: "GET",
+                url: "validate-schoolfees-payment",
+                data: {
+                    reference: reference,
+                    transAmount: amount,
+                    action: "requery",
+                },
+                dataType: "json",
+                success: function (response) {
+                    toastr["success"](response.message);
+                    location.reload();
+                },
+                error: function (response) {
+                    console.log(response);
+                    toastr["error"](response.responseJSON.message);
+                },
+            });
+        }
+    );
 });
