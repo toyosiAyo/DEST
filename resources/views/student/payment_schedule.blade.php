@@ -37,14 +37,16 @@
                                                     <tr>
                                                         <td style="width: 50px;">
                                                             <input type="checkbox" name="item[]"
-                                                                value="{{ $payment->id }}" required>
+                                                                value="{{ $payment->id }}"
+                                                                @if ($payment->amount_due > 0) required @endif>
                                                         </td>
                                                         <td>{{ $payment->item }}</td>
                                                         <td>{{ $payment->amount }}</td>
                                                         <td>{{ $payment->amount_paid }}</td>
                                                         <td><input type="text" name="amount[]" size="6"
                                                                 class="form-control" value="{{ $payment->amount_due }}"
-                                                                required></td>
+                                                                @if ($payment->amount_due == 0 || $payment->installment == $payment->payment_count) readonly @endif required>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
