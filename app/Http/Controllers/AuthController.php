@@ -89,6 +89,23 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * @OA\Post(
+     *   path="/api/student_login_access",
+     *   tags={"Auth"},
+     *   summary="Authenticate student",
+     *   @OA\RequestBody(
+     *     required=true,
+     *     @OA\JsonContent(
+     *       required={"student_email","student_password"},
+     *       @OA\Property(property="student_email", type="string", format="email"),
+     *       @OA\Property(property="student_password", type="string")
+     *     )
+     *   ),
+     *   @OA\Response(response=200, description="Successful authentication"),
+     *   @OA\Response(response=401, description="Invalid credentials")
+     * )
+     */
     public function studentLogin(Request $request){
         $request->validate([
             'student_email'=>'required|email',
