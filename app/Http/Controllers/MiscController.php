@@ -17,6 +17,18 @@ use App\Imports\StudentScoresImport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MiscController extends Controller{ 
+    /**
+     * @OA\Get(
+     *   path="/api/get-dest-student",
+     *   tags={"Misc"},
+     *   summary="Get a single student by matric number or email",
+     *   @OA\Parameter(name="degree", in="query", required=true, @OA\Schema(type="string")),
+     *   @OA\Parameter(name="matric_number", in="query", required=true, description="matric number or email", @OA\Schema(type="string")),
+     *   @OA\Response(response=200, description="Student found"),
+     *   @OA\Response(response=404, description="Student not found"),
+     *   @OA\Response(response=422, description="Validation error")
+     * )
+     */
     public function getStudent(Request $request){
         $validator = Validator::make($request->all(), ['degree'=>'required','matric_number'=>'required']);
         if ($validator->fails()) { 
@@ -39,8 +51,8 @@ class MiscController extends Controller{
             $student->level = 'FOUNDATION';
         }
         $student->profile_pix = "https://destadms.run.edu.ng/storage/".$student->profile_pix;
-        $student->genotype = "AA";
-        $student->blood_group = "O+";
+        //$student->genotype = "AA";
+        //$student->blood_group = "O+";
         return $student;
     }
     
@@ -55,26 +67,83 @@ class MiscController extends Controller{
                 orderBy('applicants.matric_number')->get();
         foreach($students as $student){
             $student->profile_pix = "https://destadms.run.edu.ng/storage/".$student->profile_pix;
-            $student->genotype = "AA";
-            $student->blood_group = "O+";
+            //$student->genotype = "AA";
+            //$student->blood_group = "O+";
         }
         
         return $students;
     }
     
+    /**
+     * @OA\Get(
+     *   path="/api/get-card-payments",
+     *   tags={"Misc"},
+     *   summary="Get card payment history/sample for a student",
+     *   @OA\Parameter(name="degree", in="query", required=true, @OA\Schema(type="string")),
+     *   @OA\Parameter(name="matric_number", in="query", required=true, description="matric number or email", @OA\Schema(type="string")),
+     *   @OA\Response(response=200, description="Payment records returned"),
+     *   @OA\Response(response=422, description="Validation error")
+     * )
+     */
     public function getCardPayments(Request $request){
         $validator = Validator::make($request->all(), ['degree'=>'required', 'matric_number'=>'required']);
         if ($validator->fails()) { 
             return response()->json(['message'=>'Matric number and degree are required'], 422); 
         }
-         return [[
-            'matric_number' => $request->matric_number,
-            'amount'=> 5000,
-            'reference' => '67343234667',
-            'payType' => 'school fees',
-            'session' => '2024/2025',
-            'date' => '2022-04-22 17:09:27',
-        ]];
+
+        if (filter_var($request->matric_number, FILTER_VALIDATE_EMAIL)) {
+            $table = 'applicants.email';
+        } else {
+            $table = 'applicants.matric_number';
+        }
+
+        if($request->degree == 'foundation'){
+            $settings_table = 'settings';
+        }
+        else{
+            $settings_table = 'part_time_settings';
+        }
+
+        $payments = DB::table('admission_payments')->join('applicants','admission_payments.email','applicants.email')
+            ->join($settings_table,'admission_payments.session',$settings_table.'.id')
+            ->where([$table => $request->matric_number,'admission_payments.status'=>'success','admission_payments.degree'=>$request->degree])
+            ->select('applicants.matric_number','admission_payments.reference','admission_payments.created_at',$settings_table.'.session','admission_payments.payload')->get();
+
+        $results = $payments->map(function ($payment) {
+            $payload = json_decode($payment->payload, true);
+
+            $items = isset($payload[0]) ? $payload : [$payload];
+
+            // Search for I.D CARD in payment_payload
+            $idCardItem = collect($items)->firstWhere('item', 'ID Card');
+
+            if ($idCardItem) {
+                return [
+                    'matric_number' => $payment->matric_number,
+                    'amount'=> $idCardItem['amount'],
+                    'reference' => $payment->reference,
+                    'payType' => $idCardItem['type'],
+                    'session' => $payment->session,
+                    'date' => $payment->created_at,
+                ];
+            }
+            return null;
+        })->filter()->values();
+        
+        if(count($results) < 1){
+            return response()->json(['message' => 'No ID card payment found'], 404);
+        }
+
+        return $results;
+
+        // return [[
+        //     'matric_number' => $request->matric_number,
+        //     'amount'=> 5000,
+        //     'reference' => '67343234667',
+        //     'payType' => 'school fees',
+        //     'session' => '2024/2025',
+        //     'date' => '2022-04-22 17:09:27',
+        // ]];
     }
     
     public function updateScores(Request $request){
@@ -125,5 +194,17 @@ class MiscController extends Controller{
         // $response = Excel::import(new StudentScoresImport, $request->file('file'));
 
         return response(['message'=>'Successful'], 200);         
+    }
+
+    public function makeApplicantStudent(Request $request){
+        set_time_limit(0); 
+
+        $students = DB::table('part_time_exemption_list')->get();
+        foreach ($students as $student) {
+            DB::table('applicants')->where('email', $student->email)->update(
+                ['level' => $student->level, 'status' => 'student'],
+            );
+        }
+        return response(['success' => true,'message'=>'Applicants updated successfully!'], 200);
     }
 }
