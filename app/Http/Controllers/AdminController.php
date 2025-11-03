@@ -1089,7 +1089,7 @@ class AdminController extends Controller
         ]);
 
         $applications = DB::table('applications')->join('applicants', 'applications.submitted_by', '=', 'applicants.email')
-        ->select('applicants.email','applicants.first_name')->where('applications.screen_date',$request->category)
+        ->select('applicants.email','applicants.first_name','applicants.id')->where('applications.screen_date',$request->category)
         ->get();
         
         $data = [
@@ -1098,7 +1098,7 @@ class AdminController extends Controller
         ];
 
         foreach ($applications as $application) {
-            SendBulkEmailJob::dispatch($application->email, $application->first_name, $data);
+            SendBulkEmailJob::dispatch($application->email, $application->first_name,$application->id, $data);
         }
         
         return response(['success' => true,'message'=>'Bulk emails queued successfully!'], 200);
