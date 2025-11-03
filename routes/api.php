@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * @OA\Info(
+ *   version="1.0.0",
+ *   title="DEST API",
+ *   description="API documentation for DEST application"
+ * )
+ */
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApplicationController;
@@ -22,7 +30,7 @@ use Illuminate\Support\Facades\DB;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-https://destadms.run.edu.ng/api/testapi
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -33,6 +41,8 @@ Route::any('create_curriculum', [AdminController::class, 'create_curriculum']);
 //Route::post('password_reset',[AuthController::class,'password_reset'])->name('password_reset');
 //Route::get('college_dept_prog',[ConfigController::class,'college_dept_prog'])->name('college_dept_prog');
 Route::post('app_actions',[AdminController::class,'app_actions']);
+
+Route::post('student_login_access',[AuthController::class,'studentLogin'])->name('student_login_access');
 
 Route::get('get-dest-student',[MiscController::class,'getStudent']);
 Route::get('get-dest-students',[MiscController::class,'getStudents']);
