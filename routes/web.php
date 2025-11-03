@@ -9,6 +9,7 @@ use App\Http\Controllers\ApplicantPaymentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\MiscController;
 
 use Illuminate\Support\Facades\Http;
 
@@ -17,6 +18,9 @@ use Illuminate\Support\Facades\Http;
 Route::get('test_mail',[ApplicationController::class,'test_mail'])->name('test_mail');
 Route::get('getFile',[ApplicationController::class,'getFile'])->name('getFile');
 Route::post('saveFile',[ApplicationController::class,'saveFile'])->name('saveFile');
+
+
+Route::get('update-applicants',[MiscController::class,'makeApplicantStudent']);
 
 Route::get('/http', function () {
     //$response->body() : string;
