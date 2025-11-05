@@ -190,7 +190,7 @@ public function auth_user($email){
     'country_origin','sponsor_name','sponsor_relationship',
     'sponsor_email','sponsor_phone','nok_name',
     'nok_relationship','nok_email','nok_phone',
-    'nok_address','profile_pix','deleted_active')->where('email',$email)->first();
+    'nok_address','profile_pix','deleted_active','genotype','blood_group')->where('email',$email)->first();
     return $data;
  } catch (\Throwable $th) {
     return response()->json(['status'=>'Nok','msg'=>'Error from catch... auth_user()','rsp'=>''], 401);
