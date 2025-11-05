@@ -295,6 +295,18 @@ class ApplicationController extends Controller
             Storage::delete($data->profile_pix);
         }
         try {
+            // $filename = $request->file('profileImage')->getClientOriginalName();
+            
+            // $path = $request->file('profileImage')->storeAs(
+            //     'profileImage', // folder name inside storage/app/public
+            //     $filename,
+            //     'public' // <--- this ensures it saves to storage/app/public
+            // );
+
+            // $applicant = Applicant::find($data->id);
+            // $applicant->profile_pix = $path;
+            // $applicant->save();
+
             $filename = $request->file('profileImage')->getClientOriginalName();
             $path = Storage::disk('public')->putFileAs('profileImage', $request->file('profileImage'), $data->surname ."_". $data->first_name ."_". $data->other_name ."_". $data->id ."_". date('YmdHis') ."_". $filename);
             $applicant = Applicant::find($data->id);
@@ -346,7 +358,8 @@ class ApplicationController extends Controller
     // Testing document upload END
 
     public function updateProfile(Request $request){
-        $check = DB::table('applicants')->where('matric_number',$request->matric)->first();
+        $check = DB::table('applicants')->where('matric_number',$request->matric)
+            ->whereNotIn('email',[$request->email])->first();
         if($check){
             return response(['status'=>'failed','message'=>'Matric Number exists already'], 401);  
         }
