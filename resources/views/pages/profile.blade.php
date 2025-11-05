@@ -121,12 +121,24 @@
                                                                     </span>
                                                                     <select class="form-control" name="genotype"
                                                                         id="genotype" required>
-                                                                        <option value="AA">AA</option>
-                                                                        <option value="AS">AS</option>
-                                                                        <option value="AC">AC</option>
-                                                                        <option value="SS">SS</option>
-                                                                        <option value="SC">SC</option>
-                                                                        <option value="CC">CC</option>
+                                                                        <option value="AA"
+                                                                            {{ $data->genotype == 'AA' ? 'selected' : '' }}>
+                                                                            AA</option>
+                                                                        <option value="AS"
+                                                                            {{ $data->genotype == 'AS' ? 'selected' : '' }}>
+                                                                            AS</option>
+                                                                        <option value="AC"
+                                                                            {{ $data->genotype == 'AC' ? 'selected' : '' }}>
+                                                                            AC</option>
+                                                                        <option value="SS"
+                                                                            {{ $data->genotype == 'SS' ? 'selected' : '' }}>
+                                                                            SS</option>
+                                                                        <option value="SC"
+                                                                            {{ $data->genotype == 'SC' ? 'selected' : '' }}>
+                                                                            SC</option>
+                                                                        <option value="CC"
+                                                                            {{ $data->genotype == 'CC' ? 'selected' : '' }}>
+                                                                            CC</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -141,14 +153,30 @@
                                                                     </span>
                                                                     <select class="form-control" name="blood_group"
                                                                         id="blood_group" required>
-                                                                        <option value="A+">A+</option>
-                                                                        <option value="A-">A-</option>
-                                                                        <option value="B+">B+</option>
-                                                                        <option value="B-">B-</option>
-                                                                        <option value="AB+">AB+</option>
-                                                                        <option value="AB-">AB-</option>
-                                                                        <option value="O+">O+</option>
-                                                                        <option value="O-">O-</option>
+                                                                        <option value="A+"
+                                                                            {{ $data->blood_group == 'A+' ? 'selected' : '' }}>
+                                                                            A+</option>
+                                                                        <option value="A-"
+                                                                            {{ $data->blood_group == 'A-' ? 'selected' : '' }}>
+                                                                            A-</option>
+                                                                        <option value="B+"
+                                                                            {{ $data->blood_group == 'B+' ? 'selected' : '' }}>
+                                                                            B+</option>
+                                                                        <option value="B-"
+                                                                            {{ $data->blood_group == 'B-' ? 'selected' : '' }}>
+                                                                            B-</option>
+                                                                        <option value="AB+"
+                                                                            {{ $data->blood_group == 'AB+' ? 'selected' : '' }}>
+                                                                            AB+</option>
+                                                                        <option value="AB-"
+                                                                            {{ $data->blood_group == 'AB-' ? 'selected' : '' }}>
+                                                                            AB-</option>
+                                                                        <option value="O+"
+                                                                            {{ $data->blood_group == 'O+' ? 'selected' : '' }}>
+                                                                            O+</option>
+                                                                        <option value="O-"
+                                                                            {{ $data->blood_group == 'O-' ? 'selected' : '' }}>
+                                                                            O-</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
