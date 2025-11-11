@@ -29,6 +29,14 @@ class PaymentController extends Controller
         }
     }
 
+    public function checkExemption($email){
+        $check = DB::table('part_time_exemption_list')->where('email',$email)->first();
+        if($check){
+            return true;
+        }
+        return false;
+    }
+
     public function checkSchoolfeePayment($request){
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
         $settings = $request->settings;
