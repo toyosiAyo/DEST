@@ -81,13 +81,16 @@ class StudentController extends Controller
             $request->merge(['settings'=>$setting]);
             $check_payment = app('App\Http\Controllers\PaymentController')->checkSchoolfeePayment($request);
             if(count($check_payment) < 1){
-                return response(['status'=>'Nok','message'=>'School fee payment required for course registration',],403); 
+                $check_exemption = app('App\Http\Controllers\PaymentController')->checkExemption($data->email);
+                if(!$check_exemption){
+                    return response(['status'=>'Nok','message'=>'School fee payment required for course registration',],403); 
+                }
             }
 
             if($_COOKIE['degree']=="part_time"){
-                return response(['status'=>'Nok','message'=>'Registration not opened for the semester yet',],401);
+                //return response(['status'=>'Nok','message'=>'Registration not opened for the semester yet',],401);
                 if($data->matric_number == ""){
-                    return response(['status'=>'Nok','message'=>'Matric number required for registration!',],403); 
+                    return response(['status'=>'Nok','message'=>'Matric number required for registration!'],403); 
                 }
                 //$setting = app('App\Http\Controllers\ConfigController')->part_time_settings($request);
                 $check = DB::table('part_time_registrations')->where(['matric_number'=> $data->matric_number,'settings_id'=>$setting->id])->first();
