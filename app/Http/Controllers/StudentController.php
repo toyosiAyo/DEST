@@ -93,10 +93,18 @@ class StudentController extends Controller
                     return response(['status'=>'Nok','message'=>'Matric number required for registration!'],403); 
                 }
                 //$setting = app('App\Http\Controllers\ConfigController')->part_time_settings($request);
-                $check = DB::table('part_time_registrations')->where(['matric_number'=> $data->matric_number,'settings_id'=>$setting->id,'status'=>1])->first();
+                $check = DB::table('part_time_registrations')->where(['matric_number'=> $data->matric_number,'settings_id'=>$setting->id])->first();
                 
                 if($check){
-                    return response()->json(['status'=>'Nok','message'=>'Registration already submitted for approval',],403); 
+                    if($check->status == 1){
+                        return response()->json(['status'=>'Nok','message'=>'Registration already submitted for approval'],403); 
+                    }
+                    DB::table('part_time_registered_courses')->where(['reg_id'=>$check->id])->delete();
+                    foreach($request->course as $index => $value){ 
+                        $course = explode("_", $value);
+                        DB::table('part_time_registered_courses')->insert(['reg_id'=>$check->id , 'course_id' => $course[4],'unit'=>$course[2],'status' => $course[3]]);
+                    }
+                    return response(['status'=>'ok', 'message'=>'Course registration successfully updated','settings'=>$setting],200);
                 }
                 
                 DB::beginTransaction();
