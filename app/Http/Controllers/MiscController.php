@@ -159,7 +159,7 @@ class MiscController extends Controller{
      *   tags={"Misc"},
      *   summary="Lock or unlock student profile update",
      *   @OA\Parameter(name="matric_number", in="query", required=true, @OA\Schema(type="string")),
-     *   @OA\Parameter(name="action", in="query", required=true, @OA\Schema(type="string")),
+     *   @OA\Parameter(name="action", in="query", required=true, description="Action to perform", @OA\Schema(type="string",enum={"lock","unlock"},default="lock")),
      *   @OA\Response(response=200, description="Payment records returned"),
      *   @OA\Response(response=422, description="Validation error")
      * )
@@ -299,7 +299,7 @@ class MiscController extends Controller{
         $students = DB::table('part_time_exemption_list')->get();
         foreach ($students as $student) {
             DB::table('applicants')->where('email', $student->email)->update(
-                ['level' => $student->level, 'status' => 'student'],
+                ['level' => $student->level, 'status' => 'student']
             );
         }
         return response(['success' => true,'message'=>'Applicants updated successfully!'], 200);
