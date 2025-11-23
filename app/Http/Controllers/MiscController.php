@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Application;
+use App\Models\Applicant;
 use App\Models\ApplicantPayment;
 use App\Models\Registration;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
 use App\Imports\StudentScoresImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Validation\Rule;
 
 class MiscController extends Controller{ 
     /**
@@ -72,6 +74,110 @@ class MiscController extends Controller{
         }
         
         return $students;
+    }
+
+    /**
+     * @OA\Get(
+     *   path="/api/get-all-card-payments",
+     *   tags={"Misc"},
+     *   summary="Get all card payments in a session",
+     *   @OA\Parameter(name="degree", in="query", required=true, @OA\Schema(type="string")),
+     *   @OA\Parameter(name="session", in="query", required=true, @OA\Schema(type="string")),
+     *   @OA\Response(response=200, description="Payment records returned"),
+     *   @OA\Response(response=422, description="Validation error")
+     * )
+     */
+    public function getAllSessionIDCardPayments(Request $request){
+        $validator = Validator::make($request->all(), ['session' => 'required','degree' => ['required', Rule::in(['foundation', 'part_time'])]]);
+        if($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $payments = DB::table('admission_payments')->join('applicants','admission_payments.email','applicants.email')
+            ->where(['admission_payments.status'=>'success','admission_payments.degree'=>$request->degree,'admission_payments.session_name'=>$request->session])
+            ->select('applicants.matric_number','admission_payments.reference','admission_payments.created_at','admission_payments.session_name','admission_payments.payload')->get();
+
+        $results = $payments->map(function ($payment) {
+            $payload = json_decode($payment->payload, true);
+
+            $items = isset($payload[0]) ? $payload : [$payload];
+
+            // Search for I.D CARD in payment_payload
+            $idCardItem = collect($items)->firstWhere('item', 'ID Card');
+
+            if ($idCardItem) {
+                return [
+                    'matric_number' => $payment->matric_number,
+                    'amount'=> $idCardItem['amount'],
+                    'reference' => $payment->reference,
+                    'payType' => $idCardItem['type'],
+                    'session' => $payment->session_name,
+                    'date' => $payment->created_at,
+                ];
+            }
+            return null;
+        })->filter()->values();
+        
+        if(count($results) < 1){
+            return response()->json(['message' => 'No ID card payment found'], 404);
+        }
+
+        return $results;
+    }
+
+    /**
+     * @OA\Get(
+     *   path="/api/get-all-card-exemption",
+     *   tags={"Misc"},
+     *   summary="Get ID card exemption list in a session",
+     *   @OA\Parameter(name="degree", in="query", required=true, @OA\Schema(type="string")),
+     *   @OA\Parameter(name="session", in="query", required=true, @OA\Schema(type="string")),
+     *   @OA\Response(response=200, description="Payment records returned"),
+     *   @OA\Response(response=422, description="Validation error")
+     * )
+     */
+
+    public function getCardExemptions(Request $request){
+        $validator = Validator::make($request->all(), ['session' => 'required','degree' => ['required', Rule::in(['foundation', 'part_time'])]]);
+        if($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        $card_payments = DB::table('idcard_exemption')->join('applicants','idcard_exemption.email','applicants.email')
+            ->select('applicants.matric_number','idcard_exemption.session','idcard_exemption.created_at AS date')
+            ->where(['idcard_exemption.session'=>$request->session,'idcard_exemption.degree'=>$request->degree])->get();
+            
+        if(count($card_payments) < 1){
+            return response()->json(['message' => 'No ID card exemption found'], 404);
+        }
+        
+        return $card_payments;
+    }
+
+     /**
+     * @OA\Patch(
+     *   path="/api/update-profile-lock",
+     *   tags={"Misc"},
+     *   summary="Lock or unlock student profile update",
+     *   @OA\Parameter(name="matric_number", in="query", required=true, @OA\Schema(type="string")),
+     *   @OA\Parameter(name="action", in="query", required=true, @OA\Schema(type="string")),
+     *   @OA\Response(response=200, description="Payment records returned"),
+     *   @OA\Response(response=422, description="Validation error")
+     * )
+     */
+    public function profileLockUpdate(Request $request){
+        $validator = Validator::make($request->all(), ['matric_number' => 'required','action' => ['required', Rule::in(['lock', 'unlock'])]]);
+        if($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        
+        $check = Applicant::where('matric_number',$request->matric_number)->first();
+        if($check){
+            $check->profile_update_lock = $request->action;
+            $check->save();
+            return response()->json(['message' => 'Profile '.$request->action.'ed'], 200);
+        }
+        
+        return response()->json(['message' => 'Matric number not found'], 404);
     }
     
     /**
@@ -135,15 +241,6 @@ class MiscController extends Controller{
         }
 
         return $results;
-
-        // return [[
-        //     'matric_number' => $request->matric_number,
-        //     'amount'=> 5000,
-        //     'reference' => '67343234667',
-        //     'payType' => 'school fees',
-        //     'session' => '2024/2025',
-        //     'date' => '2022-04-22 17:09:27',
-        // ]];
     }
     
     public function updateScores(Request $request){
