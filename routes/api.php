@@ -49,4 +49,8 @@ Route::get('get-dest-students',[MiscController::class,'getStudents']);
 
 Route::get('get-card-payments',[MiscController::class,'getCardPayments']);
 
+Route::get('get-all-card-payments',[MiscController::class,'getAllSessionIDCardPayments']);
+Route::get('get-all-card-exemption',[MiscController::class,'getCardExemptions']);
+Route::patch('update-profile-lock',[MiscController::class,'profileLockUpdate']);
+
 Route::get('update-scores',[MiscController::class,'updateScores']);
