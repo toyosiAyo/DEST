@@ -291,9 +291,7 @@ class ApplicationController extends Controller
     public function uploadProfileImage(Request $request)
     {
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-        if(!is_null($data->profile_pix)){
-            Storage::delete($data->profile_pix);
-        }
+        
         try {
             // $filename = $request->file('profileImage')->getClientOriginalName();
             
@@ -307,9 +305,18 @@ class ApplicationController extends Controller
             // $applicant->profile_pix = $path;
             // $applicant->save();
 
+            $applicant = Applicant::find($data->id);
+            if($applicant->profile_update_lock == 'lock'){
+                return response(['status'=>'failed','message'=>'Profile update currently locked'], 401);  
+            }
+
+            if(!is_null($data->profile_pix)){
+                Storage::delete($data->profile_pix);
+            }
+
             $filename = $request->file('profileImage')->getClientOriginalName();
             $path = Storage::disk('public')->putFileAs('profileImage', $request->file('profileImage'), $data->surname ."_". $data->first_name ."_". $data->other_name ."_". $data->id ."_". date('YmdHis') ."_". $filename);
-            $applicant = Applicant::find($data->id);
+            // $applicant = Applicant::find($data->id);
             $applicant->profile_pix = $path;
             $applicant->save();
             return back()->with('success','image uploaded successfully!');
@@ -362,6 +369,10 @@ class ApplicationController extends Controller
             ->whereNotIn('email',[$request->email])->first();
         if($check){
             return response(['status'=>'failed','message'=>'Matric Number exists already'], 401);  
+        }
+        $check2 = DB::table('applicants')->where('matric_number',$request->matric)->first();
+        if($check2->profile_update_lock == 'lock'){
+            return response(['status'=>'failed','message'=>'Profile update currently locked'], 401);  
         }
         DB::table('applicants')->where('email', $request->email)->update(
             ['phone' => $request->phone, 'matric_number' =>  $request->matric,'genotype'=>$request->genotype,
