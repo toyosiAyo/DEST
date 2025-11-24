@@ -370,7 +370,7 @@ class ApplicationController extends Controller
         if($check){
             return response(['status'=>'failed','message'=>'Matric Number exists already'], 401);  
         }
-        $check2 = DB::table('applicants')->where('matric_number',$request->matric)->first();
+        $check2 = DB::table('applicants')->where('email',$request->email)->first();
         if($check2->profile_update_lock == 'lock'){
             return response(['status'=>'failed','message'=>'Profile update currently locked'], 401);  
         }
