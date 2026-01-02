@@ -869,11 +869,12 @@
                                                                                     data-live-search="true"
                                                                                     data-allow-clear="true">
                                                                                     {{-- @if (!in_array($data->state_resident, $non_eligible_states)) --}}
-                                                                                    <option value="20/10/2025">
-                                                                                        20/10/2025
-                                                                                        (Main Campus EDE)
-                                                                                    </option>
-                                                                                    {{-- @endif --}}
+                                                                                    @if ($_COOKIE['app_type'] == 'foundation')
+                                                                                        <option value="20/10/2025">
+                                                                                            20/10/2025
+                                                                                            (Main Campus EDE)
+                                                                                        </option>
+                                                                                    @endif
                                                                                 </select>
                                                                             </div>
                                                                         </div>
