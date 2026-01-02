@@ -255,6 +255,9 @@ class PaymentController extends Controller
             
             //$session = app('App\Http\Controllers\ConfigController')->settings($request)->id;
             $session = "9";
+            if($request->payType == 'part_time'){
+                $session = "4";
+            }
             $check_pending_payment = ApplicantPayment::where(['email'=>$request->email,'amount'=>$request->amount,'pay_type'=>$request->payType,'status_msg'=>'pending','session'=>$session])->first();
 
             if($check_pending_payment){
@@ -273,8 +276,14 @@ class PaymentController extends Controller
               'customerFirstName' => $request->first_name,
               'customerLastName' => $request->surname,
               'email' => $request->email,
-              'reference' => $reference,
+              'reference' => $reference
             ];
+
+            if($request->payType == 'part_time'){
+                $body['serviceCode'] = '006199JGP4KI';
+            }
+
+            //return response(['body'=>$body], 400);
             
             $headers = [
               'Content-Type' => 'application/json',
