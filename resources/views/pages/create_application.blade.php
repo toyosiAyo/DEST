@@ -114,16 +114,16 @@
                                                     <div class="panel-body">
                                                         Click the button below to create a new application or to continue
                                                         with your unsubmitted application<br>
-                                                        Application fee is (₦10,000)
+                                                        Application fee is (₦20,000)
                                                         <div class="animation-example animation-hover hover">
-                                                            @if ($data->email == 'toyxyboy@gmail.com')
-                                                                <button type="button" data-surname="{{ $data->surname }}"
-                                                                    data-firstname="{{ $data->first_name }}"
-                                                                    data-email="{{ $data->email }}" data-amount="10000"
-                                                                    data-paytype="part_time"
-                                                                    class="btn btn-dark animation-shake pay">Create
-                                                                    Application</button>
-                                                            @endif
+                                                            {{-- @if ($data->email == 'toyxyboy@gmail.com') --}}
+                                                            <button type="button" data-surname="{{ $data->surname }}"
+                                                                data-firstname="{{ $data->first_name }}"
+                                                                data-email="{{ $data->email }}" data-amount="20000"
+                                                                data-paytype="part_time"
+                                                                class="btn btn-dark animation-shake pay">Create
+                                                                Application</button>
+                                                            {{-- @endif --}}
                                                         </div>
                                                     </div>
                                                 </div>
