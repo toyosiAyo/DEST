@@ -863,7 +863,8 @@
                                                                                     class="form-label">Select Screening
                                                                                     Date</label>
                                                                                 <select class="form-control"
-                                                                                    data-plugin="selectpicker" required
+                                                                                    data-plugin="selectpicker"
+                                                                                    @if ($_COOKIE['app_type'] == 'foundation') required @endif
                                                                                     name="screening_date"
                                                                                     id="screening_date"
                                                                                     data-live-search="true"
