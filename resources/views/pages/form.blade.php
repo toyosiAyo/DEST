@@ -858,26 +858,25 @@
                                                                                     13,
                                                                                 ];
                                                                             @endphp
-                                                                            <div class="example col-xl-6 col-md-3">
-                                                                                <label for="screening_date"
-                                                                                    class="form-label">Select Screening
-                                                                                    Date</label>
-                                                                                <select class="form-control"
-                                                                                    data-plugin="selectpicker"
-                                                                                    @if ($_COOKIE['app_type'] == 'foundation') required @endif
-                                                                                    name="screening_date"
-                                                                                    id="screening_date"
-                                                                                    data-live-search="true"
-                                                                                    data-allow-clear="true">
-                                                                                    {{-- @if (!in_array($data->state_resident, $non_eligible_states)) --}}
-                                                                                    @if ($_COOKIE['app_type'] == 'foundation')
+                                                                            @if ($_COOKIE['app_type'] == 'foundation')
+                                                                                <div class="example col-xl-6 col-md-3">
+                                                                                    <label for="screening_date"
+                                                                                        class="form-label">Select Screening
+                                                                                        Date</label>
+                                                                                    <select class="form-control"
+                                                                                        data-plugin="selectpicker" required
+                                                                                        name="screening_date"
+                                                                                        id="screening_date"
+                                                                                        data-live-search="true"
+                                                                                        data-allow-clear="true">
+                                                                                        {{-- @if (!in_array($data->state_resident, $non_eligible_states)) --}}
                                                                                         <option value="20/10/2025">
                                                                                             20/10/2025
                                                                                             (Main Campus EDE)
                                                                                         </option>
-                                                                                    @endif
-                                                                                </select>
-                                                                            </div>
+                                                                                    </select>
+                                                                                </div>
+                                                                            @endif
                                                                         </div>
                                                                     </div>
 
