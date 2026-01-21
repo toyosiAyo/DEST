@@ -86,6 +86,10 @@ class ApplicationController extends Controller
             $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
             // $session = app('App\Http\Controllers\ConfigController')->settings($request)->id;
             $session = "9";
+            if($request->payType == 'part_time'){
+                $session = "4";
+                $request->amount = "20000";
+            }
 
             $used_pin = DB::table('application_payments')
             ->join('applications','application_payments.rrr','applications.used_pin')

@@ -21,6 +21,7 @@ Route::post('saveFile',[ApplicationController::class,'saveFile'])->name('saveFil
 
 
 Route::get('update-applicants',[MiscController::class,'makeApplicantStudent']);
+Route::get('get-dups',[MiscController::class,'getDups']);
 
 Route::get('/http', function () {
     //$response->body() : string;

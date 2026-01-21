@@ -296,12 +296,38 @@ class MiscController extends Controller{
     public function makeApplicantStudent(Request $request){
         set_time_limit(0); 
 
-        $students = DB::table('part_time_exemption_list')->get();
+        $records = 0;
+        $students = DB::table('part_time_exemption_list')->where('migrated', 0)->get();
         foreach ($students as $student) {
             DB::table('applicants')->where('email', $student->email)->update(
                 ['level' => $student->level, 'status' => 'student']
             );
+            $records++;
         }
-        return response(['success' => true,'message'=>'Applicants updated successfully!'], 200);
+        return response(['success' => true,'message'=>'Applicants updated successfully!', 'records' => $records], 200);
+    }
+
+    public function getDups(Request $request){
+        // $dups = DB::table('part_time_exemption_list')
+        //     ->select('email', DB::raw('COUNT(*) as count'))
+        //     ->groupBy('email')
+        //     ->having('count', '>', 1)
+        //     ->get();
+
+        // $delete_dups = DB::table('part_time_exemption_list')
+        //     ->whereNotIn('id', function($q){
+        //         $q->select(DB::raw('MIN(id)'))
+        //         ->from('part_time_exemption_list')
+        //         ->groupBy('email');
+        //     })->delete();
+
+           $deleted = DB::statement("
+                DELETE p1 FROM part_time_exemption_list p1
+                INNER JOIN part_time_exemption_list p2
+                ON p1.email = p2.email
+                WHERE p1.id > p2.id
+            ");
+
+        return $deleted;
     }
 }
