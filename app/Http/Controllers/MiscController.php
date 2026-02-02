@@ -39,19 +39,29 @@ class MiscController extends Controller{
         if (filter_var($request->matric_number, FILTER_VALIDATE_EMAIL)) {
             $table = 'applicants.email';
         } else {
-            $table = 'applicants.matric_number';
+            $table = 'applicants.matric_no_idcard';
         }
         
         $student = DB::table('applicants')->join('applications','applicants.email','applications.submitted_by')
                 ->where(['applications.app_type'=>$request->degree,'applications.status' => 'admitted',
                 $table => $request->matric_number])
-                ->select('applicants.id as applicant_id','applicants.matric_number','applicants.surname','applicants.first_name','applicants.other_name','applicants.phone','applicants.email','applicants.level','applicants.gender','applications.first_choice->prog as prog','applications.first_choice->dept as dept','applications.first_choice->faculty as faculty','applicants.profile_pix','applicants.genotype','applicants.blood_group')->first();
+                ->select('applicants.id as applicant_id','applicants.matric_number',
+                'applicants.surname','applicants.first_name','applicants.other_name','applicants.matric_no_idcard',
+                'applicants.phone','applicants.email','applicants.level','applicants.gender',
+                'applications.first_choice->prog as prog','applications.first_choice->dept as dept',
+                'applications.first_choice->faculty as faculty','applicants.profile_pix',
+                'applicants.genotype','applicants.blood_group')->first();
         if(!$student){
             return response(["message"=>"Student not found"], 404);
         }
         if($request->degree == 'foundation'){
             $student->level = 'FOUNDATION';
         }
+        $student->matric_number = $student->matric_number ?? $student->matric_no_idcard;
+
+        // if($student->matric_number == null || $student->matric_number == ''){
+        //     $student->matric_number = $student->matric_no_idcard;
+        // }
         $student->profile_pix = "https://destadms.run.edu.ng/storage/".$student->profile_pix;
         //$student->genotype = "AA";
         //$student->blood_group = "O+";
@@ -65,10 +75,16 @@ class MiscController extends Controller{
         }
         $students = DB::table('applicants')->join('applications','applicants.email','applications.submitted_by')
             ->where(['applications.app_type'=>$request->degree,'applications.status' => 'admitted'])
-            ->select('applicants.matric_number','applicants.surname','applicants.first_name','applicants.other_name','applicants.phone','applicants.email','applicants.gender','applications.first_choice->prog as prog','applications.first_choice->dept as dept','applications.first_choice->faculty as faculty','applicants.profile_pix','applicants.genotype','applicants.blood_group')->groupBy('applications.submitted_by')->
-                orderBy('applicants.matric_number')->get();
+            ->select('applicants.matric_number','applicants.surname','applicants.first_name','applicants.matric_no_idcard',
+            'applicants.other_name','applicants.phone','applicants.email','applicants.gender',
+            'applications.first_choice->prog as prog','applications.first_choice->dept as dept',
+            'applications.first_choice->faculty as faculty','applicants.profile_pix',
+            'applicants.genotype','applicants.blood_group')
+            ->groupBy('applications.submitted_by')
+            ->orderBy('applicants.matric_no_idcard')->get();
         foreach($students as $student){
             $student->profile_pix = "https://destadms.run.edu.ng/storage/".$student->profile_pix;
+            $student->matric_number = $student->matric_number ?? $student->matric_no_idcard;
             //$student->genotype = "AA";
             //$student->blood_group = "O+";
         }
@@ -95,7 +111,7 @@ class MiscController extends Controller{
 
         $payments = DB::table('admission_payments')->join('applicants','admission_payments.email','applicants.email')
             ->where(['admission_payments.status'=>'success','admission_payments.degree'=>$request->degree,'admission_payments.session_name'=>$request->session])
-            ->select('applicants.matric_number','admission_payments.reference','admission_payments.created_at','admission_payments.session_name','admission_payments.payload')->get();
+            ->select('applicants.matric_number','applicants.matric_no_idcard','admission_payments.reference','admission_payments.created_at','admission_payments.session_name','admission_payments.payload')->get();
 
         $results = $payments->map(function ($payment) {
             $payload = json_decode($payment->payload, true);
@@ -107,7 +123,7 @@ class MiscController extends Controller{
 
             if ($idCardItem) {
                 return [
-                    'matric_number' => $payment->matric_number,
+                    'matric_number' => $payment->matric_number ?? $payment->matric_no_idcard,
                     'amount'=> $idCardItem['amount'],
                     'reference' => $payment->reference,
                     'payType' => $idCardItem['type'],
@@ -143,11 +159,15 @@ class MiscController extends Controller{
             return response()->json(['errors' => $validator->errors()], 422);
         }
         $card_payments = DB::table('idcard_exemption')->join('applicants','idcard_exemption.email','applicants.email')
-            ->select('applicants.matric_number','idcard_exemption.session','idcard_exemption.created_at AS date')
+            ->select('applicants.matric_number','applicants.matric_no_idcard','idcard_exemption.session','idcard_exemption.created_at AS date')
             ->where(['idcard_exemption.session'=>$request->session,'idcard_exemption.degree'=>$request->degree])->get();
             
         if(count($card_payments) < 1){
             return response()->json(['message' => 'No ID card exemption found'], 404);
+        }
+
+        foreach ($card_payments as $student) {
+            $student->matric_number = $student->matric_number ?? $student->matric_no_idcard;
         }
         
         return $card_payments;
@@ -200,7 +220,7 @@ class MiscController extends Controller{
         if (filter_var($request->matric_number, FILTER_VALIDATE_EMAIL)) {
             $table = 'applicants.email';
         } else {
-            $table = 'applicants.matric_number';
+            $table = 'applicants.matric_no_idcard';
         }
 
         if($request->degree == 'foundation'){
@@ -213,7 +233,7 @@ class MiscController extends Controller{
         $payments = DB::table('admission_payments')->join('applicants','admission_payments.email','applicants.email')
             ->join($settings_table,'admission_payments.session',$settings_table.'.id')
             ->where([$table => $request->matric_number,'admission_payments.status'=>'success','admission_payments.degree'=>$request->degree])
-            ->select('applicants.matric_number','admission_payments.reference','admission_payments.created_at',$settings_table.'.session','admission_payments.payload')->get();
+            ->select('applicants.matric_number','applicants.matric_no_idcard','admission_payments.reference','admission_payments.created_at',$settings_table.'.session','admission_payments.payload')->get();
 
         $results = $payments->map(function ($payment) {
             $payload = json_decode($payment->payload, true);
@@ -225,7 +245,7 @@ class MiscController extends Controller{
 
             if ($idCardItem) {
                 return [
-                    'matric_number' => $payment->matric_number,
+                    'matric_number' => $payment->matric_number ?? $payment->matric_no_idcard,
                     'amount'=> $idCardItem['amount'],
                     'reference' => $payment->reference,
                     'payType' => $idCardItem['type'],
@@ -305,6 +325,31 @@ class MiscController extends Controller{
             $records++;
         }
         return response(['success' => true,'message'=>'Applicants updated successfully!', 'records' => $records], 200);
+    }
+
+    public function updateMatricIDCard(Request $request){
+        // Efficiently update matric_no_idcard for all applicants using a single query
+        $updated = DB::statement("
+            UPDATE applicants 
+            INNER JOIN applications ON applicants.email = applications.submitted_by
+            SET applicants.matric_no_idcard = CONCAT('RUN/', 
+                CASE 
+                    WHEN applications.app_type = 'foundation' THEN 'FD'
+                    WHEN applications.app_type = 'part_time' THEN 'PT'
+                    ELSE 'DEST'
+                END, 
+                '/', LPAD(applicants.id, 4, '0'))
+        ");
+        
+        $affectedRows = DB::table('applicants')
+            ->join('applications', 'applicants.email', '=', 'applications.submitted_by')
+            ->count();
+        
+        return response([
+            'success' => true,
+            'message' => 'Matric ID cards updated successfully!',
+            'records' => $affectedRows
+        ], 200);
     }
 
     public function getDups(Request $request){

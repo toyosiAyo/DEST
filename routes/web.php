@@ -19,6 +19,8 @@ Route::get('test_mail',[ApplicationController::class,'test_mail'])->name('test_m
 Route::get('getFile',[ApplicationController::class,'getFile'])->name('getFile');
 Route::post('saveFile',[ApplicationController::class,'saveFile'])->name('saveFile');
 
+Route::get('update-matric-idcard',[MiscController::class,'updateMatricIDCard'])->name('update.matric.idcard');
+
 
 Route::get('update-applicants',[MiscController::class,'makeApplicantStudent']);
 Route::get('get-dups',[MiscController::class,'getDups']);
