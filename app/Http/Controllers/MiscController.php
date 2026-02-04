@@ -255,6 +255,21 @@ class MiscController extends Controller{
             }
             return null;
         })->filter()->values();
+
+        $idcard_exemptions = DB::table('idcard_exemption')->join('applicants','idcard_exemption.email','applicants.email')
+            ->where([$table => $request->matric_number,'idcard_exemption.degree'=>$request->degree])
+            ->select('applicants.matric_number','applicants.matric_no_idcard','idcard_exemption.session','idcard_exemption.created_at AS date')
+            ->get();
+        foreach ($idcard_exemptions as $exemption) {
+            $results->push([
+                'matric_number' => $exemption->matric_number ?? $exemption->matric_no_idcard,
+                'amount'=> 0,
+                'reference' => 'EXEMPTION',
+                'payType' => 'EXEMPTION',
+                'session' => $exemption->session,
+                'date' => $exemption->date,
+            ]);
+        }
         
         if(count($results) < 1){
             return response()->json(['message' => 'No ID card payment found'], 404);
