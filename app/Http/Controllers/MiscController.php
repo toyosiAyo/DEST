@@ -36,15 +36,34 @@ class MiscController extends Controller{
         if ($validator->fails()) { 
             return response()->json(['message'=>'degree and matric number are required'], 422); 
         } 
-        if (filter_var($request->matric_number, FILTER_VALIDATE_EMAIL)) {
-            $table = 'applicants.email';
-        } else {
-            $table = 'applicants.matric_no_idcard';
-        }
+
+        $applyApplicantIdentifierFilter = function ($query) use ($request) {
+            $identifier = $request->matric_number;
+
+            // If identifier is an email, match by applicants.email.
+            if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+                return $query->where('applicants.email', $identifier);
+            }
+
+            // Otherwise: match applicants.matric_number first.
+            // Only match applicants.matric_no_idcard when applicants.matric_number is NULL/empty.
+            return $query->where(function ($q) use ($identifier) {
+                $q->where('applicants.matric_number', $identifier)
+                  ->orWhere(function ($q2) use ($identifier) {
+                      $q2->where(function ($q3) {
+                              $q3->whereNull('applicants.matric_number')
+                                 ->orWhere('applicants.matric_number', '');
+                          })
+                          ->where('applicants.matric_no_idcard', $identifier);
+                  });
+            });
+        };
         
         $student = DB::table('applicants')->join('applications','applicants.email','applications.submitted_by')
-                ->where(['applications.app_type'=>$request->degree,'applications.status' => 'admitted',
-                $table => $request->matric_number])
+                ->where(['applications.app_type'=>$request->degree,'applications.status' => 'admitted'])
+                ->where(function ($q) use ($applyApplicantIdentifierFilter) {
+                    $applyApplicantIdentifierFilter($q);
+                })
                 ->select('applicants.id as applicant_id','applicants.matric_number',
                 'applicants.surname','applicants.first_name','applicants.other_name','applicants.matric_no_idcard',
                 'applicants.phone','applicants.email','applicants.level','applicants.gender',
@@ -217,11 +236,27 @@ class MiscController extends Controller{
             return response()->json(['message'=>'Matric number and degree are required'], 422); 
         }
 
-        if (filter_var($request->matric_number, FILTER_VALIDATE_EMAIL)) {
-            $table = 'applicants.email';
-        } else {
-            $table = 'applicants.matric_no_idcard';
-        }
+        $applyApplicantIdentifierFilter = function ($query) use ($request) {
+            $identifier = $request->matric_number;
+
+            // If identifier is an email, match by applicants.email.
+            if (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+                return $query->where('applicants.email', $identifier);
+            }
+
+            // Otherwise: match applicants.matric_number first.
+            // Only match applicants.matric_no_idcard when applicants.matric_number is NULL/empty.
+            return $query->where(function ($q) use ($identifier) {
+                $q->where('applicants.matric_number', $identifier)
+                  ->orWhere(function ($q2) use ($identifier) {
+                      $q2->where(function ($q3) {
+                              $q3->whereNull('applicants.matric_number')
+                                 ->orWhere('applicants.matric_number', '');
+                          })
+                          ->where('applicants.matric_no_idcard', $identifier);
+                  });
+            });
+        };
 
         if($request->degree == 'foundation'){
             $settings_table = 'settings';
@@ -232,7 +267,10 @@ class MiscController extends Controller{
 
         $payments = DB::table('admission_payments')->join('applicants','admission_payments.email','applicants.email')
             ->join($settings_table,'admission_payments.session',$settings_table.'.id')
-            ->where([$table => $request->matric_number,'admission_payments.status'=>'success','admission_payments.degree'=>$request->degree])
+            ->where(['admission_payments.status'=>'success','admission_payments.degree'=>$request->degree])
+            ->where(function ($q) use ($applyApplicantIdentifierFilter) {
+                $applyApplicantIdentifierFilter($q);
+            })
             ->select('applicants.matric_number','applicants.matric_no_idcard','admission_payments.reference','admission_payments.created_at',$settings_table.'.session','admission_payments.payload')->get();
 
         $results = $payments->map(function ($payment) {
@@ -257,7 +295,10 @@ class MiscController extends Controller{
         })->filter()->values();
 
         $idcard_exemptions = DB::table('idcard_exemption')->join('applicants','idcard_exemption.email','applicants.email')
-            ->where([$table => $request->matric_number,'idcard_exemption.degree'=>$request->degree])
+            ->where(['idcard_exemption.degree'=>$request->degree])
+            ->where(function ($q) use ($applyApplicantIdentifierFilter) {
+                $applyApplicantIdentifierFilter($q);
+            })
             ->select('applicants.matric_number','applicants.matric_no_idcard','idcard_exemption.session','idcard_exemption.created_at AS date')
             ->get();
         foreach ($idcard_exemptions as $exemption) {
