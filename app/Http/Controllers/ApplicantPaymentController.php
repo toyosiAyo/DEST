@@ -219,12 +219,33 @@ class ApplicantPaymentController extends Controller
 
     public function viewReceipt(Request $request, $ref){
         $data = app('App\Http\Controllers\ConfigController')->auth_user(session('user'));
-        $payment_data = DB::table('application_payments')->join('applicants', 'application_payments.email', '=', 'applicants.email')
-        ->join('settings', 'application_payments.session', '=', 'settings.id')
-        ->where([
-                ['application_payments.email',$data->email],
-                ['application_payments.trans_ref', $ref],['application_payments.status_code', '00']
-            ])->select('application_payments.*','applicants.profile_pix','settings.session', 'applicants.surname','applicants.first_name','applicants.other_name')->first();
+        $pay_type = DB::table('application_payments')
+            ->where([
+                ['email', $data->email],
+                ['trans_ref', $ref],
+                ['status_code', '00'],
+            ])
+            ->value('pay_type');
+
+        $settings_table = (strtolower((string) $pay_type) === 'part_time') ? 'part_time_settings' : 'settings';
+
+        $payment_data = DB::table('application_payments')
+            ->join('applicants', 'application_payments.email', '=', 'applicants.email')
+            ->join($settings_table, 'application_payments.session', '=', $settings_table . '.id')
+            ->where([
+                ['application_payments.email', $data->email],
+                ['application_payments.trans_ref', $ref],
+                ['application_payments.status_code', '00'],
+            ])
+            ->select(
+                'application_payments.*',
+                'applicants.profile_pix',
+                $settings_table . '.session',
+                'applicants.surname',
+                'applicants.first_name',
+                'applicants.other_name'
+            )
+            ->first();
         return view('receipt',['payment_data'=>$payment_data]);
     }
 
