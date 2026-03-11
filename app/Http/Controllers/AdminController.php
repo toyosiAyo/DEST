@@ -260,20 +260,23 @@ class AdminController extends Controller
 
     public function viewSubmittedApplications(Request $request){
         $data = app('App\Http\Controllers\ConfigController')->adminUser(session('user'));
-        $request->merge([
-            'settingId' => 9
-        ]);
-        $session = app('App\Http\Controllers\ConfigController')->settings($request)->session;
+        // $request->merge([
+        //     'settingId' => 9
+        // ]);
+        $settings = app('App\Http\Controllers\ConfigController')->settings($request);
+        $part_time_settings = app('App\Http\Controllers\ConfigController')->part_time_settings($request);
         $applications = DB::table('applications')->join('applicants', 'applications.submitted_by', '=', 'applicants.email')
         ->join('application_payments','applications.used_pin','application_payments.rrr')
         ->select('applications.*','first_choice->prog as Programme','applicants.surname','applicants.first_name','applicants.other_name')->latest()
-        ->where('application_payments.session','9')->latest('applications.updated_at')
+        ->where('application_payments.session',$settings->id)->orWhere(['application_payments.session'=>4,'application_payments.approved_by'=>'E-tranzact','applications.status'=>'success'])
+        ->latest('applications.updated_at')
         ->get();
         $categories = DB::table('applications')->join('application_payments','applications.used_pin','application_payments.rrr')
-            ->where('application_payments.session','9')->distinct('screen_date')->select('screen_date','screen_center')->get();
+            ->where('application_payments.session',$settings->id)->orWhere(['application_payments.session'=>4,'application_payments.approved_by'=>'E-tranzact','applications.status'=>'success'])
+            ->distinct('screen_date')->select('screen_date','screen_center')->get();
             
         $count = count($applications);
-        return view('admin.pages.submitted_applications',['data'=>$data,'applications'=>$applications,'count'=>$count, 'session'=>$session, 'categories'=>$categories]);
+        return view('admin.pages.submitted_applications',['data'=>$data,'applications'=>$applications,'count'=>$count, 'session'=>$settings->session, 'categories'=>$categories]);
     }
 
     public function previewApplication(Request $request, $id){
