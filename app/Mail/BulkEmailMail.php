@@ -24,7 +24,7 @@ class BulkEmailMail extends Mailable
 
     public function build()
     {
-        if($this->data["type"]=="screening"){
+        if(isset($this->data["type"]) && $this->data["type"]=="screening"){
             $this->data["url"] = "https://lms.run-putme.online";
             $screening_message = "Your exam login details are as follows:<br>Username: ".$this->id."<br>Password: ".$this->data["message"]."<br>Exam Link: ".$this->data["url"]."<br>Time: 10am";
             $this->data["message"] = $screening_message;
