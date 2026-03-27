@@ -206,8 +206,12 @@
                                 <label for="session" class="col-form-label">Session</label>
                                 <input type="text" class="form-control" id="session" name="session"
                                     placeholder="Enter session e.g (2022/2023)" required><br>
+                                <label for="degree" class="col-form-label">Degree</label>
                                 <input type="text" class="form-control" id="degree" name="degree"
-                                    placeholder="Enter degree" required><br>
+                                    placeholder="e.g (B.Sc. Statistics)" required><br>
+                                <label for="level" class="col-form-label">Level</label>
+                                <input type="text" class="form-control" id="level" name="level"
+                                    placeholder="e.g. 100" required><br>
                                 <button type="submit" class="btn btn-primary" id="btn_approve">Submit</button>
                             </form>
                         </div>
