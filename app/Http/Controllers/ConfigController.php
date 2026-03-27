@@ -69,7 +69,7 @@ class ConfigController extends Controller
             'to' => [$get_app->email],
             'docs'=> [ 
                 ['path'=> public_path('PART_TIME_ACCEPTANCE_FORM.pdf'), 'as' => "CONVERSION_ACCEPTANCE_FORM.pdf",'mime' => 'application/pdf'], 
-                ['path'=> public_path('2022_2023_PROPOSED_CONVERSION_PROGRAMME.pdf'), 'as' => "CONVERSION_FEE_SCHEDULE_FEES.pdf",'mime' => 'application/pdf'], 
+                //['path'=> public_path('2022_2023_PROPOSED_CONVERSION_PROGRAMME.pdf'), 'as' => "CONVERSION_FEE_SCHEDULE_FEES.pdf",'mime' => 'application/pdf'], 
             ],
             'name' => $get_app->surname ." ". $get_app->firstname,
             'sub' => $Subject,
