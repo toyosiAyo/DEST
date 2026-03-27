@@ -50,7 +50,8 @@ class AdminController extends Controller
             ->where(['applications.id'=>$request->app_id,'applications.submitted_by'=>$request->email,'adms_y_n'=>'N']) 
             ->select('applications.first_choice->prog as Programme1','applications.second_choice->prog as Programme2','applicants.*','applications.*')
             ->first(); 
-        if($get_app){    
+        if($get_app){ 
+            $user = Applicant::where('email',$request->email)->first();
             if(strtoupper($request->action) == 'APPROVE'){
                 $validator = Validator::make($request->all(), ['session'=>'required|min:8','duration'=>'required','resumption_date'=>'required', 'registration_closing'=>'required',]);
                 if ($validator->fails()) { return response()->json(['status'=>'Nok','message'=>'session/duration/resumption_date/registration_closing are required','rsp'=>''], 401);        } 
@@ -116,6 +117,8 @@ class AdminController extends Controller
                             //unset($get_app->session_formulated);
                             unset($get_app->degree);
                             if($get_app->save()){
+                                $user->level = $request->level;
+                                $user->save();
                                 unset($get_app->session_formulated);
                                 //  File::delete($app_stud->address.'.pdf');
                                 return response(["status"=>"success","message"=>"Admission Letter successfully delivered"],200);  }
